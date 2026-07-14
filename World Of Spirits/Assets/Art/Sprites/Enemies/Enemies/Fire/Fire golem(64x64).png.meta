@@ -1,0 +1,988 @@
+fileFormatVersion: 2
+guid: c280bf9a28384df4cabe62c8f728b6ed
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -4774731348922355927
+    second: Fire golem(64x64)_0
+  - first:
+      213: 4699956463783340862
+    second: Fire golem(64x64)_1
+  - first:
+      213: 5789812262422481232
+    second: Fire golem(64x64)_2
+  - first:
+      213: 169247931194210461
+    second: Fire golem(64x64)_3
+  - first:
+      213: -3162304829160975370
+    second: Fire golem(64x64)_4
+  - first:
+      213: 1837705505521772793
+    second: Fire golem(64x64)_5
+  - first:
+      213: 5000875732132460206
+    second: Fire golem(64x64)_6
+  - first:
+      213: 3427781053219279704
+    second: Fire golem(64x64)_7
+  - first:
+      213: 133260194299255957
+    second: Fire golem(64x64)_8
+  - first:
+      213: 8814770933434880048
+    second: Fire golem(64x64)_9
+  - first:
+      213: -4919035308611868068
+    second: Fire golem(64x64)_10
+  - first:
+      213: 4624698475008002962
+    second: Fire golem(64x64)_11
+  - first:
+      213: -1702414567504423337
+    second: Fire golem(64x64)_12
+  - first:
+      213: 3453957883139652166
+    second: Fire golem(64x64)_13
+  - first:
+      213: 8661275543246985928
+    second: Fire golem(64x64)_14
+  - first:
+      213: -1453909895344564936
+    second: Fire golem(64x64)_15
+  - first:
+      213: 301558287889140504
+    second: Fire golem(64x64)_16
+  - first:
+      213: -7901120484954204845
+    second: Fire golem(64x64)_17
+  - first:
+      213: 6927386751115394325
+    second: Fire golem(64x64)_18
+  - first:
+      213: -7981307012002936145
+    second: Fire golem(64x64)_19
+  - first:
+      213: 8004576007043853855
+    second: Fire golem(64x64)_20
+  - first:
+      213: 2265894491664833794
+    second: Fire golem(64x64)_21
+  - first:
+      213: -2229509260773073763
+    second: Fire golem(64x64)_22
+  - first:
+      213: 2078397575953798660
+    second: Fire golem(64x64)_23
+  - first:
+      213: -614794570260088307
+    second: Fire golem(64x64)_24
+  - first:
+      213: -6957040620573035151
+    second: Fire golem(64x64)_25
+  - first:
+      213: 281831023044153029
+    second: Fire golem(64x64)_26
+  - first:
+      213: -978384079009383615
+    second: Fire golem(64x64)_27
+  - first:
+      213: -2915437904766707696
+    second: Fire golem(64x64)_28
+  - first:
+      213: -3089801820117599683
+    second: Fire golem(64x64)_29
+  - first:
+      213: 8094796285478978437
+    second: Fire golem(64x64)_30
+  - first:
+      213: -7058348747470621345
+    second: Fire golem(64x64)_31
+  - first:
+      213: 6966129012392904581
+    second: Fire golem(64x64)_32
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 64
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Fire golem(64x64)_0
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 463
+        width: 26
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 92faf81c22fbcbdb0800000000000000
+      internalID: -4774731348922355927
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire golem(64x64)_1
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 463
+        width: 26
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e3b6b9b9089993140800000000000000
+      internalID: 4699956463783340862
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire golem(64x64)_2
+      rect:
+        serializedVersion: 2
+        x: 146
+        y: 463
+        width: 26
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 05984e1b39b895050800000000000000
+      internalID: 5789812262422481232
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire golem(64x64)_3
+      rect:
+        serializedVersion: 2
+        x: 210
+        y: 463
+        width: 26
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d98fcc1c81a495200800000000000000
+      internalID: 169247931194210461
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire golem(64x64)_4
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 399
+        width: 24
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6f39b52338c3d14d0800000000000000
+      internalID: -3162304829160975370
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire golem(64x64)_5
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 399
+        width: 21
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9f8a762bb67d08910800000000000000
+      internalID: 1837705505521772793
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire golem(64x64)_6
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 399
+        width: 17
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ea670ab8bfda66540800000000000000
+      internalID: 5000875732132460206
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire golem(64x64)_7
+      rect:
+        serializedVersion: 2
+        x: 216
+        y: 399
+        width: 15
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 85313fce4bce19f20800000000000000
+      internalID: 3427781053219279704
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire golem(64x64)_8
+      rect:
+        serializedVersion: 2
+        x: 279
+        y: 399
+        width: 19
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 59c18efc07f69d100800000000000000
+      internalID: 133260194299255957
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire golem(64x64)_9
+      rect:
+        serializedVersion: 2
+        x: 343
+        y: 399
+        width: 16
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 03013d7167b545a70800000000000000
+      internalID: 8814770933434880048
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire golem(64x64)_10
+      rect:
+        serializedVersion: 2
+        x: 408
+        y: 399
+        width: 17
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c5ae590f2731cbbb0800000000000000
+      internalID: -4919035308611868068
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire golem(64x64)_11
+      rect:
+        serializedVersion: 2
+        x: 469
+        y: 399
+        width: 21
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 29b8424a2ca3e2040800000000000000
+      internalID: 4624698475008002962
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire golem(64x64)_12
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 335
+        width: 17
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 756d27b78fecf58e0800000000000000
+      internalID: -1702414567504423337
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire golem(64x64)_13
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 271
+        width: 22
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 64af2b5156ceeef20800000000000000
+      internalID: 3453957883139652166
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire golem(64x64)_14
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 271
+        width: 20
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8cad3099738033870800000000000000
+      internalID: 8661275543246985928
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire golem(64x64)_15
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 207
+        width: 24
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 835df8047aca2dbe0800000000000000
+      internalID: -1453909895344564936
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire golem(64x64)_16
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 207
+        width: 22
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 81b05b44aa95f2400800000000000000
+      internalID: 301558287889140504
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire golem(64x64)_17
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 207
+        width: 21
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3551eb6e7c4995290800000000000000
+      internalID: -7901120484954204845
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire golem(64x64)_18
+      rect:
+        serializedVersion: 2
+        x: 209
+        y: 207
+        width: 27
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 51dfaf91c85032060800000000000000
+      internalID: 6927386751115394325
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire golem(64x64)_19
+      rect:
+        serializedVersion: 2
+        x: 271
+        y: 207
+        width: 27
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: faa0b323f83bc3190800000000000000
+      internalID: -7981307012002936145
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire golem(64x64)_20
+      rect:
+        serializedVersion: 2
+        x: 342
+        y: 207
+        width: 20
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f1ea675e777f51f60800000000000000
+      internalID: 8004576007043853855
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire golem(64x64)_21
+      rect:
+        serializedVersion: 2
+        x: 398
+        y: 207
+        width: 29
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 20d5232f803127f10800000000000000
+      internalID: 2265894491664833794
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire golem(64x64)_22
+      rect:
+        serializedVersion: 2
+        x: 461
+        y: 207
+        width: 31
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d9c5d28c3213f01e0800000000000000
+      internalID: -2229509260773073763
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire golem(64x64)_23
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 143
+        width: 18
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 40652c06593f7dc10800000000000000
+      internalID: 2078397575953798660
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire golem(64x64)_24
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 143
+        width: 20
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d0afecd789fc777f0800000000000000
+      internalID: -614794570260088307
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire golem(64x64)_25
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 79
+        width: 26
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 175f7c26a60a37f90800000000000000
+      internalID: -6957040620573035151
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire golem(64x64)_26
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 15
+        width: 18
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5ce4b3f72d349e300800000000000000
+      internalID: 281831023044153029
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire golem(64x64)_27
+      rect:
+        serializedVersion: 2
+        x: 87
+        y: 15
+        width: 17
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 14b7fb42dd41c62f0800000000000000
+      internalID: -978384079009383615
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire golem(64x64)_28
+      rect:
+        serializedVersion: 2
+        x: 148
+        y: 15
+        width: 18
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 018dba91ca84a87d0800000000000000
+      internalID: -2915437904766707696
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire golem(64x64)_29
+      rect:
+        serializedVersion: 2
+        x: 210
+        y: 15
+        width: 20
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d3af8857d91de15d0800000000000000
+      internalID: -3089801820117599683
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire golem(64x64)_30
+      rect:
+        serializedVersion: 2
+        x: 274
+        y: 15
+        width: 20
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5834025655e765070800000000000000
+      internalID: 8094796285478978437
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire golem(64x64)_31
+      rect:
+        serializedVersion: 2
+        x: 332
+        y: 15
+        width: 26
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f55b03ef535bb0e90800000000000000
+      internalID: -7058348747470621345
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire golem(64x64)_32
+      rect:
+        serializedVersion: 2
+        x: 389
+        y: 15
+        width: 34
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 587c83bbd69aca060800000000000000
+      internalID: 6966129012392904581
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Fire golem(64x64)_0: -4774731348922355927
+      Fire golem(64x64)_1: 4699956463783340862
+      Fire golem(64x64)_10: -4919035308611868068
+      Fire golem(64x64)_11: 4624698475008002962
+      Fire golem(64x64)_12: -1702414567504423337
+      Fire golem(64x64)_13: 3453957883139652166
+      Fire golem(64x64)_14: 8661275543246985928
+      Fire golem(64x64)_15: -1453909895344564936
+      Fire golem(64x64)_16: 301558287889140504
+      Fire golem(64x64)_17: -7901120484954204845
+      Fire golem(64x64)_18: 6927386751115394325
+      Fire golem(64x64)_19: -7981307012002936145
+      Fire golem(64x64)_2: 5789812262422481232
+      Fire golem(64x64)_20: 8004576007043853855
+      Fire golem(64x64)_21: 2265894491664833794
+      Fire golem(64x64)_22: -2229509260773073763
+      Fire golem(64x64)_23: 2078397575953798660
+      Fire golem(64x64)_24: -614794570260088307
+      Fire golem(64x64)_25: -6957040620573035151
+      Fire golem(64x64)_26: 281831023044153029
+      Fire golem(64x64)_27: -978384079009383615
+      Fire golem(64x64)_28: -2915437904766707696
+      Fire golem(64x64)_29: -3089801820117599683
+      Fire golem(64x64)_3: 169247931194210461
+      Fire golem(64x64)_30: 8094796285478978437
+      Fire golem(64x64)_31: -7058348747470621345
+      Fire golem(64x64)_32: 6966129012392904581
+      Fire golem(64x64)_4: -3162304829160975370
+      Fire golem(64x64)_5: 1837705505521772793
+      Fire golem(64x64)_6: 5000875732132460206
+      Fire golem(64x64)_7: 3427781053219279704
+      Fire golem(64x64)_8: 133260194299255957
+      Fire golem(64x64)_9: 8814770933434880048
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
