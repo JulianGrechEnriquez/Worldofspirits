@@ -25,12 +25,16 @@ namespace WorldOfSpirits.Combat
         private float statusStrength;
         private CombatStatus activeStatus;
         private float nextStatusDamageTime;
+        private float currentShield;
+        private float shieldEndTime;
+        private int reviveCharges;
 
         public abstract Faction Faction { get; }
         public bool IsAlive => currentHealth > 0f;
         public Transform Transform => transform;
         public float MaxHealth => maxHealth;
         public float CurrentHealth => currentHealth;
+        public float CurrentShield => Time.time < shieldEndTime ? currentShield : 0f;
         public float MoveSpeed => IsMovementDisabled ? 0f : moveSpeed * MovementMultiplier;
         public bool IsMovementDisabled => Time.time < statusEndTime &&
             (activeStatus == CombatStatus.Freeze || activeStatus == CombatStatus.Stun);
@@ -76,6 +80,17 @@ namespace WorldOfSpirits.Combat
                 return;
             }
 
+            if (Time.time < shieldEndTime && currentShield > 0f)
+            {
+                float absorbed = Mathf.Min(currentShield, amount);
+                currentShield -= absorbed;
+                amount -= absorbed;
+            }
+
+            if (amount <= 0f) return;
+            if (Time.time < statusEndTime && activeStatus == CombatStatus.ArmorBreak)
+                amount *= 1f + statusStrength;
+
             currentHealth = Mathf.Max(0f, currentHealth - amount);
             Damaged?.Invoke(amount);
             HealthChanged?.Invoke(currentHealth, maxHealth);
@@ -108,8 +123,28 @@ namespace WorldOfSpirits.Combat
             }
         }
 
+        public void AddShield(float amount, float duration)
+        {
+            if (!IsAlive || amount <= 0f) return;
+            currentShield += amount;
+            shieldEndTime = Mathf.Max(shieldEndTime, Time.time + Mathf.Max(0.1f, duration));
+        }
+
+        public void GrantRevive(int charges = 1)
+        {
+            reviveCharges += Mathf.Max(0, charges);
+        }
+
         protected virtual void Die()
         {
+            if (reviveCharges > 0)
+            {
+                reviveCharges--;
+                currentHealth = Mathf.Max(1f, maxHealth * 0.5f);
+                HealthChanged?.Invoke(currentHealth, maxHealth);
+                return;
+            }
+
             if (logHealthChanges)
             {
                 Debug.Log($"[{name}] Died.", this);

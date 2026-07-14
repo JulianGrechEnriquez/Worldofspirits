@@ -20,19 +20,25 @@ namespace WorldOfSpirits.Spirits
             }
 
             weaponLevel = Mathf.Clamp(weaponLevel, 1, definition.Weapon.MaxLevel);
-            while (abilityLevels.Count < definition.Abilities.Count)
+            int abilityCount = definition.RuntimeAbilities.Count > 0
+                ? definition.RuntimeAbilities.Count
+                : definition.Abilities.Count;
+            while (abilityLevels.Count < abilityCount)
             {
                 abilityLevels.Add(1);
             }
 
-            if (abilityLevels.Count > definition.Abilities.Count)
+            if (abilityLevels.Count > abilityCount)
             {
-                abilityLevels.RemoveRange(definition.Abilities.Count, abilityLevels.Count - definition.Abilities.Count);
+                abilityLevels.RemoveRange(abilityCount, abilityLevels.Count - abilityCount);
             }
 
             for (int i = 0; i < abilityLevels.Count; i++)
             {
-                abilityLevels[i] = Mathf.Clamp(abilityLevels[i], 1, definition.Abilities[i].MaxLevel);
+                int maxLevel = definition.RuntimeAbilities.Count > 0
+                    ? definition.RuntimeAbilities[i].MaxLevel
+                    : definition.Abilities[i].MaxLevel;
+                abilityLevels[i] = Mathf.Clamp(abilityLevels[i], 1, maxLevel);
             }
         }
 
@@ -54,13 +60,19 @@ namespace WorldOfSpirits.Spirits
 
         public bool TryLevelAbility(SpiritDefinition definition, int abilityIndex)
         {
-            if (definition == null || abilityIndex < 0 || abilityIndex >= definition.Abilities.Count)
+            int abilityCount = definition != null && definition.RuntimeAbilities.Count > 0
+                ? definition.RuntimeAbilities.Count
+                : definition != null ? definition.Abilities.Count : 0;
+            if (definition == null || abilityIndex < 0 || abilityIndex >= abilityCount)
             {
                 return false;
             }
 
             Initialize(definition);
-            if (abilityLevels[abilityIndex] >= definition.Abilities[abilityIndex].MaxLevel)
+            int maxLevel = definition.RuntimeAbilities.Count > 0
+                ? definition.RuntimeAbilities[abilityIndex].MaxLevel
+                : definition.Abilities[abilityIndex].MaxLevel;
+            if (abilityLevels[abilityIndex] >= maxLevel)
             {
                 return false;
             }

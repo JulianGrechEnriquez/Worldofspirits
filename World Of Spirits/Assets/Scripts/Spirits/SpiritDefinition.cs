@@ -11,11 +11,14 @@ namespace WorldOfSpirits.Spirits
         [SerializeField] private string shape;
         [SerializeField] private SpiritWeaponDefinition weapon = new SpiritWeaponDefinition();
         [SerializeField] private List<SpiritAbilityDefinition> abilities = new List<SpiritAbilityDefinition>();
+        [Tooltip("Data-driven runtime abilities. New spirits should use this list.")]
+        [SerializeField] private List<AbilityDefinition> runtimeAbilities = new List<AbilityDefinition>();
 
         public string SpiritName => spiritName;
         public string Shape => shape;
         public SpiritWeaponDefinition Weapon => weapon;
         public IReadOnlyList<SpiritAbilityDefinition> Abilities => abilities;
+        public IReadOnlyList<AbilityDefinition> RuntimeAbilities => runtimeAbilities;
 
         public void Configure(string name, string spiritShape, SpiritWeaponDefinition spiritWeapon,
             params SpiritAbilityDefinition[] spiritAbilities)
@@ -24,6 +27,11 @@ namespace WorldOfSpirits.Spirits
             shape = spiritShape;
             weapon = spiritWeapon;
             abilities = new List<SpiritAbilityDefinition>(spiritAbilities);
+        }
+
+        public void SetRuntimeAbilities(IEnumerable<AbilityDefinition> definitions)
+        {
+            runtimeAbilities = new List<AbilityDefinition>(definitions);
         }
     }
 

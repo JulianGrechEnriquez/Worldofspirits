@@ -1,5 +1,105 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &889830258473922699
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7806959382366115011}
+  - component: {fileID: 4554716374823569964}
+  m_Layer: 0
+  m_Name: Runtime Ability 2 - Fiery Talons
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7806959382366115011
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 889830258473922699}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4116971992522366896}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4554716374823569964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 889830258473922699}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59463a8d5a7449f3a1ef4c6f88e1a242, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WorldOfSpirits.Spirits.DataDrivenAbility
+  abilityIndex: 1
+  cooldown: 1
+  primarySpiritOnly: 0
+  castWhileMoving: 1
+  castWhileStandingStill: 0
+  definition: {fileID: 11400000, guid: e1a1623014773104c862b5d141f2f050, type: 2}
+--- !u!1 &2490549335699204285
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7763064909170682597}
+  - component: {fileID: 2662564377236191826}
+  m_Layer: 0
+  m_Name: Runtime Ability 1 - Fiery Feathers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7763064909170682597
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2490549335699204285}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4116971992522366896}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2662564377236191826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2490549335699204285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59463a8d5a7449f3a1ef4c6f88e1a242, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WorldOfSpirits.Spirits.DataDrivenAbility
+  abilityIndex: 0
+  cooldown: 1
+  primarySpiritOnly: 0
+  castWhileMoving: 1
+  castWhileStandingStill: 0
+  definition: {fileID: 11400000, guid: 802631645874b334187aaf6e7b36bf42, type: 2}
 --- !u!1 &6132413610933079858
 GameObject:
   m_ObjectHideFlags: 0
@@ -32,9 +132,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 6147905749400682296}
-  - {fileID: 3800044111008679330}
-  - {fileID: 463106586476028630}
+  - {fileID: 7763064909170682597}
+  - {fileID: 7806959382366115011}
+  - {fileID: 2447451177828199193}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7831901199194899550
@@ -134,7 +234,7 @@ MonoBehaviour:
   progression:
     weaponLevel: 1
     abilityLevels: 
---- !u!1 &6988957653758214892
+--- !u!1 &7324707533912945930
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -142,22 +242,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3800044111008679330}
-  - component: {fileID: 5300821263754998246}
+  - component: {fileID: 2447451177828199193}
+  - component: {fileID: 6507041511803515873}
   m_Layer: 0
-  m_Name: Ability 2 - Fiery Talons (Needs Fire Trail Prefab)
+  m_Name: Runtime Ability 3 - Phoenix Dive
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3800044111008679330
+--- !u!4 &2447451177828199193
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6988957653758214892}
+  m_GameObject: {fileID: 7324707533912945930}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -166,153 +266,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4116971992522366896}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5300821263754998246
+--- !u!114 &6507041511803515873
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6988957653758214892}
+  m_GameObject: {fileID: 7324707533912945930}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5eed7159eef058e4d903ca7be5003665, type: 3}
+  m_Script: {fileID: 11500000, guid: 59463a8d5a7449f3a1ef4c6f88e1a242, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::WorldOfSpirits.Spirits.SpawnEffectAbility
-  abilityIndex: 1
-  cooldown: 1.5
-  primarySpiritOnly: 0
-  castWhileMoving: 0
-  castWhileStandingStill: 0
-  effectPrefab: {fileID: 6966402938049929962, guid: e675da6e2b2d63f4bad70720de97918e, type: 3}
-  spawnPosition: 1
-  spawnCount:
-    baseValue: 1
-    increasePerLevel: 0
-  spawnRadius:
-    baseValue: 1
-    increasePerLevel: 0
-  targetingRange: 15
---- !u!1 &7827452910413818640
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 463106586476028630}
-  - component: {fileID: 8489897239049044367}
-  m_Layer: 0
-  m_Name: Ability 3 - Phoenix Dive (Needs Dive Prefab)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &463106586476028630
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7827452910413818640}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 4116971992522366896}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8489897239049044367
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7827452910413818640}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5eed7159eef058e4d903ca7be5003665, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::WorldOfSpirits.Spirits.SpawnEffectAbility
+  m_EditorClassIdentifier: Assembly-CSharp::WorldOfSpirits.Spirits.DataDrivenAbility
   abilityIndex: 2
-  cooldown: 4
+  cooldown: 1
   primarySpiritOnly: 0
   castWhileMoving: 1
   castWhileStandingStill: 0
-  effectPrefab: {fileID: 6966402938049929962, guid: 8cb0870c3a93ffe4692b72b8cd458476, type: 3}
-  spawnPosition: 3
-  spawnCount:
-    baseValue: 1
-    increasePerLevel: 0
-  spawnRadius:
-    baseValue: 20
-    increasePerLevel: 0
-  targetingRange: 15
---- !u!1 &7854740518017848307
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6147905749400682296}
-  - component: {fileID: 2440235618484709214}
-  m_Layer: 0
-  m_Name: Ability 1 - Fiery Feathers
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6147905749400682296
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7854740518017848307}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 4116971992522366896}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2440235618484709214
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7854740518017848307}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48b0ef25c58df8943b062c2a0ccec32d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::WorldOfSpirits.Spirits.ProjectilePatternAbility
-  abilityIndex: 0
-  cooldown: 1.2
-  primarySpiritOnly: 0
-  castWhileMoving: 1
-  castWhileStandingStill: 0
-  projectilePrefab: {fileID: 1132934643380735030, guid: 34dc7f9e6e7c2984a943df3f31bb774d, type: 3}
-  pattern: 0
-  projectileCount:
-    baseValue: 3
-    increasePerLevel: 0
-  damage:
-    baseValue: 10
-    increasePerLevel: 3
-  speed:
-    baseValue: 10
-    increasePerLevel: 0.5
-  spreadAngle: 201
-  spreadMode: 1
-  homeOnEnemies: 1
-  homingStrength: 6
-  homingRange: 10
-  targetingRange: 15
+  definition: {fileID: 11400000, guid: bb55d684aea53eb4fb769c3fbb68ac06, type: 2}

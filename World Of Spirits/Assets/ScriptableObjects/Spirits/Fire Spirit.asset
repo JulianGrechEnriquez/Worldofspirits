@@ -30,3 +30,7 @@ MonoBehaviour:
       effect: 'Increased damage  '
     - level: 4
       effect: 'Exploding feathers  '
+  runtimeAbilities:
+  - {fileID: 11400000, guid: 802631645874b334187aaf6e7b36bf42, type: 2}
+  - {fileID: 11400000, guid: e1a1623014773104c862b5d141f2f050, type: 2}
+  - {fileID: 11400000, guid: bb55d684aea53eb4fb769c3fbb68ac06, type: 2}

@@ -39,9 +39,10 @@ namespace WorldOfSpirits.Spirits
             }
 
             Cast(context);
-            nextCastTime = Time.time + cooldown;
+            nextCastTime = Time.time + GetCooldown();
         }
 
+        protected virtual float GetCooldown() => cooldown;
         protected virtual bool CanCast(SpiritAbilityContext context) => true;
         protected abstract void Cast(SpiritAbilityContext context);
     }

@@ -39,7 +39,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 93171121659383547}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 48b0ef25c58df8943b062c2a0ccec32d, type: 3}
   m_Name: 
@@ -66,6 +66,106 @@ MonoBehaviour:
   homingStrength: 5
   homingRange: 8
   targetingRange: 15
+--- !u!1 &315698047600222336
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2162719911662910801}
+  - component: {fileID: 1986156178559903639}
+  m_Layer: 0
+  m_Name: Runtime Ability 3 - Stone Spikes
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2162719911662910801
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 315698047600222336}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3939549601579696684}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1986156178559903639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 315698047600222336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59463a8d5a7449f3a1ef4c6f88e1a242, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WorldOfSpirits.Spirits.DataDrivenAbility
+  abilityIndex: 2
+  cooldown: 1
+  primarySpiritOnly: 0
+  castWhileMoving: 1
+  castWhileStandingStill: 0
+  definition: {fileID: 11400000, guid: 4b2d79ac995de4d489dbbd9c13ecffd4, type: 2}
+--- !u!1 &796400763780962921
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1643286875522105678}
+  - component: {fileID: 1112901116981269246}
+  m_Layer: 0
+  m_Name: Runtime Ability 2 - Boulder Throw
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1643286875522105678
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 796400763780962921}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3939549601579696684}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1112901116981269246
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 796400763780962921}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59463a8d5a7449f3a1ef4c6f88e1a242, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WorldOfSpirits.Spirits.DataDrivenAbility
+  abilityIndex: 1
+  cooldown: 1
+  primarySpiritOnly: 0
+  castWhileMoving: 1
+  castWhileStandingStill: 0
+  definition: {fileID: 11400000, guid: 67dfbcb6d2ee509499d12f9afc01964a, type: 2}
 --- !u!1 &2147099322828026053
 GameObject:
   m_ObjectHideFlags: 0
@@ -101,6 +201,9 @@ Transform:
   - {fileID: 2957478980962241244}
   - {fileID: 7400221333579242549}
   - {fileID: 2126535488901123875}
+  - {fileID: 3648151183838121042}
+  - {fileID: 1643286875522105678}
+  - {fileID: 2162719911662910801}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &881250671039397578
@@ -196,7 +299,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa69272fd7c64617b86f87fde7b72f15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WorldOfSpirits.Spirits.SpiritMember
-  definition: {fileID: 11400000, guid: 6212b1a2c1d40d94f85b0c45946d274f, type: 2}
+  definition: {fileID: 11400000, guid: 05b10d0c749a3ff4baede037d772ab78, type: 2}
   progression:
     weaponLevel: 1
     abilityLevels: 
@@ -239,7 +342,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3034366530754039914}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7f70e162ffde2b44e8d7c8a8a59bad80, type: 3}
   m_Name: 
@@ -267,6 +370,56 @@ MonoBehaviour:
   statusStrength:
     baseValue: 0.25
     increasePerLevel: 0.1
+--- !u!1 &6578158312847507561
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3648151183838121042}
+  - component: {fileID: 5680463834102944313}
+  m_Layer: 0
+  m_Name: Runtime Ability 1 - Quicksand Domain
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3648151183838121042
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6578158312847507561}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3939549601579696684}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5680463834102944313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6578158312847507561}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59463a8d5a7449f3a1ef4c6f88e1a242, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WorldOfSpirits.Spirits.DataDrivenAbility
+  abilityIndex: 0
+  cooldown: 1
+  primarySpiritOnly: 0
+  castWhileMoving: 1
+  castWhileStandingStill: 0
+  definition: {fileID: 11400000, guid: 182c93e18b2aa3849a9e192142de44c2, type: 2}
 --- !u!1 &9170545273383967295
 GameObject:
   m_ObjectHideFlags: 0
@@ -306,7 +459,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9170545273383967295}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5eed7159eef058e4d903ca7be5003665, type: 3}
   m_Name: 

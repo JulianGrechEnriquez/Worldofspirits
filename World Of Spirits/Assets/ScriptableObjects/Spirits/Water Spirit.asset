@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b3673d079a44352bca51249540fde9d, type: 3}
+  m_Name: Water Spirit
+  m_EditorClassIdentifier: Assembly-CSharp::WorldOfSpirits.Spirits.SpiritDefinition
+  spiritName: Water Spirit
+  shape: Leviathan
+  weapon:
+    weaponName: Water Trident
+    description: The primary weapon used while standing still.
+    levels:
+    - level: 1
+      effect: Weapon unlocked
+  abilities: []
+  runtimeAbilities:
+  - {fileID: 11400000, guid: 4750291c3506e6d4c8556417f5ff6b1d, type: 2}
+  - {fileID: 11400000, guid: 92233e488be9ab341a3e2ba169f99126, type: 2}
+  - {fileID: 11400000, guid: 6da74ab588990d943967c020f97ca8f8, type: 2}

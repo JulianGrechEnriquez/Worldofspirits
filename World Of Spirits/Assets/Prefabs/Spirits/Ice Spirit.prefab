@@ -39,7 +39,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 351705699776417919}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 07eb97ead06e7754f83a05b337076be3, type: 3}
   m_Name: 
@@ -59,6 +59,57 @@ MonoBehaviour:
   rotationSpeed:
     baseValue: 1
     increasePerLevel: 2
+  spawnOnEnable: 1
+--- !u!1 &683549070998363486
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3558503634400425577}
+  - component: {fileID: 5686666188259828074}
+  m_Layer: 0
+  m_Name: Runtime Ability 2 - Avalanche
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3558503634400425577
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 683549070998363486}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 42979624625530286}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5686666188259828074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 683549070998363486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59463a8d5a7449f3a1ef4c6f88e1a242, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WorldOfSpirits.Spirits.DataDrivenAbility
+  abilityIndex: 1
+  cooldown: 1
+  primarySpiritOnly: 0
+  castWhileMoving: 1
+  castWhileStandingStill: 0
+  definition: {fileID: 11400000, guid: e9e02eca65e6a4649bbc6d2897993e63, type: 2}
 --- !u!1 &3349831716639086228
 GameObject:
   m_ObjectHideFlags: 0
@@ -98,7 +149,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3349831716639086228}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 48b0ef25c58df8943b062c2a0ccec32d, type: 3}
   m_Name: 
@@ -125,6 +176,56 @@ MonoBehaviour:
   homingStrength: 5
   homingRange: 8
   targetingRange: 15
+--- !u!1 &4180377177455681162
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 994127458983776562}
+  - component: {fileID: 100046344787980342}
+  m_Layer: 0
+  m_Name: Runtime Ability 1 - Frozen Orbs
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &994127458983776562
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4180377177455681162}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 42979624625530286}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &100046344787980342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4180377177455681162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59463a8d5a7449f3a1ef4c6f88e1a242, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WorldOfSpirits.Spirits.DataDrivenAbility
+  abilityIndex: 0
+  cooldown: 1
+  primarySpiritOnly: 0
+  castWhileMoving: 1
+  castWhileStandingStill: 0
+  definition: {fileID: 11400000, guid: 1d90114f7f0810049992f0a59816ecdf, type: 2}
 --- !u!1 &4719086181759721856
 GameObject:
   m_ObjectHideFlags: 0
@@ -164,7 +265,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4719086181759721856}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5eed7159eef058e4d903ca7be5003665, type: 3}
   m_Name: 
@@ -218,6 +319,9 @@ Transform:
   - {fileID: 3783827184282135661}
   - {fileID: 8291176970453552210}
   - {fileID: 3413798828376047954}
+  - {fileID: 994127458983776562}
+  - {fileID: 3558503634400425577}
+  - {fileID: 4034615769223617230}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6349169034217764554
@@ -317,3 +421,53 @@ MonoBehaviour:
   progression:
     weaponLevel: 1
     abilityLevels: 
+--- !u!1 &8715549361477964926
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4034615769223617230}
+  - component: {fileID: 1700400644393519817}
+  m_Layer: 0
+  m_Name: Runtime Ability 3 - Ice Crystal
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4034615769223617230
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8715549361477964926}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 42979624625530286}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1700400644393519817
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8715549361477964926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59463a8d5a7449f3a1ef4c6f88e1a242, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WorldOfSpirits.Spirits.DataDrivenAbility
+  abilityIndex: 2
+  cooldown: 1
+  primarySpiritOnly: 0
+  castWhileMoving: 1
+  castWhileStandingStill: 0
+  definition: {fileID: 11400000, guid: 59e3049209e13fb48947f3865f59ac01, type: 2}

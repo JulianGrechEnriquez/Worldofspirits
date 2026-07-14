@@ -23,6 +23,18 @@ namespace WorldOfSpirits.Combat
             base.Launch(direction, projectileSpeed, damage, ownerFaction);
         }
 
+        public void Configure(int newPierceCount, float newExplosionRadius, float newGrowthPerSecond,
+            bool shouldApplyStatus, CombatStatus newStatus, float newStatusDuration, float newStatusStrength)
+        {
+            pierceCount = Mathf.Max(0, newPierceCount);
+            explosionRadius = Mathf.Max(0f, newExplosionRadius);
+            growthPerSecond = Mathf.Max(0f, newGrowthPerSecond);
+            appliesStatus = shouldApplyStatus;
+            status = newStatus;
+            statusDuration = Mathf.Max(0f, newStatusDuration);
+            statusStrength = Mathf.Max(0f, newStatusStrength);
+        }
+
         protected override void Update()
         {
             base.Update();

@@ -32,3 +32,7 @@ MonoBehaviour:
       effect: 'Increased rotation speed and Freeze chance. '
     - level: 4
       effect: 'Additional orb. '
+  runtimeAbilities:
+  - {fileID: 11400000, guid: 1d90114f7f0810049992f0a59816ecdf, type: 2}
+  - {fileID: 11400000, guid: e9e02eca65e6a4649bbc6d2897993e63, type: 2}
+  - {fileID: 11400000, guid: 59e3049209e13fb48947f3865f59ac01, type: 2}

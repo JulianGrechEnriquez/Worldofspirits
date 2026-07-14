@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b3673d079a44352bca51249540fde9d, type: 3}
+  m_Name: Wind Spirit
+  m_EditorClassIdentifier: Assembly-CSharp::WorldOfSpirits.Spirits.SpiritDefinition
+  spiritName: Wind Spirit
+  shape: Roc
+  weapon:
+    weaponName: Chakrams
+    description: The primary weapon used while standing still.
+    levels:
+    - level: 1
+      effect: Weapon unlocked
+  abilities: []
+  runtimeAbilities:
+  - {fileID: 11400000, guid: e5674a4357271434487a66e4a175961d, type: 2}
+  - {fileID: 11400000, guid: 1c08faca5cd1f454890e1b479206d85b, type: 2}
