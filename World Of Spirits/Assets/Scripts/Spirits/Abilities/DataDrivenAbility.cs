@@ -9,6 +9,8 @@ namespace WorldOfSpirits.Spirits
         [SerializeField] private AbilityDefinition definition;
 
         private readonly List<Transform> orbitingObjects = new List<Transform>();
+        private GameObject followingArea;
+        private float followingAreaDisableTime;
         private AbilityLevelData ActiveLevel => definition != null ? definition.GetLevel(CurrentLevel) : null;
 
         public AbilityDefinition Definition => definition;
@@ -34,11 +36,15 @@ namespace WorldOfSpirits.Spirits
                 case AbilityExecutionType.Orbiting: EnsureOrbiting(level); break;
                 case AbilityExecutionType.Chain: CastChain(level); break;
                 case AbilityExecutionType.Self: ApplyEffects(context.Player, context.Player, level.effects); break;
+                case AbilityExecutionType.FollowingArea: ActivateFollowingArea(context, level); break;
             }
         }
 
         private void Update()
         {
+            if (followingArea != null && followingArea.activeSelf && Time.time >= followingAreaDisableTime)
+                followingArea.SetActive(false);
+
             if (definition == null || definition.ExecutionType != AbilityExecutionType.Orbiting || ActiveLevel == null)
             {
                 return;
@@ -62,6 +68,30 @@ namespace WorldOfSpirits.Spirits
                 if (item != null) Destroy(item.gameObject);
             }
             orbitingObjects.Clear();
+            if (followingArea != null) Destroy(followingArea);
+        }
+
+        private void ActivateFollowingArea(SpiritAbilityContext context, AbilityLevelData level)
+        {
+            if (level.spawnedEffectPrefab == null || context.Player == null) return;
+
+            if (followingArea == null)
+            {
+                followingArea = Instantiate(level.spawnedEffectPrefab, context.Player);
+                followingArea.name = level.spawnedEffectPrefab.name + " (Following Area)";
+                followingArea.transform.localPosition = Vector3.zero;
+                PersistentDamageZone zone = followingArea.GetComponent<PersistentDamageZone>();
+                if (zone != null)
+                {
+                    zone.SetReusable(true);
+                    zone.SetOwner(context.Player);
+                }
+            }
+
+            followingArea.transform.SetParent(context.Player, false);
+            followingArea.transform.localPosition = Vector3.zero;
+            followingArea.SetActive(true);
+            followingAreaDisableTime = Time.time + Mathf.Max(0.05f, level.activeDuration);
         }
 
         private void CastProjectiles(SpiritAbilityContext context, AbilityLevelData level)

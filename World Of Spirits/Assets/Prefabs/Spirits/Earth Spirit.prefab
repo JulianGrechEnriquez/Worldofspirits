@@ -1,71 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &93171121659383547
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7400221333579242549}
-  - component: {fileID: 2181264336989069246}
-  m_Layer: 0
-  m_Name: Ability 2 - Boulder Throw (Needs Boulder Projectile)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7400221333579242549
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 93171121659383547}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 3939549601579696684}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2181264336989069246
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 93171121659383547}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48b0ef25c58df8943b062c2a0ccec32d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::WorldOfSpirits.Spirits.ProjectilePatternAbility
-  abilityIndex: 1
-  cooldown: 2
-  primarySpiritOnly: 0
-  castWhileMoving: 1
-  castWhileStandingStill: 0
-  projectilePrefab: {fileID: 0}
-  pattern: 0
-  projectileCount:
-    baseValue: 1
-    increasePerLevel: 0
-  damage:
-    baseValue: 1
-    increasePerLevel: 0
-  speed:
-    baseValue: 1
-    increasePerLevel: 0
-  spreadAngle: 45
-  spreadMode: 0
-  homeOnEnemies: 0
-  homingStrength: 5
-  homingRange: 8
-  targetingRange: 15
 --- !u!1 &315698047600222336
 GameObject:
   m_ObjectHideFlags: 0
@@ -198,12 +132,11 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2957478980962241244}
-  - {fileID: 7400221333579242549}
-  - {fileID: 2126535488901123875}
+  - {fileID: 800311635626276632}
   - {fileID: 3648151183838121042}
   - {fileID: 1643286875522105678}
   - {fileID: 2162719911662910801}
+  - {fileID: 3924693158634573900}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &881250671039397578
@@ -303,7 +236,7 @@ MonoBehaviour:
   progression:
     weaponLevel: 1
     abilityLevels: 
---- !u!1 &3034366530754039914
+--- !u!1 &2862786398580829607
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -311,65 +244,48 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2957478980962241244}
-  - component: {fileID: 8162175876485230452}
+  - component: {fileID: 800311635626276632}
+  - component: {fileID: 6937623553093221940}
   m_Layer: 0
-  m_Name: Ability 1 - Quicksand Domain
+  m_Name: Quicksand Domain holder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &2957478980962241244
+--- !u!4 &800311635626276632
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3034366530754039914}
+  m_GameObject: {fileID: 2862786398580829607}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3939549601579696684}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8162175876485230452
+--- !u!114 &6937623553093221940
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3034366530754039914}
-  m_Enabled: 0
+  m_GameObject: {fileID: 2862786398580829607}
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f70e162ffde2b44e8d7c8a8a59bad80, type: 3}
+  m_Script: {fileID: 11500000, guid: 59463a8d5a7449f3a1ef4c6f88e1a242, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::WorldOfSpirits.Spirits.AreaPulseAbility
+  m_EditorClassIdentifier: Assembly-CSharp::WorldOfSpirits.Spirits.DataDrivenAbility
   abilityIndex: 0
   cooldown: 1
   primarySpiritOnly: 0
   castWhileMoving: 1
   castWhileStandingStill: 0
-  radius:
-    baseValue: 3
-    increasePerLevel: 0.75
-  damage:
-    baseValue: 0
-    increasePerLevel: 2
-  force:
-    baseValue: 1
-    increasePerLevel: 0.5
-  pullInward: 1
-  appliesStatus: 1
-  status: 3
-  statusDuration:
-    baseValue: 1.5
-    increasePerLevel: 0.5
-  statusStrength:
-    baseValue: 0.25
-    increasePerLevel: 0.1
+  definition: {fileID: 11400000, guid: 182c93e18b2aa3849a9e192142de44c2, type: 2}
 --- !u!1 &6578158312847507561
 GameObject:
   m_ObjectHideFlags: 0
@@ -420,61 +336,65 @@ MonoBehaviour:
   castWhileMoving: 1
   castWhileStandingStill: 0
   definition: {fileID: 11400000, guid: 182c93e18b2aa3849a9e192142de44c2, type: 2}
---- !u!1 &9170545273383967295
-GameObject:
+--- !u!1001 &613672384177346062
+PrefabInstance:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2126535488901123875}
-  - component: {fileID: 9168677730013045675}
-  m_Layer: 0
-  m_Name: Ability 3 - Stone Spikes (Needs Spike Prefab)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2126535488901123875
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9170545273383967295}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 3939549601579696684}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &9168677730013045675
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3939549601579696684}
+    m_Modifications:
+    - target: {fileID: 757564496604831664, guid: d06a6bdd67a02f544835b2e0cfa7051c, type: 3}
+      propertyPath: m_Name
+      value: Stone Hammer
+      objectReference: {fileID: 0}
+    - target: {fileID: 4536106046406149698, guid: d06a6bdd67a02f544835b2e0cfa7051c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4536106046406149698, guid: d06a6bdd67a02f544835b2e0cfa7051c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4536106046406149698, guid: d06a6bdd67a02f544835b2e0cfa7051c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4536106046406149698, guid: d06a6bdd67a02f544835b2e0cfa7051c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4536106046406149698, guid: d06a6bdd67a02f544835b2e0cfa7051c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4536106046406149698, guid: d06a6bdd67a02f544835b2e0cfa7051c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4536106046406149698, guid: d06a6bdd67a02f544835b2e0cfa7051c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4536106046406149698, guid: d06a6bdd67a02f544835b2e0cfa7051c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4536106046406149698, guid: d06a6bdd67a02f544835b2e0cfa7051c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4536106046406149698, guid: d06a6bdd67a02f544835b2e0cfa7051c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d06a6bdd67a02f544835b2e0cfa7051c, type: 3}
+--- !u!4 &3924693158634573900 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4536106046406149698, guid: d06a6bdd67a02f544835b2e0cfa7051c, type: 3}
+  m_PrefabInstance: {fileID: 613672384177346062}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9170545273383967295}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5eed7159eef058e4d903ca7be5003665, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::WorldOfSpirits.Spirits.SpawnEffectAbility
-  abilityIndex: 2
-  cooldown: 2.5
-  primarySpiritOnly: 0
-  castWhileMoving: 1
-  castWhileStandingStill: 0
-  effectPrefab: {fileID: 4805495892300969012, guid: b713d0544d04beb48a9d39ba8846a768, type: 3}
-  spawnPosition: 2
-  spawnCount:
-    baseValue: 3
-    increasePerLevel: 0
-  spawnRadius:
-    baseValue: 10
-    increasePerLevel: 0
-  targetingRange: 15

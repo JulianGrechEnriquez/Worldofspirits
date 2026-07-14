@@ -10,6 +10,7 @@ namespace WorldOfSpirits.Spirits
         [SerializeField, Min(0f)] private float damagePerTick = 5f;
         [SerializeField, Min(0.05f)] private float tickInterval = 0.5f;
         [SerializeField, Min(0.05f)] private float duration = 3f;
+        [SerializeField] private bool destroyAfterDuration = true;
         [SerializeField] private Faction ownerFaction = Faction.Player;
         [SerializeField, Min(0f)] private float pullForce;
         [SerializeField] private bool followOwner;
@@ -20,12 +21,22 @@ namespace WorldOfSpirits.Spirits
         private void Awake()
         {
             GetComponent<Collider2D>().isTrigger = true;
-            Destroy(gameObject, duration);
+        }
+
+        private void Start()
+        {
+            if (destroyAfterDuration)
+                Destroy(gameObject, duration);
         }
 
         public void SetOwner(Transform newOwner)
         {
             owner = newOwner;
+        }
+
+        public void SetReusable(bool reusable)
+        {
+            destroyAfterDuration = !reusable;
         }
 
         private void Update()

@@ -20,6 +20,7 @@ MonoBehaviour:
     levels:
     - level: 1
       effect: Weapon unlocked
+  runtimeWeapon: {fileID: 11400000, guid: f37f920ae17f9694091b1c980a8cfb94, type: 2}
   abilities: []
   runtimeAbilities:
   - {fileID: 11400000, guid: 182c93e18b2aa3849a9e192142de44c2, type: 2}

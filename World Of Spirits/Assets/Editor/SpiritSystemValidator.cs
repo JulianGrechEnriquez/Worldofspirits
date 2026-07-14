@@ -51,7 +51,9 @@ namespace WorldOfSpirits.EditorTools
                     if (string.IsNullOrWhiteSpace(level.upgradeDescription)) Add("WARNING", path, $"Level {i + 1} has no upgrade description.");
                     if (ability.ExecutionType == AbilityExecutionType.Projectile && level.projectile.projectilePrefab == null)
                         Add("TODO", path, $"Level {i + 1} needs a projectile prefab.");
-                    if ((ability.ExecutionType == AbilityExecutionType.SpawnEffect || ability.ExecutionType == AbilityExecutionType.Orbiting) && level.spawnedEffectPrefab == null)
+                    if ((ability.ExecutionType == AbilityExecutionType.SpawnEffect ||
+                         ability.ExecutionType == AbilityExecutionType.Orbiting ||
+                         ability.ExecutionType == AbilityExecutionType.FollowingArea) && level.spawnedEffectPrefab == null)
                         Add("TODO", path, $"Level {i + 1} needs an effect prefab.");
                 }
             }

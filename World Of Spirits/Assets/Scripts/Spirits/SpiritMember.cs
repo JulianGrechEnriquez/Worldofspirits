@@ -10,7 +10,7 @@ namespace WorldOfSpirits.Spirits
         [SerializeField] private SpiritProgression progression = new SpiritProgression();
 
         private Renderer[] renderers;
-        private AutoProjectileWeapon[] primaryWeapons;
+        private SpiritWeaponAttack[] weapons;
         private SpiritAbility[] abilities;
 
         private void Awake()
@@ -44,14 +44,23 @@ namespace WorldOfSpirits.Spirits
                 spiritRenderer.enabled = spiritVisible;
             }
 
-            // Every spirit attacks continuously. While stationary, the primary
-            // spirit is channelled through the player's projectile spawn point.
-            // While moving, it fires visibly from its own spirit spawn point.
-            foreach (AutoProjectileWeapon weapon in primaryWeapons)
+            // A spirit's weapon is active only while that spirit occupies the
+            // main slot and the player is standing still.
+            bool weaponIsActive = isPrimary && !playerIsMoving;
+            foreach (SpiritWeaponAttack weapon in weapons)
             {
-                weapon.enabled = true;
-                bool usePlayerSpawner = isPrimary && !playerIsMoving;
-                weapon.SetFirePointOverride(usePlayerSpawner ? playerProjectileSpawner : null);
+                weapon.enabled = weaponIsActive;
+
+                if (weapon is AutoProjectileWeapon projectileWeapon)
+                {
+                    projectileWeapon.SetFirePointOverride(
+                        weaponIsActive ? playerProjectileSpawner : null);
+                }
+                else if (weapon is DataDrivenWeapon dataDrivenWeapon)
+                {
+                    dataDrivenWeapon.SetFirePointOverride(
+                        weaponIsActive ? playerProjectileSpawner : null);
+                }
             }
 
             SpiritAbilityContext context = new SpiritAbilityContext(player, playerIsMoving, isPrimary);
@@ -64,7 +73,7 @@ namespace WorldOfSpirits.Spirits
         private void CacheComponents()
         {
             renderers = GetComponentsInChildren<Renderer>(true);
-            primaryWeapons = GetComponentsInChildren<AutoProjectileWeapon>(true);
+            weapons = GetComponentsInChildren<SpiritWeaponAttack>(true);
             abilities = GetComponentsInChildren<SpiritAbility>(true);
         }
     }

@@ -39,9 +39,10 @@ MonoBehaviour:
       status: 0
       statusDuration: 2
       statusStrength: 2
-    spawnedEffectPrefab: {fileID: 0}
+    spawnedEffectPrefab: {fileID: 1728612343264657921, guid: 9eb8b35368dbbbf4cbecdcd076650e57, type: 3}
     spawnCount: 1
     areaRadius: 3
+    activeDuration: 3
     orbitRadius: 1.5
     orbitSpeed: 100
     chainCount: 3
@@ -81,6 +82,7 @@ MonoBehaviour:
     spawnedEffectPrefab: {fileID: 0}
     spawnCount: 1
     areaRadius: 3.5
+    activeDuration: 3
     orbitRadius: 1.6
     orbitSpeed: 120
     chainCount: 4
@@ -120,6 +122,7 @@ MonoBehaviour:
     spawnedEffectPrefab: {fileID: 0}
     spawnCount: 1
     areaRadius: 4
+    activeDuration: 3
     orbitRadius: 1.7
     orbitSpeed: 140
     chainCount: 5
@@ -159,6 +162,7 @@ MonoBehaviour:
     spawnedEffectPrefab: {fileID: 0}
     spawnCount: 1
     areaRadius: 4.5
+    activeDuration: 3
     orbitRadius: 1.8
     orbitSpeed: 160
     chainCount: 6
@@ -203,6 +207,7 @@ MonoBehaviour:
     spawnedEffectPrefab: {fileID: 0}
     spawnCount: 1
     areaRadius: 5
+    activeDuration: 3
     orbitRadius: 1.9
     orbitSpeed: 180
     chainCount: 7

@@ -10,6 +10,8 @@ namespace WorldOfSpirits.Spirits
         [SerializeField] private string spiritName;
         [SerializeField] private string shape;
         [SerializeField] private SpiritWeaponDefinition weapon = new SpiritWeaponDefinition();
+        [Tooltip("Data-driven runtime weapon. New spirits should use this field.")]
+        [SerializeField] private WeaponDefinition runtimeWeapon;
         [SerializeField] private List<SpiritAbilityDefinition> abilities = new List<SpiritAbilityDefinition>();
         [Tooltip("Data-driven runtime abilities. New spirits should use this list.")]
         [SerializeField] private List<AbilityDefinition> runtimeAbilities = new List<AbilityDefinition>();
@@ -17,6 +19,7 @@ namespace WorldOfSpirits.Spirits
         public string SpiritName => spiritName;
         public string Shape => shape;
         public SpiritWeaponDefinition Weapon => weapon;
+        public WeaponDefinition RuntimeWeapon => runtimeWeapon;
         public IReadOnlyList<SpiritAbilityDefinition> Abilities => abilities;
         public IReadOnlyList<AbilityDefinition> RuntimeAbilities => runtimeAbilities;
 

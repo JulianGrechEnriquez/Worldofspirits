@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31342a0c190e58d49bf04376fd127bb4, type: 3}
+  m_Name: Stone Hammer
+  m_EditorClassIdentifier: Assembly-CSharp::WorldOfSpirits.Spirits.WeaponDefinition
+  weaponName: Stone Hammer
+  description: 
+  icon: {fileID: 0}
+  executionType: 1
+  levels:
+  - level: 1
+    upgradeDescription: 'swings a hamer around hte player '
+    projectilePrefab: {fileID: 0}
+    weaponPrefab: {fileID: 757564496604831664, guid: a7d1ad94746f185419c1c325103ec395, type: 3}
+    damage: 20
+    attackCooldown: 0
+    targetingRange: 0
+    projectileSpeed: 0
+    homeOnEnemies: 0
+    homingStrength: 0
+    homingRange: 0
+    orbitRadius: 1.4
+    orbitSpeed: 180

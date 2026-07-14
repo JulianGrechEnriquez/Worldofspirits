@@ -30,6 +30,20 @@ namespace WorldOfSpirits.EditorTools
             SpiritMember member = GetOrAdd<SpiritMember>(root);
             AssignDefinition(member, "Assets/ScriptableObjects/Spirits/Fire Spirit.asset");
 
+            GameObject bowObject = GetOrCreateChild(root, "Fire Bow Weapon");
+            AutoProjectileWeapon bow = GetOrAdd<AutoProjectileWeapon>(bowObject);
+            SerializedObject bowData = new SerializedObject(bow);
+            GameObject bowProjectile = AssetDatabase.LoadAssetAtPath<GameObject>(
+                "Assets/Prefabs/Projectiles/FireFeather.prefab");
+            bowData.FindProperty("projectilePrefab").objectReferenceValue =
+                bowProjectile != null ? bowProjectile.GetComponent<ProjectileBase>() : null;
+            bowData.FindProperty("firePoint").objectReferenceValue = bowObject.transform;
+            bowData.FindProperty("damage").floatValue = 10f;
+            bowData.FindProperty("projectileSpeed").floatValue = 12f;
+            bowData.FindProperty("attackCooldown").floatValue = 0.75f;
+            bowData.FindProperty("targetingRange").floatValue = 12f;
+            bowData.ApplyModifiedPropertiesWithoutUndo();
+
             GameObject featherObject = GetOrCreateChild(root, "Ability 1 - Fiery Feathers");
             ProjectilePatternAbility feathers = GetOrAdd<ProjectilePatternAbility>(featherObject);
             ConfigureAbility(feathers, 0, 1.2f);
@@ -61,7 +75,7 @@ namespace WorldOfSpirits.EditorTools
             if (root == null) return;
 
             GetOrAdd<SpiritMember>(root);
-            GameObject hammerPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Spirits/Stone Hammer.prefab");
+            GameObject hammerPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Weapons/Stone Hammer.prefab");
             if (hammerPrefab != null && root.transform.Find("Stone Hammer Weapon") == null)
             {
                 GameObject hammer = (GameObject)PrefabUtility.InstantiatePrefab(hammerPrefab, root.transform);

@@ -12,7 +12,8 @@ namespace WorldOfSpirits.Spirits
         SpawnEffect,
         Orbiting,
         Chain,
-        Self
+        Self,
+        FollowingArea
     }
 
     public enum AbilityTargetingMode
@@ -81,6 +82,8 @@ namespace WorldOfSpirits.Spirits
         public GameObject spawnedEffectPrefab;
         [Min(1)] public int spawnCount = 1;
         [Min(0f)] public float areaRadius = 3f;
+        [Tooltip("How long a reusable following area remains active.")]
+        [Min(0.05f)] public float activeDuration = 3f;
         [Min(0f)] public float orbitRadius = 1.5f;
         public float orbitSpeed = 120f;
         [Min(1)] public int chainCount = 1;

@@ -19,7 +19,9 @@ namespace WorldOfSpirits.Spirits
                 return;
             }
 
-            weaponLevel = Mathf.Clamp(weaponLevel, 1, definition.Weapon.MaxLevel);
+            int weaponMaxLevel = definition.RuntimeWeapon != null
+                ? definition.RuntimeWeapon.MaxLevel : definition.Weapon.MaxLevel;
+            weaponLevel = Mathf.Clamp(weaponLevel, 1, weaponMaxLevel);
             int abilityCount = definition.RuntimeAbilities.Count > 0
                 ? definition.RuntimeAbilities.Count
                 : definition.Abilities.Count;
@@ -49,7 +51,10 @@ namespace WorldOfSpirits.Spirits
 
         public bool TryLevelWeapon(SpiritDefinition definition)
         {
-            if (definition == null || weaponLevel >= definition.Weapon.MaxLevel)
+            int maxLevel = definition != null && definition.RuntimeWeapon != null
+                ? definition.RuntimeWeapon.MaxLevel
+                : definition != null ? definition.Weapon.MaxLevel : 0;
+            if (definition == null || weaponLevel >= maxLevel)
             {
                 return false;
             }
