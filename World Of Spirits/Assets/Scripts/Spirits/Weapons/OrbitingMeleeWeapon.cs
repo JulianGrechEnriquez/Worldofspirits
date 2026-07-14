@@ -20,6 +20,7 @@ namespace WorldOfSpirits.Spirits
 
         [Header("Damage")]
         [SerializeField, Min(0f)] private float damage = 20f;
+        [SerializeField, Min(0f)] private float damageIncreasePerWeaponLevel = 0.2f;
         [SerializeField, Min(0.05f)] private float hitCooldownPerEnemy = 0.5f;
         [SerializeField] private Faction ownerFaction = Faction.Player;
 
@@ -28,6 +29,7 @@ namespace WorldOfSpirits.Spirits
         private bool isVisible;
         private Collider2D weaponCollider;
         private readonly Dictionary<int, float> nextHitTimes = new Dictionary<int, float>();
+        private SpiritMember spiritOwner;
 
         private void Awake()
         {
@@ -37,6 +39,7 @@ namespace WorldOfSpirits.Spirits
             }
 
             currentAngle = startingAngle;
+            spiritOwner = GetComponentInParent<SpiritMember>();
             weaponRenderers = GetComponentsInChildren<Renderer>(true);
             isVisible = true;
             ConfigureCollider();
@@ -97,7 +100,9 @@ namespace WorldOfSpirits.Spirits
                 return;
             }
 
-            target.TakeDamage(damage);
+            int weaponLevel = spiritOwner != null ? spiritOwner.Progression.WeaponLevel : 1;
+            float scaledDamage = damage * (1f + damageIncreasePerWeaponLevel * Mathf.Max(0, weaponLevel - 1));
+            target.TakeDamage(scaledDamage);
             nextHitTimes[targetId] = Time.time + hitCooldownPerEnemy;
         }
 

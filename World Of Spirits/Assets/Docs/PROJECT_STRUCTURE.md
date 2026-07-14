@@ -6,12 +6,15 @@ most specific existing folder and always move Unity `.meta` files with assets.
 ## Runtime Scripts
 
 - `Assets/Scripts/Combat/Damage` - living entities, damage contracts, and contact damage.
-- `Assets/Scripts/Combat/Projectiles` - projectile bases, implementations, and automatic weapons.
+- `Assets/Scripts/Combat/Projectiles` - projectile bases and projectile implementations.
+- `Assets/Scripts/Combat/Weapons` - reusable automatic weapon attacks.
+- `Assets/Scripts/Combat` - shared combat targeting and weapon foundations.
 - `Assets/Scripts/Enemies/Movement` - normal enemy bases and chase movement.
 - `Assets/Scripts/Enemies/Bosses` - boss bases and behavior that does not inherit normal chasing.
 - `Assets/Scripts/Player` - player identity and movement.
 - `Assets/Scripts/Spirits` - spirit membership and slot rotation management.
-- `Assets/Scripts/Spirits/Abilities` - reusable spirit abilities.
+- `Assets/Scripts/Spirits` - spirit definitions, membership, progression, and slot management.
+- `Assets/Scripts/Spirits/Abilities` - ability foundations, implementations, scaling, and spawned effects.
 - `Assets/Scripts/Spirits/Weapons` - weapon behavior such as orbiting melee weapons.
 - `Assets/Scripts/UI/Buttons` - interactive gameplay buttons.
 - `Assets/Scripts/UI/Debug` - debug HUD and temporary combat feedback.

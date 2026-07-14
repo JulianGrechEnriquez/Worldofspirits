@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b3673d079a44352bca51249540fde9d, type: 3}
+  m_Name: Earth Spirt
+  m_EditorClassIdentifier: Assembly-CSharp::WorldOfSpirits.Spirits.SpiritDefinition
+  spiritName: Ice Spirit
+  shape: Yeti
+  weapon:
+    weaponName: 'Ice gauntlets '
+    description: 
+    levels:
+    - level: 1
+      effect: punches enemies
+  abilities:
+  - abilityName: Earth spike
+    description: Sumons spike
+    levels:
+    - level: 1
+      effect: Sumons spike
+    - level: 2
+      effect: Sumons 3 snow orb
+    - level: 3
+      effect: 'Increased rotation speed and Freeze chance. '
+    - level: 4
+      effect: 'Additional orb. '

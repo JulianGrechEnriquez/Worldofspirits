@@ -4,12 +4,23 @@ namespace WorldOfSpirits.Spirits
 {
     public abstract class SpiritAbility : MonoBehaviour
     {
+        [Header("Definition")]
+        [SerializeField, Min(0)] private int abilityIndex;
         [SerializeField, Min(0.05f)] private float cooldown = 1f;
         [SerializeField] private bool primarySpiritOnly;
         [SerializeField] private bool castWhileMoving = true;
         [SerializeField] private bool castWhileStandingStill;
 
         private float nextCastTime;
+
+        public int AbilityIndex => abilityIndex;
+        protected SpiritMember OwnerSpirit { get; private set; }
+        protected int CurrentLevel => OwnerSpirit != null ? Mathf.Max(1, OwnerSpirit.Progression.GetAbilityLevel(abilityIndex)) : 1;
+
+        protected virtual void Awake()
+        {
+            OwnerSpirit = GetComponentInParent<SpiritMember>();
+        }
 
         public void TickAbility(SpiritAbilityContext context)
         {

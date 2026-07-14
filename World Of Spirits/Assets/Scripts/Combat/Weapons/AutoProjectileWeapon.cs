@@ -1,14 +1,16 @@
 using UnityEngine;
+using WorldOfSpirits.Spirits;
 
 namespace WorldOfSpirits.Combat
 {
-    public class AutoProjectileWeapon : MonoBehaviour
+    public class AutoProjectileWeapon : SpiritWeaponAttack
     {
         [Header("Projectile")]
         [SerializeField] private ProjectileBase projectilePrefab;
         [SerializeField] private Transform firePoint;
         [SerializeField, Min(0f)] private float damage = 10f;
         [SerializeField, Min(0.1f)] private float projectileSpeed = 10f;
+        [SerializeField, Min(0f)] private float damageIncreasePerWeaponLevel = 0.2f;
 
         [Header("Automatic Fire")]
         [SerializeField, Min(0.05f)] private float attackCooldown = 0.75f;
@@ -20,7 +22,7 @@ namespace WorldOfSpirits.Combat
         [SerializeField] private bool drawTargetingRange = true;
 
         private LivingEntity owner;
-        private float nextAttackTime;
+        private SpiritMember spiritOwner;
         private Transform firePointOverride;
 
         private Transform ActiveFirePoint => firePointOverride != null ? firePointOverride : firePoint;
@@ -28,6 +30,7 @@ namespace WorldOfSpirits.Combat
         private void Awake()
         {
             owner = GetComponentInParent<LivingEntity>();
+            spiritOwner = GetComponentInParent<SpiritMember>();
             if (firePoint == null)
             {
                 firePoint = transform;
@@ -47,13 +50,8 @@ namespace WorldOfSpirits.Combat
             }
         }
 
-        private void Update()
+        protected override void PerformAttack()
         {
-            if (owner == null || !owner.IsAlive || Time.time < nextAttackTime)
-            {
-                return;
-            }
-
             IDamageable target = FindClosestTarget();
             if (target != null)
             {
@@ -63,9 +61,15 @@ namespace WorldOfSpirits.Combat
                 }
 
                 FireAt(target.Transform.position);
-                nextAttackTime = Time.time + attackCooldown;
             }
         }
+
+        protected override bool CanAttack()
+        {
+            return owner != null && owner.IsAlive;
+        }
+
+        protected override float AttackCooldown => attackCooldown;
 
         private IDamageable FindClosestTarget()
         {
@@ -102,7 +106,9 @@ namespace WorldOfSpirits.Combat
             Transform spawnPoint = ActiveFirePoint;
             Vector2 direction = targetPosition - spawnPoint.position;
             ProjectileBase projectile = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
-            projectile.Launch(direction, projectileSpeed, damage, owner.Faction);
+            int weaponLevel = spiritOwner != null ? spiritOwner.Progression.WeaponLevel : 1;
+            float scaledDamage = damage * (1f + damageIncreasePerWeaponLevel * Mathf.Max(0, weaponLevel - 1));
+            projectile.Launch(direction, projectileSpeed, scaledDamage, owner.Faction);
         }
 
         public void SetFirePointOverride(Transform overridePoint)

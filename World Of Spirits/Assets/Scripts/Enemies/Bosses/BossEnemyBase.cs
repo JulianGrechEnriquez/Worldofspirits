@@ -42,8 +42,9 @@ namespace WorldOfSpirits.Enemies
             }
         }
 
-        protected virtual void Update()
+        protected override void Update()
         {
+            base.Update();
             if (IsAlive && target != null)
             {
                 UpdateBoss(target);

@@ -5,14 +5,30 @@ namespace WorldOfSpirits.Spirits
 {
     public class SpiritMember : MonoBehaviour
     {
+        [Header("Spirit Data")]
+        [SerializeField] private SpiritDefinition definition;
+        [SerializeField] private SpiritProgression progression = new SpiritProgression();
+
         private Renderer[] renderers;
         private AutoProjectileWeapon[] primaryWeapons;
         private SpiritAbility[] abilities;
 
         private void Awake()
         {
+            if (definition == null)
+            {
+                definition = BuiltInSpiritCatalog.Find(name);
+            }
+
+            progression.Initialize(definition);
             CacheComponents();
         }
+
+        public SpiritDefinition Definition => definition;
+        public SpiritProgression Progression => progression;
+
+        public bool TryLevelWeapon() => progression.TryLevelWeapon(definition);
+        public bool TryLevelAbility(int abilityIndex) => progression.TryLevelAbility(definition, abilityIndex);
 
         public void ApplyState(Transform player, Transform playerProjectileSpawner, bool isPrimary, bool playerIsMoving)
         {

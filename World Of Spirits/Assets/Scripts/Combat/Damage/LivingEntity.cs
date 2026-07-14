@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace WorldOfSpirits.Combat
 {
-    public abstract class LivingEntity : MonoBehaviour, IDamageable
+    public abstract class LivingEntity : MonoBehaviour, IDamageable, IStatusEffectReceiver
     {
         [Header("Core Stats")]
         [SerializeField, Min(1f)] private float maxHealth = 100f;
@@ -21,13 +21,21 @@ namespace WorldOfSpirits.Combat
         private SpriteRenderer[] spriteRenderers;
         private Color[] originalSpriteColors;
         private Coroutine hitFlashRoutine;
+        private float statusEndTime;
+        private float statusStrength;
+        private CombatStatus activeStatus;
+        private float nextStatusDamageTime;
 
         public abstract Faction Faction { get; }
         public bool IsAlive => currentHealth > 0f;
         public Transform Transform => transform;
         public float MaxHealth => maxHealth;
         public float CurrentHealth => currentHealth;
-        public float MoveSpeed => moveSpeed;
+        public float MoveSpeed => IsMovementDisabled ? 0f : moveSpeed * MovementMultiplier;
+        public bool IsMovementDisabled => Time.time < statusEndTime &&
+            (activeStatus == CombatStatus.Freeze || activeStatus == CombatStatus.Stun);
+        private float MovementMultiplier => Time.time < statusEndTime && activeStatus == CombatStatus.Slow
+            ? Mathf.Clamp01(1f - statusStrength) : 1f;
 
         public event Action<float, float> HealthChanged;
         public event Action<float> Damaged;
@@ -37,6 +45,28 @@ namespace WorldOfSpirits.Combat
         {
             currentHealth = maxHealth;
             CacheSpriteColors();
+        }
+
+        protected virtual void Update()
+        {
+            if (Time.time >= statusEndTime || Time.time < nextStatusDamageTime)
+            {
+                return;
+            }
+
+            if (activeStatus == CombatStatus.Burn || activeStatus == CombatStatus.Poison || activeStatus == CombatStatus.Bleed)
+            {
+                TakeDamage(statusStrength);
+                nextStatusDamageTime = Time.time + 0.5f;
+            }
+        }
+
+        public void ApplyStatus(CombatStatus status, float duration, float strength)
+        {
+            activeStatus = status;
+            statusEndTime = Mathf.Max(statusEndTime, Time.time + Mathf.Max(0f, duration));
+            statusStrength = Mathf.Max(0f, strength);
+            nextStatusDamageTime = Time.time;
         }
 
         public virtual void TakeDamage(float amount)
