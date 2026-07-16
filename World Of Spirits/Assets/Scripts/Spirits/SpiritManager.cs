@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -23,10 +24,12 @@ namespace WorldOfSpirits.Spirits
         private PlayerMovement playerMovement;
         private float rotationProgress = 1f;
         private Vector3[] rotationStartPositions;
+        private bool isChangingFormation;
 
         public SpiritMember PrimarySpirit => spirits.Count > 0 ? spirits[0] : null;
         public int SpiritCount => spirits.Count;
         public bool PlayerIsMoving => playerMovement != null && playerMovement.IsMoving;
+        public bool IsChangingFormation => isChangingFormation;
 
         public string GetSpiritNameAt(int index)
         {
@@ -114,15 +117,28 @@ namespace WorldOfSpirits.Spirits
             bool isMoving = playerMovement != null && playerMovement.IsMoving;
             for (int i = 0; i < spirits.Count; i++)
             {
-                spirits[i].ApplyState(transform, playerProjectileSpawner, i == 0, isMoving);
+                spirits[i].ApplyState(transform, playerProjectileSpawner, i == 0, isMoving, isChangingFormation);
             }
         }
 
         public void RotateSpirits()
         {
-            if (spirits.Count < 2 || rotationProgress < 1f)
+            if (spirits.Count < 2 || isChangingFormation)
             {
                 return;
+            }
+
+            StartCoroutine(ChangeFormationSequence());
+        }
+
+        private IEnumerator ChangeFormationSequence()
+        {
+            isChangingFormation = true;
+
+            float changeDuration = PlayFormationAnimation(false);
+            if (changeDuration > 0f)
+            {
+                yield return new WaitForSeconds(changeDuration);
             }
 
             SpiritMember previousPrimary = spirits[0];
@@ -141,6 +157,41 @@ namespace WorldOfSpirits.Spirits
             {
                 Debug.Log($"Primary spirit changed to {PrimarySpirit.name}.", this);
             }
+
+            while (rotationProgress < 1f)
+            {
+                yield return null;
+            }
+
+            float remergeDuration = PlayFormationAnimation(true);
+            if (remergeDuration > 0f)
+            {
+                yield return new WaitForSeconds(remergeDuration);
+            }
+
+            foreach (SpiritMember spirit in spirits)
+            {
+                if (spirit != null)
+                {
+                    spirit.PlayIdleAnimation();
+                }
+            }
+
+            isChangingFormation = false;
+        }
+
+        private float PlayFormationAnimation(bool remerging)
+        {
+            float longestDuration = 0f;
+            foreach (SpiritMember spirit in spirits)
+            {
+                if (spirit != null)
+                {
+                    longestDuration = Mathf.Max(longestDuration, spirit.PlayTransitionAnimation(remerging));
+                }
+            }
+
+            return longestDuration;
         }
 
         private void AnimateRotation()
