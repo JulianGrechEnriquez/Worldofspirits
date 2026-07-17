@@ -207,7 +207,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 32
+  spritePixelsToUnits: 16
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -272,10 +272,10 @@ TextureImporter:
       name: Phoenixling Sprite Sheet_0
       rect:
         serializedVersion: 2
-        x: 19
-        y: 340
-        width: 25
-        height: 23
+        x: 20
+        y: 341
+        width: 23
+        height: 21
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -294,10 +294,10 @@ TextureImporter:
       name: Phoenixling Sprite Sheet_1
       rect:
         serializedVersion: 2
-        x: 83
-        y: 339
-        width: 25
-        height: 24
+        x: 84
+        y: 340
+        width: 23
+        height: 22
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -316,10 +316,10 @@ TextureImporter:
       name: Phoenixling Sprite Sheet_2
       rect:
         serializedVersion: 2
-        x: 152
-        y: 341
-        width: 15
-        height: 24
+        x: 153
+        y: 342
+        width: 13
+        height: 22
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -338,10 +338,10 @@ TextureImporter:
       name: Phoenixling Sprite Sheet_3
       rect:
         serializedVersion: 2
-        x: 211
-        y: 341
-        width: 25
-        height: 23
+        x: 212
+        y: 342
+        width: 23
+        height: 21
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -357,145 +357,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Phoenixling Sprite Sheet_4
-      rect:
-        serializedVersion: 2
-        x: 19
-        y: 280
-        width: 25
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: f2efbc2f8aecf4ec0800000000000000
-      internalID: -3580415953712972241
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Phoenixling Sprite Sheet_5
-      rect:
-        serializedVersion: 2
-        x: 83
-        y: 279
-        width: 25
-        height: 17
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 2beae4d7e36c751a0800000000000000
-      internalID: -6820765138936746318
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Phoenixling Sprite Sheet_6
-      rect:
-        serializedVersion: 2
-        x: 147
-        y: 277
-        width: 25
-        height: 17
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 859f637f80dce61f0800000000000000
-      internalID: -1049676224739739304
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Phoenixling Sprite Sheet_7
-      rect:
-        serializedVersion: 2
-        x: 211
-        y: 281
-        width: 25
-        height: 13
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: ffe710ba34419f0c0800000000000000
-      internalID: -4541576468362068225
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Phoenixling Sprite Sheet_8
-      rect:
-        serializedVersion: 2
-        x: 19
-        y: 212
-        width: 25
-        height: 23
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: c1cbd7d71eabee6f0800000000000000
-      internalID: -653379418286343140
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Phoenixling Sprite Sheet_9
-      rect:
-        serializedVersion: 2
-        x: 83
-        y: 211
-        width: 26
-        height: 24
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 2c9c8dc80cd2db680800000000000000
-      internalID: -8737777397008905790
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: Phoenixling Sprite Sheet_10
       rect:
         serializedVersion: 2
-        x: 149
-        y: 210
-        width: 22
-        height: 27
+        x: 20
+        y: 281
+        width: 23
+        height: 14
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -514,10 +382,10 @@ TextureImporter:
       name: Phoenixling Sprite Sheet_11
       rect:
         serializedVersion: 2
-        x: 214
-        y: 202
-        width: 20
-        height: 36
+        x: 84
+        y: 280
+        width: 23
+        height: 15
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -536,10 +404,10 @@ TextureImporter:
       name: Phoenixling Sprite Sheet_12
       rect:
         serializedVersion: 2
-        x: 279
-        y: 215
-        width: 18
-        height: 22
+        x: 148
+        y: 278
+        width: 23
+        height: 15
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -558,10 +426,10 @@ TextureImporter:
       name: Phoenixling Sprite Sheet_13
       rect:
         serializedVersion: 2
-        x: 282
-        y: 197
-        width: 12
-        height: 19
+        x: 212
+        y: 282
+        width: 23
+        height: 11
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -580,10 +448,10 @@ TextureImporter:
       name: Phoenixling Sprite Sheet_14
       rect:
         serializedVersion: 2
-        x: 341
-        y: 196
-        width: 11
-        height: 12
+        x: 20
+        y: 213
+        width: 23
+        height: 21
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -602,9 +470,9 @@ TextureImporter:
       name: Phoenixling Sprite Sheet_15
       rect:
         serializedVersion: 2
-        x: 342
-        y: 216
-        width: 20
+        x: 84
+        y: 212
+        width: 24
         height: 22
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -624,10 +492,10 @@ TextureImporter:
       name: Phoenixling Sprite Sheet_16
       rect:
         serializedVersion: 2
-        x: 352
-        y: 196
-        width: 11
-        height: 12
+        x: 150
+        y: 211
+        width: 20
+        height: 25
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -646,10 +514,10 @@ TextureImporter:
       name: Phoenixling Sprite Sheet_17
       rect:
         serializedVersion: 2
-        x: 401
-        y: 196
-        width: 11
-        height: 7
+        x: 215
+        y: 203
+        width: 18
+        height: 34
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -668,10 +536,10 @@ TextureImporter:
       name: Phoenixling Sprite Sheet_18
       rect:
         serializedVersion: 2
-        x: 407
-        y: 215
-        width: 18
-        height: 22
+        x: 280
+        y: 216
+        width: 16
+        height: 20
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -690,10 +558,10 @@ TextureImporter:
       name: Phoenixling Sprite Sheet_19
       rect:
         serializedVersion: 2
-        x: 419
-        y: 196
-        width: 11
-        height: 7
+        x: 343
+        y: 217
+        width: 18
+        height: 20
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -712,10 +580,10 @@ TextureImporter:
       name: Phoenixling Sprite Sheet_20
       rect:
         serializedVersion: 2
-        x: 462
-        y: 198
-        width: 36
-        height: 40
+        x: 408
+        y: 216
+        width: 16
+        height: 20
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -734,10 +602,10 @@ TextureImporter:
       name: Phoenixling Sprite Sheet_21
       rect:
         serializedVersion: 2
-        x: 19
-        y: 148
-        width: 25
-        height: 23
+        x: 283
+        y: 198
+        width: 10
+        height: 17
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -756,10 +624,10 @@ TextureImporter:
       name: Phoenixling Sprite Sheet_22
       rect:
         serializedVersion: 2
-        x: 83
-        y: 148
-        width: 25
-        height: 23
+        x: 342
+        y: 197
+        width: 9
+        height: 10
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -778,10 +646,10 @@ TextureImporter:
       name: Phoenixling Sprite Sheet_23
       rect:
         serializedVersion: 2
-        x: 147
-        y: 149
-        width: 25
-        height: 22
+        x: 353
+        y: 197
+        width: 9
+        height: 10
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -800,10 +668,10 @@ TextureImporter:
       name: Phoenixling Sprite Sheet_24
       rect:
         serializedVersion: 2
-        x: 211
-        y: 148
-        width: 25
-        height: 23
+        x: 402
+        y: 197
+        width: 9
+        height: 5
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -822,10 +690,10 @@ TextureImporter:
       name: Phoenixling Sprite Sheet_25
       rect:
         serializedVersion: 2
-        x: 19
-        y: 84
-        width: 25
-        height: 23
+        x: 420
+        y: 197
+        width: 9
+        height: 5
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -844,10 +712,10 @@ TextureImporter:
       name: Phoenixling Sprite Sheet_26
       rect:
         serializedVersion: 2
-        x: 89
-        y: 83
-        width: 13
-        height: 27
+        x: 20
+        y: 149
+        width: 23
+        height: 21
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -866,10 +734,10 @@ TextureImporter:
       name: Phoenixling Sprite Sheet_27
       rect:
         serializedVersion: 2
-        x: 153
-        y: 78
-        width: 13
-        height: 31
+        x: 84
+        y: 149
+        width: 23
+        height: 21
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -888,10 +756,10 @@ TextureImporter:
       name: Phoenixling Sprite Sheet_28
       rect:
         serializedVersion: 2
-        x: 217
-        y: 68
-        width: 13
-        height: 40
+        x: 148
+        y: 150
+        width: 23
+        height: 20
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -910,10 +778,10 @@ TextureImporter:
       name: Phoenixling Sprite Sheet_29
       rect:
         serializedVersion: 2
-        x: 280
-        y: 93
-        width: 7
-        height: 13
+        x: 212
+        y: 149
+        width: 23
+        height: 21
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -932,10 +800,10 @@ TextureImporter:
       name: Phoenixling Sprite Sheet_30
       rect:
         serializedVersion: 2
-        x: 284
-        y: 99
-        width: 8
-        height: 16
+        x: 20
+        y: 85
+        width: 23
+        height: 21
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -954,10 +822,10 @@ TextureImporter:
       name: Phoenixling Sprite Sheet_31
       rect:
         serializedVersion: 2
-        x: 285
-        y: 81
-        width: 8
-        height: 19
+        x: 90
+        y: 84
+        width: 11
+        height: 25
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -976,10 +844,10 @@ TextureImporter:
       name: Phoenixling Sprite Sheet_32
       rect:
         serializedVersion: 2
-        x: 344
-        y: 68
-        width: 14
-        height: 51
+        x: 154
+        y: 79
+        width: 11
+        height: 29
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -998,10 +866,10 @@ TextureImporter:
       name: Phoenixling Sprite Sheet_33
       rect:
         serializedVersion: 2
-        x: 409
-        y: 68
-        width: 13
-        height: 53
+        x: 218
+        y: 69
+        width: 11
+        height: 38
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1020,10 +888,10 @@ TextureImporter:
       name: Phoenixling Sprite Sheet_34
       rect:
         serializedVersion: 2
-        x: 282
-        y: 68
-        width: 11
-        height: 14
+        x: 281
+        y: 94
+        width: 5
+        height: 11
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1042,10 +910,10 @@ TextureImporter:
       name: Phoenixling Sprite Sheet_35
       rect:
         serializedVersion: 2
-        x: 473
-        y: 68
-        width: 13
-        height: 9
+        x: 285
+        y: 100
+        width: 6
+        height: 14
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1064,10 +932,10 @@ TextureImporter:
       name: Phoenixling Sprite Sheet_38
       rect:
         serializedVersion: 2
-        x: 463
-        y: 13
-        width: 33
-        height: 40
+        x: 286
+        y: 82
+        width: 6
+        height: 17
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1086,10 +954,10 @@ TextureImporter:
       name: Phoenixling Sprite Sheet_40
       rect:
         serializedVersion: 2
-        x: 525
-        y: 20
-        width: 37
-        height: 37
+        x: 474
+        y: 69
+        width: 11
+        height: 7
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1105,57 +973,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Phoenixling Sprite Sheet_41
-      rect:
-        serializedVersion: 2
-        x: 216
-        y: 7
-        width: 16
-        height: 27
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: cb61d48ddb001fb10800000000000000
-      internalID: 2013391323789072060
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Phoenixling Sprite Sheet_42
-      rect:
-        serializedVersion: 2
-        x: 281
-        y: 11
-        width: 14
-        height: 27
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 7cc32365dd95606f0800000000000000
-      internalID: -718788283350238009
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: Phoenixling Sprite Sheet_43
       rect:
         serializedVersion: 2
-        x: 345
-        y: 8
-        width: 13
-        height: 37
+        x: 463
+        y: 13
+        width: 33
+        height: 40
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1174,10 +998,10 @@ TextureImporter:
       name: Phoenixling Sprite Sheet_45
       rect:
         serializedVersion: 2
-        x: 399
-        y: 11
-        width: 32
-        height: 41
+        x: 526
+        y: 21
+        width: 35
+        height: 35
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1193,35 +1017,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Phoenixling Sprite Sheet_49
-      rect:
-        serializedVersion: 2
-        x: 25
-        y: 4
-        width: 13
-        height: 9
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 0f950b9153b3e2a10800000000000000
-      internalID: 1886510393165109744
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: Phoenixling Sprite Sheet_50
       rect:
         serializedVersion: 2
-        x: 89
-        y: 4
-        width: 13
-        height: 9
+        x: 399
+        y: 11
+        width: 32
+        height: 41
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1237,12 +1039,56 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Phoenixling Sprite Sheet_51
+      name: Phoenixling Sprite Sheet_36
       rect:
         serializedVersion: 2
-        x: 151
-        y: 4
-        width: 18
+        x: 345
+        y: 69
+        width: 12
+        height: 49
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6ff70c5cde3f1034aa2a8dbc13346efc
+      internalID: -6727337387090863306
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Phoenixling Sprite Sheet_37
+      rect:
+        serializedVersion: 2
+        x: 410
+        y: 69
+        width: 11
+        height: 51
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 06fab106c4509494082ad96388229ddb
+      internalID: -8801673709728540119
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Phoenixling Sprite Sheet_39
+      rect:
+        serializedVersion: 2
+        x: 283
+        y: 69
+        width: 9
         height: 12
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -1250,10 +1096,142 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: ce28f4540034102e0800000000000000
-      internalID: -2161372677719227668
+      spriteID: c6fdfc61ca99e9745bbb34e434dcd8bc
+      internalID: 5458937795065934757
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Phoenixling Sprite Sheet_46
+      rect:
+        serializedVersion: 2
+        x: 217
+        y: 8
+        width: 14
+        height: 25
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c71ef73bb52fe3740bb73ed35fbcd309
+      internalID: -7133810809127817291
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Phoenixling Sprite Sheet_47
+      rect:
+        serializedVersion: 2
+        x: 282
+        y: 12
+        width: 12
+        height: 25
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 070cc1abeef23fb42af9a15d70f86be3
+      internalID: 5391439081365872229
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Phoenixling Sprite Sheet_48
+      rect:
+        serializedVersion: 2
+        x: 346
+        y: 8
+        width: 11
+        height: 36
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b16ce48bddb723f44b87ddb89aaa513a
+      internalID: 6104655492098416139
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Phoenixling Sprite Sheet_54
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 5
+        width: 11
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4046eaf170ec01342a24f98988d9ef81
+      internalID: 770517049
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Phoenixling Sprite Sheet_55
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 5
+        width: 11
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a1799915136ff06459213ea40df4fa17
+      internalID: 1948724282
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Phoenixling Sprite Sheet_56
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 5
+        width: 16
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 97f0aaa57d2cfa045a181200bdda8d6e
+      internalID: 1613359352
       vertices: []
       indices: 
       edges: []
@@ -1323,6 +1301,11 @@ TextureImporter:
       Phoenixling Sprite Sheet_50: 249051019493558860
       Phoenixling Sprite Sheet_51: -2161372677719227668
       Phoenixling Sprite Sheet_52: 2660445375617109017
+      Phoenixling Sprite Sheet_53: -727486892
+      Phoenixling Sprite Sheet_54: 770517049
+      Phoenixling Sprite Sheet_55: 1948724282
+      Phoenixling Sprite Sheet_56: 1613359352
+      Phoenixling Sprite Sheet_57: 2113380649
       Phoenixling Sprite Sheet_6: -1049676224739739304
       Phoenixling Sprite Sheet_7: -4541576468362068225
       Phoenixling Sprite Sheet_8: -653379418286343140
