@@ -63,6 +63,10 @@ namespace WorldOfSpirits.Spirits
         [Min(0f)] public float homingStrength = 5f;
         [Min(0.1f)] public float homingRange = 8f;
         [Min(0)] public int pierceCount;
+        [Tooltip("How many additional enemies this projectile can bounce to after its first hit.")]
+        [Min(0)] public int bounceCount;
+        [Tooltip("Maximum distance used to find the next enemy after a bounce.")]
+        [Min(0.1f)] public float bounceRange = 5f;
         [Min(0f)] public float explosionRadius;
         [Min(0f)] public float growthPerSecond;
         public bool appliesStatus;

@@ -7,6 +7,8 @@ namespace WorldOfSpirits.Combat
     {
         [Header("Projectile Behaviour")]
         [SerializeField, Min(0)] private int pierceCount;
+        [SerializeField, Min(0)] private int bounceCount;
+        [SerializeField, Min(0.1f)] private float bounceRange = 5f;
         [SerializeField, Min(0f)] private float explosionRadius;
         [SerializeField, Min(0f)] private float growthPerSecond;
         [SerializeField] private bool appliesStatus;
@@ -16,17 +18,23 @@ namespace WorldOfSpirits.Combat
 
         private readonly HashSet<int> hitTargets = new HashSet<int>();
         private int remainingPierces;
+        private int remainingBounces;
 
         public override void Launch(Vector2 direction, float projectileSpeed, float damage, Faction ownerFaction)
         {
+            hitTargets.Clear();
             remainingPierces = pierceCount;
+            remainingBounces = bounceCount;
             base.Launch(direction, projectileSpeed, damage, ownerFaction);
         }
 
         public void Configure(int newPierceCount, float newExplosionRadius, float newGrowthPerSecond,
-            bool shouldApplyStatus, CombatStatus newStatus, float newStatusDuration, float newStatusStrength)
+            bool shouldApplyStatus, CombatStatus newStatus, float newStatusDuration, float newStatusStrength,
+            int newBounceCount = 0, float newBounceRange = 5f)
         {
             pierceCount = Mathf.Max(0, newPierceCount);
+            bounceCount = Mathf.Max(0, newBounceCount);
+            bounceRange = Mathf.Max(0.1f, newBounceRange);
             explosionRadius = Mathf.Max(0f, newExplosionRadius);
             growthPerSecond = Mathf.Max(0f, newGrowthPerSecond);
             appliesStatus = shouldApplyStatus;
@@ -69,10 +77,43 @@ namespace WorldOfSpirits.Combat
                 receiver.ApplyStatus(status, statusDuration, statusStrength);
             }
 
+            if (remainingBounces > 0)
+            {
+                IDamageable nextTarget = FindClosestUnhitTarget(target.Transform.position);
+                if (nextTarget != null)
+                {
+                    remainingBounces--;
+                    Redirect(nextTarget.Transform.position - transform.position);
+                    return;
+                }
+            }
+
             if (remainingPierces-- <= 0)
             {
                 Destroy(gameObject);
             }
+        }
+
+        private IDamageable FindClosestUnhitTarget(Vector3 position)
+        {
+            IDamageable closest = null;
+            float closestDistance = bounceRange * bounceRange;
+            foreach (IDamageable candidate in CombatTargeting.FindAll(position, bounceRange, OwnerFaction))
+            {
+                if (candidate == null || hitTargets.Contains(candidate.Transform.gameObject.GetInstanceID()))
+                {
+                    continue;
+                }
+
+                float distance = (candidate.Transform.position - position).sqrMagnitude;
+                if (distance < closestDistance)
+                {
+                    closest = candidate;
+                    closestDistance = distance;
+                }
+            }
+
+            return closest;
         }
     }
 }

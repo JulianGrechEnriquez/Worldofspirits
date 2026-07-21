@@ -236,6 +236,9 @@ MonoBehaviour:
   progression:
     weaponLevel: 1
     abilityLevels: 
+  changeAnimationState: 
+  remergeAnimationState: 
+  idleAnimationState: 
 --- !u!1 &2862786398580829607
 GameObject:
   m_ObjectHideFlags: 0

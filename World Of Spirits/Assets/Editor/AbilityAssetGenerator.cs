@@ -129,6 +129,13 @@ namespace WorldOfSpirits.EditorTools
             }
             if (spec.Name == "Lightning Strike") level.spawnCount = index == 0 ? 3 : 6;
             if (spec.Name == "Chain Lightning Bolt") level.chainCount = index == 0 ? 3 : 5;
+            if (spec.Name == "Boulder Throw")
+            {
+                GameObject boulder = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Spirits/boulder.prefab");
+                level.projectile.projectilePrefab = boulder != null ? boulder.GetComponent<ProjectileBase>() : null;
+                level.projectile.bounceCount = 2 + index;
+                level.projectile.bounceRange = 5f + index;
+            }
             if (spec.Name == "Frozen Orbs") level.spawnCount = index == 0 ? 2 : index < 3 ? 3 : 4;
             if (spec.Name == "Acid Spray") level.projectile.spreadAngle = 45f + index * 12f;
 

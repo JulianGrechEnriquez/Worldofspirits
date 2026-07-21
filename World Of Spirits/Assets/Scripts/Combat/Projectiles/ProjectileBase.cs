@@ -64,6 +64,18 @@ namespace WorldOfSpirits.Combat
             homingRange = Mathf.Max(0.1f, range);
         }
 
+        protected void Redirect(Vector2 direction)
+        {
+            if (Body == null || direction.sqrMagnitude <= Mathf.Epsilon)
+            {
+                return;
+            }
+
+            Vector2 normalizedDirection = direction.normalized;
+            Body.linearVelocity = normalizedDirection * launchSpeed;
+            FaceDirection(normalizedDirection);
+        }
+
         protected virtual void Update()
         {
             if (!homeOnEnemies || homingStrength <= 0f || Body == null)

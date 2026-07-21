@@ -115,7 +115,8 @@ namespace WorldOfSpirits.Spirits
                 if (projectile is ConfigurableProjectile configurable)
                 {
                     configurable.Configure(data.pierceCount, data.explosionRadius, data.growthPerSecond,
-                        data.appliesStatus, data.status, data.statusDuration, data.statusStrength);
+                        data.appliesStatus, data.status, data.statusDuration, data.statusStrength,
+                        data.bounceCount, data.bounceRange);
                 }
                 projectile.Launch(direction, data.speed, data.damage, Faction.Player);
             }
