@@ -234,6 +234,9 @@ MonoBehaviour:
   progression:
     weaponLevel: 1
     abilityLevels: 
+  changeAnimationState: Fire_Change
+  remergeAnimationState: Fire_remerg
+  idleAnimationState: Fire ideal
 --- !u!1 &7324707533912945930
 GameObject:
   m_ObjectHideFlags: 0

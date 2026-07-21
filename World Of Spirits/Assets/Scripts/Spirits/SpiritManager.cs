@@ -277,9 +277,9 @@ namespace WorldOfSpirits.Spirits
                 spirits.Add(member);
             }
 
-            if (spirits.Count == 0)
+            if (slots.Count == 0)
             {
-                Debug.LogWarning("SpiritManager could not find any spirits inside its slots.", this);
+                Debug.LogWarning("SpiritManager could not find any configured spirit slots.", this);
             }
         }
     }

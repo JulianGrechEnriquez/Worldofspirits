@@ -9,6 +9,11 @@ namespace WorldOfSpirits.Spirits
         [SerializeField] private SpiritDefinition definition;
         [SerializeField] private SpiritProgression progression = new SpiritProgression();
 
+        [Header("Formation Animations (optional)")]
+        [SerializeField] private string changeAnimationState;
+        [SerializeField] private string remergeAnimationState;
+        [SerializeField] private string idleAnimationState;
+
         private Renderer[] renderers;
         private SpiritWeaponAttack[] weapons;
         private SpiritAbility[] abilities;
@@ -100,13 +105,31 @@ namespace WorldOfSpirits.Spirits
                     continue;
                 }
 
-                string stateName = FindTransitionState(animator, remerging, out float duration);
+                string configuredState = remerging ? remergeAnimationState : changeAnimationState;
+                string stateName;
+                float duration;
+                if (!string.IsNullOrWhiteSpace(configuredState))
+                {
+                    stateName = FindPlayableState(animator, configuredState);
+                    duration = FindClipDuration(animator, configuredState);
+                }
+                else
+                {
+                    stateName = FindTransitionState(animator, remerging, out duration);
+                }
+
                 if (string.IsNullOrEmpty(stateName))
                 {
+                    if (!string.IsNullOrWhiteSpace(configuredState))
+                    {
+                        Debug.LogWarning($"[{name}] Animator state '{configuredState}' was not found.", this);
+                    }
                     continue;
                 }
 
+                animator.enabled = true;
                 animator.Play(stateName, 0, 0f);
+                animator.Update(0f);
                 longestDuration = Mathf.Max(longestDuration, duration);
             }
 
@@ -127,13 +150,40 @@ namespace WorldOfSpirits.Spirits
                     continue;
                 }
 
+                if (!string.IsNullOrWhiteSpace(idleAnimationState))
+                {
+                    string configuredIdle = FindPlayableState(animator, idleAnimationState);
+                    if (!string.IsNullOrEmpty(configuredIdle))
+                    {
+                        animator.enabled = true;
+                        animator.Play(configuredIdle, 0, 0f);
+                        animator.Update(0f);
+                    }
+                    else
+                    {
+                        Debug.LogWarning($"[{name}] Animator state '{idleAnimationState}' was not found.", this);
+                    }
+
+                    continue;
+                }
+
                 foreach (AnimationClip clip in animator.runtimeAnimatorController.animationClips)
                 {
                     string normalizedName = clip.name.ToLowerInvariant();
                     bool isIdle = normalizedName.Contains("idle") || normalizedName.Contains("ideal");
-                    if (isIdle && animator.HasState(0, Animator.StringToHash(clip.name)))
+                    if (!isIdle)
                     {
-                        animator.Play(clip.name, 0, 0f);
+                        continue;
+                    }
+
+                    string stateName = FindPlayableState(animator,
+                        clip.name,
+                        clip.name.Replace("_Idle", " ideal"),
+                        clip.name.Replace("_Idle", " Idle"),
+                        clip.name.Replace("Idle", "ideal"));
+                    if (!string.IsNullOrEmpty(stateName))
+                    {
+                        animator.Play(stateName, 0, 0f);
                         break;
                     }
                 }
@@ -150,16 +200,63 @@ namespace WorldOfSpirits.Spirits
                     ? normalizedName.Contains("remerg") || normalizedName.Contains("re-merg")
                     : normalizedName.Contains("change") && !normalizedName.Contains("remerg");
 
-                if (!isMatch || !animator.HasState(0, Animator.StringToHash(clip.name)))
+                if (!isMatch)
+                {
+                    continue;
+                }
+
+                string stateName = FindPlayableState(animator, clip.name);
+                if (string.IsNullOrEmpty(stateName))
                 {
                     continue;
                 }
 
                 duration = clip.length;
-                return clip.name;
+                return stateName;
             }
 
             return null;
+        }
+
+        private static string FindPlayableState(Animator animator, params string[] candidateNames)
+        {
+            foreach (string candidateName in candidateNames)
+            {
+                if (string.IsNullOrWhiteSpace(candidateName))
+                {
+                    continue;
+                }
+
+                string fullStateName = $"Base Layer.{candidateName}";
+                if (animator.HasState(0, Animator.StringToHash(fullStateName)))
+                {
+                    return fullStateName;
+                }
+
+                if (animator.HasState(0, Animator.StringToHash(candidateName)))
+                {
+                    return candidateName;
+                }
+            }
+
+            return null;
+        }
+
+        private static float FindClipDuration(Animator animator, string stateName)
+        {
+            string normalizedState = stateName.Replace(" ", string.Empty)
+                .Replace("_", string.Empty).ToLowerInvariant();
+            foreach (AnimationClip clip in animator.runtimeAnimatorController.animationClips)
+            {
+                string normalizedClip = clip.name.Replace(" ", string.Empty)
+                    .Replace("_", string.Empty).ToLowerInvariant();
+                if (normalizedClip == normalizedState)
+                {
+                    return clip.length;
+                }
+            }
+
+            return 0f;
         }
     }
 }
