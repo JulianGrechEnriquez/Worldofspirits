@@ -73,12 +73,13 @@ namespace WorldOfSpirits.Combat
 
         private IDamageable FindClosestTarget()
         {
-            LivingEntity[] candidates = FindObjectsByType<LivingEntity>(FindObjectsSortMode.None);
             IDamageable closest = null;
             float closestDistance = float.PositiveInfinity;
+            var candidates = LivingEntity.ActiveEntities;
 
-            foreach (LivingEntity candidate in candidates)
+            for (int i = 0; i < candidates.Count; i++)
             {
+                LivingEntity candidate = candidates[i];
                 bool layerAllowed = (targetLayers.value & (1 << candidate.gameObject.layer)) != 0;
                 if (!candidate.IsAlive || candidate.Faction == owner.Faction || !layerAllowed)
                 {
@@ -105,7 +106,7 @@ namespace WorldOfSpirits.Combat
 
             Transform spawnPoint = ActiveFirePoint;
             Vector2 direction = targetPosition - spawnPoint.position;
-            ProjectileBase projectile = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
+            ProjectileBase projectile = ProjectilePool.Spawn(projectilePrefab, spawnPoint.position, Quaternion.identity);
             int weaponLevel = spiritOwner != null ? spiritOwner.Progression.WeaponLevel : 1;
             float scaledDamage = damage * (1f + damageIncreasePerWeaponLevel * Mathf.Max(0, weaponLevel - 1));
             projectile.Launch(direction, projectileSpeed, scaledDamage, owner.Faction);

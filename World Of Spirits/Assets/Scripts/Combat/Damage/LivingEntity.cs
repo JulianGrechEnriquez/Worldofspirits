@@ -1,11 +1,16 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using WorldOfSpirits.Core;
 
 namespace WorldOfSpirits.Combat
 {
-    public abstract class LivingEntity : MonoBehaviour, IDamageable, IStatusEffectReceiver
+    public abstract class LivingEntity : MonoBehaviour, IDamageable, IStatusEffectReceiver, IScenePoolable
     {
+        private static readonly List<LivingEntity> activeEntities = new List<LivingEntity>(128);
+        public static IReadOnlyList<LivingEntity> ActiveEntities => activeEntities;
+
         [Header("Core Stats")]
         [SerializeField, Min(1f)] private float maxHealth = 100f;
         [SerializeField, Min(0f)] private float moveSpeed = 5f;
@@ -49,6 +54,19 @@ namespace WorldOfSpirits.Combat
         {
             currentHealth = maxHealth;
             CacheSpriteColors();
+        }
+
+        protected virtual void OnEnable()
+        {
+            if (!activeEntities.Contains(this))
+            {
+                activeEntities.Add(this);
+            }
+        }
+
+        protected virtual void OnDisable()
+        {
+            activeEntities.Remove(this);
         }
 
         protected virtual void Update()
@@ -151,7 +169,39 @@ namespace WorldOfSpirits.Combat
             }
 
             Died?.Invoke();
-            Destroy(gameObject);
+            SceneObjectPool.ReleaseOrDestroy(gameObject);
+        }
+
+        public virtual void OnSpawnedFromPool(GameObject prefab)
+        {
+            currentHealth = maxHealth;
+            currentShield = 0f;
+            shieldEndTime = 0f;
+            statusEndTime = 0f;
+            statusStrength = 0f;
+            nextStatusDamageTime = 0f;
+            activeStatus = default;
+            if (spriteRenderers == null)
+            {
+                CacheSpriteColors();
+            }
+            else
+            {
+                RestoreSpriteColors();
+            }
+
+            HealthChanged?.Invoke(currentHealth, maxHealth);
+        }
+
+        public virtual void OnReturnedToPool()
+        {
+            if (hitFlashRoutine != null)
+            {
+                StopCoroutine(hitFlashRoutine);
+                hitFlashRoutine = null;
+            }
+
+            RestoreSpriteColors();
         }
 
         protected virtual void OnValidate()

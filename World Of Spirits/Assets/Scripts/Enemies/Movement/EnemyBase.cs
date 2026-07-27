@@ -1,6 +1,7 @@
 using UnityEngine;
 using WorldOfSpirits.Combat;
 using WorldOfSpirits.UI;
+using WorldOfSpirits.Core;
 
 namespace WorldOfSpirits.Enemies
 {
@@ -9,6 +10,8 @@ namespace WorldOfSpirits.Enemies
     {
         [Header("Targeting")]
         [SerializeField] private Transform target;
+        [Tooltip("How often this enemy recalculates its direction. Its Rigidbody keeps moving between updates.")]
+        [SerializeField, Min(0.02f)] private float movementRefreshInterval = 0.06f;
 
         [Header("Debug")]
         [SerializeField] private bool drawTargetLine = true;
@@ -16,6 +19,7 @@ namespace WorldOfSpirits.Enemies
         protected Rigidbody2D Body { get; private set; }
         protected Transform Target => target;
         public override Faction Faction => global::WorldOfSpirits.Combat.Faction.Enemy;
+        private float nextMovementRefresh;
 
         protected override void Awake()
         {
@@ -23,6 +27,9 @@ namespace WorldOfSpirits.Enemies
             Body = GetComponent<Rigidbody2D>();
             Body.gravityScale = 0f;
             Body.freezeRotation = true;
+            Body.collisionDetectionMode = CollisionDetectionMode2D.Discrete;
+            nextMovementRefresh = Time.fixedTime +
+                (Mathf.Abs(GetInstanceID()) % 4) * movementRefreshInterval * 0.25f;
 
             if (GetComponent<DamageNumberEmitter>() == null)
             {
@@ -40,7 +47,11 @@ namespace WorldOfSpirits.Enemies
         {
             if (IsAlive && target != null)
             {
-                MoveTowardsTarget();
+                if (Time.fixedTime >= nextMovementRefresh)
+                {
+                    MoveTowardsTarget();
+                    nextMovementRefresh = Time.fixedTime + movementRefreshInterval;
+                }
             }
             else
             {
@@ -49,6 +60,28 @@ namespace WorldOfSpirits.Enemies
         }
 
         protected abstract void MoveTowardsTarget();
+
+        public override void OnSpawnedFromPool(GameObject prefab)
+        {
+            base.OnSpawnedFromPool(prefab);
+            Body.linearVelocity = Vector2.zero;
+            if (target == null)
+            {
+                Player.PlayerCharacter player = FindFirstObjectByType<Player.PlayerCharacter>();
+                target = player != null ? player.transform : null;
+            }
+        }
+
+        protected virtual void Start()
+        {
+            SceneObjectPool.AdoptExisting(gameObject, PoolCategory.Enemies);
+        }
+
+        public override void OnReturnedToPool()
+        {
+            Body.linearVelocity = Vector2.zero;
+            base.OnReturnedToPool();
+        }
 
         protected virtual void OnDrawGizmosSelected()
         {

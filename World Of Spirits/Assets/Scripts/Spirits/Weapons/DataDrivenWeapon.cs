@@ -1,5 +1,6 @@
 using UnityEngine;
 using WorldOfSpirits.Combat;
+using WorldOfSpirits.Core;
 
 namespace WorldOfSpirits.Spirits
 {
@@ -43,7 +44,8 @@ namespace WorldOfSpirits.Spirits
             if (target == null) return;
 
             Vector2 direction = target.Transform.position - origin.position;
-            ProjectileBase projectile = Instantiate(level.projectilePrefab, origin.position, Quaternion.identity);
+            ProjectileBase projectile = ProjectilePool.Spawn(
+                level.projectilePrefab, origin.position, Quaternion.identity);
             projectile.ConfigureHoming(level.homeOnEnemies, level.homingStrength, level.homingRange);
             projectile.Launch(direction, level.projectileSpeed, level.damage, owner.Faction);
         }
@@ -59,7 +61,9 @@ namespace WorldOfSpirits.Spirits
             WeaponLevelData level = ActiveLevel;
             if (level == null || level.weaponPrefab == null) return;
             if (orbitingWeapon == null)
-                orbitingWeapon = Instantiate(level.weaponPrefab, transform.position, Quaternion.identity).transform;
+                orbitingWeapon = SceneObjectPool.Spawn(
+                    level.weaponPrefab, transform.position, Quaternion.identity,
+                    PoolCategory.Effects).transform;
 
             orbitAngle = Mathf.Repeat(orbitAngle + level.orbitSpeed * Time.deltaTime, 360f);
             float radians = orbitAngle * Mathf.Deg2Rad;
@@ -74,7 +78,11 @@ namespace WorldOfSpirits.Spirits
 
         private void OnDisable()
         {
-            if (orbitingWeapon != null) Destroy(orbitingWeapon.gameObject);
+            if (orbitingWeapon != null)
+            {
+                SceneObjectPool.ReleaseOrDestroy(orbitingWeapon.gameObject);
+                orbitingWeapon = null;
+            }
         }
     }
 }

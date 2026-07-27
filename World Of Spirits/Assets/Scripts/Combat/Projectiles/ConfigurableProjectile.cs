@@ -17,14 +17,23 @@ namespace WorldOfSpirits.Combat
         [SerializeField, Min(0f)] private float statusStrength = 2f;
 
         private readonly HashSet<int> hitTargets = new HashSet<int>();
+        private readonly List<IDamageable> targetBuffer = new List<IDamageable>(64);
         private int remainingPierces;
         private int remainingBounces;
+        private Vector3 initialScale;
+
+        protected override void Awake()
+        {
+            base.Awake();
+            initialScale = transform.localScale;
+        }
 
         public override void Launch(Vector2 direction, float projectileSpeed, float damage, Faction ownerFaction)
         {
             hitTargets.Clear();
             remainingPierces = pierceCount;
             remainingBounces = bounceCount;
+            transform.localScale = initialScale;
             base.Launch(direction, projectileSpeed, damage, ownerFaction);
         }
 
@@ -41,6 +50,24 @@ namespace WorldOfSpirits.Combat
             status = newStatus;
             statusDuration = Mathf.Max(0f, newStatusDuration);
             statusStrength = Mathf.Max(0f, newStatusStrength);
+        }
+
+        protected override void ResetPooledConfiguration(ProjectileBase prefab)
+        {
+            if (prefab is not ConfigurableProjectile configurablePrefab)
+            {
+                return;
+            }
+
+            pierceCount = configurablePrefab.pierceCount;
+            bounceCount = configurablePrefab.bounceCount;
+            bounceRange = configurablePrefab.bounceRange;
+            explosionRadius = configurablePrefab.explosionRadius;
+            growthPerSecond = configurablePrefab.growthPerSecond;
+            appliesStatus = configurablePrefab.appliesStatus;
+            status = configurablePrefab.status;
+            statusDuration = configurablePrefab.statusDuration;
+            statusStrength = configurablePrefab.statusStrength;
         }
 
         protected override void Update()
@@ -62,7 +89,9 @@ namespace WorldOfSpirits.Combat
 
             if (explosionRadius > 0f)
             {
-                foreach (IDamageable nearbyTarget in CombatTargeting.FindAll(transform.position, explosionRadius, OwnerFaction))
+                CombatTargeting.FindAllNonAlloc(
+                    transform.position, explosionRadius, OwnerFaction, targetBuffer);
+                foreach (IDamageable nearbyTarget in targetBuffer)
                 {
                     nearbyTarget.TakeDamage(Damage);
                 }
@@ -90,7 +119,7 @@ namespace WorldOfSpirits.Combat
 
             if (remainingPierces-- <= 0)
             {
-                Destroy(gameObject);
+                Despawn();
             }
         }
 
@@ -98,7 +127,8 @@ namespace WorldOfSpirits.Combat
         {
             IDamageable closest = null;
             float closestDistance = bounceRange * bounceRange;
-            foreach (IDamageable candidate in CombatTargeting.FindAll(position, bounceRange, OwnerFaction))
+            CombatTargeting.FindAllNonAlloc(position, bounceRange, OwnerFaction, targetBuffer);
+            foreach (IDamageable candidate in targetBuffer)
             {
                 if (candidate == null || hitTargets.Contains(candidate.Transform.gameObject.GetInstanceID()))
                 {

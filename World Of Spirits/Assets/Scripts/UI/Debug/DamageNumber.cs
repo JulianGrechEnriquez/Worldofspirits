@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using System;
 
 namespace WorldOfSpirits.UI
 {
@@ -11,8 +12,11 @@ namespace WorldOfSpirits.UI
         private float remainingLifetime;
         private float riseSpeed;
         private Color startColor;
+        private Action<DamageNumber> release;
 
-        public void Initialize(float damage, Color color, float duration, float speed, int fontSize)
+        public void Initialize(
+            float damage, Color color, float duration, float speed, int fontSize,
+            Action<DamageNumber> releaseAction)
         {
             textMesh = GetComponent<TextMeshPro>();
             textMesh.text = Mathf.CeilToInt(damage).ToString();
@@ -25,6 +29,7 @@ namespace WorldOfSpirits.UI
             lifetime = Mathf.Max(0.1f, duration);
             remainingLifetime = lifetime;
             riseSpeed = speed;
+            release = releaseAction;
         }
 
         private void Update()
@@ -37,7 +42,16 @@ namespace WorldOfSpirits.UI
 
             if (remainingLifetime <= 0f)
             {
-                Destroy(gameObject);
+                if (release != null)
+                {
+                    Action<DamageNumber> releaseAction = release;
+                    release = null;
+                    releaseAction(this);
+                }
+                else
+                {
+                    Destroy(gameObject);
+                }
             }
         }
     }

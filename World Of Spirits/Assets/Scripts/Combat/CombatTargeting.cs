@@ -9,8 +9,15 @@ namespace WorldOfSpirits.Combat
         {
             IDamageable closest = null;
             float closestDistance = range * range;
-            foreach (LivingEntity candidate in Object.FindObjectsByType<LivingEntity>(FindObjectsSortMode.None))
+            IReadOnlyList<LivingEntity> candidates = LivingEntity.ActiveEntities;
+            for (int i = 0; i < candidates.Count; i++)
             {
+                LivingEntity candidate = candidates[i];
+                if (candidate == null)
+                {
+                    continue;
+                }
+
                 float distance = (candidate.Transform.position - origin).sqrMagnitude;
                 if (candidate.IsAlive && candidate.Faction != enemyOf && distance <= closestDistance)
                 {
@@ -25,16 +32,30 @@ namespace WorldOfSpirits.Combat
         public static List<IDamageable> FindAll(Vector3 origin, float range, Faction enemyOf)
         {
             List<IDamageable> targets = new List<IDamageable>();
-            foreach (LivingEntity candidate in Object.FindObjectsByType<LivingEntity>(FindObjectsSortMode.None))
+            FindAllNonAlloc(origin, range, enemyOf, targets);
+            return targets;
+        }
+
+        public static void FindAllNonAlloc(
+            Vector3 origin, float range, Faction enemyOf, List<IDamageable> results)
+        {
+            results.Clear();
+            float rangeSquared = range * range;
+            IReadOnlyList<LivingEntity> candidates = LivingEntity.ActiveEntities;
+            for (int i = 0; i < candidates.Count; i++)
             {
-                if (candidate.IsAlive && candidate.Faction != enemyOf &&
-                    (candidate.Transform.position - origin).sqrMagnitude <= range * range)
+                LivingEntity candidate = candidates[i];
+                if (candidate == null)
                 {
-                    targets.Add(candidate);
+                    continue;
+                }
+
+                if (candidate.IsAlive && candidate.Faction != enemyOf &&
+                    (candidate.Transform.position - origin).sqrMagnitude <= rangeSquared)
+                {
+                    results.Add(candidate);
                 }
             }
-
-            return targets;
         }
     }
 }

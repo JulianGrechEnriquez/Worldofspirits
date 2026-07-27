@@ -16,6 +16,7 @@ namespace WorldOfSpirits.Combat
         [SerializeField, Min(0f)] private float homingStrength = 5f;
         [Tooltip("Maximum distance at which this projectile can acquire an enemy.")]
         [SerializeField, Min(0.1f)] private float homingRange = 8f;
+        [SerializeField, Min(0.02f)] private float homingTargetRefreshInterval = 0.15f;
 
         [Header("Debug")]
         [SerializeField] private bool logProjectileEvents;
@@ -25,6 +26,10 @@ namespace WorldOfSpirits.Combat
         protected float Damage { get; private set; }
         protected Faction OwnerFaction { get; private set; }
         private float launchSpeed;
+        private float despawnTime;
+        private float nextHomingTargetRefresh;
+        private IDamageable homingTarget;
+        private ProjectileBase poolPrefab;
 
         protected virtual void Awake()
         {
@@ -44,6 +49,9 @@ namespace WorldOfSpirits.Combat
             Damage = damage;
             OwnerFaction = ownerFaction;
             launchSpeed = speed;
+            despawnTime = Time.time + lifetime;
+            nextHomingTargetRefresh = Time.time;
+            homingTarget = null;
             Vector2 normalizedDirection = direction.normalized;
 
             FaceDirection(normalizedDirection);
@@ -54,7 +62,32 @@ namespace WorldOfSpirits.Combat
                 Debug.Log($"[{name}] Launched by {ownerFaction}: speed={speed:0.##}, damage={damage:0.##}", this);
             }
 
-            Destroy(gameObject, lifetime);
+        }
+
+        internal void AssignPool(ProjectileBase prefab)
+        {
+            poolPrefab = prefab;
+            homeOnEnemies = prefab.homeOnEnemies;
+            homingStrength = prefab.homingStrength;
+            homingRange = prefab.homingRange;
+            homingTargetRefreshInterval = prefab.homingTargetRefreshInterval;
+            ResetPooledConfiguration(prefab);
+        }
+
+        protected virtual void ResetPooledConfiguration(ProjectileBase prefab) { }
+
+        protected void Despawn()
+        {
+            Body.linearVelocity = Vector2.zero;
+            homingTarget = null;
+            if (poolPrefab != null)
+            {
+                ProjectilePool.Release(this, poolPrefab);
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
         }
 
         public void ConfigureHoming(bool enabled, float strength, float range)
@@ -78,18 +111,30 @@ namespace WorldOfSpirits.Combat
 
         protected virtual void Update()
         {
+            if (Time.time >= despawnTime)
+            {
+                Despawn();
+                return;
+            }
+
             if (!homeOnEnemies || homingStrength <= 0f || Body == null)
             {
                 return;
             }
 
-            IDamageable target = CombatTargeting.FindClosest(transform.position, homingRange, OwnerFaction);
-            if (target == null)
+            if (Time.time >= nextHomingTargetRefresh)
+            {
+                homingTarget = CombatTargeting.FindClosest(transform.position, homingRange, OwnerFaction);
+                nextHomingTargetRefresh = Time.time + homingTargetRefreshInterval;
+            }
+
+            if (homingTarget == null || !homingTarget.IsAlive ||
+                (homingTarget.Transform.position - transform.position).sqrMagnitude > homingRange * homingRange)
             {
                 return;
             }
 
-            Vector2 desiredVelocity = (target.Transform.position - transform.position).normalized * launchSpeed;
+            Vector2 desiredVelocity = (homingTarget.Transform.position - transform.position).normalized * launchSpeed;
             Body.linearVelocity = Vector2.Lerp(Body.linearVelocity, desiredVelocity,
                 Mathf.Clamp01(homingStrength * Time.deltaTime));
             FaceDirection(Body.linearVelocity);

@@ -2,6 +2,7 @@ using UnityEngine;
 using WorldOfSpirits.Combat;
 using WorldOfSpirits.Player;
 using WorldOfSpirits.UI;
+using WorldOfSpirits.Core;
 
 namespace WorldOfSpirits.Enemies
 {
@@ -60,6 +61,28 @@ namespace WorldOfSpirits.Enemies
         }
 
         protected abstract void UpdateBoss(Transform playerTarget);
+
+        public override void OnSpawnedFromPool(GameObject prefab)
+        {
+            base.OnSpawnedFromPool(prefab);
+            Body.linearVelocity = Vector2.zero;
+            if (target == null)
+            {
+                PlayerCharacter player = FindFirstObjectByType<PlayerCharacter>();
+                target = player != null ? player.transform : null;
+            }
+        }
+
+        protected virtual void Start()
+        {
+            SceneObjectPool.AdoptExisting(gameObject, PoolCategory.Enemies);
+        }
+
+        public override void OnReturnedToPool()
+        {
+            Body.linearVelocity = Vector2.zero;
+            base.OnReturnedToPool();
+        }
 
         private void UpdateFacing()
         {

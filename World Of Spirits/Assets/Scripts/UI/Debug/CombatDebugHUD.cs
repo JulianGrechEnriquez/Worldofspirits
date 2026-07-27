@@ -3,6 +3,7 @@ using UnityEngine.InputSystem;
 using WorldOfSpirits.Enemies;
 using WorldOfSpirits.Player;
 using WorldOfSpirits.Spirits;
+using WorldOfSpirits.Combat;
 
 namespace WorldOfSpirits.UI
 {
@@ -34,7 +35,15 @@ namespace WorldOfSpirits.UI
 
             if (Time.unscaledTime >= nextEnemyCountRefresh)
             {
-                enemyCount = FindObjectsByType<EnemyBase>(FindObjectsSortMode.None).Length;
+                enemyCount = 0;
+                var entities = LivingEntity.ActiveEntities;
+                for (int i = 0; i < entities.Count; i++)
+                {
+                    if (entities[i] is EnemyBase && entities[i].IsAlive)
+                    {
+                        enemyCount++;
+                    }
+                }
                 nextEnemyCountRefresh = Time.unscaledTime + enemyCountRefreshRate;
             }
 

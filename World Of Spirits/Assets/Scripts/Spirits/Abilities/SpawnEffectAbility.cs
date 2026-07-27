@@ -1,5 +1,6 @@
 using UnityEngine;
 using WorldOfSpirits.Combat;
+using WorldOfSpirits.Core;
 
 namespace WorldOfSpirits.Spirits
 {
@@ -18,6 +19,8 @@ namespace WorldOfSpirits.Spirits
         [SerializeField] private IntegerLevelScaling spawnCount = new IntegerLevelScaling();
         [SerializeField] private LevelScaling spawnRadius = new LevelScaling();
         [SerializeField, Min(0.1f)] private float targetingRange = 15f;
+        [Tooltip("Fallback lifetime for effects that do not manage their own duration.")]
+        [SerializeField, Min(0.1f)] private float effectLifetime = 3f;
 
         protected override bool CanCast(SpiritAbilityContext context) => effectPrefab != null;
 
@@ -26,7 +29,13 @@ namespace WorldOfSpirits.Spirits
             int count = Mathf.Max(1, spawnCount.Evaluate(CurrentLevel));
             for (int i = 0; i < count; i++)
             {
-                Instantiate(effectPrefab, ResolvePosition(context), Quaternion.identity);
+                GameObject spawned = SceneObjectPool.Spawn(
+                    effectPrefab, ResolvePosition(context), Quaternion.identity,
+                    PoolCategory.FloorEffects);
+                if (spawned.GetComponent<PersistentDamageZone>() == null)
+                {
+                    SceneObjectPool.ReleaseAfter(spawned, effectLifetime);
+                }
             }
         }
 

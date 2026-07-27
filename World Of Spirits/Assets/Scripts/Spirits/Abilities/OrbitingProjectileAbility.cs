@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using WorldOfSpirits.Combat;
+using WorldOfSpirits.Core;
 
 namespace WorldOfSpirits.Spirits
 {
@@ -75,13 +76,15 @@ namespace WorldOfSpirits.Spirits
             orbs.RemoveAll(orb => orb == null);
             while (orbs.Count < desiredCount)
             {
-                orbs.Add(Instantiate(orbPrefab, transform.position, Quaternion.identity, transform).transform);
+                orbs.Add(SceneObjectPool.Spawn(
+                    orbPrefab, transform.position, Quaternion.identity,
+                    PoolCategory.Effects, transform).transform);
             }
             while (orbs.Count > desiredCount)
             {
                 Transform extra = orbs[orbs.Count - 1];
                 orbs.RemoveAt(orbs.Count - 1);
-                Destroy(extra.gameObject);
+                SceneObjectPool.ReleaseOrDestroy(extra.gameObject);
             }
         }
 
@@ -91,7 +94,7 @@ namespace WorldOfSpirits.Spirits
             {
                 if (orb != null)
                 {
-                    Destroy(orb.gameObject);
+                    SceneObjectPool.ReleaseOrDestroy(orb.gameObject);
                 }
             }
 

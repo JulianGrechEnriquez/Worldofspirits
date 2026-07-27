@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using WorldOfSpirits.Combat;
+using WorldOfSpirits.Core;
 
 namespace WorldOfSpirits.Spirits
 {
@@ -9,6 +10,8 @@ namespace WorldOfSpirits.Spirits
         [SerializeField] private AbilityDefinition definition;
 
         private readonly List<Transform> orbitingObjects = new List<Transform>();
+        private readonly List<IDamageable> targetBuffer = new List<IDamageable>(64);
+        private readonly HashSet<Transform> chainHitBuffer = new HashSet<Transform>();
         private GameObject followingArea;
         private float followingAreaDisableTime;
         private AbilityLevelData ActiveLevel => definition != null ? definition.GetLevel(CurrentLevel) : null;
@@ -65,10 +68,14 @@ namespace WorldOfSpirits.Spirits
         {
             foreach (Transform item in orbitingObjects)
             {
-                if (item != null) Destroy(item.gameObject);
+                if (item != null) SceneObjectPool.ReleaseOrDestroy(item.gameObject);
             }
             orbitingObjects.Clear();
-            if (followingArea != null) Destroy(followingArea);
+            if (followingArea != null)
+            {
+                SceneObjectPool.ReleaseOrDestroy(followingArea);
+                followingArea = null;
+            }
         }
 
         private void ActivateFollowingArea(SpiritAbilityContext context, AbilityLevelData level)
@@ -77,7 +84,9 @@ namespace WorldOfSpirits.Spirits
 
             if (followingArea == null)
             {
-                followingArea = Instantiate(level.spawnedEffectPrefab, context.Player);
+                followingArea = SceneObjectPool.Spawn(
+                    level.spawnedEffectPrefab, context.Player.position, Quaternion.identity,
+                    PoolCategory.FloorEffects, context.Player);
                 followingArea.name = level.spawnedEffectPrefab.name + " (Following Area)";
                 followingArea.transform.localPosition = Vector3.zero;
                 PersistentDamageZone zone = followingArea.GetComponent<PersistentDamageZone>();
@@ -110,7 +119,8 @@ namespace WorldOfSpirits.Spirits
                     angle = centerAngle - data.spreadAngle * 0.5f + (count > 1 ? data.spreadAngle * i / (count - 1) : 0f);
 
                 Vector2 direction = new Vector2(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad));
-                ProjectileBase projectile = Instantiate(data.projectilePrefab, transform.position, Quaternion.identity);
+                ProjectileBase projectile = ProjectilePool.Spawn(
+                    data.projectilePrefab, transform.position, Quaternion.identity);
                 projectile.ConfigureHoming(data.homeOnEnemies, data.homingStrength, data.homingRange);
                 if (projectile is ConfigurableProjectile configurable)
                 {
@@ -124,7 +134,9 @@ namespace WorldOfSpirits.Spirits
 
         private void CastArea(SpiritAbilityContext context, AbilityLevelData level)
         {
-            foreach (IDamageable target in CombatTargeting.FindAll(transform.position, level.areaRadius, Faction.Player))
+            CombatTargeting.FindAllNonAlloc(
+                transform.position, level.areaRadius, Faction.Player, targetBuffer);
+            foreach (IDamageable target in targetBuffer)
                 ApplyEffects(target.Transform, context.Player, level.effects);
         }
 
@@ -134,9 +146,12 @@ namespace WorldOfSpirits.Spirits
             for (int i = 0; i < Mathf.Max(1, level.spawnCount); i++)
             {
                 Vector3 position = ResolvePosition(context, level);
-                GameObject spawned = Instantiate(level.spawnedEffectPrefab, position, Quaternion.identity);
+                GameObject spawned = SceneObjectPool.Spawn(
+                    level.spawnedEffectPrefab, position, Quaternion.identity,
+                    PoolCategory.FloorEffects);
                 PersistentDamageZone zone = spawned.GetComponent<PersistentDamageZone>();
                 if (zone != null) zone.SetOwner(context.Player);
+                else SceneObjectPool.ReleaseAfter(spawned, Mathf.Max(0.1f, level.activeDuration));
             }
         }
 
@@ -146,25 +161,27 @@ namespace WorldOfSpirits.Spirits
             if (prefab == null) return;
             orbitingObjects.RemoveAll(item => item == null);
             while (orbitingObjects.Count < Mathf.Max(1, level.spawnCount))
-                orbitingObjects.Add(Instantiate(prefab, transform.position, Quaternion.identity, transform).transform);
+                orbitingObjects.Add(SceneObjectPool.Spawn(
+                    prefab, transform.position, Quaternion.identity,
+                    PoolCategory.Effects, transform).transform);
             while (orbitingObjects.Count > Mathf.Max(1, level.spawnCount))
             {
                 Transform item = orbitingObjects[orbitingObjects.Count - 1];
                 orbitingObjects.RemoveAt(orbitingObjects.Count - 1);
-                Destroy(item.gameObject);
+                SceneObjectPool.ReleaseOrDestroy(item.gameObject);
             }
         }
 
         private void CastChain(AbilityLevelData level)
         {
-            HashSet<Transform> hit = new HashSet<Transform>();
+            chainHitBuffer.Clear();
             Vector3 position = transform.position;
             for (int i = 0; i < level.chainCount; i++)
             {
-                IDamageable next = FindClosestUnhit(position, level.chainRange, hit);
+                IDamageable next = FindClosestUnhit(position, level.chainRange, chainHitBuffer);
                 if (next == null) break;
                 ApplyEffects(next.Transform, OwnerSpirit != null ? OwnerSpirit.transform : transform, level.effects);
-                hit.Add(next.Transform);
+                chainHitBuffer.Add(next.Transform);
                 position = next.Transform.position;
             }
         }
@@ -173,7 +190,8 @@ namespace WorldOfSpirits.Spirits
         {
             IDamageable best = null;
             float bestDistance = range * range;
-            foreach (IDamageable candidate in CombatTargeting.FindAll(position, range, Faction.Player))
+            CombatTargeting.FindAllNonAlloc(position, range, Faction.Player, targetBuffer);
+            foreach (IDamageable candidate in targetBuffer)
             {
                 float distance = (candidate.Transform.position - position).sqrMagnitude;
                 if (!hit.Contains(candidate.Transform) && distance < bestDistance)
@@ -204,7 +222,14 @@ namespace WorldOfSpirits.Spirits
                     case AbilityEffectType.Shield: living?.AddShield(effect.value, effect.duration); break;
                     case AbilityEffectType.GrantRevive: living?.GrantRevive(Mathf.Max(1, Mathf.RoundToInt(effect.value))); break;
                     case AbilityEffectType.SpawnEffect:
-                        if (effect.effectPrefab != null) Instantiate(effect.effectPrefab, target.position, Quaternion.identity);
+                        if (effect.effectPrefab != null)
+                        {
+                            GameObject spawnedEffect = SceneObjectPool.Spawn(
+                                effect.effectPrefab, target.position, Quaternion.identity,
+                                PoolCategory.FloorEffects);
+                            SceneObjectPool.ReleaseAfter(
+                                spawnedEffect, Mathf.Max(0.1f, effect.duration));
+                        }
                         break;
                 }
             }
@@ -234,14 +259,16 @@ namespace WorldOfSpirits.Spirits
 
         private Transform ResolveTarget(SpiritAbilityContext context, AbilityLevelData level)
         {
-            List<IDamageable> targets = CombatTargeting.FindAll(transform.position, level.targetingRange, Faction.Player);
             if (definition.TargetingMode == AbilityTargetingMode.Self || definition.TargetingMode == AbilityTargetingMode.AroundPlayer ||
                 definition.TargetingMode == AbilityTargetingMode.PlayerFacing || definition.TargetingMode == AbilityTargetingMode.RandomPositionNearPlayer)
                 return context.Player;
-            if (targets.Count == 0) return null;
-            if (definition.TargetingMode == AbilityTargetingMode.RandomEnemy) return targets[Random.Range(0, targets.Count)].Transform;
+            CombatTargeting.FindAllNonAlloc(
+                transform.position, level.targetingRange, Faction.Player, targetBuffer);
+            if (targetBuffer.Count == 0) return null;
+            if (definition.TargetingMode == AbilityTargetingMode.RandomEnemy)
+                return targetBuffer[Random.Range(0, targetBuffer.Count)].Transform;
             LivingEntity selected = null;
-            foreach (IDamageable candidate in targets)
+            foreach (IDamageable candidate in targetBuffer)
             {
                 LivingEntity living = candidate as LivingEntity;
                 if (living == null) continue;

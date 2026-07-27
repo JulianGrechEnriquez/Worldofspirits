@@ -22,7 +22,8 @@ namespace WorldOfSpirits.Spirits
             {
                 float angle = angleStep * i * Mathf.Deg2Rad;
                 Vector2 direction = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
-                ProjectileBase projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
+                ProjectileBase projectile = ProjectilePool.Spawn(
+                    projectilePrefab, transform.position, Quaternion.identity);
                 projectile.Launch(direction, projectileSpeed, damage, Faction.Player);
             }
         }

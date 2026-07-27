@@ -1,12 +1,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 using WorldOfSpirits.Combat;
+using WorldOfSpirits.Core;
 
 namespace WorldOfSpirits.Spirits
 {
     [RequireComponent(typeof(Collider2D))]
-    public class PersistentDamageZone : MonoBehaviour
+    public class PersistentDamageZone : MonoBehaviour, IScenePoolable
     {
+        private sealed class Occupant
+        {
+            public IDamageable Target;
+            public Rigidbody2D Body;
+            public float NextHitTime;
+            public int ColliderCount;
+        }
+
         [SerializeField, Min(0f)] private float damagePerTick = 5f;
         [SerializeField, Min(0.05f)] private float tickInterval = 0.5f;
         [SerializeField, Min(0.05f)] private float duration = 3f;
@@ -15,18 +24,19 @@ namespace WorldOfSpirits.Spirits
         [SerializeField, Min(0f)] private float pullForce;
         [SerializeField] private bool followOwner;
 
-        private readonly Dictionary<int, float> nextHitTimes = new Dictionary<int, float>();
+        private readonly Dictionary<int, Occupant> occupants = new Dictionary<int, Occupant>();
+        private readonly List<int> occupantsToRemove = new List<int>();
         private Transform owner;
+        private float disableTime;
 
         private void Awake()
         {
             GetComponent<Collider2D>().isTrigger = true;
         }
 
-        private void Start()
+        private void OnEnable()
         {
-            if (destroyAfterDuration)
-                Destroy(gameObject, duration);
+            disableTime = Time.time + duration;
         }
 
         public void SetOwner(Transform newOwner)
@@ -41,13 +51,59 @@ namespace WorldOfSpirits.Spirits
 
         private void Update()
         {
+            if (destroyAfterDuration && Time.time >= disableTime)
+            {
+                SceneObjectPool.ReleaseOrDestroy(gameObject);
+                return;
+            }
+
             if (followOwner && owner != null)
             {
                 transform.position = owner.position;
             }
+
+            occupantsToRemove.Clear();
+            foreach (KeyValuePair<int, Occupant> pair in occupants)
+            {
+                Occupant occupant = pair.Value;
+                if (occupant.Target == null || !occupant.Target.IsAlive)
+                {
+                    occupantsToRemove.Add(pair.Key);
+                    continue;
+                }
+
+                if (Time.time >= occupant.NextHitTime)
+                {
+                    occupant.Target.TakeDamage(damagePerTick);
+                    occupant.NextHitTime = Time.time + tickInterval;
+                }
+            }
+
+            for (int i = 0; i < occupantsToRemove.Count; i++)
+            {
+                occupants.Remove(occupantsToRemove[i]);
+            }
         }
 
-        private void OnTriggerStay2D(Collider2D other)
+        private void FixedUpdate()
+        {
+            if (pullForce <= 0f)
+            {
+                return;
+            }
+
+            foreach (Occupant occupant in occupants.Values)
+            {
+                if (occupant.Body != null && occupant.Target != null && occupant.Target.IsAlive)
+                {
+                    occupant.Body.AddForce(
+                        (transform.position - occupant.Target.Transform.position).normalized * pullForce,
+                        ForceMode2D.Force);
+                }
+            }
+        }
+
+        private void OnTriggerEnter2D(Collider2D other)
         {
             IDamageable target = other.GetComponentInParent<IDamageable>();
             if (target == null || !target.IsAlive || target.Faction == ownerFaction)
@@ -56,18 +112,63 @@ namespace WorldOfSpirits.Spirits
             }
 
             int id = target.Transform.gameObject.GetInstanceID();
-            if (nextHitTimes.TryGetValue(id, out float nextHit) && Time.time < nextHit)
+            if (occupants.TryGetValue(id, out Occupant existing))
+            {
+                existing.ColliderCount++;
+                return;
+            }
+
+            occupants.Add(id, new Occupant
+            {
+                Target = target,
+                Body = target.Transform.GetComponent<Rigidbody2D>(),
+                NextHitTime = Time.time,
+                ColliderCount = 1
+            });
+        }
+
+        private void OnTriggerExit2D(Collider2D other)
+        {
+            IDamageable target = other.GetComponentInParent<IDamageable>();
+            if (target == null)
             {
                 return;
             }
 
-            target.TakeDamage(damagePerTick);
-            nextHitTimes[id] = Time.time + tickInterval;
-            Rigidbody2D body = target.Transform.GetComponent<Rigidbody2D>();
-            if (body != null && pullForce > 0f)
+            int id = target.Transform.gameObject.GetInstanceID();
+            if (occupants.TryGetValue(id, out Occupant occupant) && --occupant.ColliderCount <= 0)
             {
-                body.AddForce((transform.position - target.Transform.position).normalized * pullForce, ForceMode2D.Force);
+                occupants.Remove(id);
             }
+        }
+
+        private void OnDisable()
+        {
+            occupants.Clear();
+        }
+
+        public void OnSpawnedFromPool(GameObject prefab)
+        {
+            PersistentDamageZone prefabZone = prefab.GetComponent<PersistentDamageZone>();
+            if (prefabZone != null)
+            {
+                damagePerTick = prefabZone.damagePerTick;
+                tickInterval = prefabZone.tickInterval;
+                duration = prefabZone.duration;
+                destroyAfterDuration = prefabZone.destroyAfterDuration;
+                ownerFaction = prefabZone.ownerFaction;
+                pullForce = prefabZone.pullForce;
+                followOwner = prefabZone.followOwner;
+            }
+
+            owner = null;
+            disableTime = Time.time + duration;
+        }
+
+        public void OnReturnedToPool()
+        {
+            occupants.Clear();
+            owner = null;
         }
     }
 }

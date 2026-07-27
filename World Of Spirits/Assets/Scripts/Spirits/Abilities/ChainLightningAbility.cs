@@ -1,11 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using WorldOfSpirits.Combat;
+using WorldOfSpirits.Core;
 
 namespace WorldOfSpirits.Spirits
 {
     public class ChainLightningAbility : SpiritAbility
     {
+        private readonly List<IDamageable> targetBuffer = new List<IDamageable>(64);
         [SerializeField] private IntegerLevelScaling jumps = new IntegerLevelScaling();
         [SerializeField] private LevelScaling damage = new LevelScaling();
         [SerializeField] private LevelScaling jumpRange = new LevelScaling();
@@ -36,7 +38,9 @@ namespace WorldOfSpirits.Spirits
         {
             IDamageable closest = null;
             float distance = jumpRange.Evaluate(CurrentLevel) * jumpRange.Evaluate(CurrentLevel);
-            foreach (IDamageable candidate in CombatTargeting.FindAll(position, jumpRange.Evaluate(CurrentLevel), Faction.Player))
+            CombatTargeting.FindAllNonAlloc(
+                position, jumpRange.Evaluate(CurrentLevel), Faction.Player, targetBuffer);
+            foreach (IDamageable candidate in targetBuffer)
             {
                 float candidateDistance = (candidate.Transform.position - position).sqrMagnitude;
                 if (!hit.Contains(candidate.Transform) && candidateDistance <= distance)
@@ -51,11 +55,12 @@ namespace WorldOfSpirits.Spirits
         private void DrawArc(Vector3 start, Vector3 end)
         {
             if (lightningPrefab == null) return;
-            LineRenderer line = Instantiate(lightningPrefab);
+            LineRenderer line = SceneObjectPool.Spawn(
+                lightningPrefab, Vector3.zero, Quaternion.identity, PoolCategory.Effects);
             line.positionCount = 2;
             line.SetPosition(0, start);
             line.SetPosition(1, end);
-            Destroy(line.gameObject, visualDuration);
+            SceneObjectPool.ReleaseAfter(line.gameObject, visualDuration);
         }
     }
 }

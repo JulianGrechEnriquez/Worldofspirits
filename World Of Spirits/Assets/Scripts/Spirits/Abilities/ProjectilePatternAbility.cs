@@ -95,7 +95,8 @@ namespace WorldOfSpirits.Spirits
 
         private void Spawn(Vector2 direction)
         {
-            ProjectileBase projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
+            ProjectileBase projectile = ProjectilePool.Spawn(
+                projectilePrefab, transform.position, Quaternion.identity);
             projectile.ConfigureHoming(homeOnEnemies, homingStrength, homingRange);
             projectile.Launch(direction, speed.Evaluate(CurrentLevel), damage.Evaluate(CurrentLevel), Faction.Player);
         }
