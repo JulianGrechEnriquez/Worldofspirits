@@ -48,6 +48,12 @@ namespace WorldOfSpirits.Spirits
         [Header("Visuals")]
         [SerializeField] private float spriteRotationOffset = -90f;
 
+        [Header("Hitbox Debug")]
+        [SerializeField] private bool drawHitboxes = true;
+        [SerializeField] private Color targetingGizmoColor = new Color(0.15f, 0.8f, 1f, 0.45f);
+        [SerializeField] private Color punchPathGizmoColor = new Color(1f, 0.8f, 0.1f, 0.8f);
+        [SerializeField] private Color activeHitboxGizmoColor = new Color(1f, 0.15f, 0.1f, 0.9f);
+
         private readonly List<IDamageable> targetBuffer = new List<IDamageable>(16);
         private readonly HashSet<int> hitTargets = new HashSet<int>();
         private SpiritMember spiritOwner;
@@ -488,6 +494,41 @@ namespace WorldOfSpirits.Spirits
         }
 
 #if UNITY_EDITOR
+        private void OnDrawGizmosSelected()
+        {
+            if (!drawHitboxes) return;
+
+            WeaponLevelData level = ActiveLevel ??
+                (definition != null ? definition.GetLevel(1) : null);
+            Vector3 center = Application.isPlaying ? ActiveOrigin.position : transform.position;
+            float range = level != null ? level.targetingRange : targetingRange;
+            float radius = level != null ? level.hitRadius : hitRadius;
+            float distance = level != null ? level.punchDistance : punchDistance;
+
+            Gizmos.color = targetingGizmoColor;
+            Gizmos.DrawWireSphere(center, range);
+
+            Vector3 start = activeGauntlet != null
+                ? punchStart
+                : leftGauntlet != null ? leftGauntlet.position : center;
+            Vector2 direction = punchDirection.sqrMagnitude > 0.001f
+                ? punchDirection.normalized : Vector2.right;
+            Vector3 end = activeGauntlet != null
+                ? punchEnd
+                : start + (Vector3)(direction * distance);
+
+            Gizmos.color = punchPathGizmoColor;
+            Gizmos.DrawLine(start, end);
+            Gizmos.DrawWireSphere(start, radius);
+            Gizmos.DrawWireSphere(end, radius);
+
+            if (activeGauntlet != null)
+            {
+                Gizmos.color = activeHitboxGizmoColor;
+                Gizmos.DrawSphere(activeGauntlet.position, radius);
+            }
+        }
+
         protected virtual void OnValidate()
         {
             sideOffset = Mathf.Max(0.1f, sideOffset);

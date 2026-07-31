@@ -1,0 +1,21 @@
+:root {
+  --wos-fire: #d96c3f;
+  --wos-gold: #d7a83d;
+}
+
+.markdown-rendered h1,
+.markdown-rendered h2 {
+  letter-spacing: -0.02em;
+}
+
+.markdown-rendered blockquote {
+  border-inline-start-color: var(--wos-fire);
+}
+
+.markdown-rendered .internal-link {
+  text-decoration-thickness: 1px;
+}
+
+.workspace-leaf-content[data-type="markdown"] .view-content {
+  --file-line-width: 820px;
+}

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b3673d079a44352bca51249540fde9d, type: 3}
   m_Name: Earth Spirt
   m_EditorClassIdentifier: Assembly-CSharp::WorldOfSpirits.Spirits.SpiritDefinition
-  spiritName: Ice Spirit
+  spiritName: Earth Spirit
   shape: Yeti
   weapon:
     weaponName: 'Ice gauntlets '

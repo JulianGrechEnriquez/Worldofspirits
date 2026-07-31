@@ -9,6 +9,7 @@ namespace WorldOfSpirits.Core
         Projectiles,
         FloorEffects,
         Enemies,
+        Pickups,
         CombatUI,
         Effects
     }
@@ -90,6 +91,7 @@ namespace WorldOfSpirits.Core
             manager.GetCategory(PoolCategory.Projectiles);
             manager.GetCategory(PoolCategory.FloorEffects);
             manager.GetCategory(PoolCategory.Enemies);
+            manager.GetCategory(PoolCategory.Pickups);
             manager.GetCategory(PoolCategory.CombatUI);
             manager.GetCategory(PoolCategory.Effects);
         }
@@ -307,8 +309,9 @@ namespace WorldOfSpirits.Core
                 PoolCategory.Projectiles => "01 - Projectiles",
                 PoolCategory.FloorEffects => "02 - Floor Effects",
                 PoolCategory.Enemies => "03 - Enemies",
-                PoolCategory.CombatUI => "04 - Combat UI",
-                _ => "05 - Other Effects"
+                PoolCategory.Pickups => "04 - Pickups",
+                PoolCategory.CombatUI => "05 - Combat UI",
+                _ => "06 - Other Effects"
             };
             Transform existing = transform.Find(categoryName);
             if (existing == null)

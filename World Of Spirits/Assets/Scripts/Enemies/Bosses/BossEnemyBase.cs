@@ -3,6 +3,7 @@ using WorldOfSpirits.Combat;
 using WorldOfSpirits.Player;
 using WorldOfSpirits.UI;
 using WorldOfSpirits.Core;
+using WorldOfSpirits.Progression;
 
 namespace WorldOfSpirits.Enemies
 {
@@ -14,6 +15,9 @@ namespace WorldOfSpirits.Enemies
         [SerializeField] private bool faceTarget;
         [SerializeField] private SpriteRenderer bossRenderer;
 
+        [Header("Rewards")]
+        [SerializeField, Min(0f)] private float experienceReward = 25f;
+
         protected Rigidbody2D Body { get; private set; }
         protected Transform Target => target;
         public override Faction Faction => global::WorldOfSpirits.Combat.Faction.Enemy;
@@ -22,6 +26,7 @@ namespace WorldOfSpirits.Enemies
         protected override void Awake()
         {
             base.Awake();
+            Died += AwardExperience;
 
             Body = GetComponent<Rigidbody2D>();
             Body.gravityScale = 0f;
@@ -60,6 +65,11 @@ namespace WorldOfSpirits.Enemies
         }
 
         protected abstract void UpdateBoss(Transform playerTarget);
+
+        private void AwardExperience()
+        {
+            if (experienceReward > 0f) ExperienceOrbService.Spawn(transform.position, experienceReward);
+        }
 
         public override void OnSpawnedFromPool(GameObject prefab)
         {

@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef4b4a2100beabc4d9dbab206fe54156, type: 3}
+  m_Name: Contract the Wind Spirit
+  m_EditorClassIdentifier: Assembly-CSharp::WorldOfSpirits.Progression.Upgrades.UpgradeCardDefinition
+  cardId: contract_wind_spirit
+  cardName: Contract the Wind Spirit
+  description: Adds the Wind Spirit to your formation and unlocks its weapon and
+    ability upgrade paths.
+  flavorText: 
+  icon: {fileID: 0}
+  suggestedIconTheme: Ancient spirit seal and elemental silhouette
+  category: 3
+  rarity: 2
+  maximumLevel: 1
+  minimumPlayerLevel: 4
+  baseWeight: 18
+  repeatableAfterMaximum: 0
+  requirements: []
+  targetSpirit: {fileID: 11400000, guid: 31fbfeb2d4d52d74592ca3eca83950f9, type: 2}
+  abilityIndex: -1
+  spiritPrefab: {fileID: 0}
+  modifiers: []

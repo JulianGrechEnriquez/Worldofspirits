@@ -30,3 +30,7 @@ MonoBehaviour:
     homingRange: 0
     orbitRadius: 1.4
     orbitSpeed: 180
+    hitRadius: 0.65
+    maximumTargets: 8
+    status: 0
+    statusDuration: 0

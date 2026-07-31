@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef4b4a2100beabc4d9dbab206fe54156, type: 3}
+  m_Name: Perfect Resonance
+  m_EditorClassIdentifier: Assembly-CSharp::WorldOfSpirits.Progression.Upgrades.UpgradeCardDefinition
+  cardId: perfect_resonance
+  cardName: Perfect Resonance
+  description: Critical chance rises by 25%.
+  flavorText: 
+  icon: {fileID: 0}
+  suggestedIconTheme: Perfectly aligned wave rings
+  category: 5
+  rarity: 4
+  maximumLevel: 1
+  minimumPlayerLevel: 1
+  baseWeight: 15
+  repeatableAfterMaximum: 0
+  requirements: []
+  targetSpirit: {fileID: 0}
+  abilityIndex: -1
+  spiritPrefab: {fileID: 0}
+  modifiers:
+  - stat: 3
+    operation: 0
+    valuePerLevel: 0.25

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using WorldOfSpirits.Player;
 using WorldOfSpirits.Spirits;
+using WorldOfSpirits.Progression;
 
 namespace WorldOfSpirits.Progression.Upgrades
 {
@@ -76,7 +77,11 @@ namespace WorldOfSpirits.Progression.Upgrades
             switch (card.Category)
             {
                 case UpgradeCategory.SpiritContract:
-                    return spiritManager.TryAddSpirit(card.SpiritPrefab);
+                {
+                    bool added = spiritManager.TryAddSpirit(card.SpiritPrefab);
+                    if (added) SpiritUnlockProgress.Unlock(card.TargetSpirit);
+                    return added;
+                }
                 case UpgradeCategory.Weapon:
                 {
                     SpiritMember spirit = spiritManager.FindSpirit(card.TargetSpirit);

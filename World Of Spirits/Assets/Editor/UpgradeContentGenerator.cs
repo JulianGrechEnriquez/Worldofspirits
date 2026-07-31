@@ -72,9 +72,14 @@ namespace WorldOfSpirits.EditorTools
                 SpiritDefinition spirit = AssetDatabase.LoadAssetAtPath<SpiritDefinition>(AssetDatabase.GUIDToAssetPath(guids[i]));
                 if (spirit == null) continue;
                 string spiritName = string.IsNullOrWhiteSpace(spirit.SpiritName) ? spirit.name : spirit.SpiritName;
+                GameObject prefab = FindSpiritPrefab(spiritName);
+                SpiritMember prefabMember = prefab != null ? prefab.GetComponentInChildren<SpiritMember>(true) : null;
+                if (prefabMember == null || prefabMember.Definition != spirit)
+                {
+                    continue;
+                }
                 string folder = Root + "/Spirits/" + Safe(spiritName);
                 EnsureFolder(folder);
-                GameObject prefab = FindSpiritPrefab(spiritName);
 
                 UpgradeCardDefinition contract = LoadOrCreate<UpgradeCardDefinition>($"{folder}/Contract the {Safe(spiritName)}.asset");
                 Configure(contract, "contract_" + Slug(spiritName), "Contract the " + spiritName,

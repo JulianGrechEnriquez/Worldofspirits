@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using WorldOfSpirits.Combat;
 using WorldOfSpirits.Core;
@@ -9,6 +10,14 @@ namespace WorldOfSpirits.Spirits
     {
         [SerializeField] private WeaponDefinition definition;
 
+        [Header("Orbiting Melee Damage")]
+        [SerializeField, Min(0.05f)] private float hitCooldownPerEnemy = 0.45f;
+        [SerializeField] private bool drawHitboxes = true;
+        [SerializeField] private Color orbitGizmoColor = new Color(1f, 0.8f, 0.15f, 0.8f);
+        [SerializeField] private Color hitboxGizmoColor = new Color(1f, 0.15f, 0.1f, 0.9f);
+
+        private readonly List<IDamageable> meleeTargets = new List<IDamageable>(32);
+        private readonly Dictionary<int, float> nextMeleeHitTimes = new Dictionary<int, float>(64);
         private SpiritMember spiritOwner;
         private LivingEntity owner;
         private Transform firePointOverride;
@@ -78,17 +87,72 @@ namespace WorldOfSpirits.Spirits
             orbitingWeapon.position = center.position + (Vector3)(outward * level.orbitRadius);
             orbitingWeapon.rotation = Quaternion.Euler(0f, 0f,
                 Mathf.Atan2(outward.y, outward.x) * Mathf.Rad2Deg - 90f);
+
+            if (definition.ExecutionType == WeaponExecutionType.OrbitingMelee)
+                DamageAtOrbitingWeapon(level);
+        }
+
+        private void DamageAtOrbitingWeapon(WeaponLevelData level)
+        {
+            float hitRadius = Mathf.Max(0.05f, level.hitRadius);
+            CombatTargeting.FindAllNonAlloc(
+                orbitingWeapon.position, hitRadius,
+                owner != null ? owner.Faction : Faction.Player, meleeTargets);
+
+            int targetLimit = Mathf.Max(1, level.maximumTargets);
+            int targetsHit = 0;
+            for (int i = 0; i < meleeTargets.Count && targetsHit < targetLimit; i++)
+            {
+                IDamageable target = meleeTargets[i];
+                int id = target.Transform.gameObject.GetInstanceID();
+                if (nextMeleeHitTimes.TryGetValue(id, out float nextHit) && Time.time < nextHit) continue;
+
+                float damage = upgradeStats != null
+                    ? upgradeStats.ScaleWeaponDamage(level.damage)
+                    : level.damage;
+                target.TakeDamage(damage);
+                nextMeleeHitTimes[id] = Time.time + hitCooldownPerEnemy;
+                targetsHit++;
+            }
         }
 
         public void SetFirePointOverride(Transform point) => firePointOverride = point;
 
         private void OnDisable()
         {
+            nextMeleeHitTimes.Clear();
             if (orbitingWeapon != null)
             {
                 SceneObjectPool.ReleaseOrDestroy(orbitingWeapon.gameObject);
                 orbitingWeapon = null;
             }
         }
+
+        private void OnDrawGizmosSelected()
+        {
+            if (!drawHitboxes || definition == null ||
+                definition.ExecutionType != WeaponExecutionType.OrbitingMelee) return;
+
+            WeaponLevelData level = ActiveLevel ?? definition.GetLevel(1);
+            if (level == null) return;
+
+            Transform center = firePointOverride != null ? firePointOverride : transform;
+            Gizmos.color = orbitGizmoColor;
+            Gizmos.DrawWireSphere(center.position, level.orbitRadius);
+
+            Vector3 hitPosition = orbitingWeapon != null
+                ? orbitingWeapon.position
+                : center.position + Vector3.right * level.orbitRadius;
+            Gizmos.color = hitboxGizmoColor;
+            Gizmos.DrawWireSphere(hitPosition, Mathf.Max(0.05f, level.hitRadius));
+            Gizmos.DrawLine(center.position, hitPosition);
+        }
+
+#if UNITY_EDITOR
+        private void OnValidate()
+        {
+            hitCooldownPerEnemy = Mathf.Max(0.05f, hitCooldownPerEnemy);
+        }
+#endif
     }
 }

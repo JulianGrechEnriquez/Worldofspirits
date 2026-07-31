@@ -11,16 +11,18 @@ namespace WorldOfSpirits.EditorTools
     {
         static ProjectOrganizer()
         {
-            // Run once for the current untidy layout. Future organization remains
-            // available from the menu and will not repeat after the files move.
-            if (AssetDatabase.LoadMainAssetAtPath(
-                    "Assets/ScriptableObjects/Wepons/Stone Hamer.asset") != null)
+            // Run only while one of the known legacy paths still exists. All moves
+            // use AssetDatabase so GUID references remain intact.
+            if (NeedsOrganization())
                 EditorApplication.delayCall += OrganizeProjectFiles;
         }
 
         [MenuItem("World of Spirits/Organize Project Files %#o")]
         public static void OrganizeProjectFiles()
         {
+            EnsureFolder("Assets/Settings/Rendering");
+            EnsureFolder("Assets/Settings/Input");
+            EnsureFolder("Assets/Art/UI/Progression");
             EnsureFolder("Assets/ScriptableObjects/Weapons");
             EnsureFolder("Assets/Prefabs/Weapons");
             EnsureFolder("Assets/Prefabs/Enemies/Regular");
@@ -28,6 +30,25 @@ namespace WorldOfSpirits.EditorTools
             EnsureFolder("Assets/Prefabs/Projectiles");
             EnsureFolder("Assets/Prefabs/Spirits/Effects");
             EnsureFolder("Assets/Prefabs/Pickups/Experience");
+            EnsureFolder("Assets/Prefabs/UI/SpiritSelection");
+            EnsureFolder("Assets/Scripts/Progression/Pickups");
+            EnsureFolder("Assets/Scripts/Progression/Unlocks");
+            EnsureFolder("Assets/Scripts/UI/Progression");
+            EnsureFolder("Assets/Scripts/UI/SpiritSelection");
+
+            MoveIfPresent("Assets/Docs", "Assets/Documentation");
+            MoveIfPresent(
+                "Assets/DefaultVolumeProfile.asset",
+                "Assets/Settings/Rendering/DefaultVolumeProfile.asset");
+            MoveIfPresent(
+                "Assets/UniversalRenderPipelineGlobalSettings.asset",
+                "Assets/Settings/Rendering/UniversalRenderPipelineGlobalSettings.asset");
+            MoveIfPresent(
+                "Assets/InputSystem_Actions.inputactions",
+                "Assets/Settings/Input/InputSystem_Actions.inputactions");
+            MoveIfPresent(
+                "Assets/Art/xpfill.png",
+                "Assets/Art/UI/Progression/ExperienceBarFill.png");
 
             MoveIfPresent(
                 "Assets/ScriptableObjects/Wepons/Stone Hamer.asset",
@@ -47,11 +68,73 @@ namespace WorldOfSpirits.EditorTools
             MoveIfPresent(
                 "Assets/Prefabs/Spirits/Quicksand Domain.prefab",
                 "Assets/Prefabs/Spirits/Effects/Quicksand Domain.prefab");
+            MoveIfPresent(
+                "Assets/Prefabs/Enemies/FireTank.prefab",
+                "Assets/Prefabs/Enemies/Regular/FireTank.prefab");
+            MoveIfPresent(
+                "Assets/Prefabs/Pickups/Experience Orb.prefab",
+                "Assets/Prefabs/Pickups/Experience/Experience Orb.prefab");
+            MoveIfPresent(
+                "Assets/Prefabs/Spirte Card.prefab",
+                "Assets/Prefabs/UI/SpiritSelection/Spirit Card.prefab");
+
+            MoveIfPresent(
+                "Assets/Scripts/Progression/ExperienceOrb.cs",
+                "Assets/Scripts/Progression/Pickups/ExperienceOrb.cs");
+            MoveIfPresent(
+                "Assets/Scripts/Progression/ExperienceOrbService.cs",
+                "Assets/Scripts/Progression/Pickups/ExperienceOrbService.cs");
+            MoveIfPresent(
+                "Assets/Scripts/Progression/SpiritUnlockProgress.cs",
+                "Assets/Scripts/Progression/Unlocks/SpiritUnlockProgress.cs");
+            MoveIfPresent(
+                "Assets/Scripts/UI/PlayerProgressionHud.cs",
+                "Assets/Scripts/UI/Progression/PlayerProgressionHud.cs");
+            MoveIfPresent(
+                "Assets/Scripts/UI/ProgressionInterface.cs",
+                "Assets/Scripts/UI/Progression/ProgressionInterface.cs");
+            MoveIfPresent(
+                "Assets/Scripts/UI/StarterSpiritCardView.cs",
+                "Assets/Scripts/UI/SpiritSelection/StarterSpiritCardView.cs");
+            MoveIfPresent(
+                "Assets/Scripts/UI/StarterSpiritSelectionController.cs",
+                "Assets/Scripts/UI/SpiritSelection/StarterSpiritSelectionController.cs");
 
             DeleteFolderIfEmpty("Assets/ScriptableObjects/Wepons");
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
             Debug.Log("Project files organized. Unity asset references were preserved.");
+        }
+
+        private static bool NeedsOrganization()
+        {
+            string[] legacyPaths =
+            {
+                "Assets/Docs",
+                "Assets/DefaultVolumeProfile.asset",
+                "Assets/UniversalRenderPipelineGlobalSettings.asset",
+                "Assets/InputSystem_Actions.inputactions",
+                "Assets/Art/xpfill.png",
+                "Assets/Prefabs/Spirte Card.prefab",
+                "Assets/Prefabs/Enemies/FireTank.prefab",
+                "Assets/Prefabs/Pickups/Experience Orb.prefab",
+                "Assets/Scripts/Progression/ExperienceOrb.cs",
+                "Assets/Scripts/Progression/ExperienceOrbService.cs",
+                "Assets/Scripts/Progression/SpiritUnlockProgress.cs",
+                "Assets/Scripts/UI/PlayerProgressionHud.cs",
+                "Assets/Scripts/UI/ProgressionInterface.cs",
+                "Assets/Scripts/UI/StarterSpiritCardView.cs",
+                "Assets/Scripts/UI/StarterSpiritSelectionController.cs",
+                "Assets/ScriptableObjects/Wepons/Stone Hamer.asset"
+            };
+
+            foreach (string path in legacyPaths)
+            {
+                if (AssetDatabase.LoadMainAssetAtPath(path) != null)
+                    return true;
+            }
+
+            return false;
         }
 
         [MenuItem("World of Spirits/Create Enemy Prefab From Selection", true)]

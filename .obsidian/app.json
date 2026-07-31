@@ -1,0 +1,16 @@
+{
+  "attachmentFolderPath": "Notes/Attachments",
+  "newFileLocation": "folder",
+  "newFileFolderPath": "Notes/Inbox",
+  "alwaysUpdateLinks": true,
+  "showUnsupportedFiles": false,
+  "useMarkdownLinks": false,
+  "userIgnoreFilters": [
+    "World Of Spirits/Library/",
+    "World Of Spirits/Logs/",
+    "World Of Spirits/Temp/",
+    "World Of Spirits/UserSettings/",
+    "World Of Spirits/obj/",
+    "*.meta"
+  ]
+}

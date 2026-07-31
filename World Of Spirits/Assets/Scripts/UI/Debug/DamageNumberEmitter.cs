@@ -21,7 +21,9 @@ namespace WorldOfSpirits.UI
         [SerializeField, Min(0f)] private float randomHorizontalOffset = 0.2f;
 
         private LivingEntity entity;
-        private float nextDisplayTime;
+        private float pendingDamage;
+        private float displayPendingAt;
+        private bool hasPendingDamage;
 
         private void Awake()
         {
@@ -44,16 +46,42 @@ namespace WorldOfSpirits.UI
             {
                 entity.Damaged -= ShowDamage;
             }
+
+            pendingDamage = 0f;
+            hasPendingDamage = false;
         }
 
         private void ShowDamage(float amount)
         {
-            if (activeCount >= maximumVisibleDamageNumbers || Time.time < nextDisplayTime)
+            if (amount <= 0f)
             {
                 return;
             }
 
-            nextDisplayTime = Time.time + minimumDisplayInterval;
+            pendingDamage += amount;
+            if (!hasPendingDamage)
+            {
+                hasPendingDamage = true;
+                displayPendingAt = Time.time + minimumDisplayInterval;
+            }
+        }
+
+        private void Update()
+        {
+            if (!hasPendingDamage || Time.time < displayPendingAt)
+            {
+                return;
+            }
+
+            float amount = pendingDamage;
+            pendingDamage = 0f;
+            hasPendingDamage = false;
+
+            if (activeCount >= maximumVisibleDamageNumbers)
+            {
+                return;
+            }
+
             Vector3 randomOffset = Vector3.right * Random.Range(-randomHorizontalOffset, randomHorizontalOffset);
             DamageNumber number = null;
             while (pool.Count > 0 && number == null)

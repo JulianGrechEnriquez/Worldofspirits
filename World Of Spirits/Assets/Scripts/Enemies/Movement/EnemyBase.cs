@@ -2,6 +2,7 @@ using UnityEngine;
 using WorldOfSpirits.Combat;
 using WorldOfSpirits.UI;
 using WorldOfSpirits.Core;
+using WorldOfSpirits.Progression;
 
 namespace WorldOfSpirits.Enemies
 {
@@ -12,6 +13,9 @@ namespace WorldOfSpirits.Enemies
         [SerializeField] private Transform target;
         [Tooltip("How often this enemy recalculates its direction. Its Rigidbody keeps moving between updates.")]
         [SerializeField, Min(0.02f)] private float movementRefreshInterval = 0.06f;
+
+        [Header("Rewards")]
+        [SerializeField, Min(0f)] private float experienceReward = 1f;
 
         [Header("Debug")]
         [SerializeField] private bool drawTargetLine = true;
@@ -35,6 +39,7 @@ namespace WorldOfSpirits.Enemies
         protected override void Awake()
         {
             base.Awake();
+            Died += AwardExperience;
             Body = GetComponent<Rigidbody2D>();
             Body.gravityScale = 0f;
             Body.freezeRotation = true;
@@ -70,6 +75,12 @@ namespace WorldOfSpirits.Enemies
         }
 
         protected abstract void MoveTowardsTarget();
+
+        private void AwardExperience()
+        {
+            if (experienceReward <= 0f) return;
+            ExperienceOrbService.Spawn(transform.position, experienceReward);
+        }
 
         public override void OnSpawnedFromPool(GameObject prefab)
         {

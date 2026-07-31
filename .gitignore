@@ -1,0 +1,11 @@
+# Obsidian's open panes and local workspace state are machine-specific.
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+
+# Unity-generated folders.
+World Of Spirits/[Ll]ibrary/
+World Of Spirits/[Tt]emp/
+World Of Spirits/[Oo]bj/
+World Of Spirits/[Ll]ogs/
+World Of Spirits/[Uu]ser[Ss]ettings/
+

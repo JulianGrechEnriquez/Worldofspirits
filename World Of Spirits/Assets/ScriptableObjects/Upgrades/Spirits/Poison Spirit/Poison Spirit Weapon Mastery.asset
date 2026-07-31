@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef4b4a2100beabc4d9dbab206fe54156, type: 3}
+  m_Name: Poison Spirit Weapon Mastery
+  m_EditorClassIdentifier: Assembly-CSharp::WorldOfSpirits.Progression.Upgrades.UpgradeCardDefinition
+  cardId: weapon_poison_spirit
+  cardName: Poison Spirit Weapon Mastery
+  description: Improves the manifested weapon to its next authored level.
+  flavorText: 
+  icon: {fileID: 0}
+  suggestedIconTheme: Elemental weapon on a radiant anvil
+  category: 1
+  rarity: 0
+  maximumLevel: 1
+  minimumPlayerLevel: 2
+  baseWeight: 100
+  repeatableAfterMaximum: 0
+  requirements: []
+  targetSpirit: {fileID: 11400000, guid: 623767a82a2de604a8a5ac74a159c10c, type: 2}
+  abilityIndex: -1
+  spiritPrefab: {fileID: 0}
+  modifiers: []
