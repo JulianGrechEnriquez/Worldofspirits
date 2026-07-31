@@ -1,5 +1,8 @@
 using UnityEditor;
+using UnityEditor.SceneManagement;
 using UnityEngine;
+using WorldOfSpirits.Combat;
+using WorldOfSpirits.Enemies;
 
 namespace WorldOfSpirits.EditorTools
 {
@@ -20,6 +23,11 @@ namespace WorldOfSpirits.EditorTools
         {
             EnsureFolder("Assets/ScriptableObjects/Weapons");
             EnsureFolder("Assets/Prefabs/Weapons");
+            EnsureFolder("Assets/Prefabs/Enemies/Regular");
+            EnsureFolder("Assets/Prefabs/Enemies/Bosses");
+            EnsureFolder("Assets/Prefabs/Projectiles");
+            EnsureFolder("Assets/Prefabs/Spirits/Effects");
+            EnsureFolder("Assets/Prefabs/Pickups/Experience");
 
             MoveIfPresent(
                 "Assets/ScriptableObjects/Wepons/Stone Hamer.asset",
@@ -33,11 +41,82 @@ namespace WorldOfSpirits.EditorTools
             MoveIfPresent(
                 "Assets/Prefabs/Spirits/IceBall.prefab",
                 "Assets/Prefabs/Weapons/Ice Ball.prefab");
+            MoveIfPresent(
+                "Assets/Prefabs/Spirits/boulder.prefab",
+                "Assets/Prefabs/Projectiles/Boulder.prefab");
+            MoveIfPresent(
+                "Assets/Prefabs/Spirits/Quicksand Domain.prefab",
+                "Assets/Prefabs/Spirits/Effects/Quicksand Domain.prefab");
 
             DeleteFolderIfEmpty("Assets/ScriptableObjects/Wepons");
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
             Debug.Log("Project files organized. Unity asset references were preserved.");
+        }
+
+        [MenuItem("World of Spirits/Create Enemy Prefab From Selection", true)]
+        private static bool ValidateCreateEnemyPrefab()
+        {
+            return Selection.activeGameObject != null &&
+                   Selection.activeGameObject.scene.IsValid();
+        }
+
+        [MenuItem("World of Spirits/Create Enemy Prefab From Selection")]
+        public static void CreateEnemyPrefabFromSelection()
+        {
+            GameObject enemy = Selection.activeGameObject;
+            if (enemy == null || !enemy.scene.IsValid())
+            {
+                Debug.LogWarning("Select an enemy GameObject in the Hierarchy first.");
+                return;
+            }
+
+            EnemyBase enemyBase = enemy.GetComponent<EnemyBase>();
+            Rigidbody2D body = enemy.GetComponent<Rigidbody2D>();
+            Collider2D enemyCollider = enemy.GetComponent<Collider2D>();
+            if (enemyBase == null || body == null || enemyCollider == null)
+            {
+                Debug.LogError(
+                    "The selected object is not ready to become an enemy prefab. " +
+                    "It needs EnemyBase (for example ChasingEnemy), Rigidbody2D, and Collider2D.",
+                    enemy);
+                return;
+            }
+
+            if (enemy.GetComponent<ContactDamage>() == null)
+            {
+                Undo.AddComponent<ContactDamage>(enemy);
+            }
+
+            body.gravityScale = 0f;
+            body.freezeRotation = true;
+
+            EnsureFolder("Assets/Prefabs/Enemies/Regular");
+            string cleanName = enemy.name.Replace("(Clone)", string.Empty).Trim();
+            int copyMarker = cleanName.LastIndexOf(" (", System.StringComparison.Ordinal);
+            if (copyMarker > 0 && cleanName.EndsWith(")"))
+            {
+                cleanName = cleanName.Substring(0, copyMarker);
+            }
+
+            string prefabPath = AssetDatabase.GenerateUniqueAssetPath(
+                $"Assets/Prefabs/Enemies/Regular/{cleanName}.prefab");
+            GameObject prefab = PrefabUtility.SaveAsPrefabAssetAndConnect(
+                enemy, prefabPath, InteractionMode.UserAction);
+
+            if (prefab == null)
+            {
+                Debug.LogError($"Unity could not create the enemy prefab at {prefabPath}.", enemy);
+                return;
+            }
+
+            EditorSceneManager.MarkSceneDirty(enemy.scene);
+            AssetDatabase.SaveAssets();
+            Selection.activeObject = prefab;
+            EditorGUIUtility.PingObject(prefab);
+            Debug.Log(
+                $"Created enemy prefab at {prefabPath}. The scene object is now connected to it.",
+                prefab);
         }
 
         private static void MoveIfPresent(string source, string destination)

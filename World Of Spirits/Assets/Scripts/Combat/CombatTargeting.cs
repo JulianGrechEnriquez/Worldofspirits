@@ -5,21 +5,23 @@ namespace WorldOfSpirits.Combat
 {
     public static class CombatTargeting
     {
-        public static IDamageable FindClosest(Vector3 origin, float range, Faction enemyOf)
+        private static readonly List<LivingEntity> queryBuffer =
+            new List<LivingEntity>(64);
+
+        public static IDamageable FindClosest(
+            Vector3 origin, float range, Faction enemyOf, int layerMask = ~0)
         {
             IDamageable closest = null;
             float closestDistance = range * range;
-            IReadOnlyList<LivingEntity> candidates = LivingEntity.ActiveEntities;
-            for (int i = 0; i < candidates.Count; i++)
+            CombatSimulationManager.Instance.Query(origin, range, queryBuffer);
+            for (int i = 0; i < queryBuffer.Count; i++)
             {
-                LivingEntity candidate = candidates[i];
-                if (candidate == null)
-                {
-                    continue;
-                }
+                LivingEntity candidate = queryBuffer[i];
 
                 float distance = (candidate.Transform.position - origin).sqrMagnitude;
-                if (candidate.IsAlive && candidate.Faction != enemyOf && distance <= closestDistance)
+                bool layerAllowed = (layerMask & (1 << candidate.gameObject.layer)) != 0;
+                if (layerAllowed && candidate.IsAlive &&
+                    candidate.Faction != enemyOf && distance <= closestDistance)
                 {
                     closest = candidate;
                     closestDistance = distance;
@@ -41,14 +43,10 @@ namespace WorldOfSpirits.Combat
         {
             results.Clear();
             float rangeSquared = range * range;
-            IReadOnlyList<LivingEntity> candidates = LivingEntity.ActiveEntities;
-            for (int i = 0; i < candidates.Count; i++)
+            CombatSimulationManager.Instance.Query(origin, range, queryBuffer);
+            for (int i = 0; i < queryBuffer.Count; i++)
             {
-                LivingEntity candidate = candidates[i];
-                if (candidate == null)
-                {
-                    continue;
-                }
+                LivingEntity candidate = queryBuffer[i];
 
                 if (candidate.IsAlive && candidate.Faction != enemyOf &&
                     (candidate.Transform.position - origin).sqrMagnitude <= rangeSquared)

@@ -1,6 +1,7 @@
 using UnityEngine;
 using WorldOfSpirits.Combat;
 using WorldOfSpirits.Core;
+using WorldOfSpirits.Progression.Upgrades;
 
 namespace WorldOfSpirits.Spirits
 {
@@ -13,6 +14,7 @@ namespace WorldOfSpirits.Spirits
         private Transform firePointOverride;
         private Transform orbitingWeapon;
         private float orbitAngle;
+        private UpgradeRuntimeStats upgradeStats;
 
         private WeaponLevelData ActiveLevel => definition != null && spiritOwner != null
             ? definition.GetLevel(spiritOwner.Progression.WeaponLevel) : null;
@@ -23,10 +25,12 @@ namespace WorldOfSpirits.Spirits
         {
             spiritOwner = GetComponentInParent<SpiritMember>();
             owner = GetComponentInParent<LivingEntity>();
+            upgradeStats = GetComponentInParent<UpgradeRuntimeStats>();
         }
 
         protected override float AttackCooldown => ActiveLevel != null
-            ? ActiveLevel.attackCooldown : base.AttackCooldown;
+            ? ActiveLevel.attackCooldown / (upgradeStats != null ? upgradeStats.GetMultiplier(UpgradeStat.AttackSpeed) : 1f)
+            : base.AttackCooldown;
 
         protected override bool CanAttack()
         {
@@ -47,7 +51,9 @@ namespace WorldOfSpirits.Spirits
             ProjectileBase projectile = ProjectilePool.Spawn(
                 level.projectilePrefab, origin.position, Quaternion.identity);
             projectile.ConfigureHoming(level.homeOnEnemies, level.homingStrength, level.homingRange);
-            projectile.Launch(direction, level.projectileSpeed, level.damage, owner.Faction);
+            float speed = level.projectileSpeed * (upgradeStats != null ? upgradeStats.GetMultiplier(UpgradeStat.ProjectileSpeed) : 1f);
+            float damage = upgradeStats != null ? upgradeStats.ScaleWeaponDamage(level.damage) : level.damage;
+            projectile.Launch(direction, speed, damage, owner.Faction);
         }
 
         protected override void Update()

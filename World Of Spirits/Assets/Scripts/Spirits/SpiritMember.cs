@@ -36,7 +36,12 @@ namespace WorldOfSpirits.Spirits
         public bool TryLevelWeapon() => progression.TryLevelWeapon(definition);
         public bool TryLevelAbility(int abilityIndex) => progression.TryLevelAbility(definition, abilityIndex);
 
-        public void ApplyState(Transform player, Transform playerProjectileSpawner, bool isPrimary, bool playerIsMoving,
+        public void ApplyState(
+            Transform player,
+            Transform playerProjectileSpawner,
+            System.Collections.Generic.IReadOnlyList<Transform> meleeWeaponSlots,
+            bool isPrimary,
+            bool playerIsMoving,
             bool combatLocked = false)
         {
             if (renderers == null)
@@ -53,20 +58,32 @@ namespace WorldOfSpirits.Spirits
 
             // A spirit's weapon is active only while that spirit occupies the
             // main slot and the player is standing still.
-            bool weaponIsActive = !combatLocked && isPrimary && !playerIsMoving;
             foreach (SpiritWeaponAttack weapon in weapons)
             {
-                weapon.enabled = weaponIsActive;
+                bool spiritOwnsWeapon = !combatLocked && isPrimary;
+                bool weaponCanAttack = spiritOwnsWeapon && !playerIsMoving;
+                bool isThrustMelee = weapon is ThrustMeleeWeaponBase;
+                weapon.enabled = isThrustMelee
+                    ? spiritOwnsWeapon
+                    : weaponCanAttack;
 
                 if (weapon is AutoProjectileWeapon projectileWeapon)
                 {
                     projectileWeapon.SetFirePointOverride(
-                        weaponIsActive ? playerProjectileSpawner : null);
+                        weaponCanAttack ? playerProjectileSpawner : null);
                 }
                 else if (weapon is DataDrivenWeapon dataDrivenWeapon)
                 {
                     dataDrivenWeapon.SetFirePointOverride(
-                        weaponIsActive ? playerProjectileSpawner : null);
+                        weaponCanAttack ? playerProjectileSpawner : null);
+                }
+                else if (weapon is ThrustMeleeWeaponBase thrustMeleeWeapon)
+                {
+                    thrustMeleeWeapon.SetOriginOverride(
+                        spiritOwnsWeapon ? player : null);
+                    thrustMeleeWeapon.SetWeaponSlots(
+                        spiritOwnsWeapon ? meleeWeaponSlots : null);
+                    thrustMeleeWeapon.SetCombatActive(weaponCanAttack);
                 }
             }
 

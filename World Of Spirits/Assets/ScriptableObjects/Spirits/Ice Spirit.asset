@@ -20,6 +20,7 @@ MonoBehaviour:
     levels:
     - level: 1
       effect: punches enemies
+  runtimeWeapon: {fileID: 11400000, guid: f3c97ab2e8dd4cfd8b4afdb50eebc821, type: 2}
   abilities:
   - abilityName: Frozen Orbs
     description: Ice orbs orbit around the player.

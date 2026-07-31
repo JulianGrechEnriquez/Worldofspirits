@@ -15,6 +15,10 @@ namespace WorldOfSpirits.Spirits
         [Header("Primary Attack")]
         [SerializeField] private Transform playerProjectileSpawner;
 
+        [Header("Melee Weapon Slots")]
+        [Tooltip("Player anchors used by thrust and punching weapons while their spirit is in the main slot.")]
+        [SerializeField] private List<Transform> meleeWeaponSlots = new List<Transform>();
+
         [Header("Movement")]
         [SerializeField, Min(0f)] private float rotationMoveDuration = 0.2f;
         [SerializeField] private bool logRotation;
@@ -28,8 +32,22 @@ namespace WorldOfSpirits.Spirits
 
         public SpiritMember PrimarySpirit => spirits.Count > 0 ? spirits[0] : null;
         public int SpiritCount => spirits.Count;
+        public int SpiritCapacity => slots.Count;
         public bool PlayerIsMoving => playerMovement != null && playerMovement.IsMoving;
         public bool IsChangingFormation => isChangingFormation;
+
+        public SpiritMember FindSpirit(SpiritDefinition definition)
+        {
+            if (definition == null) return null;
+            for (int i = 0; i < spirits.Count; i++)
+            {
+                if (spirits[i] != null && spirits[i].Definition == definition) return spirits[i];
+            }
+            return null;
+        }
+
+        public bool OwnsSpirit(SpiritDefinition definition) => FindSpirit(definition) != null;
+        public bool HasOpenSpiritSlot => spirits.Count < slots.Count;
 
         public string GetSpiritNameAt(int index)
         {
@@ -102,6 +120,7 @@ namespace WorldOfSpirits.Spirits
             }
 
             DiscoverSlotsIfNeeded();
+            DiscoverMeleeWeaponSlotsIfNeeded();
             BuildSpiritList();
         }
 
@@ -117,7 +136,13 @@ namespace WorldOfSpirits.Spirits
             bool isMoving = playerMovement != null && playerMovement.IsMoving;
             for (int i = 0; i < spirits.Count; i++)
             {
-                spirits[i].ApplyState(transform, playerProjectileSpawner, i == 0, isMoving, isChangingFormation);
+                spirits[i].ApplyState(
+                    transform,
+                    playerProjectileSpawner,
+                    meleeWeaponSlots,
+                    i == 0,
+                    isMoving,
+                    isChangingFormation);
             }
         }
 
@@ -267,19 +292,50 @@ namespace WorldOfSpirits.Spirits
                     continue;
                 }
 
-                Transform spiritTransform = slot.GetChild(0);
-                SpiritMember member = spiritTransform.GetComponent<SpiritMember>();
-                if (member == null)
+                SpiritMember member = null;
+                for (int childIndex = 0; childIndex < slot.childCount; childIndex++)
                 {
-                    member = spiritTransform.gameObject.AddComponent<SpiritMember>();
+                    Transform child = slot.GetChild(childIndex);
+                    if (child.TryGetComponent(out member))
+                    {
+                        break;
+                    }
                 }
 
-                spirits.Add(member);
+                // Melee weapon anchors also live below the main slot. They are
+                // deliberately ignored instead of being mistaken for spirits.
+                if (member != null)
+                {
+                    spirits.Add(member);
+                }
             }
 
             if (slots.Count == 0)
             {
                 Debug.LogWarning("SpiritManager could not find any configured spirit slots.", this);
+            }
+        }
+
+        private void DiscoverMeleeWeaponSlotsIfNeeded()
+        {
+            if (meleeWeaponSlots.Count > 0)
+            {
+                return;
+            }
+
+            Transform searchRoot = mainSlot != null ? mainSlot : transform;
+            Transform[] children = searchRoot.GetComponentsInChildren<Transform>(true);
+            for (int i = 0; i < children.Length; i++)
+            {
+                string normalizedName = children[i].name
+                    .Replace(" ", string.Empty)
+                    .ToLowerInvariant();
+                if ((normalizedName.StartsWith("weponslot") ||
+                     normalizedName.StartsWith("weaponslot")) &&
+                    !meleeWeaponSlots.Contains(children[i]))
+                {
+                    meleeWeaponSlots.Add(children[i]);
+                }
             }
         }
     }

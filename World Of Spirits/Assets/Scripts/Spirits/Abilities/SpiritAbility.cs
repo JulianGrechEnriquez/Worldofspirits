@@ -1,4 +1,5 @@
 using UnityEngine;
+using WorldOfSpirits.Progression.Upgrades;
 
 namespace WorldOfSpirits.Spirits
 {
@@ -12,6 +13,7 @@ namespace WorldOfSpirits.Spirits
         [SerializeField] private bool castWhileStandingStill;
 
         private float nextCastTime;
+        protected UpgradeRuntimeStats UpgradeStats { get; private set; }
 
         public int AbilityIndex => abilityIndex;
         protected SpiritMember OwnerSpirit { get; private set; }
@@ -20,10 +22,16 @@ namespace WorldOfSpirits.Spirits
         protected virtual void Awake()
         {
             OwnerSpirit = GetComponentInParent<SpiritMember>();
+            UpgradeStats = GetComponentInParent<UpgradeRuntimeStats>();
         }
 
         public void TickAbility(SpiritAbilityContext context)
         {
+            if (OwnerSpirit != null && !OwnerSpirit.Progression.IsAbilityUnlocked(abilityIndex))
+            {
+                return;
+            }
+
             if (!isActiveAndEnabled || Time.time < nextCastTime || primarySpiritOnly && !context.IsPrimary)
             {
                 return;
@@ -42,7 +50,9 @@ namespace WorldOfSpirits.Spirits
             nextCastTime = Time.time + GetCooldown();
         }
 
-        protected virtual float GetCooldown() => cooldown;
+        protected virtual float GetCooldown() => ScaleCooldown(cooldown);
+        protected float ScaleCooldown(float value) => value /
+            (UpgradeStats != null ? UpgradeStats.GetMultiplier(UpgradeStat.CooldownReduction) : 1f);
         protected virtual bool CanCast(SpiritAbilityContext context) => true;
         protected abstract void Cast(SpiritAbilityContext context);
     }

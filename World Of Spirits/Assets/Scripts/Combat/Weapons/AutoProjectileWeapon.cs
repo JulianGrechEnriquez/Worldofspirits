@@ -1,5 +1,6 @@
 using UnityEngine;
 using WorldOfSpirits.Spirits;
+using WorldOfSpirits.Progression.Upgrades;
 
 namespace WorldOfSpirits.Combat
 {
@@ -24,6 +25,7 @@ namespace WorldOfSpirits.Combat
         private LivingEntity owner;
         private SpiritMember spiritOwner;
         private Transform firePointOverride;
+        private UpgradeRuntimeStats upgradeStats;
 
         private Transform ActiveFirePoint => firePointOverride != null ? firePointOverride : firePoint;
 
@@ -31,6 +33,7 @@ namespace WorldOfSpirits.Combat
         {
             owner = GetComponentInParent<LivingEntity>();
             spiritOwner = GetComponentInParent<SpiritMember>();
+            upgradeStats = GetComponentInParent<UpgradeRuntimeStats>();
             if (firePoint == null)
             {
                 firePoint = transform;
@@ -69,32 +72,16 @@ namespace WorldOfSpirits.Combat
             return owner != null && owner.IsAlive;
         }
 
-        protected override float AttackCooldown => attackCooldown;
+        protected override float AttackCooldown => attackCooldown /
+            (upgradeStats != null ? upgradeStats.GetMultiplier(UpgradeStat.AttackSpeed) : 1f);
 
         private IDamageable FindClosestTarget()
         {
-            IDamageable closest = null;
-            float closestDistance = float.PositiveInfinity;
-            var candidates = LivingEntity.ActiveEntities;
-
-            for (int i = 0; i < candidates.Count; i++)
-            {
-                LivingEntity candidate = candidates[i];
-                bool layerAllowed = (targetLayers.value & (1 << candidate.gameObject.layer)) != 0;
-                if (!candidate.IsAlive || candidate.Faction == owner.Faction || !layerAllowed)
-                {
-                    continue;
-                }
-
-                float distance = (candidate.Transform.position - transform.position).sqrMagnitude;
-                if (distance <= targetingRange * targetingRange && distance < closestDistance)
-                {
-                    closest = candidate;
-                    closestDistance = distance;
-                }
-            }
-
-            return closest;
+            return CombatTargeting.FindClosest(
+                transform.position,
+                targetingRange,
+                owner.Faction,
+                targetLayers.value);
         }
 
         private void FireAt(Vector3 targetPosition)
@@ -109,7 +96,9 @@ namespace WorldOfSpirits.Combat
             ProjectileBase projectile = ProjectilePool.Spawn(projectilePrefab, spawnPoint.position, Quaternion.identity);
             int weaponLevel = spiritOwner != null ? spiritOwner.Progression.WeaponLevel : 1;
             float scaledDamage = damage * (1f + damageIncreasePerWeaponLevel * Mathf.Max(0, weaponLevel - 1));
-            projectile.Launch(direction, projectileSpeed, scaledDamage, owner.Faction);
+            if (upgradeStats != null) scaledDamage = upgradeStats.ScaleWeaponDamage(scaledDamage);
+            float speed = projectileSpeed * (upgradeStats != null ? upgradeStats.GetMultiplier(UpgradeStat.ProjectileSpeed) : 1f);
+            projectile.Launch(direction, speed, scaledDamage, owner.Faction);
         }
 
         public void SetFirePointOverride(Transform overridePoint)

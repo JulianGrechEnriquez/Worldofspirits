@@ -27,7 +27,7 @@ namespace WorldOfSpirits.Spirits
                 : definition.Abilities.Count;
             while (abilityLevels.Count < abilityCount)
             {
-                abilityLevels.Add(1);
+                abilityLevels.Add(abilityLevels.Count == 0 ? 1 : 0);
             }
 
             if (abilityLevels.Count > abilityCount)
@@ -40,7 +40,7 @@ namespace WorldOfSpirits.Spirits
                 int maxLevel = definition.RuntimeAbilities.Count > 0
                     ? definition.RuntimeAbilities[i].MaxLevel
                     : definition.Abilities[i].MaxLevel;
-                abilityLevels[i] = Mathf.Clamp(abilityLevels[i], 1, maxLevel);
+                abilityLevels[i] = Mathf.Clamp(abilityLevels[i], 0, maxLevel);
             }
         }
 
@@ -85,5 +85,7 @@ namespace WorldOfSpirits.Spirits
             abilityLevels[abilityIndex]++;
             return true;
         }
+
+        public bool IsAbilityUnlocked(int abilityIndex) => GetAbilityLevel(abilityIndex) > 0;
     }
 }

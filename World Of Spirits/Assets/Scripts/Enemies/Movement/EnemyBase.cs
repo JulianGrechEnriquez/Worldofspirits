@@ -20,6 +20,17 @@ namespace WorldOfSpirits.Enemies
         protected Transform Target => target;
         public override Faction Faction => global::WorldOfSpirits.Combat.Faction.Enemy;
         private float nextMovementRefresh;
+        private bool externalMovement;
+        private static Player.PlayerCharacter cachedPlayer;
+
+        public void SetExternalMovement(bool enabled)
+        {
+            externalMovement = enabled;
+            if (enabled && Body != null)
+            {
+                Body.linearVelocity = Vector2.zero;
+            }
+        }
 
         protected override void Awake()
         {
@@ -38,14 +49,13 @@ namespace WorldOfSpirits.Enemies
 
             if (target == null)
             {
-                Player.PlayerCharacter player = FindFirstObjectByType<Player.PlayerCharacter>();
-                target = player != null ? player.transform : null;
+                target = GetPlayerTransform();
             }
         }
 
         protected virtual void FixedUpdate()
         {
-            if (IsAlive && target != null)
+            if (!externalMovement && IsAlive && target != null)
             {
                 if (Time.fixedTime >= nextMovementRefresh)
                 {
@@ -67,9 +77,17 @@ namespace WorldOfSpirits.Enemies
             Body.linearVelocity = Vector2.zero;
             if (target == null)
             {
-                Player.PlayerCharacter player = FindFirstObjectByType<Player.PlayerCharacter>();
-                target = player != null ? player.transform : null;
+                target = GetPlayerTransform();
             }
+        }
+
+        private static Transform GetPlayerTransform()
+        {
+            if (cachedPlayer == null)
+            {
+                cachedPlayer = FindFirstObjectByType<Player.PlayerCharacter>();
+            }
+            return cachedPlayer != null ? cachedPlayer.transform : null;
         }
 
         protected virtual void Start()

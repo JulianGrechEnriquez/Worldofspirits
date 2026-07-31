@@ -26,6 +26,37 @@ namespace WorldOfSpirits.Core
         internal Transform StorageParent;
         internal int SpawnVersion;
         internal string OriginalName;
+        private IScenePoolable[] callbacks;
+
+        internal IScenePoolable[] GetCallbacks()
+        {
+            if (callbacks != null)
+            {
+                return callbacks;
+            }
+
+            MonoBehaviour[] behaviours = GetComponentsInChildren<MonoBehaviour>(true);
+            int count = 0;
+            for (int i = 0; i < behaviours.Length; i++)
+            {
+                if (behaviours[i] is IScenePoolable)
+                {
+                    count++;
+                }
+            }
+
+            callbacks = new IScenePoolable[count];
+            int callbackIndex = 0;
+            for (int i = 0; i < behaviours.Length; i++)
+            {
+                if (behaviours[i] is IScenePoolable callback)
+                {
+                    callbacks[callbackIndex++] = callback;
+                }
+            }
+
+            return callbacks;
+        }
     }
 
     public sealed class SceneObjectPool : MonoBehaviour
@@ -41,6 +72,16 @@ namespace WorldOfSpirits.Core
         private readonly Dictionary<GameObject, Bucket> buckets = new Dictionary<GameObject, Bucket>();
         private readonly Dictionary<PoolCategory, Transform> categoryParents =
             new Dictionary<PoolCategory, Transform>();
+
+        private void Awake()
+        {
+            if (instance != null && instance != this)
+            {
+                Destroy(gameObject);
+                return;
+            }
+            instance = this;
+        }
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
         private static void CreatePoolHierarchy()
@@ -98,7 +139,7 @@ namespace WorldOfSpirits.Core
             pooled.SpawnVersion++;
             spawned.transform.SetParent(activeParent != null ? activeParent : bucket.Parent, false);
             spawned.transform.SetPositionAndRotation(position, rotation);
-            NotifySpawned(spawned, prefab);
+            NotifySpawned(pooled, prefab);
             spawned.SetActive(true);
             return spawned;
         }
@@ -127,6 +168,7 @@ namespace WorldOfSpirits.Core
             pooled.StorageParent = bucket.Parent;
             pooled.SpawnVersion = 1;
             pooled.OriginalName = spawned.name;
+            pooled.GetCallbacks();
             spawned.name = $"{pooled.OriginalName} [Pooled {bucket.CreatedCount:000}]";
             spawned.transform.SetParent(bucket.Parent, true);
         }
@@ -144,7 +186,7 @@ namespace WorldOfSpirits.Core
             }
 
             SceneObjectPool manager = GetOrCreate();
-            NotifyReturned(spawned);
+            NotifyReturned(pooled);
             spawned.SetActive(false);
             spawned.transform.SetParent(pooled.StorageParent, false);
             if (!manager.buckets.TryGetValue(pooled.Prefab, out Bucket bucket))
@@ -187,6 +229,44 @@ namespace WorldOfSpirits.Core
             return GetOrCreate().GetCategory(category);
         }
 
+        /// <summary>
+        /// Creates inactive reusable instances ahead of gameplay. Existing
+        /// instances count toward the requested total.
+        /// </summary>
+        public static void Preload(
+            GameObject prefab,
+            int count,
+            PoolCategory category)
+        {
+            if (prefab == null || count <= 0)
+            {
+                return;
+            }
+
+            SceneObjectPool manager = GetOrCreate();
+            Bucket bucket = manager.GetBucket(prefab, category);
+            int needed = Mathf.Max(0, count - bucket.CreatedCount);
+            if (needed == 0)
+            {
+                return;
+            }
+
+            var heldInstances = new List<GameObject>(needed);
+            for (int i = 0; i < needed; i++)
+            {
+                heldInstances.Add(Spawn(
+                    prefab,
+                    Vector3.zero,
+                    Quaternion.identity,
+                    category));
+            }
+
+            for (int i = 0; i < heldInstances.Count; i++)
+            {
+                TryRelease(heldInstances[i]);
+            }
+        }
+
         private static SceneObjectPool GetOrCreate()
         {
             if (instance != null)
@@ -194,17 +274,8 @@ namespace WorldOfSpirits.Core
                 return instance;
             }
 
-            GameObject root = GameObject.Find("=== Runtime Pools ===");
-            if (root == null)
-            {
-                root = new GameObject("=== Runtime Pools ===");
-            }
-
-            instance = root.GetComponent<SceneObjectPool>();
-            if (instance == null)
-            {
-                instance = root.AddComponent<SceneObjectPool>();
-            }
+            GameObject root = new GameObject("=== Runtime Pools ===");
+            instance = root.AddComponent<SceneObjectPool>();
 
             return instance;
         }
@@ -261,27 +332,21 @@ namespace WorldOfSpirits.Core
             }
         }
 
-        private static void NotifySpawned(GameObject spawned, GameObject prefab)
+        private static void NotifySpawned(PooledSceneObject pooled, GameObject prefab)
         {
-            MonoBehaviour[] behaviours = spawned.GetComponentsInChildren<MonoBehaviour>(true);
-            foreach (MonoBehaviour behaviour in behaviours)
+            IScenePoolable[] callbacks = pooled.GetCallbacks();
+            for (int i = 0; i < callbacks.Length; i++)
             {
-                if (behaviour is IScenePoolable poolable)
-                {
-                    poolable.OnSpawnedFromPool(prefab);
-                }
+                callbacks[i].OnSpawnedFromPool(prefab);
             }
         }
 
-        private static void NotifyReturned(GameObject spawned)
+        private static void NotifyReturned(PooledSceneObject pooled)
         {
-            MonoBehaviour[] behaviours = spawned.GetComponentsInChildren<MonoBehaviour>(true);
-            foreach (MonoBehaviour behaviour in behaviours)
+            IScenePoolable[] callbacks = pooled.GetCallbacks();
+            for (int i = 0; i < callbacks.Length; i++)
             {
-                if (behaviour is IScenePoolable poolable)
-                {
-                    poolable.OnReturnedToPool();
-                }
+                callbacks[i].OnReturnedToPool();
             }
         }
     }

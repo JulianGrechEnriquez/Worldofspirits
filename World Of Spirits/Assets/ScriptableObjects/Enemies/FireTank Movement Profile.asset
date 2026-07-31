@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c14d7b9a23e841a49f0a001c950ad103, type: 3}
+  m_Name: FireTank Movement Profile
+  m_EditorClassIdentifier: Assembly-CSharp::WorldOfSpirits.Crowd.EnemyMovementProfile
+  movementSpeed: 4
+  acceleration: 18
+  stoppingDistance: 0.45
+  collisionRadius: 0.4
+  separationRadius: 0.9
+  separationStrength: 1.5
+  weight: 1
+  pushStrength: 1
+  maximumNeighbours: 6
+  seekWeight: 1
+  separationWeight: 1.25
+  avoidanceWeight: 1.5
+  maximumSteeringForce: 2.5
+  obstacleCheckDistance: 1.25
+  alternativeDirectionAngle: 45
+  contactDamage: 10
+  attackCooldown: 0.75
+  attackRange: 0.15
+  knockback: 0
+  nearNeighbourInterval: 0.1
+  mediumNeighbourInterval: 0.25
+  farNeighbourInterval: 0.35
+  obstacleInterval: 0.2
+  nearDistance: 8
+  mediumDistance: 18
+  farDistance: 35
+  dormantSpeedMultiplier: 0.75
+  dormantMovementStepInterval: 4
+  repositionDistance: 70
+  repositionRadius: 18

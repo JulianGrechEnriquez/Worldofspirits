@@ -14,11 +14,15 @@ namespace WorldOfSpirits.UI
         private Color startColor;
         private Action<DamageNumber> release;
 
+        private void Awake()
+        {
+            textMesh = GetComponent<TextMeshPro>();
+        }
+
         public void Initialize(
             float damage, Color color, float duration, float speed, int fontSize,
             Action<DamageNumber> releaseAction)
         {
-            textMesh = GetComponent<TextMeshPro>();
             textMesh.text = Mathf.CeilToInt(damage).ToString();
             textMesh.color = color;
             textMesh.fontSize = fontSize;

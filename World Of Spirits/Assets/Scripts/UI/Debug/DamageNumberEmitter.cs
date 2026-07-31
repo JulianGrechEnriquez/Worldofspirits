@@ -10,6 +10,9 @@ namespace WorldOfSpirits.UI
     {
         private static readonly Stack<DamageNumber> pool = new Stack<DamageNumber>(64);
         private static int createdCount;
+        private static int activeCount;
+        [SerializeField, Min(0)] private int maximumVisibleDamageNumbers = 80;
+        [SerializeField, Min(0f)] private float minimumDisplayInterval = 0.06f;
         [SerializeField] private Vector3 worldOffset = new Vector3(0f, 0.75f, 0f);
         [SerializeField] private Color damageColor = new Color(1f, 0.25f, 0.15f, 1f);
         [SerializeField, Min(0.1f)] private float duration = 0.8f;
@@ -18,6 +21,7 @@ namespace WorldOfSpirits.UI
         [SerializeField, Min(0f)] private float randomHorizontalOffset = 0.2f;
 
         private LivingEntity entity;
+        private float nextDisplayTime;
 
         private void Awake()
         {
@@ -44,6 +48,12 @@ namespace WorldOfSpirits.UI
 
         private void ShowDamage(float amount)
         {
+            if (activeCount >= maximumVisibleDamageNumbers || Time.time < nextDisplayTime)
+            {
+                return;
+            }
+
+            nextDisplayTime = Time.time + minimumDisplayInterval;
             Vector3 randomOffset = Vector3.right * Random.Range(-randomHorizontalOffset, randomHorizontalOffset);
             DamageNumber number = null;
             while (pool.Count > 0 && number == null)
@@ -67,11 +77,13 @@ namespace WorldOfSpirits.UI
                 SceneObjectPool.GetCategoryParent(PoolCategory.CombatUI), false);
             numberObject.transform.position = transform.position + worldOffset + randomOffset;
             numberObject.SetActive(true);
+            activeCount++;
             number.Initialize(amount, damageColor, duration, riseSpeed, fontSize, ReturnToPool);
         }
 
         private static void ReturnToPool(DamageNumber number)
         {
+            activeCount = Mathf.Max(0, activeCount - 1);
             number.gameObject.SetActive(false);
             number.transform.SetParent(
                 SceneObjectPool.GetCategoryParent(PoolCategory.CombatUI), false);

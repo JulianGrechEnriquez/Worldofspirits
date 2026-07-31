@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using WorldOfSpirits.Progression.Upgrades;
 
 namespace WorldOfSpirits.Player
 {
@@ -20,6 +21,7 @@ namespace WorldOfSpirits.Player
 
         private Rigidbody2D rb;
         private PlayerCharacter playerCharacter;
+        private UpgradeRuntimeStats upgradeStats;
         private Vector2 moveInput;
         private Vector2 lastMoveDirection = Vector2.down;
         private bool hasMoveX;
@@ -37,6 +39,7 @@ namespace WorldOfSpirits.Player
         {
             rb = GetComponent<Rigidbody2D>();
             playerCharacter = GetComponent<PlayerCharacter>();
+            upgradeStats = GetComponent<UpgradeRuntimeStats>();
             rb.gravityScale = 0f;
             rb.freezeRotation = true;
 
@@ -57,6 +60,7 @@ namespace WorldOfSpirits.Player
         private void FixedUpdate()
         {
             float speed = playerCharacter != null ? playerCharacter.MoveSpeed : fallbackMoveSpeed;
+            if (upgradeStats != null) speed *= upgradeStats.GetMultiplier(UpgradeStat.MovementSpeed);
             rb.linearVelocity = moveInput * speed;
         }
 

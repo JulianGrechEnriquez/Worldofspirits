@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using WorldOfSpirits.Combat;
 using WorldOfSpirits.Core;
+using WorldOfSpirits.Progression.Upgrades;
 
 namespace WorldOfSpirits.Spirits
 {
@@ -20,7 +21,7 @@ namespace WorldOfSpirits.Spirits
 
         protected override float GetCooldown()
         {
-            return ActiveLevel != null ? ActiveLevel.cooldown : base.GetCooldown();
+            return ActiveLevel != null ? ScaleCooldown(ActiveLevel.cooldown) : base.GetCooldown();
         }
 
         protected override bool CanCast(SpiritAbilityContext context)
@@ -108,7 +109,7 @@ namespace WorldOfSpirits.Spirits
             AbilityProjectileData data = level.projectile;
             if (data.projectilePrefab == null) return;
             Vector2 center = ResolveDirection(context, level);
-            int count = Mathf.Max(1, data.count);
+            int count = Mathf.Max(1, data.count + (UpgradeStats != null ? Mathf.RoundToInt(UpgradeStats.GetFlat(UpgradeStat.MultiShot)) : 0));
             float centerAngle = Mathf.Atan2(center.y, center.x) * Mathf.Rad2Deg;
             for (int i = 0; i < count; i++)
             {
@@ -124,18 +125,23 @@ namespace WorldOfSpirits.Spirits
                 projectile.ConfigureHoming(data.homeOnEnemies, data.homingStrength, data.homingRange);
                 if (projectile is ConfigurableProjectile configurable)
                 {
-                    configurable.Configure(data.pierceCount, data.explosionRadius, data.growthPerSecond,
+                    int pierce = data.pierceCount + (UpgradeStats != null ? Mathf.RoundToInt(UpgradeStats.GetFlat(UpgradeStat.Pierce)) : 0);
+                    int bounce = data.bounceCount + (UpgradeStats != null ? Mathf.RoundToInt(UpgradeStats.GetFlat(UpgradeStat.Ricochet)) : 0);
+                    float area = data.explosionRadius * (UpgradeStats != null ? UpgradeStats.GetMultiplier(UpgradeStat.AreaSize) : 1f);
+                    configurable.Configure(pierce, area, data.growthPerSecond,
                         data.appliesStatus, data.status, data.statusDuration, data.statusStrength,
-                        data.bounceCount, data.bounceRange);
+                        bounce, data.bounceRange);
                 }
-                projectile.Launch(direction, data.speed, data.damage, Faction.Player);
+                float speed = data.speed * (UpgradeStats != null ? UpgradeStats.GetMultiplier(UpgradeStat.ProjectileSpeed) : 1f);
+                float damage = UpgradeStats != null ? UpgradeStats.ScaleSpiritDamage(data.damage) : data.damage;
+                projectile.Launch(direction, speed, damage, Faction.Player);
             }
         }
 
         private void CastArea(SpiritAbilityContext context, AbilityLevelData level)
         {
             CombatTargeting.FindAllNonAlloc(
-                transform.position, level.areaRadius, Faction.Player, targetBuffer);
+                transform.position, level.areaRadius * (UpgradeStats != null ? UpgradeStats.GetMultiplier(UpgradeStat.AreaSize) : 1f), Faction.Player, targetBuffer);
             foreach (IDamageable target in targetBuffer)
                 ApplyEffects(target.Transform, context.Player, level.effects);
         }
@@ -212,7 +218,9 @@ namespace WorldOfSpirits.Spirits
             {
                 switch (effect.effectType)
                 {
-                    case AbilityEffectType.Damage: damageable?.TakeDamage(effect.value); break;
+                    case AbilityEffectType.Damage:
+                        damageable?.TakeDamage(UpgradeStats != null ? UpgradeStats.ScaleSpiritDamage(effect.value) : effect.value);
+                        break;
                     case AbilityEffectType.ApplyStatus:
                         if (damageable is IStatusEffectReceiver receiver) receiver.ApplyStatus(effect.status, effect.duration, effect.value);
                         break;

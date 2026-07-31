@@ -62,16 +62,21 @@ namespace WorldOfSpirits.Combat
             {
                 activeEntities.Add(this);
             }
+            CombatSimulationManager.Instance.Register(this);
         }
 
         protected virtual void OnDisable()
         {
             activeEntities.Remove(this);
+            if (CombatSimulationManager.TryGetExisting(out CombatSimulationManager simulation))
+            {
+                simulation.Unregister(this);
+            }
         }
 
-        protected virtual void Update()
+        internal void TickStatusEffects(float now)
         {
-            if (Time.time >= statusEndTime || Time.time < nextStatusDamageTime)
+            if (now >= statusEndTime || now < nextStatusDamageTime)
             {
                 return;
             }
@@ -79,7 +84,7 @@ namespace WorldOfSpirits.Combat
             if (activeStatus == CombatStatus.Burn || activeStatus == CombatStatus.Poison || activeStatus == CombatStatus.Bleed)
             {
                 TakeDamage(statusStrength);
-                nextStatusDamageTime = Time.time + 0.5f;
+                nextStatusDamageTime = now + 0.5f;
             }
         }
 
@@ -151,6 +156,14 @@ namespace WorldOfSpirits.Combat
         public void GrantRevive(int charges = 1)
         {
             reviveCharges += Mathf.Max(0, charges);
+        }
+
+        public void IncreaseMaximumHealth(float amount, bool healIncrease = true)
+        {
+            if (amount <= 0f) return;
+            maxHealth += amount;
+            if (healIncrease) currentHealth += amount;
+            HealthChanged?.Invoke(currentHealth, maxHealth);
         }
 
         protected virtual void Die()

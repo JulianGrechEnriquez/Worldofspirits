@@ -5,7 +5,12 @@ using WorldOfSpirits.Combat;
 
 namespace WorldOfSpirits.Spirits
 {
-    public enum WeaponExecutionType { Projectile, OrbitingMelee }
+    public enum WeaponExecutionType
+    {
+        Projectile,
+        OrbitingMelee,
+        PunchingMelee
+    }
 
     [Serializable]
     public class WeaponLevelData
@@ -23,6 +28,15 @@ namespace WorldOfSpirits.Spirits
         [Min(0.1f)] public float homingRange = 10f;
         [Min(0.1f)] public float orbitRadius = 1.4f;
         public float orbitSpeed = 180f;
+
+        [Header("Punching Melee")]
+        [Min(0.1f)] public float punchDistance = 2.25f;
+        [Min(0.05f)] public float extendDuration = 0.12f;
+        [Min(0.05f)] public float returnDuration = 0.18f;
+        [Min(0.05f)] public float hitRadius = 0.55f;
+        [Min(1)] public int maximumTargets = 4;
+        public CombatStatus status = CombatStatus.Freeze;
+        [Min(0f)] public float statusDuration = 0.2f;
     }
 
     [CreateAssetMenu(fileName = "Weapon Definition", menuName = "World of Spirits/Weapon Definition")]
