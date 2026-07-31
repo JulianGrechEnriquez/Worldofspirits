@@ -276,6 +276,15 @@ namespace WorldOfSpirits.Core
                 return instance;
             }
 
+            // Prefer the pool manager saved in the scene hierarchy. This also
+            // handles calls made before its Awake method has run (for example
+            // with custom script execution order or disabled domain reload).
+            instance = FindFirstObjectByType<SceneObjectPool>(FindObjectsInactive.Include);
+            if (instance != null)
+            {
+                return instance;
+            }
+
             GameObject root = new GameObject("=== Runtime Pools ===");
             instance = root.AddComponent<SceneObjectPool>();
 

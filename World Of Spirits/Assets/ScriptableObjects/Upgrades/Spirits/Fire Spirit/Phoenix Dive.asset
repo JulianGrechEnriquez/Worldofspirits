@@ -16,7 +16,7 @@ MonoBehaviour:
   cardName: Phoenix Dive
   description: Unlocks or improves this advanced spirit ability.
   flavorText: 
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: a1e961bcfac85ee4a85a52701bcdceb1, type: 3}
   suggestedIconTheme: Elemental ability glyph
   category: 2
   rarity: 1

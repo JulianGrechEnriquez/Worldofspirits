@@ -10,6 +10,10 @@ namespace WorldOfSpirits.Spirits
     {
         [SerializeField] private WeaponDefinition definition;
 
+        [Header("Projectile Visual")]
+        [SerializeField] private float projectileVisualRotationOffset = -45f;
+        [SerializeField] private bool fireFromVisualPoint;
+
         [Header("Orbiting Melee Damage")]
         [SerializeField, Min(0.05f)] private float hitCooldownPerEnemy = 0.45f;
         [SerializeField] private bool drawHitboxes = true;
@@ -21,7 +25,9 @@ namespace WorldOfSpirits.Spirits
         private SpiritMember spiritOwner;
         private LivingEntity owner;
         private Transform firePointOverride;
+        private Transform visualPointOverride;
         private Transform orbitingWeapon;
+        private Transform projectileWeaponVisual;
         private float orbitAngle;
         private UpgradeRuntimeStats upgradeStats;
 
@@ -52,7 +58,9 @@ namespace WorldOfSpirits.Spirits
             WeaponLevelData level = ActiveLevel;
             if (level.projectilePrefab == null) return;
 
-            Transform origin = firePointOverride != null ? firePointOverride : transform;
+            Transform origin = fireFromVisualPoint && visualPointOverride != null
+                ? visualPointOverride
+                : firePointOverride != null ? firePointOverride : transform;
             IDamageable target = CombatTargeting.FindClosest(origin.position, level.targetingRange, owner.Faction);
             if (target == null) return;
 
@@ -69,6 +77,7 @@ namespace WorldOfSpirits.Spirits
         {
             if (definition == null || definition.ExecutionType == WeaponExecutionType.Projectile)
             {
+                UpdateProjectileVisual();
                 base.Update();
                 return;
             }
@@ -118,9 +127,55 @@ namespace WorldOfSpirits.Spirits
 
         public void SetFirePointOverride(Transform point) => firePointOverride = point;
 
+        public void SetVisualPointOverride(Transform point) => visualPointOverride = point;
+
+        private void UpdateProjectileVisual()
+        {
+            WeaponLevelData level = ActiveLevel;
+            if (level == null || level.weaponPrefab == null)
+            {
+                ReleaseProjectileVisual();
+                return;
+            }
+
+            Transform origin = fireFromVisualPoint && visualPointOverride != null
+                ? visualPointOverride
+                : firePointOverride != null ? firePointOverride : transform;
+            Transform visualOrigin = visualPointOverride != null ? visualPointOverride : origin;
+            if (projectileWeaponVisual == null)
+            {
+                projectileWeaponVisual = SceneObjectPool.Spawn(
+                    level.weaponPrefab,
+                    visualOrigin.position,
+                    Quaternion.identity,
+                    PoolCategory.Effects).transform;
+            }
+
+            projectileWeaponVisual.position = visualOrigin.position;
+            IDamageable target = CombatTargeting.FindClosest(
+                origin.position,
+                level.targetingRange,
+                owner != null ? owner.Faction : Faction.Player);
+            if (target == null) return;
+
+            Vector2 direction = target.Transform.position - visualOrigin.position;
+            if (direction.sqrMagnitude <= 0.0001f) return;
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            projectileWeaponVisual.rotation = Quaternion.Euler(
+                0f, 0f, angle + projectileVisualRotationOffset);
+        }
+
+        private void ReleaseProjectileVisual()
+        {
+            if (projectileWeaponVisual == null) return;
+            SceneObjectPool.ReleaseOrDestroy(projectileWeaponVisual.gameObject);
+            projectileWeaponVisual = null;
+        }
+
         private void OnDisable()
         {
             nextMeleeHitTimes.Clear();
+            ReleaseProjectileVisual();
             if (orbitingWeapon != null)
             {
                 SceneObjectPool.ReleaseOrDestroy(orbitingWeapon.gameObject);

@@ -17,3 +17,7 @@ MonoBehaviour:
   enemies:
   - enemy: {fileID: 11400000, guid: fc72e7e12b250744ba5c4859878343b3, type: 2}
     preloadCount: 10
+  - enemy: {fileID: 11400000, guid: 9e8c5c6b7b9391345b385986875d02ce, type: 2}
+    preloadCount: 6
+  - enemy: {fileID: 11400000, guid: 873477b2d36a88246ac432675c92ba9c, type: 2}
+    preloadCount: 8

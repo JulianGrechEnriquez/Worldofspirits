@@ -1,0 +1,119 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31342a0c190e58d49bf04376fd127bb4, type: 3}
+  m_Name: Flame Bow
+  m_EditorClassIdentifier: Assembly-CSharp::WorldOfSpirits.Spirits.WeaponDefinition
+  weaponName: Flame Bow
+  description: A phoenix-forged bow that launches burning feathers at nearby enemies.
+  icon: {fileID: 21300000, guid: 82dface052603214d868fc87ef4e3922, type: 3}
+  executionType: 0
+  levels:
+  - level: 1
+    upgradeDescription: Flame Bow unlocked
+    projectilePrefab: {fileID: 1132934643380735030, guid: 34dc7f9e6e7c2984a943df3f31bb774d, type: 3}
+    weaponPrefab: {fileID: 8987451310273595696, guid: f753d299d5f12f0419cf73efc38b1d85, type: 3}
+    damage: 9
+    attackCooldown: 0.78
+    targetingRange: 14
+    projectileSpeed: 10
+    homeOnEnemies: 1
+    homingStrength: 6
+    homingRange: 12
+    orbitRadius: 0
+    orbitSpeed: 0
+    punchDistance: 0
+    extendDuration: 0
+    returnDuration: 0
+    hitRadius: 0
+    maximumTargets: 0
+    status: 0
+    statusDuration: 0
+  - level: 2
+    upgradeDescription: Faster draw and stronger feathers
+    projectilePrefab: {fileID: 1132934643380735030, guid: 34dc7f9e6e7c2984a943df3f31bb774d, type: 3}
+    weaponPrefab: {fileID: 8987451310273595696, guid: f753d299d5f12f0419cf73efc38b1d85, type: 3}
+    damage: 12
+    attackCooldown: 0.7
+    targetingRange: 15
+    projectileSpeed: 11
+    homeOnEnemies: 1
+    homingStrength: 7
+    homingRange: 12
+    orbitRadius: 0
+    orbitSpeed: 0
+    punchDistance: 0
+    extendDuration: 0
+    returnDuration: 0
+    hitRadius: 0
+    maximumTargets: 0
+    status: 0
+    statusDuration: 0
+  - level: 3
+    upgradeDescription: Ember-tipped arrows deal more damage
+    projectilePrefab: {fileID: 1132934643380735030, guid: 34dc7f9e6e7c2984a943df3f31bb774d, type: 3}
+    weaponPrefab: {fileID: 8987451310273595696, guid: f753d299d5f12f0419cf73efc38b1d85, type: 3}
+    damage: 15
+    attackCooldown: 0.62
+    targetingRange: 16
+    projectileSpeed: 12
+    homeOnEnemies: 1
+    homingStrength: 8
+    homingRange: 12
+    orbitRadius: 0
+    orbitSpeed: 0
+    punchDistance: 0
+    extendDuration: 0
+    returnDuration: 0
+    hitRadius: 0
+    maximumTargets: 0
+    status: 0
+    statusDuration: 0
+  - level: 4
+    upgradeDescription: Phoenix string greatly increases fire rate
+    projectilePrefab: {fileID: 1132934643380735030, guid: 34dc7f9e6e7c2984a943df3f31bb774d, type: 3}
+    weaponPrefab: {fileID: 8987451310273595696, guid: f753d299d5f12f0419cf73efc38b1d85, type: 3}
+    damage: 19
+    attackCooldown: 0.54
+    targetingRange: 17
+    projectileSpeed: 13
+    homeOnEnemies: 1
+    homingStrength: 9
+    homingRange: 12
+    orbitRadius: 0
+    orbitSpeed: 0
+    punchDistance: 0
+    extendDuration: 0
+    returnDuration: 0
+    hitRadius: 0
+    maximumTargets: 0
+    status: 0
+    statusDuration: 0
+  - level: 5
+    upgradeDescription: Inferno Bow reaches its full power
+    projectilePrefab: {fileID: 1132934643380735030, guid: 34dc7f9e6e7c2984a943df3f31bb774d, type: 3}
+    weaponPrefab: {fileID: 8987451310273595696, guid: f753d299d5f12f0419cf73efc38b1d85, type: 3}
+    damage: 24
+    attackCooldown: 0.46
+    targetingRange: 18
+    projectileSpeed: 14
+    homeOnEnemies: 1
+    homingStrength: 10
+    homingRange: 12
+    orbitRadius: 0
+    orbitSpeed: 0
+    punchDistance: 0
+    extendDuration: 0
+    returnDuration: 0
+    hitRadius: 0
+    maximumTargets: 0
+    status: 0
+    statusDuration: 0

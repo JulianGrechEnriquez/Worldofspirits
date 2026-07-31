@@ -16,7 +16,7 @@ MonoBehaviour:
   cardName: Fiery Feathers
   description: Improves this spirit's first ability.
   flavorText: 
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 435900491ae6f2041b45dae3cb1a1862, type: 3}
   suggestedIconTheme: Elemental ability glyph
   category: 2
   rarity: 0

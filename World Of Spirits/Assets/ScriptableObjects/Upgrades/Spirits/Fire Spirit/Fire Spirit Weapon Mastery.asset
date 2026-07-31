@@ -16,7 +16,7 @@ MonoBehaviour:
   cardName: Fire Spirit Weapon Mastery
   description: Improves the manifested weapon to its next authored level.
   flavorText: 
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 086ee2c1a9c73d646ab240c8de073c1a, type: 3}
   suggestedIconTheme: Elemental weapon on a radiant anvil
   category: 1
   rarity: 0

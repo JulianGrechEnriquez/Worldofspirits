@@ -76,6 +76,10 @@ namespace WorldOfSpirits.Spirits
                 {
                     dataDrivenWeapon.SetFirePointOverride(
                         weaponCanAttack ? playerProjectileSpawner : null);
+                    dataDrivenWeapon.SetVisualPointOverride(
+                        weaponCanAttack && meleeWeaponSlots != null && meleeWeaponSlots.Count > 0
+                            ? meleeWeaponSlots[0]
+                            : null);
                 }
                 else if (weapon is ThrustMeleeWeaponBase thrustMeleeWeapon)
                 {

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WorldOfSpirits.Spirits.AbilityDefinition
   abilityName: Fiery Feathers
   description: Shoots homing feathers in a fan shape.
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 435900491ae6f2041b45dae3cb1a1862, type: 3}
   executionType: 0
   targetingMode: 0
   levels:
@@ -24,11 +24,11 @@ MonoBehaviour:
     targetingRange: 15
     projectile:
       projectilePrefab: {fileID: 1132934643380735030, guid: 34dc7f9e6e7c2984a943df3f31bb774d, type: 3}
-      count: 2
-      spreadAngle: 45
+      count: 3
+      spreadAngle: 49.6
       spreadMode: 0
       speed: 9
-      damage: 17.48
+      damage: 10
       homeOnEnemies: 1
       homingStrength: 6
       homingRange: 10
@@ -56,15 +56,15 @@ MonoBehaviour:
     targetingRange: 15
     projectile:
       projectilePrefab: {fileID: 1132934643380735030, guid: 34dc7f9e6e7c2984a943df3f31bb774d, type: 3}
-      count: 5
-      spreadAngle: 35
-      spreadMode: 0
+      count: 6
+      spreadAngle: 360
+      spreadMode: 1
       speed: 9
-      damage: 13
+      damage: 15
       homeOnEnemies: 1
       homingStrength: 6
       homingRange: 10
-      pierceCount: 0
+      pierceCount: 31
       bounceCount: 0
       bounceRange: 5
       explosionRadius: 0

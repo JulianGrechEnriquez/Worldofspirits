@@ -17,7 +17,7 @@ MonoBehaviour:
   description: Transforms the spirit's appearance and empowers its complete kit.
     Add its unique behaviour to the spirit prefab.
   flavorText: 
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: b3ddfb51150f8ba4ab4b48cadc3b73f5, type: 3}
   suggestedIconTheme: Transformed spirit breaking through a luminous card
   category: 4
   rarity: 4
