@@ -40,6 +40,7 @@ namespace WorldOfSpirits.Spawning
             new HashSet<BiomeSpawnData>();
 
         public int AliveCount => activeEnemies.Count;
+        public event Action<EnemyBase> EnemyKilled;
 
         private void Awake()
         {
@@ -124,6 +125,8 @@ namespace WorldOfSpirits.Spawning
                 return null;
             }
 
+            enemy.ConfigureClassification(spawnData.IsElite, spawnData.IsBoss);
+
             TrackInstance(enemy);
             if (activeEnemies.Add(enemy))
             {
@@ -187,6 +190,7 @@ namespace WorldOfSpirits.Spawning
         {
             // LivingEntity releases itself to SceneObjectPool immediately
             // after raising Died. This callback only updates high-level state.
+            EnemyKilled?.Invoke(enemy);
             DeactivateTracking(enemy);
         }
 

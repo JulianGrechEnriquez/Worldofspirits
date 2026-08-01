@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using WorldOfSpirits.Combat;
+using WorldOfSpirits.Progression.Upgrades;
 
 namespace WorldOfSpirits.Spirits
 {
@@ -30,6 +31,8 @@ namespace WorldOfSpirits.Spirits
         private Collider2D weaponCollider;
         private readonly Dictionary<int, float> nextHitTimes = new Dictionary<int, float>();
         private SpiritMember spiritOwner;
+        private UpgradeRuntimeStats upgradeStats;
+        private Vector3 authoredScale;
 
         private void Awake()
         {
@@ -40,6 +43,8 @@ namespace WorldOfSpirits.Spirits
 
             currentAngle = startingAngle;
             spiritOwner = GetComponentInParent<SpiritMember>();
+            upgradeStats = GetComponentInParent<UpgradeRuntimeStats>();
+            authoredScale = transform.localScale;
             weaponRenderers = GetComponentsInChildren<Renderer>(true);
             isVisible = true;
             ConfigureCollider();
@@ -59,7 +64,12 @@ namespace WorldOfSpirits.Spirits
                 return;
             }
 
-            currentAngle = Mathf.Repeat(currentAngle + orbitSpeed * Time.deltaTime, 360f);
+            float attackSpeed = upgradeStats != null
+                ? upgradeStats.GetMultiplier(UpgradeStat.AttackSpeed)
+                : 1f;
+            currentAngle = Mathf.Repeat(
+                currentAngle + orbitSpeed * attackSpeed * Time.deltaTime,
+                360f);
             float radians = currentAngle * Mathf.Deg2Rad;
             Vector2 outwardDirection = new Vector2(Mathf.Cos(radians), Mathf.Sin(radians));
 
@@ -69,6 +79,8 @@ namespace WorldOfSpirits.Spirits
             // local up outward therefore keeps the handle pointed at the player.
             float facingAngle = Mathf.Atan2(outwardDirection.y, outwardDirection.x) * Mathf.Rad2Deg - 90f;
             transform.rotation = Quaternion.Euler(0f, 0f, facingAngle + rotationOffset);
+            transform.localScale = authoredScale *
+                (upgradeStats != null ? upgradeStats.GetMultiplier(UpgradeStat.ProjectileSize) : 1f);
         }
 
         private void OnTriggerEnter2D(Collider2D other)
@@ -102,8 +114,15 @@ namespace WorldOfSpirits.Spirits
 
             int weaponLevel = spiritOwner != null ? spiritOwner.Progression.WeaponLevel : 1;
             float scaledDamage = damage * (1f + damageIncreasePerWeaponLevel * Mathf.Max(0, weaponLevel - 1));
-            target.TakeDamage(scaledDamage);
-            nextHitTimes[targetId] = Time.time + hitCooldownPerEnemy;
+            target.TakeDamage(DamageContext.Weapon(
+                scaledDamage,
+                spiritOwner != null ? spiritOwner.transform : transform,
+                DamageElementUtility.FromSpiritName(
+                    spiritOwner != null && spiritOwner.Definition != null
+                        ? spiritOwner.Definition.SpiritName
+                        : string.Empty)));
+            float attackSpeed = upgradeStats != null ? upgradeStats.GetMultiplier(UpgradeStat.AttackSpeed) : 1f;
+            nextHitTimes[targetId] = Time.time + hitCooldownPerEnemy / attackSpeed;
         }
 
         private void ConfigureCollider()

@@ -172,7 +172,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WorldOfSpirits.Enemies.ChasingEnemy
   maxHealth: 55
-  moveSpeed: 11.5
+  moveSpeed: 15
   logHealthChanges: 0
   hitFlashColor: {r: 1, g: 0, b: 0, a: 1}
   hitFlashDuration: 0.12

@@ -61,7 +61,7 @@ GameObject:
   - component: {fileID: 1643286875522105678}
   - component: {fileID: 1112901116981269246}
   m_Layer: 0
-  m_Name: Runtime Ability 2 - Boulder Throw
+  m_Name: Runtime Ability 1 - Boulder Throw
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -94,7 +94,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59463a8d5a7449f3a1ef4c6f88e1a242, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WorldOfSpirits.Spirits.DataDrivenAbility
-  abilityIndex: 1
+  abilityIndex: 0
   cooldown: 1
   primarySpiritOnly: 0
   castWhileMoving: 1
@@ -283,7 +283,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59463a8d5a7449f3a1ef4c6f88e1a242, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WorldOfSpirits.Spirits.DataDrivenAbility
-  abilityIndex: 0
+  abilityIndex: 1
   cooldown: 1
   primarySpiritOnly: 0
   castWhileMoving: 1
@@ -300,7 +300,7 @@ GameObject:
   - component: {fileID: 3648151183838121042}
   - component: {fileID: 5680463834102944313}
   m_Layer: 0
-  m_Name: Runtime Ability 1 - Quicksand Domain
+  m_Name: Runtime Ability 2 - Quicksand Domain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -333,7 +333,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59463a8d5a7449f3a1ef4c6f88e1a242, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WorldOfSpirits.Spirits.DataDrivenAbility
-  abilityIndex: 0
+  abilityIndex: 1
   cooldown: 1
   primarySpiritOnly: 0
   castWhileMoving: 1

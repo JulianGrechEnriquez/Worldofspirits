@@ -24,12 +24,6 @@ namespace WorldOfSpirits.Spawning
         [SerializeField, Min(0f)] private float spawnWeight = 1f;
 
         [Header("Availability")]
-        [Tooltip("Earliest elapsed run time, in seconds, at which this enemy may be selected.")]
-        [SerializeField, Min(0f)] private float minimumSpawnTime;
-
-        [Tooltip("Latest elapsed run time, in seconds, at which this enemy may be selected. Use 0 for no limit.")]
-        [SerializeField, Min(0f)] private float maximumSpawnTime;
-
         [Tooltip("Stable biome identifier, such as burning-plains. Matching is case-insensitive.")]
         [SerializeField] private string biomeId = "burning-plains";
 
@@ -43,25 +37,18 @@ namespace WorldOfSpirits.Spawning
         public EnemyBase EnemyPrefab => enemyPrefab;
         public int SpawnCost => spawnCost;
         public float SpawnWeight => spawnWeight;
-        public float MinimumSpawnTime => minimumSpawnTime;
-        public float MaximumSpawnTime => maximumSpawnTime;
         public string BiomeId => biomeId;
         public bool IsElite => elite;
         public bool IsBoss => boss;
 
         /// <summary>
-        /// Returns true when this entry is eligible for the supplied run time and biome.
+        /// Returns true when this entry is eligible for the active biome.
         /// Budget, elite chance, and boss-event rules are intentionally handled by the
         /// director because they depend on the current spawning context.
         /// </summary>
-        public bool IsAvailable(float elapsedTime, string activeBiomeId)
+        public bool IsAvailable(string activeBiomeId)
         {
-            if (enemyPrefab == null || spawnWeight <= 0f || elapsedTime < minimumSpawnTime)
-            {
-                return false;
-            }
-
-            if (maximumSpawnTime > 0f && elapsedTime > maximumSpawnTime)
+            if (enemyPrefab == null || spawnWeight <= 0f)
             {
                 return false;
             }
@@ -77,14 +64,6 @@ namespace WorldOfSpirits.Spawning
         {
             spawnCost = Mathf.Max(1, spawnCost);
             spawnWeight = Mathf.Max(0f, spawnWeight);
-            minimumSpawnTime = Mathf.Max(0f, minimumSpawnTime);
-            maximumSpawnTime = Mathf.Max(0f, maximumSpawnTime);
-
-            if (maximumSpawnTime > 0f && maximumSpawnTime < minimumSpawnTime)
-            {
-                maximumSpawnTime = minimumSpawnTime;
-            }
-
             biomeId = string.IsNullOrWhiteSpace(biomeId)
                 ? "burning-plains"
                 : biomeId.Trim().ToLowerInvariant();

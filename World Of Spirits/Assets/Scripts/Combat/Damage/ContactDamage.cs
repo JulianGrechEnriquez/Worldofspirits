@@ -38,7 +38,11 @@ namespace WorldOfSpirits.Combat
                 return;
             }
 
-            target.TakeDamage(damage);
+            target.TakeDamage(new DamageContext(
+                damage,
+                owner.transform,
+                DamageElement.Physical,
+                false));
             nextHitTime = Time.time + hitCooldown;
         }
     }

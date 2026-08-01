@@ -14,5 +14,6 @@ namespace WorldOfSpirits.Combat
     public interface IStatusEffectReceiver
     {
         void ApplyStatus(CombatStatus status, float duration, float strength);
+        void ApplyStatus(CombatStatus status, float duration, float strength, DamageContext sourceDamage);
     }
 }

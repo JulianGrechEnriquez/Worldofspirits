@@ -100,6 +100,8 @@ namespace WorldOfSpirits.Spawning
         public bool IsSpawningPaused => spawningPaused;
         public bool IsBossEventActive => bossEventActive;
         public BiomeSpawnData ActiveBiome => activeBiome;
+        public event System.Action<EnemyBase> BossStarted;
+        public event System.Action<EnemyBase> BossDefeated;
 
         private void Awake()
         {
@@ -205,6 +207,7 @@ namespace WorldOfSpirits.Spawning
             }
 
             activeBoss.Died += HandleBossDied;
+            BossStarted?.Invoke(activeBoss);
             return true;
         }
 
@@ -299,7 +302,7 @@ namespace WorldOfSpirits.Spawning
                    !data.IsBoss &&
                    data.IsElite == eliteOnly &&
                    data.SpawnCost <= remainingBudget &&
-                   data.IsAvailable(elapsedRunTime, activeBiome.BiomeId);
+                   data.IsAvailable(activeBiome.BiomeId);
         }
 
         private bool TryGetSpawnPosition(out Vector3 position)
@@ -383,8 +386,10 @@ namespace WorldOfSpirits.Spawning
 
         private void HandleBossDied()
         {
+            EnemyBase defeatedBoss = activeBoss;
             UnsubscribeFromBoss();
             bossEventActive = false;
+            BossDefeated?.Invoke(defeatedBoss);
 
             if (resumeAfterBoss)
             {

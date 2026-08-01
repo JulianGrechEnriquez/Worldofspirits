@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using WorldOfSpirits.Combat;
 using WorldOfSpirits.Core;
+using WorldOfSpirits.Progression.Upgrades;
 
 namespace WorldOfSpirits.Spirits
 {
@@ -28,10 +29,20 @@ namespace WorldOfSpirits.Spirits
         private readonly List<int> occupantsToRemove = new List<int>();
         private Transform owner;
         private float disableTime;
+        private UpgradeRuntimeStats upgradeStats;
+        private Vector3 authoredScale;
+        private float authoredDamagePerTick;
+        private float authoredDuration;
+        private float authoredPullForce;
+        private DamageContext damageSource;
 
         private void Awake()
         {
             GetComponent<Collider2D>().isTrigger = true;
+            authoredScale = transform.localScale;
+            authoredDamagePerTick = damagePerTick;
+            authoredDuration = duration;
+            authoredPullForce = pullForce;
         }
 
         private void OnEnable()
@@ -42,6 +53,25 @@ namespace WorldOfSpirits.Spirits
         public void SetOwner(Transform newOwner)
         {
             owner = newOwner;
+            upgradeStats = newOwner != null
+                ? newOwner.GetComponentInParent<UpgradeRuntimeStats>()
+                : null;
+        }
+
+        public void ConfigureUpgradeModifiers(UpgradeRuntimeStats stats)
+        {
+            upgradeStats = stats;
+            damagePerTick = authoredDamagePerTick;
+            duration = stats != null ? stats.ScaleDuration(authoredDuration) : authoredDuration;
+            pullForce = stats != null ? stats.ScaleForce(authoredPullForce) : authoredPullForce;
+            transform.localScale = authoredScale *
+                (stats != null ? stats.GetMultiplier(UpgradeStat.AreaSize) : 1f);
+            disableTime = Time.time + duration;
+        }
+
+        public void ConfigureDamageSource(DamageContext context)
+        {
+            damageSource = context;
         }
 
         public void SetReusable(bool reusable)
@@ -74,7 +104,7 @@ namespace WorldOfSpirits.Spirits
 
                 if (Time.time >= occupant.NextHitTime)
                 {
-                    occupant.Target.TakeDamage(damagePerTick);
+                    occupant.Target.TakeDamage(damageSource.WithBaseDamage(damagePerTick));
                     occupant.NextHitTime = Time.time + tickInterval;
                 }
             }
@@ -159,9 +189,16 @@ namespace WorldOfSpirits.Spirits
                 ownerFaction = prefabZone.ownerFaction;
                 pullForce = prefabZone.pullForce;
                 followOwner = prefabZone.followOwner;
+                authoredScale = prefabZone.transform.localScale;
+                authoredDamagePerTick = prefabZone.damagePerTick;
+                authoredDuration = prefabZone.duration;
+                authoredPullForce = prefabZone.pullForce;
             }
 
             owner = null;
+            upgradeStats = null;
+            damageSource = new DamageContext(damagePerTick);
+            transform.localScale = authoredScale;
             disableTime = Time.time + duration;
         }
 

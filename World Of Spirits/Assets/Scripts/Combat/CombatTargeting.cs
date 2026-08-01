@@ -9,7 +9,11 @@ namespace WorldOfSpirits.Combat
             new List<LivingEntity>(64);
 
         public static IDamageable FindClosest(
-            Vector3 origin, float range, Faction enemyOf, int layerMask = ~0)
+            Vector3 origin,
+            float range,
+            Faction enemyOf,
+            int layerMask = ~0,
+            ISet<int> excludedTargetIds = null)
         {
             IDamageable closest = null;
             float closestDistance = range * range;
@@ -17,11 +21,14 @@ namespace WorldOfSpirits.Combat
             for (int i = 0; i < queryBuffer.Count; i++)
             {
                 LivingEntity candidate = queryBuffer[i];
+                int candidateId = candidate.Transform.gameObject.GetInstanceID();
 
                 float distance = (candidate.Transform.position - origin).sqrMagnitude;
                 bool layerAllowed = (layerMask & (1 << candidate.gameObject.layer)) != 0;
                 if (layerAllowed && candidate.IsAlive &&
-                    candidate.Faction != enemyOf && distance <= closestDistance)
+                    candidate.Faction != enemyOf &&
+                    (excludedTargetIds == null || !excludedTargetIds.Contains(candidateId)) &&
+                    distance <= closestDistance)
                 {
                     closest = candidate;
                     closestDistance = distance;

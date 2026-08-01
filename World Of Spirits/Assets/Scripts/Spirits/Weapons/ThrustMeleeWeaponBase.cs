@@ -55,11 +55,16 @@ namespace WorldOfSpirits.Spirits
         [SerializeField] private Color activeHitboxGizmoColor = new Color(1f, 0.15f, 0.1f, 0.9f);
 
         private readonly List<IDamageable> targetBuffer = new List<IDamageable>(16);
+        private readonly List<Collider2D> colliderBuffer = new List<Collider2D>(16);
         private readonly HashSet<int> hitTargets = new HashSet<int>();
         private SpiritMember spiritOwner;
         private Renderer[] gauntletRenderers;
+        private Collider2D leftGauntletHitbox;
+        private Collider2D rightGauntletHitbox;
         private Transform fallbackLeftGauntlet;
         private Transform fallbackRightGauntlet;
+        private Vector3 fallbackLeftScale;
+        private Vector3 fallbackRightScale;
         private Transform primaryWeaponSlot;
         private Transform secondaryWeaponSlot;
         private GameObject pooledVisualPrefab;
@@ -92,6 +97,8 @@ namespace WorldOfSpirits.Spirits
             upgradeStats = GetComponentInParent<UpgradeRuntimeStats>();
             fallbackLeftGauntlet = leftGauntlet;
             fallbackRightGauntlet = rightGauntlet;
+            fallbackLeftScale = leftGauntlet != null ? leftGauntlet.localScale : Vector3.one;
+            fallbackRightScale = rightGauntlet != null ? rightGauntlet.localScale : Vector3.one;
             CacheRenderers();
 
             WeaponLevelData firstLevel =
@@ -108,6 +115,7 @@ namespace WorldOfSpirits.Spirits
 
         protected override void Update()
         {
+            ApplyWeaponSize();
             UpdateGauntletAnimation();
             if (phase == PunchPhase.Idle)
             {
@@ -217,6 +225,9 @@ namespace WorldOfSpirits.Spirits
                     gauntletRenderers[i].enabled = active;
                 }
             }
+
+            if (leftGauntletHitbox != null) leftGauntletHitbox.enabled = active;
+            if (rightGauntletHitbox != null) rightGauntletHitbox.enabled = active;
         }
 
         public void SetCombatActive(bool active)
@@ -312,12 +323,9 @@ namespace WorldOfSpirits.Spirits
             }
 
             float activeHitRadius =
-                ActiveLevel != null ? ActiveLevel.hitRadius : hitRadius;
-            CombatTargeting.FindAllNonAlloc(
-                position,
-                activeHitRadius,
-                Faction.Player,
-                targetBuffer);
+                (ActiveLevel != null ? ActiveLevel.hitRadius : hitRadius) *
+                (upgradeStats != null ? upgradeStats.GetMultiplier(UpgradeStat.ProjectileSize) : 1f);
+            PopulatePunchTargets(position, activeHitRadius);
 
             for (int i = 0;
                  i < targetBuffer.Count && targetsHit < targetLimit;
@@ -337,11 +345,18 @@ namespace WorldOfSpirits.Spirits
                     ? ActiveLevel.damage
                     : baseDamage *
                       (1f + damageIncreasePerLevel * Mathf.Max(0, level - 1));
-                if (upgradeStats != null) damage = upgradeStats.ScaleWeaponDamage(damage);
-                target.TakeDamage(damage);
+                DamageContext damageContext = DamageContext.Weapon(
+                    damage,
+                    spiritOwner != null ? spiritOwner.transform : transform,
+                    DamageElementUtility.FromSpiritName(
+                        spiritOwner != null && spiritOwner.Definition != null
+                            ? spiritOwner.Definition.SpiritName
+                            : string.Empty));
+                target.TakeDamage(damageContext);
                 float activeStatusDuration = ActiveLevel != null
                     ? ActiveLevel.statusDuration
                     : freezeDuration;
+                if (upgradeStats != null) activeStatusDuration = upgradeStats.ScaleDuration(activeStatusDuration);
                 CombatStatus activeStatus = ActiveLevel != null
                     ? ActiveLevel.status
                     : CombatStatus.Freeze;
@@ -351,10 +366,45 @@ namespace WorldOfSpirits.Spirits
                     statusReceiver.ApplyStatus(
                         activeStatus,
                         activeStatusDuration,
-                        1f);
+                        1f,
+                        damageContext);
                 }
                 targetsHit++;
                 OnTargetHit(target, level);
+            }
+        }
+
+        private void PopulatePunchTargets(Vector2 fallbackPosition, float fallbackRadius)
+        {
+            Collider2D activeHitbox = activeGauntlet == leftGauntlet
+                ? leftGauntletHitbox
+                : rightGauntletHitbox;
+            if (activeHitbox == null || !activeHitbox.enabled)
+            {
+                CombatTargeting.FindAllNonAlloc(
+                    fallbackPosition,
+                    fallbackRadius,
+                    Faction.Player,
+                    targetBuffer);
+                return;
+            }
+
+            targetBuffer.Clear();
+            colliderBuffer.Clear();
+            Physics2D.SyncTransforms();
+            Physics2D.OverlapCollider(
+                activeHitbox,
+                ContactFilter2D.noFilter,
+                colliderBuffer);
+
+            for (int i = 0; i < colliderBuffer.Count; i++)
+            {
+                Collider2D overlap = colliderBuffer[i];
+                IDamageable target = overlap != null
+                    ? overlap.GetComponentInParent<IDamageable>()
+                    : null;
+                if (target != null && target.IsAlive && target.Faction != Faction.Player)
+                    targetBuffer.Add(target);
             }
         }
 
@@ -491,6 +541,12 @@ namespace WorldOfSpirits.Spirits
                 leftGauntlet != null ? leftGauntlet.GetComponent<Renderer>() : null,
                 rightGauntlet != null ? rightGauntlet.GetComponent<Renderer>() : null
             };
+            leftGauntletHitbox = leftGauntlet != null
+                ? leftGauntlet.GetComponentInChildren<Collider2D>(true)
+                : null;
+            rightGauntletHitbox = rightGauntlet != null
+                ? rightGauntlet.GetComponentInChildren<Collider2D>(true)
+                : null;
         }
 
 #if UNITY_EDITOR
@@ -527,6 +583,23 @@ namespace WorldOfSpirits.Spirits
                 Gizmos.color = activeHitboxGizmoColor;
                 Gizmos.DrawSphere(activeGauntlet.position, radius);
             }
+        }
+
+        private void ApplyWeaponSize()
+        {
+            float multiplier = upgradeStats != null
+                ? upgradeStats.GetMultiplier(UpgradeStat.ProjectileSize)
+                : 1f;
+            Vector3 pooledScale = pooledVisualPrefab != null
+                ? pooledVisualPrefab.transform.localScale
+                : Vector3.one;
+
+            if (leftGauntlet != null)
+                leftGauntlet.localScale =
+                    (leftGauntlet == fallbackLeftGauntlet ? fallbackLeftScale : pooledScale) * multiplier;
+            if (rightGauntlet != null)
+                rightGauntlet.localScale =
+                    (rightGauntlet == fallbackRightGauntlet ? fallbackRightScale : pooledScale) * multiplier;
         }
 
         protected virtual void OnValidate()

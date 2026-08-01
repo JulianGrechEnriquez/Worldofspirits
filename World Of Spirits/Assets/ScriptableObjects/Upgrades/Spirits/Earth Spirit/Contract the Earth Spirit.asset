@@ -22,10 +22,8 @@ MonoBehaviour:
   category: 3
   rarity: 2
   maximumLevel: 1
-  minimumPlayerLevel: 4
-  baseWeight: 18
+  baseWeight: 50.2
   repeatableAfterMaximum: 0
-  requirements: []
   targetSpirit: {fileID: 11400000, guid: 05b10d0c749a3ff4baede037d772ab78, type: 2}
   abilityIndex: -1
   spiritPrefab: {fileID: 2147099322828026053, guid: 84dbd4f20c7c83343809f64508989aca, type: 3}

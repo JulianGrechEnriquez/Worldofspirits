@@ -8,7 +8,7 @@ using WorldOfSpirits.Progression;
 namespace WorldOfSpirits.Enemies
 {
     [RequireComponent(typeof(Rigidbody2D), typeof(Collider2D))]
-    public abstract class BossEnemyBase : LivingEntity
+    public abstract class BossEnemyBase : LivingEntity, IRewardSource, IEnemyClassification
     {
         [Header("Boss Target")]
         [SerializeField] private Transform target;
@@ -21,6 +21,9 @@ namespace WorldOfSpirits.Enemies
         protected Rigidbody2D Body { get; private set; }
         protected Transform Target => target;
         public override Faction Faction => global::WorldOfSpirits.Combat.Faction.Enemy;
+        public float ExperienceReward => experienceReward;
+        public bool IsElite => false;
+        public bool IsBoss => true;
         private static PlayerCharacter cachedPlayer;
 
         protected override void Awake()

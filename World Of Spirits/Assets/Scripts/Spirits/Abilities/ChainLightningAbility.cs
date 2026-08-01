@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using WorldOfSpirits.Combat;
 using WorldOfSpirits.Core;
+using WorldOfSpirits.Progression.Upgrades;
 
 namespace WorldOfSpirits.Spirits
 {
@@ -27,7 +28,7 @@ namespace WorldOfSpirits.Spirits
             {
                 IDamageable target = FindNext(currentPosition, hit);
                 if (target == null) break;
-                target.TakeDamage(damage.Evaluate(CurrentLevel));
+                target.TakeDamage(CreateSpiritDamage(damage.Evaluate(CurrentLevel)));
                 DrawArc(currentPosition, target.Transform.position);
                 hit.Add(target.Transform);
                 currentPosition = target.Transform.position;
@@ -37,9 +38,11 @@ namespace WorldOfSpirits.Spirits
         private IDamageable FindNext(Vector3 position, HashSet<Transform> hit)
         {
             IDamageable closest = null;
-            float distance = jumpRange.Evaluate(CurrentLevel) * jumpRange.Evaluate(CurrentLevel);
+            float range = jumpRange.Evaluate(CurrentLevel) *
+                (UpgradeStats != null ? UpgradeStats.GetMultiplier(UpgradeStat.AreaSize) : 1f);
+            float distance = range * range;
             CombatTargeting.FindAllNonAlloc(
-                position, jumpRange.Evaluate(CurrentLevel), Faction.Player, targetBuffer);
+                position, range, Faction.Player, targetBuffer);
             foreach (IDamageable candidate in targetBuffer)
             {
                 float candidateDistance = (candidate.Transform.position - position).sqrMagnitude;

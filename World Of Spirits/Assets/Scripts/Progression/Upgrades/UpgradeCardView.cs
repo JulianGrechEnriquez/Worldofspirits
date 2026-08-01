@@ -28,10 +28,25 @@ namespace WorldOfSpirits.Progression.Upgrades
         {
             manager = owner;
             offerIndex = index;
+            if (button != null) button.interactable = true;
             if (titleText != null) titleText.text = card.CardName;
             if (descriptionText != null) descriptionText.text = card.Description;
             if (rarityText != null) rarityText.text = card.Rarity.ToString();
             if (levelText != null) levelText.text = $"Level {currentLevel + 1}/{card.MaximumLevel}";
+            if (icon != null) { icon.sprite = card.Icon; icon.enabled = card.Icon != null; }
+            if (border != null) border.color = RarityColor(card.Rarity);
+            gameObject.SetActive(true);
+        }
+
+        public void BindDisplay(UpgradeCardDefinition card, int currentLevel)
+        {
+            manager = null;
+            offerIndex = -1;
+            if (button != null) button.interactable = false;
+            if (titleText != null) titleText.text = card.CardName;
+            if (descriptionText != null) descriptionText.text = card.Description;
+            if (rarityText != null) rarityText.text = card.Rarity.ToString();
+            if (levelText != null) levelText.text = $"Level {currentLevel}/{card.MaximumLevel}";
             if (icon != null) { icon.sprite = card.Icon; icon.enabled = card.Icon != null; }
             if (border != null) border.color = RarityColor(card.Rarity);
             gameObject.SetActive(true);

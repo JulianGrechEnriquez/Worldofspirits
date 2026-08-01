@@ -1,5 +1,6 @@
 using UnityEngine;
 using WorldOfSpirits.Combat;
+using WorldOfSpirits.Progression.Upgrades;
 
 namespace WorldOfSpirits.Spirits
 {
@@ -18,18 +19,25 @@ namespace WorldOfSpirits.Spirits
 
         protected override void Cast(SpiritAbilityContext context)
         {
-            float effectRadius = radius.Evaluate(CurrentLevel);
+            float effectRadius = radius.Evaluate(CurrentLevel) *
+                (UpgradeStats != null ? UpgradeStats.GetMultiplier(UpgradeStat.AreaSize) : 1f);
             float effectDamage = damage.Evaluate(CurrentLevel);
-            float effectForce = force.Evaluate(CurrentLevel);
-            float effectStatusDuration = statusDuration.Evaluate(CurrentLevel);
+            float effectForce = UpgradeStats != null
+                ? UpgradeStats.ScaleForce(force.Evaluate(CurrentLevel))
+                : force.Evaluate(CurrentLevel);
+            float effectStatusDuration = UpgradeStats != null
+                ? UpgradeStats.ScaleDuration(statusDuration.Evaluate(CurrentLevel))
+                : statusDuration.Evaluate(CurrentLevel);
             float effectStatusStrength = statusStrength.Evaluate(CurrentLevel);
             CombatTargeting.FindAllNonAlloc(transform.position, effectRadius, Faction.Player, targets);
             foreach (IDamageable target in targets)
             {
-                target.TakeDamage(effectDamage);
+                DamageContext damageContext = CreateSpiritDamage(effectDamage);
+                target.TakeDamage(damageContext);
                 if (appliesStatus && target is IStatusEffectReceiver receiver)
                 {
-                    receiver.ApplyStatus(status, effectStatusDuration, effectStatusStrength);
+                    receiver.ApplyStatus(
+                        status, effectStatusDuration, effectStatusStrength, damageContext);
                 }
                 Rigidbody2D body = target.Transform.GetComponent<Rigidbody2D>();
                 if (body != null && effectForce > 0f)

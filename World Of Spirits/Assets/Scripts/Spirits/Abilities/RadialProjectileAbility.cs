@@ -1,5 +1,6 @@
 using UnityEngine;
 using WorldOfSpirits.Combat;
+using WorldOfSpirits.Progression.Upgrades;
 
 namespace WorldOfSpirits.Spirits
 {
@@ -17,14 +18,20 @@ namespace WorldOfSpirits.Spirits
 
         protected override void Cast(SpiritAbilityContext context)
         {
-            float angleStep = 360f / projectileCount;
-            for (int i = 0; i < projectileCount; i++)
+            int count = UpgradeStats != null ? UpgradeStats.GetProjectileCount(projectileCount) : projectileCount;
+            float angleStep = 360f / count;
+            float speed = projectileSpeed *
+                (UpgradeStats != null ? UpgradeStats.GetMultiplier(UpgradeStat.ProjectileSpeed) : 1f);
+            DamageContext damageContext = CreateSpiritDamage(damage);
+            for (int i = 0; i < count; i++)
             {
                 float angle = angleStep * i * Mathf.Deg2Rad;
                 Vector2 direction = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
                 ProjectileBase projectile = ProjectilePool.Spawn(
                     projectilePrefab, transform.position, Quaternion.identity);
-                projectile.Launch(direction, projectileSpeed, damage, Faction.Player);
+                projectile.ConfigureUpgradeModifiers(UpgradeStats);
+                projectile.ConfigureDamageContext(damageContext);
+                projectile.Launch(direction, speed, damageContext.BaseDamage, Faction.Player);
             }
         }
     }

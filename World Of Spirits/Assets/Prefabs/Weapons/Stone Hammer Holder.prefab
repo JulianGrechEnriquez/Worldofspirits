@@ -45,6 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WorldOfSpirits.Spirits.DataDrivenWeapon
   definition: {fileID: 11400000, guid: f37f920ae17f9694091b1c980a8cfb94, type: 2}
+  projectileVisualRotationOffset: -45
+  fireFromVisualPoint: 0
   hitCooldownPerEnemy: 0.45
   drawHitboxes: 1
   orbitGizmoColor: {r: 1, g: 0.8, b: 0.15, a: 0.8}

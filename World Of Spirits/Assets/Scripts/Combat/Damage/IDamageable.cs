@@ -1,12 +1,8 @@
-using UnityEngine;
-
 namespace WorldOfSpirits.Combat
 {
-    public interface IDamageable
+    public interface IDamageable : ITargetable
     {
-        Faction Faction { get; }
-        bool IsAlive { get; }
-        Transform Transform { get; }
         void TakeDamage(float amount);
+        void TakeDamage(DamageContext context);
     }
 }

@@ -7,7 +7,7 @@ using WorldOfSpirits.Progression;
 namespace WorldOfSpirits.Enemies
 {
     [RequireComponent(typeof(Rigidbody2D), typeof(Collider2D))]
-    public abstract class EnemyBase : LivingEntity
+    public abstract class EnemyBase : LivingEntity, IRewardSource, IEnemyClassification
     {
         [Header("Targeting")]
         [SerializeField] private Transform target;
@@ -23,6 +23,9 @@ namespace WorldOfSpirits.Enemies
         protected Rigidbody2D Body { get; private set; }
         protected Transform Target => target;
         public override Faction Faction => global::WorldOfSpirits.Combat.Faction.Enemy;
+        public bool IsElite { get; private set; }
+        public bool IsBoss { get; private set; }
+        public float ExperienceReward => experienceReward;
         private float nextMovementRefresh;
         private bool externalMovement;
         private static Player.PlayerCharacter cachedPlayer;
@@ -39,7 +42,6 @@ namespace WorldOfSpirits.Enemies
         protected override void Awake()
         {
             base.Awake();
-            Died += AwardExperience;
             Body = GetComponent<Rigidbody2D>();
             Body.gravityScale = 0f;
             Body.freezeRotation = true;
@@ -76,10 +78,10 @@ namespace WorldOfSpirits.Enemies
 
         protected abstract void MoveTowardsTarget();
 
-        private void AwardExperience()
+        public void ConfigureClassification(bool isElite, bool isBoss)
         {
-            if (experienceReward <= 0f) return;
-            ExperienceOrbService.Spawn(transform.position, experienceReward);
+            IsElite = isElite;
+            IsBoss = isBoss;
         }
 
         public override void OnSpawnedFromPool(GameObject prefab)

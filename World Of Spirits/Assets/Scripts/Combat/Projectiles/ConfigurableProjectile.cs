@@ -21,6 +21,7 @@ namespace WorldOfSpirits.Combat
         private int remainingPierces;
         private int remainingBounces;
         private Vector3 initialScale;
+        private float activeExplosionRadius;
 
         protected override void Awake()
         {
@@ -31,8 +32,9 @@ namespace WorldOfSpirits.Combat
         public override void Launch(Vector2 direction, float projectileSpeed, float damage, Faction ownerFaction)
         {
             hitTargets.Clear();
-            remainingPierces = pierceCount;
-            remainingBounces = bounceCount;
+            remainingPierces = pierceCount + UpgradePierceCount;
+            remainingBounces = bounceCount + UpgradeRicochetCount;
+            activeExplosionRadius = explosionRadius * UpgradeAreaMultiplier;
             transform.localScale = initialScale;
             base.Launch(direction, projectileSpeed, damage, ownerFaction);
         }
@@ -87,23 +89,27 @@ namespace WorldOfSpirits.Combat
                 return;
             }
 
-            if (explosionRadius > 0f)
+            if (activeExplosionRadius > 0f)
             {
                 CombatTargeting.FindAllNonAlloc(
-                    transform.position, explosionRadius, OwnerFaction, targetBuffer);
+                    transform.position, activeExplosionRadius, OwnerFaction, targetBuffer);
                 foreach (IDamageable nearbyTarget in targetBuffer)
                 {
-                    nearbyTarget.TakeDamage(Damage);
+                    nearbyTarget.TakeDamage(DamageSourceContext);
                 }
             }
             else
             {
-                target.TakeDamage(Damage);
+                target.TakeDamage(DamageSourceContext);
             }
 
             if (appliesStatus && target is IStatusEffectReceiver receiver)
             {
-                receiver.ApplyStatus(status, statusDuration, statusStrength);
+                receiver.ApplyStatus(
+                    status,
+                    statusDuration * UpgradeDurationMultiplier,
+                    statusStrength,
+                    DamageSourceContext);
             }
 
             if (remainingBounces > 0)

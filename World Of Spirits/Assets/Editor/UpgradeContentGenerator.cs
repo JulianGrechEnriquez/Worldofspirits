@@ -131,7 +131,6 @@ namespace WorldOfSpirits.EditorTools
             so.FindProperty("category").enumValueIndex = (int)category;
             so.FindProperty("rarity").enumValueIndex = (int)rarity;
             so.FindProperty("maximumLevel").intValue = Mathf.Max(1, max);
-            so.FindProperty("minimumPlayerLevel").intValue = Mathf.Max(1, minimumLevel);
             so.FindProperty("baseWeight").floatValue = weight;
             so.FindProperty("targetSpirit").objectReferenceValue = spirit;
             so.FindProperty("abilityIndex").intValue = ability;

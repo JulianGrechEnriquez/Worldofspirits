@@ -23,6 +23,6 @@ MonoBehaviour:
   runtimeWeapon: {fileID: 11400000, guid: f37f920ae17f9694091b1c980a8cfb94, type: 2}
   abilities: []
   runtimeAbilities:
-  - {fileID: 11400000, guid: 182c93e18b2aa3849a9e192142de44c2, type: 2}
   - {fileID: 11400000, guid: 67dfbcb6d2ee509499d12f9afc01964a, type: 2}
+  - {fileID: 11400000, guid: 182c93e18b2aa3849a9e192142de44c2, type: 2}
   - {fileID: 11400000, guid: 4b2d79ac995de4d489dbbd9c13ecffd4, type: 2}

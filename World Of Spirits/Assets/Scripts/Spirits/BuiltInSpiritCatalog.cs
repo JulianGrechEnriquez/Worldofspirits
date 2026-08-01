@@ -27,8 +27,8 @@ namespace WorldOfSpirits.Spirits
                 Ability("Fiery Talons", "Leaves a trail of fire behind the player.", "Larger trail", "Longer duration", "More damage", "Trail spreads to nearby enemies", "Burning enemies explode"),
                 Ability("Phoenix Dive", "A flaming phoenix dives through enemies.", "More damage", "Multiple dives", "Leaves fire zones", "Larger area", "Revives once per run"));
             Add(definitions, "Earth", "Golem", "Stone Hammer",
-                Ability("Quicksand Domain", "Slows enemies around the player.", "Bigger radius", "Stronger slow", "Damage over time", "Pulls enemies inward", "Immobilizes elites briefly"),
                 Ability("Boulder Throw", "Throws bouncing boulders.", "More bounces", "More damage", "Splits into smaller rocks", "Stuns enemies", "Explodes on final bounce"),
+                Ability("Quicksand Domain", "Slows enemies around the player.", "Bigger radius", "Stronger slow", "Damage over time", "Pulls enemies inward", "Immobilizes elites briefly"),
                 Ability("Stone Spikes", "Stone pillars erupt from the ground.", "More spikes", "Larger spikes", "Faster spawn rate", "Bleed effect", "Chain eruptions"));
             Add(definitions, "Water", "Leviathan", "Water Trident",
                 Ability("Tidal Wave", "A wave crashes outward, knocking enemies back.", "Fires a wave in front of the player", "Fires an additional wave behind the player", "Waves become wider", "Fires waves to the left and right"),

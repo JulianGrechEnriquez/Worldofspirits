@@ -9,3 +9,20 @@ World Of Spirits/[Oo]bj/
 World Of Spirits/[Ll]ogs/
 World Of Spirits/[Uu]ser[Ss]ettings/
 
+# Unity and IDE-generated project files.
+World Of Spirits/.vs/
+World Of Spirits/*.csproj
+World Of Spirits/*.sln
+World Of Spirits/*.suo
+
+# Local and exported player builds.
+World Of Spirits/[Bb]uild/
+World Of Spirits/[Bb]uilds/
+World Of Spirits/BulidTestPeformance/
+
+# Local profiling captures can be very large.
+World Of Spirits/ProfilerCaptures/
+
+# Local AI assistant and agent configuration.
+World Of Spirits/.agents/
+World Of Spirits/.codex/

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using WorldOfSpirits.Spirits;
+using WorldOfSpirits.Core;
 
 namespace WorldOfSpirits.Progression.Upgrades
 {
@@ -16,7 +17,6 @@ namespace WorldOfSpirits.Progression.Upgrades
 
         [Header("Choice Rules")]
         [SerializeField, Range(1, 5)] private int choicesPerLevel = 3;
-        [SerializeField, Min(1)] private int previousAbilityInvestmentToUnlockNext = 2;
         [SerializeField, Min(1)] private int rarePityAfterLevels = 5;
         [SerializeField, Min(1)] private int epicPityAfterLevels = 12;
         [Tooltip("Makes an already-started ability path more likely to return.")]
@@ -57,7 +57,7 @@ namespace WorldOfSpirits.Progression.Upgrades
         private void OnLevelGained(int newLevel)
         {
             pendingSelections++;
-            if (!selectionOpen) CreateChoices(newLevel);
+            if (!selectionOpen) CreateChoices();
         }
 
         public bool Choose(int offerIndex)
@@ -70,7 +70,7 @@ namespace WorldOfSpirits.Progression.Upgrades
             UpdatePity(selected.Rarity);
 
             if (pendingSelections > 0)
-                CreateChoices(levelSystem != null ? levelSystem.Level : 1);
+                CreateChoices();
             else
             {
                 selectionOpen = false;
@@ -86,10 +86,10 @@ namespace WorldOfSpirits.Progression.Upgrades
         {
             if (selectionOpen) return;
             pendingSelections++;
-            CreateChoices(levelSystem != null ? levelSystem.Level : 1);
+            CreateChoices();
         }
 
-        private void CreateChoices(int playerLevel)
+        private void CreateChoices()
         {
             candidates.Clear();
             candidateWeights.Clear();
@@ -100,7 +100,7 @@ namespace WorldOfSpirits.Progression.Upgrades
             for (int i = 0; i < allCards.Count; i++)
             {
                 UpgradeCardDefinition card = allCards[i];
-                if (!IsEligible(card, playerLevel)) continue;
+                if (!IsEligible(card)) continue;
                 candidates.Add(card);
                 candidateWeights.Add(CalculateWeight(card));
             }
@@ -111,19 +111,18 @@ namespace WorldOfSpirits.Progression.Upgrades
 
             selectionOpen = true;
             previousTimeScale = Time.timeScale;
-            Time.timeScale = 0f;
+            if (GameManager.Instance != null)
+                GameManager.Instance.SetState(GameState.LevelUp);
+            else
+                Time.timeScale = 0f;
             ChoicesReady?.Invoke(offers);
         }
 
-        private bool IsEligible(UpgradeCardDefinition card, int playerLevel)
+        private bool IsEligible(UpgradeCardDefinition card)
         {
-            if (card == null || card.BaseWeight <= 0f || playerLevel < card.MinimumPlayerLevel) return false;
+            if (card == null || card.BaseWeight <= 0f) return false;
             int level = runtimeStats.GetCardLevel(card.Id);
             if (level >= card.MaximumLevel && !card.RepeatableAfterMaximum) return false;
-
-            IReadOnlyList<UpgradeRequirement> requirements = card.Requirements;
-            for (int i = 0; i < requirements.Count; i++)
-                if (runtimeStats.GetCardLevel(requirements[i].cardId) < requirements[i].requiredLevel) return false;
 
             if (card.Category == UpgradeCategory.SpiritContract)
                 return spiritManager != null && spiritManager.HasOpenSpiritSlot &&
@@ -141,8 +140,6 @@ namespace WorldOfSpirits.Progression.Upgrades
             int abilityCount = spirit.Definition.RuntimeAbilities.Count > 0 ?
                 spirit.Definition.RuntimeAbilities.Count : spirit.Definition.Abilities.Count;
             if (abilityIndex < 0 || abilityIndex >= abilityCount) return false;
-            if (abilityIndex > 0 && spirit.Progression.GetAbilityLevel(abilityIndex) == 0 &&
-                spirit.Progression.GetAbilityLevel(abilityIndex - 1) < previousAbilityInvestmentToUnlockNext) return false;
             int max = spirit.Definition.RuntimeAbilities.Count > 0 ?
                 spirit.Definition.RuntimeAbilities[abilityIndex].MaxLevel : spirit.Definition.Abilities[abilityIndex].MaxLevel;
             return spirit.Progression.GetAbilityLevel(abilityIndex) < max;
@@ -195,14 +192,16 @@ namespace WorldOfSpirits.Progression.Upgrades
 
         private void RestoreTime()
         {
-            Time.timeScale = previousTimeScale;
+            if (GameManager.Instance != null && GameManager.Instance.CurrentState == GameState.LevelUp)
+                GameManager.Instance.ReturnToPreviousState();
+            else
+                Time.timeScale = previousTimeScale;
             selectionOpen = false;
         }
 
         private void OnValidate()
         {
             choicesPerLevel = Mathf.Clamp(choicesPerLevel, 1, 5);
-            previousAbilityInvestmentToUnlockNext = Mathf.Max(1, previousAbilityInvestmentToUnlockNext);
             rarePityAfterLevels = Mathf.Max(1, rarePityAfterLevels);
             epicPityAfterLevels = Mathf.Max(1, epicPityAfterLevels);
             focusedPathWeight = Mathf.Max(1f, focusedPathWeight);

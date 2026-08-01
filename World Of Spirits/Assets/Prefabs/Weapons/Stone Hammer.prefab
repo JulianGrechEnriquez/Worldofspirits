@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4536106046406149698}
   - component: {fileID: 7412867907011225314}
   - component: {fileID: -1253972535367977376}
+  - component: {fileID: 5767964286824997194}
   m_Layer: 0
   m_Name: Stone Hammer
   m_TagString: Untagged
@@ -105,7 +106,55 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WorldOfSpirits.Spirits.DataDrivenWeapon
   definition: {fileID: 11400000, guid: f37f920ae17f9694091b1c980a8cfb94, type: 2}
+  projectileVisualRotationOffset: -45
+  fireFromVisualPoint: 0
   hitCooldownPerEnemy: 0.45
   drawHitboxes: 1
   orbitGizmoColor: {r: 1, g: 0.8, b: 0.15, a: 0.8}
   hitboxGizmoColor: {r: 1, g: 0.15, b: 0.1, a: 0.9}
+--- !u!61 &5767964286824997194
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 757564496604831664}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0.08355188, y: 10.527634}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5026769, y: 0.079517335}
+    oldSize: {x: 7.15625, y: 13.53125}
+    newSize: {x: 4.58, y: 8.66}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 7.9756117, y: 4.6369553}
+  m_EdgeRadius: 0

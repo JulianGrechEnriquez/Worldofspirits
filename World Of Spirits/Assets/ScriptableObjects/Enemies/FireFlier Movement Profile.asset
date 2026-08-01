@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c14d7b9a23e841a49f0a001c950ad103, type: 3}
   m_Name: FireFlier Movement Profile
   m_EditorClassIdentifier: Assembly-CSharp::WorldOfSpirits.Crowd.EnemyMovementProfile
-  movementSpeed: 5.5
-  acceleration: 18
+  movementSpeed: 8
+  acceleration: 28
   stoppingDistance: 0.25
   collisionRadius: 0.33
   separationRadius: 0.7260001
@@ -38,7 +38,7 @@ MonoBehaviour:
   nearDistance: 8
   mediumDistance: 18
   farDistance: 35
-  dormantSpeedMultiplier: 0.75
+  dormantSpeedMultiplier: 0.9
   dormantMovementStepInterval: 4
   repositionDistance: 70
   repositionRadius: 18

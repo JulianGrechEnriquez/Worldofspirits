@@ -1,4 +1,5 @@
 using UnityEngine;
+using WorldOfSpirits.Combat;
 using WorldOfSpirits.Progression.Upgrades;
 
 namespace WorldOfSpirits.Spirits
@@ -53,6 +54,14 @@ namespace WorldOfSpirits.Spirits
         protected virtual float GetCooldown() => ScaleCooldown(cooldown);
         protected float ScaleCooldown(float value) => value /
             (UpgradeStats != null ? UpgradeStats.GetMultiplier(UpgradeStat.CooldownReduction) : 1f);
+        protected DamageElement DamageElement => DamageElementUtility.FromSpiritName(
+            OwnerSpirit != null && OwnerSpirit.Definition != null
+                ? OwnerSpirit.Definition.SpiritName
+                : string.Empty);
+        protected DamageContext CreateSpiritDamage(float baseDamage) => DamageContext.Spirit(
+            baseDamage,
+            OwnerSpirit != null ? OwnerSpirit.transform : transform,
+            DamageElement);
         protected virtual bool CanCast(SpiritAbilityContext context) => true;
         protected abstract void Cast(SpiritAbilityContext context);
     }

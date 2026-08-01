@@ -93,12 +93,35 @@ namespace WorldOfSpirits.Combat
 
             Transform spawnPoint = ActiveFirePoint;
             Vector2 direction = targetPosition - spawnPoint.position;
-            ProjectileBase projectile = ProjectilePool.Spawn(projectilePrefab, spawnPoint.position, Quaternion.identity);
             int weaponLevel = spiritOwner != null ? spiritOwner.Progression.WeaponLevel : 1;
             float scaledDamage = damage * (1f + damageIncreasePerWeaponLevel * Mathf.Max(0, weaponLevel - 1));
-            if (upgradeStats != null) scaledDamage = upgradeStats.ScaleWeaponDamage(scaledDamage);
+            DamageContext damageContext = DamageContext.Weapon(
+                scaledDamage,
+                owner != null ? owner.transform : transform,
+                DamageElementUtility.FromSpiritName(
+                    spiritOwner != null && spiritOwner.Definition != null
+                        ? spiritOwner.Definition.SpiritName
+                        : string.Empty));
             float speed = projectileSpeed * (upgradeStats != null ? upgradeStats.GetMultiplier(UpgradeStat.ProjectileSpeed) : 1f);
-            projectile.Launch(direction, speed, scaledDamage, owner.Faction);
+            int projectileCount = upgradeStats != null ? upgradeStats.GetProjectileCount(1) : 1;
+            for (int i = 0; i < projectileCount; i++)
+            {
+                Vector2 shotDirection = SpreadDirection(direction, i, projectileCount, 12f);
+                ProjectileBase projectile = ProjectilePool.Spawn(
+                    projectilePrefab, spawnPoint.position, Quaternion.identity);
+                projectile.ConfigureUpgradeModifiers(upgradeStats);
+                projectile.ConfigureDamageContext(damageContext);
+                projectile.Launch(shotDirection, speed, scaledDamage, owner.Faction);
+            }
+        }
+
+        private static Vector2 SpreadDirection(Vector2 center, int index, int count, float spread)
+        {
+            if (count <= 1) return center.normalized;
+            float centerAngle = Mathf.Atan2(center.y, center.x) * Mathf.Rad2Deg;
+            float angle = centerAngle - spread * 0.5f + spread * index / (count - 1);
+            float radians = angle * Mathf.Deg2Rad;
+            return new Vector2(Mathf.Cos(radians), Mathf.Sin(radians));
         }
 
         public void SetFirePointOverride(Transform overridePoint)

@@ -12,20 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef4b4a2100beabc4d9dbab206fe54156, type: 3}
   m_Name: Boulder Throw
   m_EditorClassIdentifier: Assembly-CSharp::WorldOfSpirits.Progression.Upgrades.UpgradeCardDefinition
-  cardId: ability_earth_spirit_1
+  cardId: ability_earth_spirit_0
   cardName: Boulder Throw
-  description: Unlocks or improves this advanced spirit ability.
+  description: Improves this spirit's starting ability.
   flavorText: 
   icon: {fileID: 0}
   suggestedIconTheme: Elemental ability glyph
   category: 2
-  rarity: 1
+  rarity: 0
   maximumLevel: 5
-  minimumPlayerLevel: 6
+  minimumPlayerLevel: 2
   baseWeight: 100
   repeatableAfterMaximum: 0
   requirements: []
   targetSpirit: {fileID: 11400000, guid: 05b10d0c749a3ff4baede037d772ab78, type: 2}
-  abilityIndex: 1
+  abilityIndex: 0
   spiritPrefab: {fileID: 0}
   modifiers: []

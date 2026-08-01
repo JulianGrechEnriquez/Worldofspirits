@@ -1,6 +1,7 @@
 using UnityEngine;
 using WorldOfSpirits.Combat;
 using WorldOfSpirits.Core;
+using WorldOfSpirits.Progression.Upgrades;
 
 namespace WorldOfSpirits.Spirits
 {
@@ -32,9 +33,19 @@ namespace WorldOfSpirits.Spirits
                 GameObject spawned = SceneObjectPool.Spawn(
                     effectPrefab, ResolvePosition(context), Quaternion.identity,
                     PoolCategory.FloorEffects);
-                if (spawned.GetComponent<PersistentDamageZone>() == null)
+                PersistentDamageZone zone = spawned.GetComponent<PersistentDamageZone>();
+                if (zone != null)
                 {
-                    SceneObjectPool.ReleaseAfter(spawned, effectLifetime);
+                    zone.SetOwner(context.Player);
+                    zone.ConfigureUpgradeModifiers(UpgradeStats);
+                    zone.ConfigureDamageSource(CreateSpiritDamage(0f));
+                }
+                else
+                {
+                    float lifetime = UpgradeStats != null
+                        ? UpgradeStats.ScaleDuration(effectLifetime)
+                        : effectLifetime;
+                    SceneObjectPool.ReleaseAfter(spawned, lifetime);
                 }
             }
         }
@@ -50,7 +61,9 @@ namespace WorldOfSpirits.Spirits
             }
             if (spawnPosition == EffectSpawnPosition.RandomAroundPlayer)
             {
-                return playerPosition + (Vector3)(Random.insideUnitCircle * spawnRadius.Evaluate(CurrentLevel));
+                float radius = spawnRadius.Evaluate(CurrentLevel) *
+                    (UpgradeStats != null ? UpgradeStats.GetMultiplier(UpgradeStat.AreaSize) : 1f);
+                return playerPosition + (Vector3)(Random.insideUnitCircle * radius);
             }
             return transform.position;
         }

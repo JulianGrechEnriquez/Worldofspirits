@@ -60,6 +60,32 @@ namespace WorldOfSpirits.UI
             }
         }
 
+        public void UnlockAllSpiritsForTesting()
+        {
+            for (int i = 0; i < availableSpiritPrefabs.Count; i++)
+            {
+                GameObject prefab = availableSpiritPrefabs[i];
+                SpiritMember member = prefab != null ? prefab.GetComponent<SpiritMember>() : null;
+                if (member != null) SpiritUnlockProgress.Unlock(member.Definition);
+            }
+
+            BuildUnlockedCards();
+        }
+
+        public void ResetSpiritUnlocksForTesting()
+        {
+            for (int i = 0; i < availableSpiritPrefabs.Count; i++)
+            {
+                GameObject prefab = availableSpiritPrefabs[i];
+                SpiritMember member = prefab != null ? prefab.GetComponent<SpiritMember>() : null;
+                if (member != null) SpiritUnlockProgress.Forget(member.Definition);
+            }
+
+            EnsureDefaultUnlocked();
+            PlayerPrefs.Save();
+            BuildUnlockedCards();
+        }
+
         private void ChooseStarter(GameObject prefab)
         {
             if (!selectionOpen || !spiritManager.TryAddSpirit(prefab)) return;

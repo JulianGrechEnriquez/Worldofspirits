@@ -83,9 +83,9 @@ namespace WorldOfSpirits.EditorTools
                 hammer.transform.localPosition = Vector3.zero;
             }
 
-            GameObject quicksandObject = GetOrCreateChild(root, "Ability 1 - Quicksand Domain");
+            GameObject quicksandObject = GetOrCreateChild(root, "Ability 2 - Quicksand Domain");
             AreaPulseAbility quicksand = GetOrAdd<AreaPulseAbility>(quicksandObject);
-            ConfigureAbility(quicksand, 0, 1f);
+            ConfigureAbility(quicksand, 1, 1f);
             SerializedObject quicksandData = new SerializedObject(quicksand);
             quicksandData.FindProperty("pullInward").boolValue = true;
             quicksandData.FindProperty("appliesStatus").boolValue = true;
@@ -97,7 +97,7 @@ namespace WorldOfSpirits.EditorTools
             SetFloatScaling(quicksandData, "statusStrength", 0.25f, 0.1f);
             quicksandData.ApplyModifiedPropertiesWithoutUndo();
 
-            ConfigurePlaceholder<ProjectilePatternAbility>(root, "Ability 2 - Boulder Throw (Needs Boulder Projectile)", 1, 2f);
+            ConfigurePlaceholder<ProjectilePatternAbility>(root, "Ability 1 - Boulder Throw (Needs Boulder Projectile)", 0, 2f);
             ConfigurePlaceholder<SpawnEffectAbility>(root, "Ability 3 - Stone Spikes (Needs Spike Prefab)", 2, 2.5f);
             PrefabUtility.SaveAsPrefabAsset(root, EarthPrefabPath);
             PrefabUtility.UnloadPrefabContents(root);

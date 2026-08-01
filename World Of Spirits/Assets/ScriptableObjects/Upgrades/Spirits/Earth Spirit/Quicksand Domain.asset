@@ -12,20 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef4b4a2100beabc4d9dbab206fe54156, type: 3}
   m_Name: Quicksand Domain
   m_EditorClassIdentifier: Assembly-CSharp::WorldOfSpirits.Progression.Upgrades.UpgradeCardDefinition
-  cardId: ability_earth_spirit_0
+  cardId: ability_earth_spirit_1
   cardName: Quicksand Domain
-  description: Improves this spirit's first ability.
+  description: Unlocks or improves this advanced spirit ability.
   flavorText: 
   icon: {fileID: 0}
   suggestedIconTheme: Elemental ability glyph
   category: 2
-  rarity: 0
+  rarity: 1
   maximumLevel: 5
-  minimumPlayerLevel: 2
+  minimumPlayerLevel: 6
   baseWeight: 100
   repeatableAfterMaximum: 0
   requirements: []
   targetSpirit: {fileID: 11400000, guid: 05b10d0c749a3ff4baede037d772ab78, type: 2}
-  abilityIndex: 0
+  abilityIndex: 1
   spiritPrefab: {fileID: 0}
   modifiers: []

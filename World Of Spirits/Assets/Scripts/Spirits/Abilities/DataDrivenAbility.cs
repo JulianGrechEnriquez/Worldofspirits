@@ -55,7 +55,8 @@ namespace WorldOfSpirits.Spirits
             }
 
             EnsureOrbiting(ActiveLevel);
-            float radius = ActiveLevel.orbitRadius;
+            float radius = ActiveLevel.orbitRadius *
+                (UpgradeStats != null ? UpgradeStats.GetMultiplier(UpgradeStat.AreaSize) : 1f);
             float angleOffset = Time.time * ActiveLevel.orbitSpeed;
             for (int i = 0; i < orbitingObjects.Count; i++)
             {
@@ -95,13 +96,16 @@ namespace WorldOfSpirits.Spirits
                 {
                     zone.SetReusable(true);
                     zone.SetOwner(context.Player);
+                    zone.ConfigureUpgradeModifiers(UpgradeStats);
+                    zone.ConfigureDamageSource(CreateSpiritDamage(0f));
                 }
             }
 
             followingArea.transform.SetParent(context.Player, false);
             followingArea.transform.localPosition = Vector3.zero;
             followingArea.SetActive(true);
-            followingAreaDisableTime = Time.time + Mathf.Max(0.05f, level.activeDuration);
+            followingAreaDisableTime = Time.time + Mathf.Max(0.05f,
+                UpgradeStats != null ? UpgradeStats.ScaleDuration(level.activeDuration) : level.activeDuration);
         }
 
         private void CastProjectiles(SpiritAbilityContext context, AbilityLevelData level)
@@ -123,18 +127,17 @@ namespace WorldOfSpirits.Spirits
                 ProjectileBase projectile = ProjectilePool.Spawn(
                     data.projectilePrefab, transform.position, Quaternion.identity);
                 projectile.ConfigureHoming(data.homeOnEnemies, data.homingStrength, data.homingRange);
+                projectile.ConfigureUpgradeModifiers(UpgradeStats);
+                DamageContext damage = CreateSpiritDamage(data.damage);
+                projectile.ConfigureDamageContext(damage);
                 if (projectile is ConfigurableProjectile configurable)
                 {
-                    int pierce = data.pierceCount + (UpgradeStats != null ? Mathf.RoundToInt(UpgradeStats.GetFlat(UpgradeStat.Pierce)) : 0);
-                    int bounce = data.bounceCount + (UpgradeStats != null ? Mathf.RoundToInt(UpgradeStats.GetFlat(UpgradeStat.Ricochet)) : 0);
-                    float area = data.explosionRadius * (UpgradeStats != null ? UpgradeStats.GetMultiplier(UpgradeStat.AreaSize) : 1f);
-                    configurable.Configure(pierce, area, data.growthPerSecond,
+                    configurable.Configure(data.pierceCount, data.explosionRadius, data.growthPerSecond,
                         data.appliesStatus, data.status, data.statusDuration, data.statusStrength,
-                        bounce, data.bounceRange);
+                        data.bounceCount, data.bounceRange);
                 }
                 float speed = data.speed * (UpgradeStats != null ? UpgradeStats.GetMultiplier(UpgradeStat.ProjectileSpeed) : 1f);
-                float damage = UpgradeStats != null ? UpgradeStats.ScaleSpiritDamage(data.damage) : data.damage;
-                projectile.Launch(direction, speed, damage, Faction.Player);
+                projectile.Launch(direction, speed, damage.BaseDamage, Faction.Player);
             }
         }
 
@@ -156,8 +159,14 @@ namespace WorldOfSpirits.Spirits
                     level.spawnedEffectPrefab, position, Quaternion.identity,
                     PoolCategory.FloorEffects);
                 PersistentDamageZone zone = spawned.GetComponent<PersistentDamageZone>();
-                if (zone != null) zone.SetOwner(context.Player);
-                else SceneObjectPool.ReleaseAfter(spawned, Mathf.Max(0.1f, level.activeDuration));
+                if (zone != null)
+                {
+                    zone.SetOwner(context.Player);
+                    zone.ConfigureUpgradeModifiers(UpgradeStats);
+                    zone.ConfigureDamageSource(CreateSpiritDamage(0f));
+                }
+                else SceneObjectPool.ReleaseAfter(spawned, Mathf.Max(0.1f,
+                    UpgradeStats != null ? UpgradeStats.ScaleDuration(level.activeDuration) : level.activeDuration));
             }
         }
 
@@ -166,11 +175,24 @@ namespace WorldOfSpirits.Spirits
             GameObject prefab = level.spawnedEffectPrefab;
             if (prefab == null) return;
             orbitingObjects.RemoveAll(item => item == null);
-            while (orbitingObjects.Count < Mathf.Max(1, level.spawnCount))
-                orbitingObjects.Add(SceneObjectPool.Spawn(
+            int desiredCount = UpgradeStats != null
+                ? UpgradeStats.GetProjectileCount(Mathf.Max(1, level.spawnCount))
+                : Mathf.Max(1, level.spawnCount);
+            while (orbitingObjects.Count < desiredCount)
+            {
+                Transform spawned = SceneObjectPool.Spawn(
                     prefab, transform.position, Quaternion.identity,
-                    PoolCategory.Effects, transform).transform);
-            while (orbitingObjects.Count > Mathf.Max(1, level.spawnCount))
+                    PoolCategory.Effects, transform).transform;
+                PersistentDamageZone zone = spawned.GetComponent<PersistentDamageZone>();
+                if (zone != null)
+                {
+                    zone.SetOwner(transform);
+                    zone.ConfigureUpgradeModifiers(UpgradeStats);
+                    zone.ConfigureDamageSource(CreateSpiritDamage(0f));
+                }
+                orbitingObjects.Add(spawned);
+            }
+            while (orbitingObjects.Count > desiredCount)
             {
                 Transform item = orbitingObjects[orbitingObjects.Count - 1];
                 orbitingObjects.RemoveAt(orbitingObjects.Count - 1);
@@ -219,15 +241,24 @@ namespace WorldOfSpirits.Spirits
                 switch (effect.effectType)
                 {
                     case AbilityEffectType.Damage:
-                        damageable?.TakeDamage(UpgradeStats != null ? UpgradeStats.ScaleSpiritDamage(effect.value) : effect.value);
+                        damageable?.TakeDamage(CreateSpiritDamage(effect.value));
                         break;
                     case AbilityEffectType.ApplyStatus:
-                        if (damageable is IStatusEffectReceiver receiver) receiver.ApplyStatus(effect.status, effect.duration, effect.value);
+                        if (damageable is IStatusEffectReceiver receiver) receiver.ApplyStatus(
+                            effect.status,
+                            UpgradeStats != null ? UpgradeStats.ScaleDuration(effect.duration) : effect.duration,
+                            effect.value,
+                            CreateSpiritDamage(effect.value));
                         break;
-                    case AbilityEffectType.Pull: ApplyForce(target, transform.position - target.position, effect.value); break;
-                    case AbilityEffectType.Knockback: ApplyForce(target, target.position - transform.position, effect.value); break;
-                    case AbilityEffectType.Heal: living?.Heal(effect.value); break;
-                    case AbilityEffectType.Shield: living?.AddShield(effect.value, effect.duration); break;
+                    case AbilityEffectType.Pull: ApplyForce(target, transform.position - target.position,
+                        UpgradeStats != null ? UpgradeStats.ScaleForce(effect.value) : effect.value); break;
+                    case AbilityEffectType.Knockback: ApplyForce(target, target.position - transform.position,
+                        UpgradeStats != null ? UpgradeStats.ScaleForce(effect.value) : effect.value); break;
+                    case AbilityEffectType.Heal: living?.Heal(
+                        UpgradeStats != null ? UpgradeStats.ScaleHealing(effect.value) : effect.value); break;
+                    case AbilityEffectType.Shield: living?.AddShield(
+                        UpgradeStats != null ? UpgradeStats.ScaleShield(effect.value) : effect.value,
+                        UpgradeStats != null ? UpgradeStats.ScaleDuration(effect.duration) : effect.duration); break;
                     case AbilityEffectType.GrantRevive: living?.GrantRevive(Mathf.Max(1, Mathf.RoundToInt(effect.value))); break;
                     case AbilityEffectType.SpawnEffect:
                         if (effect.effectPrefab != null)
@@ -236,7 +267,8 @@ namespace WorldOfSpirits.Spirits
                                 effect.effectPrefab, target.position, Quaternion.identity,
                                 PoolCategory.FloorEffects);
                             SceneObjectPool.ReleaseAfter(
-                                spawnedEffect, Mathf.Max(0.1f, effect.duration));
+                                spawnedEffect, Mathf.Max(0.1f,
+                                    UpgradeStats != null ? UpgradeStats.ScaleDuration(effect.duration) : effect.duration));
                         }
                         break;
                 }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using WorldOfSpirits.Combat;
 using WorldOfSpirits.Player;
 using WorldOfSpirits.Spirits;
 using WorldOfSpirits.Progression;
@@ -8,7 +9,7 @@ using WorldOfSpirits.Progression;
 namespace WorldOfSpirits.Progression.Upgrades
 {
     [DisallowMultipleComponent]
-    public sealed class UpgradeRuntimeStats : MonoBehaviour
+    public sealed class UpgradeRuntimeStats : MonoBehaviour, IUpgradeable
     {
         private readonly Dictionary<string, int> cardLevels = new Dictionary<string, int>(64);
         private readonly float[] additive = new float[(int)UpgradeStat.Count];
@@ -103,17 +104,68 @@ namespace WorldOfSpirits.Progression.Upgrades
             return chance > 0f && UnityEngine.Random.value < chance;
         }
 
-        public float ScaleWeaponDamage(float baseDamage)
+        public int GetProjectileCount(int baseCount) =>
+            Mathf.Max(1, baseCount + Mathf.RoundToInt(GetFlat(UpgradeStat.MultiShot)));
+
+        public float ScaleDuration(float baseDuration) =>
+            baseDuration * GetMultiplier(UpgradeStat.Duration);
+
+        public float ScaleArea(float baseArea) =>
+            baseArea * GetMultiplier(UpgradeStat.AreaSize);
+
+        public float ScaleForce(float baseForce) =>
+            baseForce * GetMultiplier(UpgradeStat.Knockback);
+
+        public float ScaleHealing(float baseHealing) =>
+            baseHealing * GetMultiplier(UpgradeStat.HealingPower);
+
+        public float ScaleShield(float baseShield) =>
+            baseShield * GetMultiplier(UpgradeStat.ShieldGeneration);
+
+        public float ScaleWeaponDamage(float baseDamage, IDamageable target = null)
         {
-            float result = baseDamage * GetMultiplier(UpgradeStat.AttackDamage);
-            return RollCritical(result);
+            float result = baseDamage * GetMultiplier(UpgradeStat.AttackDamage) *
+                GetMultiplier(UpgradeStat.ElementalDamage);
+            return ScaleDamageAgainstTarget(RollCritical(result), target);
         }
 
-        public float ScaleSpiritDamage(float baseDamage)
+        public float ResolveDamage(DamageContext context, IDamageable target)
         {
-            float result = baseDamage * GetMultiplier(UpgradeStat.SpiritDamage) *
+            float result = context.BaseDamage;
+            if (context.IsWeaponDamage || context.IsSpiritDamage)
+                result *= GetMultiplier(UpgradeStat.AttackDamage);
+            if (context.IsSpiritDamage)
+                result *= GetMultiplier(UpgradeStat.SpiritDamage);
+            if (context.Element != DamageElement.Physical)
+                result *= GetMultiplier(UpgradeStat.ElementalDamage);
+            if (context.CanCritical)
+                result = RollCritical(result);
+            return ScaleDamageAgainstTarget(result, target);
+        }
+
+        public float ScaleSpiritDamage(float baseDamage, IDamageable target = null)
+        {
+            float result = baseDamage * GetMultiplier(UpgradeStat.AttackDamage) *
+                GetMultiplier(UpgradeStat.SpiritDamage) *
                 GetMultiplier(UpgradeStat.ElementalDamage);
-            return RollCritical(result);
+            return ScaleDamageAgainstTarget(RollCritical(result), target);
+        }
+
+        public float ScaleDamageAgainstTarget(float damage, IDamageable target)
+        {
+            if (target == null || damage <= 0f) return damage;
+
+            float result = damage;
+            if (target is IEnemyClassification enemy && enemy.IsElite)
+                result *= GetMultiplier(UpgradeStat.EliteDamage);
+
+            if (target is LivingEntity living && living.MaxHealth > 0f &&
+                living.CurrentHealth / living.MaxHealth <= GetFlat(UpgradeStat.ExecuteThreshold))
+            {
+                result = Mathf.Max(result, living.CurrentHealth + living.CurrentShield);
+            }
+
+            return result;
         }
 
         private float RollCritical(float damage)

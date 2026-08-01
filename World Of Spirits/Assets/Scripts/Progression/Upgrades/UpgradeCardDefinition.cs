@@ -19,10 +19,8 @@ namespace WorldOfSpirits.Progression.Upgrades
         [SerializeField] private UpgradeCategory category;
         [SerializeField] private UpgradeRarity rarity;
         [Min(1), SerializeField] private int maximumLevel = 1;
-        [Min(0), SerializeField] private int minimumPlayerLevel = 1;
         [Min(0f), SerializeField] private float baseWeight = 100f;
         [SerializeField] private bool repeatableAfterMaximum;
-        [SerializeField] private List<UpgradeRequirement> requirements = new List<UpgradeRequirement>();
 
         [Header("Target (optional)")]
         [SerializeField] private SpiritDefinition targetSpirit;
@@ -42,19 +40,16 @@ namespace WorldOfSpirits.Progression.Upgrades
         public UpgradeCategory Category => category;
         public UpgradeRarity Rarity => rarity;
         public int MaximumLevel => Mathf.Max(1, maximumLevel);
-        public int MinimumPlayerLevel => Mathf.Max(1, minimumPlayerLevel);
         public float BaseWeight => Mathf.Max(0f, baseWeight);
         public bool RepeatableAfterMaximum => repeatableAfterMaximum;
         public SpiritDefinition TargetSpirit => targetSpirit;
         public int AbilityIndex => abilityIndex;
         public GameObject SpiritPrefab => spiritPrefab;
         public IReadOnlyList<UpgradeModifier> Modifiers => modifiers;
-        public IReadOnlyList<UpgradeRequirement> Requirements => requirements;
 
         private void OnValidate()
         {
             maximumLevel = Mathf.Max(1, maximumLevel);
-            minimumPlayerLevel = Mathf.Max(1, minimumPlayerLevel);
             baseWeight = Mathf.Max(0f, baseWeight);
             abilityIndex = Mathf.Max(-1, abilityIndex);
             if (string.IsNullOrWhiteSpace(cardId)) cardId = name.Trim().ToLowerInvariant().Replace(' ', '_');

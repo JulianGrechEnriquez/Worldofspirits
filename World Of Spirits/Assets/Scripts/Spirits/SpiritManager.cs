@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -35,6 +36,11 @@ namespace WorldOfSpirits.Spirits
         public int SpiritCapacity => slots.Count;
         public bool PlayerIsMoving => playerMovement != null && playerMovement.IsMoving;
         public bool IsChangingFormation => isChangingFormation;
+        public event Action<SpiritMember> SpiritContracted;
+        public event Action<SpiritMember> SpiritRotated;
+
+        public SpiritMember GetSpiritAt(int index) =>
+            index >= 0 && index < spirits.Count ? spirits[index] : null;
 
         public SpiritMember FindSpirit(SpiritDefinition definition)
         {
@@ -95,6 +101,7 @@ namespace WorldOfSpirits.Spirits
             }
 
             spirits.Add(member);
+            SpiritContracted?.Invoke(member);
             Debug.Log($"Added {requestedName} to spirit slot {spirits.Count}.", this);
             return true;
         }
@@ -203,6 +210,7 @@ namespace WorldOfSpirits.Spirits
             }
 
             isChangingFormation = false;
+            SpiritRotated?.Invoke(PrimarySpirit);
         }
 
         private float PlayFormationAnimation(bool remerging)

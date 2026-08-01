@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using WorldOfSpirits.Combat;
 
@@ -32,9 +33,22 @@ namespace WorldOfSpirits.Spirits
 
         public SpiritDefinition Definition => definition;
         public SpiritProgression Progression => progression;
+        public event Action<SpiritMember, int> WeaponLeveled;
+        public event Action<SpiritMember, int, int> AbilityLeveled;
 
-        public bool TryLevelWeapon() => progression.TryLevelWeapon(definition);
-        public bool TryLevelAbility(int abilityIndex) => progression.TryLevelAbility(definition, abilityIndex);
+        public bool TryLevelWeapon()
+        {
+            if (!progression.TryLevelWeapon(definition)) return false;
+            WeaponLeveled?.Invoke(this, progression.WeaponLevel);
+            return true;
+        }
+
+        public bool TryLevelAbility(int abilityIndex)
+        {
+            if (!progression.TryLevelAbility(definition, abilityIndex)) return false;
+            AbilityLeveled?.Invoke(this, abilityIndex, progression.GetAbilityLevel(abilityIndex));
+            return true;
+        }
 
         public void ApplyState(
             Transform player,

@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using UnityEngine;
+using WorldOfSpirits.Progression.Upgrades;
 
 namespace WorldOfSpirits.Combat
 {
@@ -29,13 +31,25 @@ namespace WorldOfSpirits.Combat
         private float despawnTime;
         private float nextHomingTargetRefresh;
         private IDamageable homingTarget;
+        private readonly HashSet<int> homingIgnoredTargets = new HashSet<int>();
         private ProjectileBase poolPrefab;
+        private Vector3 authoredScale;
+        private float lifetimeMultiplier = 1f;
+        private float projectileScaleMultiplier = 1f;
+        private DamageContext damageContext;
+        private bool hasConfiguredDamageContext;
+        protected UpgradeRuntimeStats UpgradeStats { get; private set; }
+        protected int UpgradePierceCount { get; private set; }
+        protected int UpgradeRicochetCount { get; private set; }
+        protected float UpgradeDurationMultiplier { get; private set; } = 1f;
+        protected float UpgradeAreaMultiplier { get; private set; } = 1f;
 
         protected virtual void Awake()
         {
             Body = GetComponent<Rigidbody2D>();
             Body.gravityScale = 0f;
             GetComponent<Collider2D>().isTrigger = true;
+            authoredScale = transform.localScale;
         }
 
         public virtual void Launch(Vector2 direction, float speed, float damage, Faction ownerFaction)
@@ -47,11 +61,14 @@ namespace WorldOfSpirits.Combat
             }
 
             Damage = damage;
+            if (!hasConfiguredDamageContext) damageContext = new DamageContext(damage);
             OwnerFaction = ownerFaction;
             launchSpeed = speed;
-            despawnTime = Time.time + lifetime;
+            despawnTime = Time.time + lifetime * lifetimeMultiplier;
             nextHomingTargetRefresh = Time.time;
             homingTarget = null;
+            homingIgnoredTargets.Clear();
+            transform.localScale = authoredScale * projectileScaleMultiplier;
             Vector2 normalizedDirection = direction.normalized;
 
             FaceDirection(normalizedDirection);
@@ -71,6 +88,18 @@ namespace WorldOfSpirits.Combat
             homingStrength = prefab.homingStrength;
             homingRange = prefab.homingRange;
             homingTargetRefreshInterval = prefab.homingTargetRefreshInterval;
+            authoredScale = prefab.transform.localScale;
+            transform.localScale = authoredScale;
+            UpgradeStats = null;
+            UpgradePierceCount = 0;
+            UpgradeRicochetCount = 0;
+            UpgradeDurationMultiplier = 1f;
+            UpgradeAreaMultiplier = 1f;
+            homingIgnoredTargets.Clear();
+            lifetimeMultiplier = 1f;
+            projectileScaleMultiplier = 1f;
+            damageContext = default;
+            hasConfiguredDamageContext = false;
             ResetPooledConfiguration(prefab);
         }
 
@@ -80,6 +109,7 @@ namespace WorldOfSpirits.Combat
         {
             Body.linearVelocity = Vector2.zero;
             homingTarget = null;
+            homingIgnoredTargets.Clear();
             if (poolPrefab != null)
             {
                 ProjectilePool.Release(this, poolPrefab);
@@ -96,6 +126,33 @@ namespace WorldOfSpirits.Combat
             homingStrength = Mathf.Max(0f, strength);
             homingRange = Mathf.Max(0.1f, range);
         }
+
+        public void ConfigureUpgradeModifiers(UpgradeRuntimeStats stats)
+        {
+            UpgradeStats = stats;
+            if (stats == null) return;
+
+            UpgradePierceCount = Mathf.Max(0, Mathf.RoundToInt(stats.GetFlat(UpgradeStat.Pierce)));
+            UpgradeRicochetCount = Mathf.Max(0, Mathf.RoundToInt(stats.GetFlat(UpgradeStat.Ricochet)));
+            UpgradeDurationMultiplier = stats.GetMultiplier(UpgradeStat.Duration);
+            UpgradeAreaMultiplier = stats.GetMultiplier(UpgradeStat.AreaSize);
+            lifetimeMultiplier = UpgradeDurationMultiplier;
+            projectileScaleMultiplier = stats.GetMultiplier(UpgradeStat.ProjectileSize);
+            transform.localScale = authoredScale * projectileScaleMultiplier;
+
+            if (homeOnEnemies)
+                homingStrength *= stats.GetMultiplier(UpgradeStat.Homing);
+        }
+
+        public void ConfigureDamageContext(DamageContext context)
+        {
+            damageContext = context;
+            hasConfiguredDamageContext = true;
+        }
+
+        protected DamageContext DamageSourceContext => damageContext;
+        protected float GetDamageAgainst(IDamageable target) =>
+            DamageResolver.Calculate(damageContext, target);
 
         protected void Redirect(Vector2 direction)
         {
@@ -124,7 +181,12 @@ namespace WorldOfSpirits.Combat
 
             if (Time.time >= nextHomingTargetRefresh)
             {
-                homingTarget = CombatTargeting.FindClosest(transform.position, homingRange, OwnerFaction);
+                homingTarget = CombatTargeting.FindClosest(
+                    transform.position,
+                    homingRange,
+                    OwnerFaction,
+                    ~0,
+                    homingIgnoredTargets);
                 nextHomingTargetRefresh = Time.time + homingTargetRefreshInterval;
             }
 
@@ -163,6 +225,16 @@ namespace WorldOfSpirits.Combat
             {
                 Debug.Log($"[{name}] Hit {target.Transform.name} for {Damage:0.##} damage.", this);
             }
+
+            // A piercing homing projectile must not turn back into an enemy it
+            // already passed through. Force an immediate search for another target.
+            homingIgnoredTargets.Add(target.Transform.gameObject.GetInstanceID());
+            if (homingTarget == target ||
+                (homingTarget != null && homingTarget.Transform == target.Transform))
+            {
+                homingTarget = null;
+            }
+            nextHomingTargetRefresh = Time.time;
 
             OnHit(target);
         }

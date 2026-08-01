@@ -6,7 +6,7 @@ using WorldOfSpirits.Core;
 
 namespace WorldOfSpirits.Combat
 {
-    public abstract class LivingEntity : MonoBehaviour, IDamageable, IStatusEffectReceiver, IScenePoolable
+    public abstract class LivingEntity : MonoBehaviour, IDamageable, IHealable, IStatusEffectReceiver, IScenePoolable
     {
         private static readonly List<LivingEntity> activeEntities = new List<LivingEntity>(128);
         public static IReadOnlyList<LivingEntity> ActiveEntities => activeEntities;
@@ -30,6 +30,7 @@ namespace WorldOfSpirits.Combat
         private float statusStrength;
         private CombatStatus activeStatus;
         private float nextStatusDamageTime;
+        private DamageContext activeStatusDamage;
         private float currentShield;
         private float shieldEndTime;
         private int reviveCharges;
@@ -48,6 +49,7 @@ namespace WorldOfSpirits.Combat
 
         public event Action<float, float> HealthChanged;
         public event Action<float> Damaged;
+        public event Action<DamageContext, float> DamageReceived;
         public event Action Died;
 
         protected virtual void Awake()
@@ -83,20 +85,42 @@ namespace WorldOfSpirits.Combat
 
             if (activeStatus == CombatStatus.Burn || activeStatus == CombatStatus.Poison || activeStatus == CombatStatus.Bleed)
             {
-                TakeDamage(statusStrength);
+                TakeDamage(activeStatusDamage.WithBaseDamage(statusStrength));
                 nextStatusDamageTime = now + 0.5f;
             }
         }
 
         public void ApplyStatus(CombatStatus status, float duration, float strength)
         {
+            ApplyStatus(status, duration, strength, new DamageContext(
+                strength, null, DamageElementUtility.FromStatus(status), false, true));
+        }
+
+        public void ApplyStatus(
+            CombatStatus status,
+            float duration,
+            float strength,
+            DamageContext sourceDamage)
+        {
             activeStatus = status;
             statusEndTime = Mathf.Max(statusEndTime, Time.time + Mathf.Max(0f, duration));
             statusStrength = Mathf.Max(0f, strength);
             nextStatusDamageTime = Time.time;
+            activeStatusDamage = sourceDamage.AsStatus(
+                strength, DamageElementUtility.FromStatus(status));
         }
 
         public virtual void TakeDamage(float amount)
+        {
+            TakeDamage(new DamageContext(amount));
+        }
+
+        public virtual void TakeDamage(DamageContext context)
+        {
+            ApplyResolvedDamage(DamageResolver.Calculate(context, this), context);
+        }
+
+        protected void ApplyResolvedDamage(float amount, DamageContext context)
         {
             if (!IsAlive || amount <= 0f)
             {
@@ -116,6 +140,7 @@ namespace WorldOfSpirits.Combat
 
             currentHealth = Mathf.Max(0f, currentHealth - amount);
             Damaged?.Invoke(amount);
+            DamageReceived?.Invoke(context, amount);
             HealthChanged?.Invoke(currentHealth, maxHealth);
             PlayHitFlash();
 
@@ -194,6 +219,7 @@ namespace WorldOfSpirits.Combat
             statusStrength = 0f;
             nextStatusDamageTime = 0f;
             activeStatus = default;
+            activeStatusDamage = default;
             if (spriteRenderers == null)
             {
                 CacheSpriteColors();

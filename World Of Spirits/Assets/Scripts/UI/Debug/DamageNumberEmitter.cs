@@ -24,6 +24,7 @@ namespace WorldOfSpirits.UI
         private float pendingDamage;
         private float displayPendingAt;
         private bool hasPendingDamage;
+        private Color pendingColor;
 
         private void Awake()
         {
@@ -37,21 +38,21 @@ namespace WorldOfSpirits.UI
                 entity = GetComponent<LivingEntity>();
             }
 
-            entity.Damaged += ShowDamage;
+            entity.DamageReceived += ShowDamage;
         }
 
         private void OnDisable()
         {
             if (entity != null)
             {
-                entity.Damaged -= ShowDamage;
+                entity.DamageReceived -= ShowDamage;
             }
 
             pendingDamage = 0f;
             hasPendingDamage = false;
         }
 
-        private void ShowDamage(float amount)
+        private void ShowDamage(DamageContext context, float amount)
         {
             if (amount <= 0f)
             {
@@ -59,6 +60,7 @@ namespace WorldOfSpirits.UI
             }
 
             pendingDamage += amount;
+            pendingColor = ResolveColor(context);
             if (!hasPendingDamage)
             {
                 hasPendingDamage = true;
@@ -106,7 +108,24 @@ namespace WorldOfSpirits.UI
             numberObject.transform.position = transform.position + worldOffset + randomOffset;
             numberObject.SetActive(true);
             activeCount++;
-            number.Initialize(amount, damageColor, duration, riseSpeed, fontSize, ReturnToPool);
+            number.Initialize(amount, pendingColor, duration, riseSpeed, fontSize, ReturnToPool);
+        }
+
+        private Color ResolveColor(DamageContext context)
+        {
+            if (context.IsStatusDamage) return new Color(0.75f, 0.35f, 1f, 1f);
+            return context.Element switch
+            {
+                DamageElement.Fire => new Color(1f, 0.35f, 0.08f, 1f),
+                DamageElement.Ice => new Color(0.35f, 0.85f, 1f, 1f),
+                DamageElement.Earth => new Color(0.65f, 0.45f, 0.2f, 1f),
+                DamageElement.Lightning => new Color(1f, 0.9f, 0.2f, 1f),
+                DamageElement.Poison => new Color(0.4f, 1f, 0.25f, 1f),
+                DamageElement.Water => new Color(0.2f, 0.55f, 1f, 1f),
+                DamageElement.Wind => new Color(0.65f, 1f, 0.75f, 1f),
+                DamageElement.Holy => new Color(1f, 0.95f, 0.6f, 1f),
+                _ => damageColor
+            };
         }
 
         private static void ReturnToPool(DamageNumber number)

@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Serialization;
 using WorldOfSpirits.Combat;
+using WorldOfSpirits.Progression.Upgrades;
 
 namespace WorldOfSpirits.Spirits
 {
@@ -47,7 +48,8 @@ namespace WorldOfSpirits.Spirits
 
         protected override void Cast(SpiritAbilityContext context)
         {
-            int count = Mathf.Max(1, projectileCount.Evaluate(CurrentLevel));
+            int baseCount = Mathf.Max(1, projectileCount.Evaluate(CurrentLevel));
+            int count = UpgradeStats != null ? UpgradeStats.GetProjectileCount(baseCount) : baseCount;
             Vector2 forward = FindDirection(context);
             switch (pattern)
             {
@@ -55,17 +57,20 @@ namespace WorldOfSpirits.Spirits
                     SpawnArc(Vector2.right, count, 360f, true);
                     break;
                 case ProjectilePattern.ForwardAndBackward:
-                    Spawn(forward);
-                    Spawn(-forward);
+                    SpawnArc(forward, 2 + GetBonusProjectiles(), 360f, true);
                     break;
                 case ProjectilePattern.FourDirections:
-                    Spawn(Vector2.up); Spawn(Vector2.down); Spawn(Vector2.left); Spawn(Vector2.right);
+                    SpawnArc(Vector2.right, 4 + GetBonusProjectiles(), 360f, true);
                     break;
                 default:
                     SpawnArc(forward, count, spreadAngle, false);
                     break;
             }
         }
+
+        private int GetBonusProjectiles() => UpgradeStats != null
+            ? Mathf.Max(0, Mathf.RoundToInt(UpgradeStats.GetFlat(UpgradeStat.MultiShot)))
+            : 0;
 
         private Vector2 FindDirection(SpiritAbilityContext context)
         {
@@ -98,7 +103,12 @@ namespace WorldOfSpirits.Spirits
             ProjectileBase projectile = ProjectilePool.Spawn(
                 projectilePrefab, transform.position, Quaternion.identity);
             projectile.ConfigureHoming(homeOnEnemies, homingStrength, homingRange);
-            projectile.Launch(direction, speed.Evaluate(CurrentLevel), damage.Evaluate(CurrentLevel), Faction.Player);
+            projectile.ConfigureUpgradeModifiers(UpgradeStats);
+            DamageContext damageContext = CreateSpiritDamage(damage.Evaluate(CurrentLevel));
+            projectile.ConfigureDamageContext(damageContext);
+            float projectileSpeed = speed.Evaluate(CurrentLevel) *
+                (UpgradeStats != null ? UpgradeStats.GetMultiplier(UpgradeStat.ProjectileSpeed) : 1f);
+            projectile.Launch(direction, projectileSpeed, damageContext.BaseDamage, Faction.Player);
         }
     }
 }

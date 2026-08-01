@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using WorldOfSpirits.Combat;
 using WorldOfSpirits.Progression.Upgrades;
@@ -14,6 +15,8 @@ namespace WorldOfSpirits.Player
         private UpgradeRuntimeStats upgradeStats;
 
         public override Faction Faction => global::WorldOfSpirits.Combat.Faction.Player;
+        public event Action<float, float> PlayerHealthChanged;
+        public event Action PlayerDied;
 
         protected override void Awake()
         {
@@ -22,12 +25,38 @@ namespace WorldOfSpirits.Player
             upgradeStats = GetComponent<UpgradeRuntimeStats>();
         }
 
+        protected override void OnEnable()
+        {
+            base.OnEnable();
+            HealthChanged += HandleHealthChanged;
+            Died += HandlePlayerDied;
+        }
+
+        protected override void OnDisable()
+        {
+            HealthChanged -= HandleHealthChanged;
+            Died -= HandlePlayerDied;
+            base.OnDisable();
+        }
+
         public override void TakeDamage(float amount)
+        {
+            TakeDamage(new DamageContext(amount));
+        }
+
+        public override void TakeDamage(DamageContext context)
         {
             if (upgradeStats != null && upgradeStats.RollDodge()) return;
             float armor = upgradeStats != null ? upgradeStats.GetFlat(UpgradeStat.Armor) : 0f;
-            base.TakeDamage(amount * (100f / (100f + Mathf.Max(0f, armor))));
+            float amount = DamageResolver.Calculate(context, this) *
+                (100f / (100f + Mathf.Max(0f, armor)));
+            ApplyResolvedDamage(amount, context);
         }
+
+        private void HandleHealthChanged(float current, float maximum) =>
+            PlayerHealthChanged?.Invoke(current, maximum);
+
+        private void HandlePlayerDied() => PlayerDied?.Invoke();
 
         public bool TryTakeContactDamage(
             float damage,
