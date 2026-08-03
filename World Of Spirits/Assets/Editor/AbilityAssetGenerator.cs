@@ -136,7 +136,12 @@ namespace WorldOfSpirits.EditorTools
                 level.projectile.bounceCount = 2 + index;
                 level.projectile.bounceRange = 5f + index;
             }
-            if (spec.Name == "Frozen Orbs") level.spawnCount = index == 0 ? 2 : index < 3 ? 3 : 4;
+            if (spec.Name == "Orbital Snowball")
+            {
+                level.spawnCount = index == 0 ? 2 : index < 3 ? 3 : 4;
+                level.spawnedEffectPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(
+                    "Assets/Prefabs/Abilities/Orbital Snowball.prefab");
+            }
             if (spec.Name == "Acid Spray") level.projectile.spreadAngle = 45f + index * 12f;
 
             if (all.Contains("pierce")) level.projectile.pierceCount = 3;
@@ -145,8 +150,8 @@ namespace WorldOfSpirits.EditorTools
             if (all.Contains("poison")) { level.projectile.appliesStatus = true; level.projectile.status = CombatStatus.Poison; }
             if (all.Contains("larger") || all.Contains("wider")) level.areaRadius += 1f;
             if (all.Contains("two whirlpools") || all.Contains("two clouds") || all.Contains("two tornadoes")) level.spawnCount = 2;
-            if (all.Contains("3 orbs")) level.spawnCount = 3;
-            if (all.Contains("additional orb")) level.spawnCount = 4;
+            if (all.Contains("3 orbs") || all.Contains("3 snowballs")) level.spawnCount = 3;
+            if (all.Contains("additional orb") || all.Contains("additional snowball")) level.spawnCount = 4;
 
             AddDefaultEffects(spec, level, index);
             return level;
@@ -247,7 +252,7 @@ namespace WorldOfSpirits.EditorTools
             yield return new Spec("Water", "Rain Clouds", "Rain clouds follow enemies and damage them.", AbilityExecutionType.SpawnEffect, AbilityTargetingMode.ClosestEnemy, "One cloud", "Two clouds", "Increased rain damage", "Clouds move faster");
             yield return new Spec("Wind", "Razor Wind", "Wind blades shoot outward from the player.", AbilityExecutionType.Projectile, AbilityTargetingMode.AroundPlayer, "2 blades", "4 blades", "Increased projectile speed", "Blades pierce enemies");
             yield return new Spec("Wind", "Tornado", "Creates a moving tornado.", AbilityExecutionType.SpawnEffect, AbilityTargetingMode.RandomPositionNearPlayer, "One tornado", "Larger tornado", "Increased pull strength", "Two tornadoes");
-            yield return new Spec("Ice", "Frozen Orbs", "Ice orbs orbit around the player.", AbilityExecutionType.Orbiting, AbilityTargetingMode.AroundPlayer, "2 orbs", "3 orbs", "Increased rotation speed and freeze chance", "Additional orb");
+            yield return new Spec("Ice", "Orbital Snowball", "Snowballs orbit around the player and damage enemies they touch.", AbilityExecutionType.Orbiting, AbilityTargetingMode.AroundPlayer, "2 snowballs", "3 snowballs", "Increased rotation speed and freeze chance", "Additional snowball");
             yield return new Spec("Ice", "Avalanche", "Throws a snowball that grows as it travels.", AbilityExecutionType.Projectile, AbilityTargetingMode.ClosestEnemy, "Small snowball", "Faster growth", "Increased damage", "Freeze enemies hit");
             yield return new Spec("Ice", "Ice Crystal", "Spawns an ice crystal that grows then explodes.", AbilityExecutionType.SpawnEffect, AbilityTargetingMode.ClosestEnemy, "Small crystal", "Faster growth", "Increased damage", "Freeze enemies hit");
             yield return new Spec("Lightning", "Lightning Strike", "Lightning strikes random enemies.", AbilityExecutionType.SpawnEffect, AbilityTargetingMode.RandomEnemy, "3 strikes", "6 strikes", "Increased damage", "Small area of effect");

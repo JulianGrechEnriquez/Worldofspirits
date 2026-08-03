@@ -16,7 +16,7 @@ MonoBehaviour:
   cardName: Rain Clouds
   description: Unlocks or improves this advanced spirit ability.
   flavorText: 
-  icon: {fileID: 0}
+  icon: {fileID: -7216652912767289102, guid: 57fb155cdc4e5af45940d389e4d97a4b, type: 3}
   suggestedIconTheme: Elemental ability glyph
   category: 2
   rarity: 1

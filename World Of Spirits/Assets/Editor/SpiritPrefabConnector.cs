@@ -110,7 +110,7 @@ namespace WorldOfSpirits.EditorTools
 
             SpiritMember member = GetOrAdd<SpiritMember>(root);
             AssignDefinition(member, "Assets/ScriptableObjects/Spirits/Ice Spirit.asset");
-            ConfigurePlaceholder<OrbitingProjectileAbility>(root, "Ability 1 - Frozen Orbs (Needs Orb Prefab)", 0, 1f);
+            ConfigurePlaceholder<OrbitingProjectileAbility>(root, "Ability 1 - Orbital Snowball (Needs Snowball Prefab)", 0, 1f);
             ConfigurePlaceholder<ProjectilePatternAbility>(root, "Ability 2 - Avalanche (Needs Snowball Projectile)", 1, 2f);
             ConfigurePlaceholder<SpawnEffectAbility>(root, "Ability 3 - Ice Crystal (Needs Crystal Prefab)", 2, 3f);
             PrefabUtility.SaveAsPrefabAsset(root, IcePrefabPath);

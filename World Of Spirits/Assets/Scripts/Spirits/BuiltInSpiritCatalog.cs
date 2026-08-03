@@ -38,7 +38,7 @@ namespace WorldOfSpirits.Spirits
                 Ability("Razor Wind", "Wind blades shoot outward from the player.", "2 blades", "4 blades", "Increased projectile speed", "Blades pierce enemies"),
                 Ability("Tornado", "Creates a moving tornado.", "One tornado", "Larger tornado", "Increased pull strength", "Two tornadoes"));
             Add(definitions, "Ice", "Yeti", "Ice Gauntlets",
-                Ability("Frozen Orbs", "Ice orbs orbit around the player.", "2 orbs", "3 orbs", "Increased rotation speed and freeze chance", "Additional orb"),
+                Ability("Orbital Snowball", "Snowballs orbit around the player and damage enemies they touch.", "2 snowballs", "3 snowballs", "Increased rotation speed and freeze chance", "Additional snowball"),
                 Ability("Avalanche", "Throws a snowball that grows larger as it travels.", "Small snowball", "Faster growth", "Increased damage", "Freeze enemies hit"),
                 Ability("Ice Crystal", "Spawns an ice crystal that grows, then explodes.", "Small crystal", "Faster growth", "Increased damage", "Freeze enemies hit"));
             Add(definitions, "Lightning", "Thunder Dragon", "Lightning Spear",

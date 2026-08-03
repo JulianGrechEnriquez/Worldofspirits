@@ -15,6 +15,8 @@ namespace WorldOfSpirits.Spirits
 
         private float nextCastTime;
         protected UpgradeRuntimeStats UpgradeStats { get; private set; }
+        protected SpiritAbilityContext LatestContext { get; private set; }
+        protected bool HasContext { get; private set; }
 
         public int AbilityIndex => abilityIndex;
         protected SpiritMember OwnerSpirit { get; private set; }
@@ -28,6 +30,9 @@ namespace WorldOfSpirits.Spirits
 
         public void TickAbility(SpiritAbilityContext context)
         {
+            LatestContext = context;
+            HasContext = true;
+
             if (OwnerSpirit != null && !OwnerSpirit.Progression.IsAbilityUnlocked(abilityIndex))
             {
                 return;
@@ -52,6 +57,8 @@ namespace WorldOfSpirits.Spirits
         }
 
         protected virtual float GetCooldown() => ScaleCooldown(cooldown);
+        protected bool IsAbilityUnlocked => OwnerSpirit == null ||
+            OwnerSpirit.Progression.IsAbilityUnlocked(abilityIndex);
         protected float ScaleCooldown(float value) => value /
             (UpgradeStats != null ? UpgradeStats.GetMultiplier(UpgradeStat.CooldownReduction) : 1f);
         protected DamageElement DamageElement => DamageElementUtility.FromSpiritName(

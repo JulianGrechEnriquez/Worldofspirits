@@ -22,17 +22,17 @@ MonoBehaviour:
       effect: punches enemies
   runtimeWeapon: {fileID: 11400000, guid: f3c97ab2e8dd4cfd8b4afdb50eebc821, type: 2}
   abilities:
-  - abilityName: Frozen Orbs
-    description: Ice orbs orbit around the player.
+  - abilityName: Orbital Snowball
+    description: Snowballs orbit around the player and damage enemies they touch.
     levels:
     - level: 1
-      effect: Sumons 1 snow orb
+      effect: Summons 2 orbiting snowballs
     - level: 2
-      effect: Sumons 3 snow orb
+      effect: Summons 3 orbiting snowballs
     - level: 3
       effect: 'Increased rotation speed and Freeze chance. '
     - level: 4
-      effect: 'Additional orb. '
+      effect: Additional snowball
   runtimeAbilities:
   - {fileID: 11400000, guid: 1d90114f7f0810049992f0a59816ecdf, type: 2}
   - {fileID: 11400000, guid: e9e02eca65e6a4649bbc6d2897993e63, type: 2}

@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b3cbab6077d644e3ab79aa41b86d3405, type: 3}
-  m_Name: Ice - Frozen Orbs
+  m_Name: Ice - Orbital Snowball
   m_EditorClassIdentifier: Assembly-CSharp::WorldOfSpirits.Spirits.AbilityDefinition
-  abilityName: Frozen Orbs
-  description: Ice orbs orbit around the player.
+  abilityName: Orbital Snowball
+  description: Snowballs orbit around the player and damage enemies they touch.
   icon: {fileID: 0}
   executionType: 3
   targetingMode: 5
   levels:
   - level: 1
-    upgradeDescription: 2 orbs
+    upgradeDescription: 2 snowballs
     cooldown: 2
     targetingRange: 15
     projectile:
@@ -39,7 +39,7 @@ MonoBehaviour:
       status: 0
       statusDuration: 2
       statusStrength: 2
-    spawnedEffectPrefab: {fileID: 0}
+    spawnedEffectPrefab: {fileID: 100000, guid: 8f3b70d640c84bb49dcedaaab5a3a715, type: 3}
     spawnCount: 2
     areaRadius: 3
     orbitRadius: 1.5
@@ -48,7 +48,7 @@ MonoBehaviour:
     chainRange: 5
     effects: []
   - level: 2
-    upgradeDescription: 3 orbs
+    upgradeDescription: 3 snowballs
     cooldown: 1.88
     targetingRange: 15
     projectile:
@@ -68,7 +68,7 @@ MonoBehaviour:
       status: 0
       statusDuration: 2
       statusStrength: 2
-    spawnedEffectPrefab: {fileID: 0}
+    spawnedEffectPrefab: {fileID: 100000, guid: 8f3b70d640c84bb49dcedaaab5a3a715, type: 3}
     spawnCount: 3
     areaRadius: 3.5
     orbitRadius: 1.6
@@ -97,7 +97,7 @@ MonoBehaviour:
       status: 4
       statusDuration: 2
       statusStrength: 2
-    spawnedEffectPrefab: {fileID: 0}
+    spawnedEffectPrefab: {fileID: 100000, guid: 8f3b70d640c84bb49dcedaaab5a3a715, type: 3}
     spawnCount: 3
     areaRadius: 4
     orbitRadius: 1.7
@@ -106,7 +106,7 @@ MonoBehaviour:
     chainRange: 7
     effects: []
   - level: 4
-    upgradeDescription: Additional orb
+    upgradeDescription: Additional snowball
     cooldown: 1.64
     targetingRange: 15
     projectile:
@@ -126,7 +126,7 @@ MonoBehaviour:
       status: 4
       statusDuration: 2
       statusStrength: 2
-    spawnedEffectPrefab: {fileID: 0}
+    spawnedEffectPrefab: {fileID: 100000, guid: 8f3b70d640c84bb49dcedaaab5a3a715, type: 3}
     spawnCount: 4
     areaRadius: 4.5
     orbitRadius: 1.8

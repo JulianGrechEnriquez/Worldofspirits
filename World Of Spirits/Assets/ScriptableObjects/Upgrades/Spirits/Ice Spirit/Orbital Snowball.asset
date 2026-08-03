@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ef4b4a2100beabc4d9dbab206fe54156, type: 3}
-  m_Name: Frozen Orbs
+  m_Name: Orbital Snowball
   m_EditorClassIdentifier: Assembly-CSharp::WorldOfSpirits.Progression.Upgrades.UpgradeCardDefinition
   cardId: ability_ice_spirit_0
-  cardName: Frozen Orbs
+  cardName: Orbital Snowball
   description: Improves this spirit's first ability.
   flavorText: 
   icon: {fileID: 0}

@@ -171,7 +171,7 @@ namespace WorldOfSpirits.Crowd
             Vector2 toPlayer = playerPosition - position;
             float distance = toPlayer.magnitude;
             float stopDistance =
-                profile.StoppingDistance + profile.CollisionRadius;
+                profile.CollisionRadius + simulation.PlayerCollisionRadius;
 
             Vector2 desiredVelocity;
             if (distance <= stopDistance)
@@ -197,7 +197,7 @@ namespace WorldOfSpirits.Crowd
             body.linearVelocity = velocity;
             body.MovePosition(position + velocity * deltaTime);
 
-            TryDamagePlayer(simulation, playerPosition, distance);
+            TryDamagePlayer(simulation, playerPosition);
         }
 
         public void TeleportForSimulation(Vector2 position)
@@ -298,19 +298,22 @@ namespace WorldOfSpirits.Crowd
 
         private void TryDamagePlayer(
             CrowdSimulationManager simulation,
-            Vector2 playerPosition,
-            float distance)
+            Vector2 playerPosition)
         {
             if (simulation.PlayerCharacter == null || Time.time < nextAttackTime)
             {
                 return;
             }
 
-            float contactDistance =
-                profile.CollisionRadius +
-                profile.StoppingDistance +
-                profile.AttackRange;
-            if (distance > contactDistance)
+            Collider2D playerCollider = simulation.PlayerCollider;
+            if (bodyCollider == null || playerCollider == null)
+            {
+                return;
+            }
+
+            ColliderDistance2D colliderDistance = bodyCollider.Distance(playerCollider);
+            const float contactTolerance = 0.01f;
+            if (!colliderDistance.isOverlapped && colliderDistance.distance > contactTolerance)
             {
                 return;
             }

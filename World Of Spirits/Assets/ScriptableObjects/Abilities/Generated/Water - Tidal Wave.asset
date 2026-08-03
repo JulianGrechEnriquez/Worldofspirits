@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WorldOfSpirits.Spirits.AbilityDefinition
   abilityName: Tidal Wave
   description: A wave crashes outward, knocking enemies back.
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: b4e2d8f1187a4ed49f247ec6a75d9302, type: 3}
   executionType: 0
   targetingMode: 4
   levels:

@@ -46,12 +46,17 @@ namespace WorldOfSpirits.Crowd
 
         private SpatialHashGrid2D grid;
         private Camera gameplayCamera;
+        private Collider2D playerCollider;
         private int nextHandle = 1;
         private int nextSteeringIndex;
         private int physicsStep;
 
         public Transform Player => player;
         public PlayerCharacter PlayerCharacter => playerCharacter;
+        public Collider2D PlayerCollider => playerCollider;
+        public float PlayerCollisionRadius => playerCollider != null
+            ? Mathf.Max(playerCollider.bounds.extents.x, playerCollider.bounds.extents.y)
+            : 0.35f;
         public int AgentCount => agents.Count;
         public int ActiveCellCount => grid != null ? grid.ActiveCellCount : 0;
 
@@ -65,6 +70,11 @@ namespace WorldOfSpirits.Crowd
             if (playerCharacter == null && player != null)
             {
                 playerCharacter = player.GetComponent<PlayerCharacter>();
+            }
+
+            if (playerCharacter != null)
+            {
+                playerCollider = playerCharacter.GetComponent<Collider2D>();
             }
         }
 

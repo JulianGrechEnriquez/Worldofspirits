@@ -61,7 +61,7 @@ GameObject:
   - component: {fileID: 994127458983776562}
   - component: {fileID: 100046344787980342}
   m_Layer: 0
-  m_Name: Runtime Ability 1 - Frozen Orbs
+  m_Name: Runtime Ability 1 - Orbital Snowball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -96,7 +96,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WorldOfSpirits.Spirits.DataDrivenAbility
   abilityIndex: 0
   cooldown: 1
-  primarySpiritOnly: 0
+  primarySpiritOnly: 1
   castWhileMoving: 1
   castWhileStandingStill: 0
   definition: {fileID: 11400000, guid: 1d90114f7f0810049992f0a59816ecdf, type: 2}

@@ -16,11 +16,11 @@ MonoBehaviour:
   cardName: Water Spirit Weapon Mastery
   description: Improves the manifested weapon to its next authored level.
   flavorText: 
-  icon: {fileID: 0}
+  icon: {fileID: -7216652912767289102, guid: 57fb155cdc4e5af45940d389e4d97a4b, type: 3}
   suggestedIconTheme: Elemental weapon on a radiant anvil
   category: 1
   rarity: 0
-  maximumLevel: 1
+  maximumLevel: 4
   minimumPlayerLevel: 2
   baseWeight: 100
   repeatableAfterMaximum: 0

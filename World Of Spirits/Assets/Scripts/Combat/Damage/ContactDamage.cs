@@ -38,6 +38,15 @@ namespace WorldOfSpirits.Combat
                 return;
             }
 
+            // Child weapon and effect colliders can live below a character in
+            // the hierarchy. They must not extend that character's contact
+            // hurtbox (for example, an Ice Gauntlet punching away from the
+            // player). Only colliders on the damageable's body count.
+            if (other.transform != target.Transform)
+            {
+                return;
+            }
+
             target.TakeDamage(new DamageContext(
                 damage,
                 owner.transform,

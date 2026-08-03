@@ -16,7 +16,7 @@ MonoBehaviour:
   cardName: Tidal Wave
   description: Improves this spirit's first ability.
   flavorText: 
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: b4e2d8f1187a4ed49f247ec6a75d9302, type: 3}
   suggestedIconTheme: Elemental ability glyph
   category: 2
   rarity: 0

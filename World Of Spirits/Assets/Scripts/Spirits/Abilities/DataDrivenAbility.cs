@@ -54,15 +54,37 @@ namespace WorldOfSpirits.Spirits
                 return;
             }
 
+            bool shouldShowOrbit = HasContext && IsAbilityUnlocked &&
+                LatestContext.IsPrimary && LatestContext.PlayerIsMoving &&
+                LatestContext.Player != null;
+            if (!shouldShowOrbit)
+            {
+                SetOrbitingVisible(false);
+                return;
+            }
+
             EnsureOrbiting(ActiveLevel);
+            SetOrbitingVisible(true);
             float radius = ActiveLevel.orbitRadius *
                 (UpgradeStats != null ? UpgradeStats.GetMultiplier(UpgradeStat.AreaSize) : 1f);
             float angleOffset = Time.time * ActiveLevel.orbitSpeed;
+            Vector3 orbitCenter = LatestContext.Player.position;
             for (int i = 0; i < orbitingObjects.Count; i++)
             {
                 if (orbitingObjects[i] == null) continue;
                 float angle = (angleOffset + 360f * i / orbitingObjects.Count) * Mathf.Deg2Rad;
-                orbitingObjects[i].position = transform.position + new Vector3(Mathf.Cos(angle), Mathf.Sin(angle)) * radius;
+                orbitingObjects[i].position = orbitCenter +
+                    new Vector3(Mathf.Cos(angle), Mathf.Sin(angle)) * radius;
+            }
+        }
+
+        private void SetOrbitingVisible(bool visible)
+        {
+            for (int i = 0; i < orbitingObjects.Count; i++)
+            {
+                Transform item = orbitingObjects[i];
+                if (item != null && item.gameObject.activeSelf != visible)
+                    item.gameObject.SetActive(visible);
             }
         }
 
@@ -181,8 +203,10 @@ namespace WorldOfSpirits.Spirits
             while (orbitingObjects.Count < desiredCount)
             {
                 Transform spawned = SceneObjectPool.Spawn(
-                    prefab, transform.position, Quaternion.identity,
-                    PoolCategory.Effects, transform).transform;
+                    prefab, HasContext && LatestContext.Player != null
+                        ? LatestContext.Player.position
+                        : transform.position, Quaternion.identity,
+                    PoolCategory.Effects).transform;
                 PersistentDamageZone zone = spawned.GetComponent<PersistentDamageZone>();
                 if (zone != null)
                 {
