@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using WorldOfSpirits.Player;
+using WorldOfSpirits.Progression.Upgrades;
 
 namespace WorldOfSpirits.Spirits
 {
@@ -27,6 +28,7 @@ namespace WorldOfSpirits.Spirits
         private readonly List<Transform> slots = new List<Transform>();
         private readonly List<SpiritMember> spirits = new List<SpiritMember>();
         private PlayerMovement playerMovement;
+        private UpgradeRuntimeStats upgradeStats;
         private float rotationProgress = 1f;
         private Vector3[] rotationStartPositions;
         private bool isChangingFormation;
@@ -120,6 +122,7 @@ namespace WorldOfSpirits.Spirits
         private void Awake()
         {
             playerMovement = GetComponent<PlayerMovement>();
+            upgradeStats = GetComponent<UpgradeRuntimeStats>();
             if (playerProjectileSpawner == null)
             {
                 Transform existingSpawner = transform.Find("PlayerProjectileSpawner");
@@ -141,6 +144,8 @@ namespace WorldOfSpirits.Spirits
             AnimateRotation();
 
             bool isMoving = playerMovement != null && playerMovement.IsMoving;
+            bool primaryWeaponAndAbilitiesEnabled = upgradeStats != null &&
+                upgradeStats.PrimarySpiritAbilitiesEnabled;
             for (int i = 0; i < spirits.Count; i++)
             {
                 spirits[i].ApplyState(
@@ -149,6 +154,7 @@ namespace WorldOfSpirits.Spirits
                     meleeWeaponSlots,
                     i == 0,
                     isMoving,
+                    primaryWeaponAndAbilitiesEnabled,
                     isChangingFormation);
             }
         }

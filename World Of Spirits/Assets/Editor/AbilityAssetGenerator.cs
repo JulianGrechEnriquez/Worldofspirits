@@ -153,6 +153,21 @@ namespace WorldOfSpirits.EditorTools
                 level.spawnedEffectPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(
                     "Assets/Prefabs/Abilities/Orbital Snowball.prefab");
             }
+            if (spec.Name == "Ice Crystal")
+            {
+                level.spawnedEffectPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(
+                    "Assets/Prefabs/Abilities/Ice Crystal.prefab");
+                level.cooldown = Mathf.Max(3.5f, 5f - index * 0.35f);
+                level.activeDuration = index == 0 ? 1.2f : index == 1 ? 0.9f : 0.8f;
+                level.spawnCount = index + 3;
+                level.areaRadius = 2.25f + index * 0.25f;
+                level.projectile.damage = 18f + index * 8f;
+                level.projectile.appliesStatus = true;
+                level.projectile.status = CombatStatus.Freeze;
+                level.projectile.statusChance = new[] { 0.10f, 0.20f, 0.35f, 0.50f }[index];
+                level.projectile.statusDuration = 1.5f;
+                level.projectile.statusStrength = 1f;
+            }
             if (spec.Name == "Acid Spray") level.projectile.spreadAngle = 45f + index * 12f;
 
             if (all.Contains("pierce")) level.projectile.pierceCount = 3;
@@ -235,6 +250,7 @@ namespace WorldOfSpirits.EditorTools
                 SerializedObject runnerData = new SerializedObject(runner);
                 runnerData.FindProperty("abilityIndex").intValue = i;
                 runnerData.FindProperty("definition").objectReferenceValue = abilities[i];
+                runnerData.FindProperty("primarySpiritOnly").boolValue = false;
                 runnerData.FindProperty("castWhileMoving").boolValue = true;
                 runnerData.FindProperty("castWhileStandingStill").boolValue = false;
                 runnerData.ApplyModifiedPropertiesWithoutUndo();
@@ -265,7 +281,7 @@ namespace WorldOfSpirits.EditorTools
             yield return new Spec("Wind", "Tornado", "Creates a moving tornado.", AbilityExecutionType.SpawnEffect, AbilityTargetingMode.RandomPositionNearPlayer, "One tornado", "Larger tornado", "Increased pull strength", "Two tornadoes");
             yield return new Spec("Ice", "Orbital Snowball", "Snowballs orbit around the player and damage enemies they touch.", AbilityExecutionType.Orbiting, AbilityTargetingMode.AroundPlayer, "2 snowballs", "3 snowballs", "Increased rotation speed and freeze chance", "Additional snowball");
             yield return new Spec("Ice", "Avalanche", "Throws a snowball that grows as it travels.", AbilityExecutionType.Projectile, AbilityTargetingMode.ClosestEnemy, "Small snowball", "Faster growth", "Increased damage", "Freeze enemies hit");
-            yield return new Spec("Ice", "Ice Crystal", "Spawns an ice crystal that grows then explodes.", AbilityExecutionType.SpawnEffect, AbilityTargetingMode.ClosestEnemy, "Small crystal", "Faster growth", "Increased damage", "Freeze enemies hit");
+            yield return new Spec("Ice", "Ice Crystal", "Spawns growing ice crystals around the closest enemy; each crystal explodes and may freeze enemies hit.", AbilityExecutionType.SpawnEffect, AbilityTargetingMode.ClosestEnemy, "3 crystals, 18 damage, 10% freeze chance", "4 crystals, 26 damage, 20% freeze chance", "5 crystals, 34 damage, 35% freeze chance", "6 crystals, 42 damage, 50% freeze chance");
             yield return new Spec("Lightning", "Lightning Strike", "Lightning strikes random enemies.", AbilityExecutionType.SpawnEffect, AbilityTargetingMode.RandomEnemy, "3 strikes", "6 strikes", "Increased damage", "Small area of effect");
             yield return new Spec("Lightning", "Chain Lightning Bolt", "A lightning bolt jumps between enemies.", AbilityExecutionType.Chain, AbilityTargetingMode.ClosestEnemy, "3 jumps", "5 jumps", "Increased damage", "Increased range");
             yield return new Spec("Lightning", "Thunder Roar", "A lightning pulse surrounds the player.", AbilityExecutionType.Area, AbilityTargetingMode.AroundPlayer, "1 ring", "Pushes and stuns enemies", "3 rings", "Increased range");

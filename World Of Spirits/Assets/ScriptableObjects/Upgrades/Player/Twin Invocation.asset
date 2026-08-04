@@ -14,17 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WorldOfSpirits.Progression.Upgrades.UpgradeCardDefinition
   cardId: twin_invocation
   cardName: Twin Invocation
-  description: Projectiles fire one additional shot, and melee weapons strike one additional time.
+  description: +1 additional projectile and one mirrored melee strike. Ice Gauntlets
+    manifest a second pair of fists.
   flavorText: 
   icon: {fileID: 0}
-  suggestedIconTheme: Mirrored spell bolts
+  suggestedIconTheme: Four mirrored spirit fists
   category: 0
   rarity: 3
   maximumLevel: 1
-  minimumPlayerLevel: 1
   baseWeight: 100
   repeatableAfterMaximum: 0
-  requirements: []
   targetSpirit: {fileID: 0}
   abilityIndex: -1
   spiritPrefab: {fileID: 0}

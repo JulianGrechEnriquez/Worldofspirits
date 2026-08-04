@@ -56,6 +56,7 @@ namespace WorldOfSpirits.Spirits
             System.Collections.Generic.IReadOnlyList<Transform> meleeWeaponSlots,
             bool isPrimary,
             bool playerIsMoving,
+            bool primaryWeaponAndAbilitiesEnabled,
             bool combatLocked = false)
         {
             if (renderers == null)
@@ -110,7 +111,11 @@ namespace WorldOfSpirits.Spirits
                 return;
             }
 
-            SpiritAbilityContext context = new SpiritAbilityContext(player, playerIsMoving, isPrimary);
+            SpiritAbilityContext context = new SpiritAbilityContext(
+                player,
+                playerIsMoving,
+                isPrimary,
+                primaryWeaponAndAbilitiesEnabled);
             foreach (SpiritAbility ability in abilities)
             {
                 ability.TickAbility(context);

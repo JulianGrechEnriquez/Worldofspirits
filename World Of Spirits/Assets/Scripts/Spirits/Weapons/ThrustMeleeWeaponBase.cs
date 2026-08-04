@@ -61,6 +61,10 @@ namespace WorldOfSpirits.Spirits
         private Renderer[] gauntletRenderers;
         private Collider2D leftGauntletHitbox;
         private Collider2D rightGauntletHitbox;
+        private Collider2D leftEchoGauntletHitbox;
+        private Collider2D rightEchoGauntletHitbox;
+        private Transform leftEchoGauntlet;
+        private Transform rightEchoGauntlet;
         private Transform fallbackLeftGauntlet;
         private Transform fallbackRightGauntlet;
         private Vector3 fallbackLeftScale;
@@ -70,10 +74,13 @@ namespace WorldOfSpirits.Spirits
         private GameObject pooledVisualPrefab;
         private Transform originOverride;
         private Transform activeGauntlet;
+        private Transform activeEchoGauntlet;
         private Transform punchTarget;
         private Vector2 punchDirection = Vector2.right;
         private Vector3 punchStart;
         private Vector3 punchEnd;
+        private Vector3 echoPunchStart;
+        private Vector3 echoPunchEnd;
         private float phaseTime;
         private int targetsHit;
         private bool useLeftNext = true;
@@ -109,13 +116,14 @@ namespace WorldOfSpirits.Spirits
                 pooledVisualPrefab = firstLevel.weaponPrefab;
                 SceneObjectPool.Preload(
                     pooledVisualPrefab,
-                    2,
+                    4,
                     PoolCategory.Effects);
             }
         }
 
         protected override void Update()
         {
+            SyncEchoGauntlets();
             ApplyWeaponSize();
             UpdateGauntletAnimation();
             if (phase == PunchPhase.Idle)
@@ -148,11 +156,17 @@ namespace WorldOfSpirits.Spirits
 
             activeGauntlet = useLeftNext ? leftGauntlet : rightGauntlet;
             useLeftNext = !useLeftNext;
-            punchStart = GetRestPosition(activeGauntlet == leftGauntlet);
+            activeEchoGauntlet = activeGauntlet == leftGauntlet
+                ? leftEchoGauntlet
+                : rightEchoGauntlet;
+            punchStart = GetRestPosition(activeGauntlet);
+            if (activeEchoGauntlet != null)
+                echoPunchStart = GetRestPosition(activeEchoGauntlet);
             punchTarget = target.Transform;
             if (!UpdatePunchAim())
             {
                 activeGauntlet = null;
+                activeEchoGauntlet = null;
                 punchTarget = null;
                 return;
             }
@@ -226,6 +240,8 @@ namespace WorldOfSpirits.Spirits
 
             if (leftGauntletHitbox != null) leftGauntletHitbox.enabled = active;
             if (rightGauntletHitbox != null) rightGauntletHitbox.enabled = active;
+            if (leftEchoGauntletHitbox != null) leftEchoGauntletHitbox.enabled = active;
+            if (rightEchoGauntletHitbox != null) rightEchoGauntletHitbox.enabled = active;
         }
 
         public void SetCombatActive(bool active)
@@ -241,6 +257,7 @@ namespace WorldOfSpirits.Spirits
             {
                 phase = PunchPhase.Idle;
                 activeGauntlet = null;
+                activeEchoGauntlet = null;
                 punchTarget = null;
                 hitTargets.Clear();
                 PositionAtRest();
@@ -276,6 +293,9 @@ namespace WorldOfSpirits.Spirits
                 // Ease out gives the punch a quick, weighty start.
                 float eased = 1f - (1f - progress) * (1f - progress);
                 activeGauntlet.position = Vector3.LerpUnclamped(punchStart, punchEnd, eased);
+                if (activeEchoGauntlet != null)
+                    activeEchoGauntlet.position = Vector3.LerpUnclamped(
+                        echoPunchStart, echoPunchEnd, eased);
                 DamageAt(activeGauntlet.position);
                 if (progress >= 1f)
                 {
@@ -288,7 +308,10 @@ namespace WorldOfSpirits.Spirits
                 // The player may move during the punch, so the return target is
                 // recalculated continuously.
                 Vector3 currentRestPosition =
-                    GetRestPosition(activeGauntlet == leftGauntlet);
+                    GetRestPosition(activeGauntlet);
+                Vector3 currentEchoRestPosition = activeEchoGauntlet != null
+                    ? GetRestPosition(activeEchoGauntlet)
+                    : Vector3.zero;
                 float duration = ActiveLevel != null
                     ? ActiveLevel.returnDuration
                     : returnDuration;
@@ -296,23 +319,20 @@ namespace WorldOfSpirits.Spirits
                 float eased = progress * progress * (3f - 2f * progress);
                 activeGauntlet.position =
                     Vector3.LerpUnclamped(punchEnd, currentRestPosition, eased);
+                if (activeEchoGauntlet != null)
+                    activeEchoGauntlet.position = Vector3.LerpUnclamped(
+                        echoPunchEnd, currentEchoRestPosition, eased);
                 if (progress >= 1f)
                 {
                     phase = PunchPhase.Idle;
                     activeGauntlet = null;
+                    activeEchoGauntlet = null;
                     punchTarget = null;
                     PositionAtRest();
                 }
             }
 
-            // The inactive fist remains anchored beside the moving player.
-            Transform restingGauntlet =
-                activeGauntlet == leftGauntlet ? rightGauntlet : leftGauntlet;
-            if (restingGauntlet != null)
-            {
-                restingGauntlet.position =
-                    GetRestPosition(restingGauntlet == leftGauntlet);
-            }
+            PositionInactiveGauntletsAtRest();
         }
 
         private void DamageAt(Vector2 position)
@@ -385,9 +405,7 @@ namespace WorldOfSpirits.Spirits
 
         private void PopulatePunchTargets(Vector2 fallbackPosition, float fallbackRadius)
         {
-            Collider2D activeHitbox = activeGauntlet == leftGauntlet
-                ? leftGauntletHitbox
-                : rightGauntletHitbox;
+            Collider2D activeHitbox = GetGauntletHitbox(activeGauntlet);
             if (activeHitbox == null || !activeHitbox.enabled)
             {
                 CombatTargeting.FindAllNonAlloc(
@@ -444,6 +462,12 @@ namespace WorldOfSpirits.Spirits
                 ActiveLevel != null ? ActiveLevel.punchDistance : punchDistance;
             punchEnd = punchStart + (Vector3)(punchDirection * activePunchDistance);
             FaceDirection(activeGauntlet, punchDirection);
+            if (activeEchoGauntlet != null)
+            {
+                echoPunchEnd = echoPunchStart +
+                    (Vector3)(punchDirection * activePunchDistance);
+                FaceDirection(activeEchoGauntlet, punchDirection);
+            }
             return true;
         }
 
@@ -453,13 +477,33 @@ namespace WorldOfSpirits.Spirits
             {
                 return;
             }
-            leftGauntlet.position = GetRestPosition(true);
-            rightGauntlet.position = GetRestPosition(false);
+            leftGauntlet.position = GetRestPosition(leftGauntlet);
+            rightGauntlet.position = GetRestPosition(rightGauntlet);
+            if (leftEchoGauntlet != null)
+                leftEchoGauntlet.position = GetRestPosition(leftEchoGauntlet);
+            if (rightEchoGauntlet != null)
+                rightEchoGauntlet.position = GetRestPosition(rightEchoGauntlet);
         }
 
-        private Vector3 GetRestPosition(bool left)
+        private void PositionInactiveGauntletsAtRest()
         {
-            Transform slot = left ? primaryWeaponSlot : secondaryWeaponSlot;
+            Transform[] gauntlets =
+                { leftGauntlet, rightGauntlet, leftEchoGauntlet, rightEchoGauntlet };
+            for (int i = 0; i < gauntlets.Length; i++)
+            {
+                Transform gauntlet = gauntlets[i];
+                if (gauntlet != null && gauntlet != activeGauntlet && gauntlet != activeEchoGauntlet)
+                    gauntlet.position = GetRestPosition(gauntlet);
+            }
+        }
+
+        private Vector3 GetRestPosition(Transform gauntlet)
+        {
+            bool isLeft = gauntlet == leftGauntlet || gauntlet == leftEchoGauntlet;
+            bool isEcho = gauntlet == leftEchoGauntlet || gauntlet == rightEchoGauntlet;
+            Transform slot = !isEcho
+                ? (isLeft ? primaryWeaponSlot : secondaryWeaponSlot)
+                : null;
             if (slot != null)
             {
                 return slot.position;
@@ -469,9 +513,10 @@ namespace WorldOfSpirits.Spirits
                 ? punchDirection
                 : Vector2.right;
             Vector2 side = new Vector2(-facing.y, facing.x);
-            float sideSign = left ? 1f : -1f;
+            float sideSign = isLeft ? 1f : -1f;
+            float formationDistance = isEcho ? sideOffset * 2f : sideOffset;
             return ActiveOrigin.position +
-                (Vector3)(facing * forwardRestOffset + side * sideOffset * sideSign);
+                (Vector3)(facing * forwardRestOffset + side * formationDistance * sideSign);
         }
 
         private void FaceDirection(Transform gauntlet, Vector2 direction)
@@ -485,6 +530,7 @@ namespace WorldOfSpirits.Spirits
         {
             phase = PunchPhase.Idle;
             activeGauntlet = null;
+            activeEchoGauntlet = null;
             punchTarget = null;
             hitTargets.Clear();
             EnsurePooledVisuals();
@@ -496,6 +542,7 @@ namespace WorldOfSpirits.Spirits
         {
             phase = PunchPhase.Idle;
             activeGauntlet = null;
+            activeEchoGauntlet = null;
             punchTarget = null;
             hitTargets.Clear();
             combatActive = false;
@@ -540,7 +587,39 @@ namespace WorldOfSpirits.Spirits
                 rightGauntlet = right.transform;
             }
 
+            SyncEchoGauntlets();
             CacheRenderers();
+        }
+
+        private void SyncEchoGauntlets()
+        {
+            bool shouldHaveEchoPair = pooledVisualPrefab != null &&
+                upgradeStats != null && upgradeStats.GetMeleeStrikeCount(1) > 1;
+            bool hasEchoPair = leftEchoGauntlet != null && rightEchoGauntlet != null;
+            if (shouldHaveEchoPair == hasEchoPair) return;
+
+            if (shouldHaveEchoPair)
+            {
+                leftEchoGauntlet = SceneObjectPool.Spawn(
+                    pooledVisualPrefab, ActiveOrigin.position, Quaternion.identity,
+                    PoolCategory.Effects).transform;
+                rightEchoGauntlet = SceneObjectPool.Spawn(
+                    pooledVisualPrefab, ActiveOrigin.position, Quaternion.identity,
+                    PoolCategory.Effects).transform;
+            }
+            else
+            {
+                if (leftEchoGauntlet != null)
+                    SceneObjectPool.ReleaseOrDestroy(leftEchoGauntlet.gameObject);
+                if (rightEchoGauntlet != null)
+                    SceneObjectPool.ReleaseOrDestroy(rightEchoGauntlet.gameObject);
+                leftEchoGauntlet = null;
+                rightEchoGauntlet = null;
+            }
+
+            CacheRenderers();
+            if (phase == PunchPhase.Idle) PositionAtRest();
+            SetVisualsActive(combatActive);
         }
 
         private void ReleasePooledVisuals()
@@ -559,9 +638,15 @@ namespace WorldOfSpirits.Spirits
             {
                 SceneObjectPool.ReleaseOrDestroy(rightGauntlet.gameObject);
             }
+            if (leftEchoGauntlet != null)
+                SceneObjectPool.ReleaseOrDestroy(leftEchoGauntlet.gameObject);
+            if (rightEchoGauntlet != null)
+                SceneObjectPool.ReleaseOrDestroy(rightEchoGauntlet.gameObject);
 
             leftGauntlet = fallbackLeftGauntlet;
             rightGauntlet = fallbackRightGauntlet;
+            leftEchoGauntlet = null;
+            rightEchoGauntlet = null;
             CacheRenderers();
             SetVisualsActive(false);
         }
@@ -571,7 +656,9 @@ namespace WorldOfSpirits.Spirits
             gauntletRenderers = new[]
             {
                 leftGauntlet != null ? leftGauntlet.GetComponent<Renderer>() : null,
-                rightGauntlet != null ? rightGauntlet.GetComponent<Renderer>() : null
+                rightGauntlet != null ? rightGauntlet.GetComponent<Renderer>() : null,
+                leftEchoGauntlet != null ? leftEchoGauntlet.GetComponent<Renderer>() : null,
+                rightEchoGauntlet != null ? rightEchoGauntlet.GetComponent<Renderer>() : null
             };
             leftGauntletHitbox = leftGauntlet != null
                 ? leftGauntlet.GetComponentInChildren<Collider2D>(true)
@@ -579,6 +666,20 @@ namespace WorldOfSpirits.Spirits
             rightGauntletHitbox = rightGauntlet != null
                 ? rightGauntlet.GetComponentInChildren<Collider2D>(true)
                 : null;
+            leftEchoGauntletHitbox = leftEchoGauntlet != null
+                ? leftEchoGauntlet.GetComponentInChildren<Collider2D>(true)
+                : null;
+            rightEchoGauntletHitbox = rightEchoGauntlet != null
+                ? rightEchoGauntlet.GetComponentInChildren<Collider2D>(true)
+                : null;
+        }
+
+        private Collider2D GetGauntletHitbox(Transform gauntlet)
+        {
+            if (gauntlet == leftGauntlet) return leftGauntletHitbox;
+            if (gauntlet == rightGauntlet) return rightGauntletHitbox;
+            if (gauntlet == leftEchoGauntlet) return leftEchoGauntletHitbox;
+            return gauntlet == rightEchoGauntlet ? rightEchoGauntletHitbox : null;
         }
 
 #if UNITY_EDITOR
@@ -632,6 +733,10 @@ namespace WorldOfSpirits.Spirits
             if (rightGauntlet != null)
                 rightGauntlet.localScale =
                     (rightGauntlet == fallbackRightGauntlet ? fallbackRightScale : pooledScale) * multiplier;
+            if (leftEchoGauntlet != null)
+                leftEchoGauntlet.localScale = pooledScale * multiplier;
+            if (rightEchoGauntlet != null)
+                rightEchoGauntlet.localScale = pooledScale * multiplier;
         }
 
         protected virtual void OnValidate()

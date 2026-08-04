@@ -96,7 +96,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WorldOfSpirits.Spirits.DataDrivenAbility
   abilityIndex: 0
   cooldown: 1
-  primarySpiritOnly: 1
+  primarySpiritOnly: 0
   castWhileMoving: 1
   castWhileStandingStill: 0
   definition: {fileID: 11400000, guid: 1d90114f7f0810049992f0a59816ecdf, type: 2}
@@ -266,6 +266,10 @@ MonoBehaviour:
   maximumTargetsPerPunch: 4
   freezeDuration: 0.2
   spriteRotationOffset: -90
+  drawHitboxes: 1
+  targetingGizmoColor: {r: 0.15, g: 0.8, b: 1, a: 0.45}
+  punchPathGizmoColor: {r: 1, g: 0.8, b: 0.1, a: 0.8}
+  activeHitboxGizmoColor: {r: 1, g: 0.15, b: 0.1, a: 0.9}
 --- !u!1 &8715549361477964926
 GameObject:
   m_ObjectHideFlags: 0

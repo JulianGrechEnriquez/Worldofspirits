@@ -45,8 +45,7 @@ namespace WorldOfSpirits.Spirits
 
             // Support spirits continue casting in either movement state. Movement
             // restrictions only control the currently selected primary spirit.
-            bool primaryAbilityMastered = UpgradeStats != null &&
-                UpgradeStats.PrimarySpiritAbilitiesEnabled;
+            bool primaryAbilityMastered = context.PrimaryWeaponAndAbilitiesEnabled;
             bool movementStateAllowed = !context.IsPrimary || primaryAbilityMastered ||
                 (context.PlayerIsMoving ? castWhileMoving : castWhileStandingStill);
             if (!movementStateAllowed || !CanCast(context))
@@ -77,15 +76,21 @@ namespace WorldOfSpirits.Spirits
 
     public readonly struct SpiritAbilityContext
     {
-        public SpiritAbilityContext(Transform player, bool playerIsMoving, bool isPrimary)
+        public SpiritAbilityContext(
+            Transform player,
+            bool playerIsMoving,
+            bool isPrimary,
+            bool primaryWeaponAndAbilitiesEnabled = false)
         {
             Player = player;
             PlayerIsMoving = playerIsMoving;
             IsPrimary = isPrimary;
+            PrimaryWeaponAndAbilitiesEnabled = primaryWeaponAndAbilitiesEnabled;
         }
 
         public Transform Player { get; }
         public bool PlayerIsMoving { get; }
         public bool IsPrimary { get; }
+        public bool PrimaryWeaponAndAbilitiesEnabled { get; }
     }
 }

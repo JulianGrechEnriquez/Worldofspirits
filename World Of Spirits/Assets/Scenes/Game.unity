@@ -1332,6 +1332,7 @@ GameObject:
   - component: {fileID: 154361506}
   - component: {fileID: 154361505}
   - component: {fileID: 154361508}
+  - component: {fileID: 154361509}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1398,6 +1399,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afdbae210eaf9ce4da66ef53139f7eee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WorldOfSpirits.UI.LossScreenController
+--- !u!114 &154361509
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 154361504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47e4f4bcb50c9294aa6bfe49170862f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WorldOfSpirits.UI.UpgradeTestPanel
+  catalog: {fileID: 11400000, guid: 42d5e2a558cd6d04681dddf713bcb8c5, type: 2}
+  visible: 0
+  toggleKey: 97
 --- !u!1 &214804871
 GameObject:
   m_ObjectHideFlags: 0
@@ -3385,7 +3401,7 @@ RectTransform:
   m_AnchorMin: {x: 0.07, y: 0.06}
   m_AnchorMax: {x: 0.93, y: 0.94}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 268.8, y: 129.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &563136265
 MonoBehaviour:
@@ -7062,7 +7078,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 17
+  m_fontSize: 19.35
   m_fontSizeBase: 22
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -8386,72 +8402,13 @@ MonoBehaviour:
   activeBiome: {fileID: 11400000, guid: 66c01e333e2c7e74db67a74e26afab64, type: 2}
   maximumAliveEnemies: 250
   maximumSpawnsPerCycle: 20
-  budgetByMinute:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 4
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 5
-      value: 12
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 10
-      value: 24
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  intervalByMinute:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 2
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 5
-      value: 1.25
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 10
-      value: 0.65
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
+  minutesBetweenMilestones: 2
+  maximumDifficultyMilestones: 4
+  startingSpawnBudget: 4
+  spawnBudgetIncreasePerMilestone: 4
+  startingSpawnInterval: 2
+  spawnIntervalMultiplierPerMilestone: 0.8
+  minimumSpawnInterval: 0.25
   eliteChanceByMinute:
     serializedVersion: 2
     m_Curve:

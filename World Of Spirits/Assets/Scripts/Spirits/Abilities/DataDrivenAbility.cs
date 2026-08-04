@@ -12,6 +12,7 @@ namespace WorldOfSpirits.Spirits
 
         private readonly List<Transform> orbitingObjects = new List<Transform>();
         private readonly List<IDamageable> targetBuffer = new List<IDamageable>(64);
+        private readonly List<Transform> crystalTargetBuffer = new List<Transform>(16);
         private readonly HashSet<Transform> chainHitBuffer = new HashSet<Transform>();
         private GameObject followingArea;
         private float followingAreaDisableTime;
@@ -54,8 +55,11 @@ namespace WorldOfSpirits.Spirits
                 return;
             }
 
+            bool movementStateAllowsOrbit = HasContext &&
+                (!LatestContext.IsPrimary || LatestContext.PlayerIsMoving ||
+                 LatestContext.PrimaryWeaponAndAbilitiesEnabled);
             bool shouldShowOrbit = HasContext && IsAbilityUnlocked &&
-                LatestContext.IsPrimary && LatestContext.PlayerIsMoving &&
+                movementStateAllowsOrbit &&
                 LatestContext.Player != null;
             if (!shouldShowOrbit)
             {
@@ -209,14 +213,27 @@ namespace WorldOfSpirits.Spirits
         private void SpawnEffects(SpiritAbilityContext context, AbilityLevelData level)
         {
             if (level.spawnedEffectPrefab == null) return;
-            for (int i = 0; i < Mathf.Max(1, level.spawnCount); i++)
+            int effectCount = Mathf.Max(1, level.spawnCount);
+            bool isIceCrystal = level.spawnedEffectPrefab.GetComponent<IceCrystalEffect>() != null;
+            if (isIceCrystal) BuildCrystalTargetList(level);
+            for (int i = 0; i < effectCount; i++)
             {
-                Vector3 position = ResolvePosition(context, level);
+                Vector3 position = isIceCrystal
+                    ? ResolveCrystalPosition(context, level, i, effectCount)
+                    : ResolvePosition(context, level);
                 GameObject spawned = SceneObjectPool.Spawn(
                     level.spawnedEffectPrefab, position, Quaternion.identity,
                     PoolCategory.FloorEffects);
-                PersistentDamageZone zone = spawned.GetComponent<PersistentDamageZone>();
-                if (zone != null)
+                IceCrystalEffect crystal = spawned.GetComponent<IceCrystalEffect>();
+                if (crystal != null)
+                {
+                    AbilityProjectileData burst = level.projectile;
+                    crystal.Configure(
+                        CreateSpiritDamage(burst.damage), UpgradeStats, burst.damage,
+                        level.areaRadius, level.activeDuration, burst.appliesStatus,
+                        burst.statusChance, burst.statusDuration, burst.statusStrength);
+                }
+                else if (spawned.TryGetComponent(out PersistentDamageZone zone))
                 {
                     zone.SetOwner(context.Player);
                     zone.ConfigureUpgradeModifiers(UpgradeStats);
@@ -225,6 +242,56 @@ namespace WorldOfSpirits.Spirits
                 else SceneObjectPool.ReleaseAfter(spawned, Mathf.Max(0.1f,
                     UpgradeStats != null ? UpgradeStats.ScaleDuration(level.activeDuration) : level.activeDuration));
             }
+        }
+
+        private void BuildCrystalTargetList(AbilityLevelData level)
+        {
+            crystalTargetBuffer.Clear();
+            CombatTargeting.FindAllNonAlloc(
+                transform.position, level.targetingRange, Faction.Player, targetBuffer);
+            for (int i = 0; i < targetBuffer.Count; i++)
+            {
+                Transform target = targetBuffer[i]?.Transform;
+                if (target != null && !crystalTargetBuffer.Contains(target))
+                    crystalTargetBuffer.Add(target);
+            }
+
+            Vector3 origin = transform.position;
+            crystalTargetBuffer.Sort((left, right) =>
+                (left.position - origin).sqrMagnitude.CompareTo(
+                    (right.position - origin).sqrMagnitude));
+        }
+
+        private Vector3 ResolveCrystalPosition(
+            SpiritAbilityContext context,
+            AbilityLevelData level,
+            int crystalIndex,
+            int crystalCount)
+        {
+            if (crystalTargetBuffer.Count > 0)
+            {
+                int targetIndex = crystalIndex % crystalTargetBuffer.Count;
+                Transform target = crystalTargetBuffer[targetIndex];
+                Vector3 targetPosition = target != null ? target.position : transform.position;
+
+                // Only add an offset when there are more crystals than unique
+                // enemies. With enough enemies every crystal gets its own target.
+                int duplicateRing = crystalIndex / crystalTargetBuffer.Count;
+                if (duplicateRing > 0)
+                {
+                    float angle = Mathf.PI * 2f * targetIndex /
+                        Mathf.Max(1, crystalTargetBuffer.Count) + duplicateRing * 0.75f;
+                    targetPosition += new Vector3(Mathf.Cos(angle), Mathf.Sin(angle)) *
+                        (0.55f * duplicateRing);
+                }
+                return targetPosition;
+            }
+
+            Vector3 origin = context.Player != null
+                ? context.Player.position
+                : transform.position;
+            float fallbackAngle = Mathf.PI * 2f * crystalIndex / Mathf.Max(1, crystalCount);
+            return origin + new Vector3(Mathf.Cos(fallbackAngle), Mathf.Sin(fallbackAngle)) * 1.25f;
         }
 
         private void EnsureOrbiting(AbilityLevelData level)

@@ -13,14 +13,15 @@ MonoBehaviour:
   m_Name: Ice - Ice Crystal
   m_EditorClassIdentifier: Assembly-CSharp::WorldOfSpirits.Spirits.AbilityDefinition
   abilityName: Ice Crystal
-  description: Spawns an ice crystal that grows then explodes.
+  description: Spawns growing ice crystals around the closest enemy; each crystal
+    explodes and may freeze enemies hit.
   icon: {fileID: 0}
   executionType: 2
   targetingMode: 0
   levels:
   - level: 1
-    upgradeDescription: Small crystal
-    cooldown: 2
+    upgradeDescription: 3 crystals, 18 damage, 10% freeze chance
+    cooldown: 5
     targetingRange: 15
     projectile:
       projectilePrefab: {fileID: 0}
@@ -28,106 +29,10 @@ MonoBehaviour:
       spreadAngle: 0
       spreadMode: 0
       speed: 9
-      damage: 10
+      damage: 18
       homeOnEnemies: 0
-      homingStrength: 6
-      homingRange: 10
-      pierceCount: 0
-      bounceCount: 0
-      bounceRange: 5
-      explosionRadius: 0
-      growthPerSecond: 0
-      appliesStatus: 0
-      status: 4
-      statusDuration: 2
-      statusStrength: 2
-    spawnedEffectPrefab: {fileID: 0}
-    spawnCount: 1
-    areaRadius: 3
-    activeDuration: 3
-    orbitRadius: 1.5
-    orbitSpeed: 100
-    chainCount: 3
-    chainRange: 5
-    effects: []
-  - level: 2
-    upgradeDescription: Faster growth
-    cooldown: 1.88
-    targetingRange: 15
-    projectile:
-      projectilePrefab: {fileID: 0}
-      count: 1
-      spreadAngle: 35
-      spreadMode: 0
-      speed: 9.5
-      damage: 13
-      homeOnEnemies: 0
-      homingStrength: 6
-      homingRange: 10
-      pierceCount: 0
-      bounceCount: 0
-      bounceRange: 5
-      explosionRadius: 0
-      growthPerSecond: 0
-      appliesStatus: 0
-      status: 0
-      statusDuration: 2
-      statusStrength: 2
-    spawnedEffectPrefab: {fileID: 0}
-    spawnCount: 1
-    areaRadius: 3.5
-    activeDuration: 3
-    orbitRadius: 1.6
-    orbitSpeed: 120
-    chainCount: 4
-    chainRange: 6
-    effects: []
-  - level: 3
-    upgradeDescription: Increased damage
-    cooldown: 1.76
-    targetingRange: 15
-    projectile:
-      projectilePrefab: {fileID: 0}
-      count: 1
-      spreadAngle: 35
-      spreadMode: 0
-      speed: 10
-      damage: 16
-      homeOnEnemies: 0
-      homingStrength: 6
-      homingRange: 10
-      pierceCount: 0
-      bounceCount: 0
-      bounceRange: 5
-      explosionRadius: 0
-      growthPerSecond: 0
-      appliesStatus: 0
-      status: 0
-      statusDuration: 2
-      statusStrength: 2
-    spawnedEffectPrefab: {fileID: 0}
-    spawnCount: 1
-    areaRadius: 4
-    activeDuration: 3
-    orbitRadius: 1.7
-    orbitSpeed: 140
-    chainCount: 5
-    chainRange: 7
-    effects: []
-  - level: 4
-    upgradeDescription: Freeze enemies hit
-    cooldown: 1.64
-    targetingRange: 15
-    projectile:
-      projectilePrefab: {fileID: 0}
-      count: 1
-      spreadAngle: 35
-      spreadMode: 0
-      speed: 10.5
-      damage: 19
-      homeOnEnemies: 0
-      homingStrength: 6
-      homingRange: 10
+      homingStrength: 5
+      homingRange: 8
       pierceCount: 0
       bounceCount: 0
       bounceRange: 5
@@ -135,14 +40,126 @@ MonoBehaviour:
       growthPerSecond: 0
       appliesStatus: 1
       status: 4
-      statusDuration: 2
-      statusStrength: 2
-    spawnedEffectPrefab: {fileID: 0}
-    spawnCount: 1
-    areaRadius: 4.5
-    activeDuration: 3
-    orbitRadius: 1.8
-    orbitSpeed: 160
-    chainCount: 6
-    chainRange: 8
+      statusChance: 0.1
+      statusDuration: 1.5
+      statusStrength: 1
+      directionPattern: 0
+      sizeMultiplier: 1
+      lifetimeMultiplier: 1
+    spawnedEffectPrefab: {fileID: 2859895427039593781, guid: 47e52233597d5764fbb76cc78b515f21, type: 3}
+    spawnCount: 3
+    areaRadius: 2.25
+    activeDuration: 1.2
+    orbitRadius: 1.5
+    orbitSpeed: 120
+    chainCount: 1
+    chainRange: 5
+    effects: []
+  - level: 2
+    upgradeDescription: 4 crystals, 26 damage, 20% freeze chance
+    cooldown: 4.65
+    targetingRange: 15
+    projectile:
+      projectilePrefab: {fileID: 0}
+      count: 1
+      spreadAngle: 0
+      spreadMode: 0
+      speed: 9
+      damage: 26
+      homeOnEnemies: 0
+      homingStrength: 5
+      homingRange: 8
+      pierceCount: 0
+      bounceCount: 0
+      bounceRange: 5
+      explosionRadius: 0
+      growthPerSecond: 0
+      appliesStatus: 1
+      status: 4
+      statusChance: 0.2
+      statusDuration: 1.5
+      statusStrength: 1
+      directionPattern: 0
+      sizeMultiplier: 1
+      lifetimeMultiplier: 1
+    spawnedEffectPrefab: {fileID: 2859895427039593781, guid: 47e52233597d5764fbb76cc78b515f21, type: 3}
+    spawnCount: 4
+    areaRadius: 2.5
+    activeDuration: 0.9
+    orbitRadius: 1.5
+    orbitSpeed: 120
+    chainCount: 1
+    chainRange: 5
+    effects: []
+  - level: 3
+    upgradeDescription: 5 crystals, 34 damage, 35% freeze chance
+    cooldown: 4.3
+    targetingRange: 15
+    projectile:
+      projectilePrefab: {fileID: 0}
+      count: 1
+      spreadAngle: 0
+      spreadMode: 0
+      speed: 9
+      damage: 34
+      homeOnEnemies: 0
+      homingStrength: 5
+      homingRange: 8
+      pierceCount: 0
+      bounceCount: 0
+      bounceRange: 5
+      explosionRadius: 0
+      growthPerSecond: 0
+      appliesStatus: 1
+      status: 4
+      statusChance: 0.35
+      statusDuration: 1.5
+      statusStrength: 1
+      directionPattern: 0
+      sizeMultiplier: 1
+      lifetimeMultiplier: 1
+    spawnedEffectPrefab: {fileID: 2859895427039593781, guid: 47e52233597d5764fbb76cc78b515f21, type: 3}
+    spawnCount: 5
+    areaRadius: 2.75
+    activeDuration: 0.8
+    orbitRadius: 1.5
+    orbitSpeed: 120
+    chainCount: 1
+    chainRange: 5
+    effects: []
+  - level: 4
+    upgradeDescription: 6 crystals, 42 damage, 50% freeze chance
+    cooldown: 3.95
+    targetingRange: 15
+    projectile:
+      projectilePrefab: {fileID: 0}
+      count: 1
+      spreadAngle: 0
+      spreadMode: 0
+      speed: 9
+      damage: 42
+      homeOnEnemies: 0
+      homingStrength: 5
+      homingRange: 8
+      pierceCount: 0
+      bounceCount: 0
+      bounceRange: 5
+      explosionRadius: 0
+      growthPerSecond: 0
+      appliesStatus: 1
+      status: 4
+      statusChance: 0.5
+      statusDuration: 1.5
+      statusStrength: 1
+      directionPattern: 0
+      sizeMultiplier: 1
+      lifetimeMultiplier: 1
+    spawnedEffectPrefab: {fileID: 2859895427039593781, guid: 47e52233597d5764fbb76cc78b515f21, type: 3}
+    spawnCount: 6
+    areaRadius: 3
+    activeDuration: 0.8
+    orbitRadius: 1.5
+    orbitSpeed: 120
+    chainCount: 1
+    chainRange: 5
     effects: []

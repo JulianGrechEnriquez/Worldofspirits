@@ -136,13 +136,21 @@ namespace WorldOfSpirits.EditorTools
             so.FindProperty("abilityIndex").intValue = ability;
             so.FindProperty("spiritPrefab").objectReferenceValue = prefab;
             SerializedProperty modifiers = so.FindProperty("modifiers");
-            modifiers.arraySize = Mathf.Approximately(value, 0f) ? 0 : 1;
+            bool twinInvocation = id == "twin_invocation";
+            modifiers.arraySize = Mathf.Approximately(value, 0f) ? 0 : twinInvocation ? 2 : 1;
             if (modifiers.arraySize > 0)
             {
                 SerializedProperty modifier = modifiers.GetArrayElementAtIndex(0);
                 modifier.FindPropertyRelative("stat").enumValueIndex = (int)stat;
                 modifier.FindPropertyRelative("operation").enumValueIndex = (int)ModifierOperation.Add;
                 modifier.FindPropertyRelative("valuePerLevel").floatValue = value;
+                if (twinInvocation)
+                {
+                    SerializedProperty meleeModifier = modifiers.GetArrayElementAtIndex(1);
+                    meleeModifier.FindPropertyRelative("stat").enumValueIndex = (int)UpgradeStat.MeleeEcho;
+                    meleeModifier.FindPropertyRelative("operation").enumValueIndex = (int)ModifierOperation.Add;
+                    meleeModifier.FindPropertyRelative("valuePerLevel").floatValue = 1f;
+                }
             }
             so.ApplyModifiedPropertiesWithoutUndo();
             EditorUtility.SetDirty(card);
@@ -210,7 +218,7 @@ namespace WorldOfSpirits.EditorTools
             new Seed("Penetrating Force", "+1 projectile pierce.", UpgradeRarity.Rare, 3, UpgradeStat.Pierce, 1, "Bolt piercing three targets"),
             new Seed("Rebounding Essence", "+1 ricochet.", UpgradeRarity.Epic, 2, UpgradeStat.Ricochet, 1, "Zigzagging elemental bolt"),
             new Seed("Seeking Spirits", "Improves homing strength.", UpgradeRarity.Rare, 4, UpgradeStat.Homing, .20f, "Curved arrows around a target"),
-            new Seed("Twin Invocation", "+1 additional projectile where supported.", UpgradeRarity.Epic, 2, UpgradeStat.MultiShot, 1, "Mirrored spell bolts"),
+            new Seed("Twin Invocation", "+1 additional projectile and one mirrored melee strike. Ice Gauntlets manifest a second pair of fists.", UpgradeRarity.Epic, 1, UpgradeStat.MultiShot, 1, "Four mirrored spirit fists"),
             new Seed("Lingering Magic", "+15% effect duration.", UpgradeRarity.Uncommon, 5, UpgradeStat.Duration, .15f, "Hourglass filled with magic"),
             new Seed("Spirit Armor", "+8 armor, reducing incoming damage.", UpgradeRarity.Uncommon, 5, UpgradeStat.Armor, 8, "Spectral shoulder armor"),
             new Seed("Magnetic Surge", "Greatly increases pickup radius.", UpgradeRarity.Rare, 3, UpgradeStat.PickupRadius, .50f, "Screen-wide magnetic pulse")
@@ -234,6 +242,7 @@ namespace WorldOfSpirits.EditorTools
             new Seed("World Piercer", "Projectiles gain three pierces.", UpgradeRarity.Legendary, 1, UpgradeStat.Pierce, 3, "Beam crossing an army", UpgradeCategory.Legendary),
             new Seed("Endless Rebound", "Projectiles gain three ricochets.", UpgradeRarity.Legendary, 1, UpgradeStat.Ricochet, 3, "Infinite bouncing rune", UpgradeCategory.Legendary),
             new Seed("Living Arsenal", "Attack speed rises by 40%.", UpgradeRarity.Legendary, 1, UpgradeStat.AttackSpeed, .4f, "Orbiting spirit weapons", UpgradeCategory.Legendary),
+            new Seed("Spirit Master", "The primary spirit can cast its unlocked abilities while channeling its weapon.", UpgradeRarity.Legendary, 1, UpgradeStat.PrimarySpiritAbility, 1f, "Crown encircling a spirit and its weapon", UpgradeCategory.Legendary),
             new Seed("Perfect Resonance", "Critical chance rises by 25%.", UpgradeRarity.Legendary, 1, UpgradeStat.CriticalChance, .25f, "Perfectly aligned wave rings", UpgradeCategory.Legendary),
             new Seed("Cataclysmic Crits", "Critical damage rises by 100%.", UpgradeRarity.Legendary, 1, UpgradeStat.CriticalDamage, 1f, "Golden catastrophic impact", UpgradeCategory.Legendary),
             new Seed("Timeless Sorcery", "Effects last 75% longer.", UpgradeRarity.Legendary, 1, UpgradeStat.Duration, .75f, "Frozen clock in magic", UpgradeCategory.Legendary),

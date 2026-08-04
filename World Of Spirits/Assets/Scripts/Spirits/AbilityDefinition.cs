@@ -77,6 +77,7 @@ namespace WorldOfSpirits.Spirits
         [Min(0f)] public float growthPerSecond;
         public bool appliesStatus;
         public CombatStatus status;
+        [Range(0f, 1f)] public float statusChance = 1f;
         [Min(0f)] public float statusDuration = 2f;
         [Min(0f)] public float statusStrength = 2f;
         [Tooltip("Aimed Arc follows the ability target. Cardinal Then Diagonal unlocks north/south, then east/west, then diagonals as projectile count increases.")]
