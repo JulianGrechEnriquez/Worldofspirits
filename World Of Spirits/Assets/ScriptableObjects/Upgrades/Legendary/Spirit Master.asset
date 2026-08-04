@@ -10,21 +10,25 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ef4b4a2100beabc4d9dbab206fe54156, type: 3}
-  m_Name: Contract the Ice Spirit
+  m_Name: Spirit Master
   m_EditorClassIdentifier: Assembly-CSharp::WorldOfSpirits.Progression.Upgrades.UpgradeCardDefinition
-  cardId: contract_ice_spirit
-  cardName: Contract the Ice Spirit
-  description: Adds the Ice Spirit to your formation and unlocks its weapon and ability
-    upgrade paths.
-  flavorText: 
+  cardId: spirit_master
+  cardName: Spirit Master
+  description: The primary spirit can cast its unlocked abilities while channeling its weapon.
+  flavorText: Weapon and spirit move as one.
   icon: {fileID: 0}
-  suggestedIconTheme: Ancient spirit seal and elemental silhouette
-  category: 3
-  rarity: 2
+  suggestedIconTheme: Crown encircling a spirit and its weapon
+  category: 5
+  rarity: 4
   maximumLevel: 1
-  baseWeight: 50
+  minimumPlayerLevel: 1
+  baseWeight: 15
   repeatableAfterMaximum: 0
-  targetSpirit: {fileID: 11400000, guid: 27f800f6b91f2dd4cad8c2075102d7fa, type: 2}
+  requirements: []
+  targetSpirit: {fileID: 0}
   abilityIndex: -1
-  spiritPrefab: {fileID: 7463225176532276333, guid: 462f4298c22f44245a7dfaff38ff7a3c, type: 3}
-  modifiers: []
+  spiritPrefab: {fileID: 0}
+  modifiers:
+  - stat: 30
+    operation: 0
+    valuePerLevel: 1

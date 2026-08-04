@@ -12,17 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c14d7b9a23e841a49f0a001c950ad103, type: 3}
   m_Name: FireRunner Movement Profile
   m_EditorClassIdentifier: Assembly-CSharp::WorldOfSpirits.Crowd.EnemyMovementProfile
-  movementSpeed: 15
-  acceleration: 50
+  movementSpeed: 18
+  acceleration: 60
   stoppingDistance: 0.25
   collisionRadius: 0.34
-  separationRadius: 0.748
-  separationStrength: 1.15
+  separationRadius: 0.9
+  separationStrength: 3
   weight: 0.7
   pushStrength: 0.9
-  maximumNeighbours: 5
+  maximumNeighbours: 8
   seekWeight: 1.5
-  separationWeight: 0.8
+  separationWeight: 1.8
   avoidanceWeight: 1.65
   maximumSteeringForce: 4.5
   obstacleCheckDistance: 1.8

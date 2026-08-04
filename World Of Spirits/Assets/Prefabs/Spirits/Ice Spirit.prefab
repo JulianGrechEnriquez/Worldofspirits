@@ -259,7 +259,7 @@ MonoBehaviour:
   extendDuration: 0.12
   returnDuration: 0.18
   attackCooldown: 0.4
-  targetingRange: 7
+  targetingRange: 3
   baseDamage: 18
   damageIncreasePerLevel: 0.25
   hitRadius: 0.55

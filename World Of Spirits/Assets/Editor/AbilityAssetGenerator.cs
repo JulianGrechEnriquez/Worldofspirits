@@ -124,8 +124,19 @@ namespace WorldOfSpirits.EditorTools
             }
             if (spec.Name == "Tidal Wave")
             {
-                level.projectile.count = index == 0 ? 1 : index < 3 ? 2 : 4;
-                level.projectile.spreadAngle = index == 0 ? 0f : index < 3 ? 180f : 270f;
+                GameObject tsunami = AssetDatabase.LoadAssetAtPath<GameObject>(
+                    "Assets/Prefabs/Projectiles/Tsunami.prefab");
+                level.projectile.projectilePrefab = tsunami != null
+                    ? tsunami.GetComponent<ProjectileBase>()
+                    : null;
+                level.cooldown = 3f - index * 0.15f;
+                level.projectile.count = index == 0 ? 2 : index < 3 ? 4 : 8;
+                level.projectile.speed = 6.5f + index * 0.25f;
+                level.projectile.damage = 12f + index * 3f + (index == 3 ? 1f : 0f);
+                level.projectile.spreadAngle = 0f;
+                level.projectile.directionPattern = ProjectileDirectionPattern.CardinalThenDiagonal;
+                level.projectile.sizeMultiplier = index >= 2 ? 1.5f : 1f;
+                level.projectile.lifetimeMultiplier = index >= 2 ? 1.5f : 1f;
             }
             if (spec.Name == "Lightning Strike") level.spawnCount = index == 0 ? 3 : 6;
             if (spec.Name == "Chain Lightning Bolt") level.chainCount = index == 0 ? 3 : 5;
@@ -247,7 +258,7 @@ namespace WorldOfSpirits.EditorTools
             yield return new Spec("Earth", "Boulder Throw", "Throws bouncing boulders.", AbilityExecutionType.Projectile, AbilityTargetingMode.ClosestEnemy, "More bounces", "More damage", "Splits into smaller rocks", "Stuns enemies", "Explodes on final bounce");
             yield return new Spec("Earth", "Quicksand Domain", "Slows enemies around the player.", AbilityExecutionType.Area, AbilityTargetingMode.AroundPlayer, "Bigger radius", "Stronger slow", "Damage over time", "Pulls enemies inward", "Immobilizes elites briefly");
             yield return new Spec("Earth", "Stone Spikes", "Stone pillars erupt from the ground.", AbilityExecutionType.SpawnEffect, AbilityTargetingMode.RandomPositionNearPlayer, "More spikes", "Larger spikes", "Faster spawn rate", "Bleed effect", "Chain eruptions");
-            yield return new Spec("Water", "Tidal Wave", "A wave crashes outward, knocking enemies back.", AbilityExecutionType.Projectile, AbilityTargetingMode.PlayerFacing, "Wave in front", "Additional wave behind", "Wider waves", "Waves left and right");
+            yield return new Spec("Water", "Tidal Wave", "Tsunami waves damage and carry enemies, then explode at the end of their lifetime.", AbilityExecutionType.Projectile, AbilityTargetingMode.AroundPlayer, "Fires waves north and south", "Also fires waves east and west", "Increased wave size and lifetime", "Also fires in the four diagonal directions");
             yield return new Spec("Water", "Whirlpool", "Summons whirlpools that pull enemies inward.", AbilityExecutionType.SpawnEffect, AbilityTargetingMode.RandomPositionNearPlayer, "One whirlpool", "Increased radius", "Two whirlpools", "Damage over time");
             yield return new Spec("Water", "Rain Clouds", "Rain clouds follow enemies and damage them.", AbilityExecutionType.SpawnEffect, AbilityTargetingMode.ClosestEnemy, "One cloud", "Two clouds", "Increased rain damage", "Clouds move faster");
             yield return new Spec("Wind", "Razor Wind", "Wind blades shoot outward from the player.", AbilityExecutionType.Projectile, AbilityTargetingMode.AroundPlayer, "2 blades", "4 blades", "Increased projectile speed", "Blades pierce enemies");

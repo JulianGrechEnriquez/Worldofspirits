@@ -40,6 +40,12 @@ namespace WorldOfSpirits.Spirits
         SpawnEffect
     }
 
+    public enum ProjectileDirectionPattern
+    {
+        AimedArc,
+        CardinalThenDiagonal
+    }
+
     [Serializable]
     public class AbilityEffectData
     {
@@ -73,6 +79,10 @@ namespace WorldOfSpirits.Spirits
         public CombatStatus status;
         [Min(0f)] public float statusDuration = 2f;
         [Min(0f)] public float statusStrength = 2f;
+        [Tooltip("Aimed Arc follows the ability target. Cardinal Then Diagonal unlocks north/south, then east/west, then diagonals as projectile count increases.")]
+        public ProjectileDirectionPattern directionPattern;
+        [Min(0.1f)] public float sizeMultiplier = 1f;
+        [Min(0.1f)] public float lifetimeMultiplier = 1f;
     }
 
     [Serializable]

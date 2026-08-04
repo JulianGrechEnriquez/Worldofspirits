@@ -114,13 +114,20 @@ namespace WorldOfSpirits.Spirits
 
             int weaponLevel = spiritOwner != null ? spiritOwner.Progression.WeaponLevel : 1;
             float scaledDamage = damage * (1f + damageIncreasePerWeaponLevel * Mathf.Max(0, weaponLevel - 1));
-            target.TakeDamage(DamageContext.Weapon(
+            DamageContext damageContext = DamageContext.Weapon(
                 scaledDamage,
                 spiritOwner != null ? spiritOwner.transform : transform,
                 DamageElementUtility.FromSpiritName(
                     spiritOwner != null && spiritOwner.Definition != null
                         ? spiritOwner.Definition.SpiritName
-                        : string.Empty)));
+                        : string.Empty));
+            int strikeCount = upgradeStats != null
+                ? upgradeStats.GetMeleeStrikeCount(1)
+                : 1;
+            for (int strike = 0; strike < strikeCount; strike++)
+            {
+                target.TakeDamage(damageContext);
+            }
             float attackSpeed = upgradeStats != null ? upgradeStats.GetMultiplier(UpgradeStat.AttackSpeed) : 1f;
             nextHitTimes[targetId] = Time.time + hitCooldownPerEnemy / attackSpeed;
         }

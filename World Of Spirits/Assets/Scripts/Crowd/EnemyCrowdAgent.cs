@@ -269,26 +269,40 @@ namespace WorldOfSpirits.Crowd
                 }
 
                 Vector2 offset = position - other.Position;
-                float desiredDistance =
+                // Start steering before colliders touch. Using only the two
+                // collision radii allowed fast enemies to occupy almost the
+                // same position before any separation force was applied.
+                float collisionDistance =
                     profile.CollisionRadius + other.CollisionRadius;
+                float desiredDistance = Mathf.Max(
+                    collisionDistance,
+                    profile.SeparationRadius,
+                    other.profile.SeparationRadius);
                 float distanceSquared = offset.sqrMagnitude;
                 if (distanceSquared >= desiredDistance * desiredDistance)
                 {
                     continue;
                 }
 
+                Vector2 separationDirection;
+                float distance;
                 if (distanceSquared < 0.0001f)
                 {
                     float angle = (handle * 137.508f) * Mathf.Deg2Rad;
-                    offset = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
-                    distanceSquared = 1f;
+                    separationDirection =
+                        new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
+                    distance = 0f;
+                }
+                else
+                {
+                    distance = Mathf.Sqrt(distanceSquared);
+                    separationDirection = offset / distance;
                 }
 
-                float distance = Mathf.Sqrt(distanceSquared);
                 float overlap = 1f - Mathf.Clamp01(distance / desiredDistance);
                 float priority = other.PushStrength /
                     Mathf.Max(0.01f, profile.Weight + other.Weight);
-                force += (offset / distance) *
+                force += separationDirection *
                     overlap * priority * profile.SeparationStrength;
                 used++;
             }

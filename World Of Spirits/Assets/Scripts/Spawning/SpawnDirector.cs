@@ -35,20 +35,27 @@ namespace WorldOfSpirits.Spawning
         [Tooltip("Maximum enemies a single budget cycle may create. This prevents frame spikes.")]
         [SerializeField, Min(1)] private int maximumSpawnsPerCycle = 20;
 
-        [Header("Difficulty Over Time")]
-        [Tooltip("Spawn budget granted each cycle. The horizontal axis is elapsed run time in minutes.")]
-        [SerializeField] private AnimationCurve budgetByMinute =
-            new AnimationCurve(
-                new Keyframe(0f, 4f),
-                new Keyframe(5f, 12f),
-                new Keyframe(10f, 24f));
+        [Header("Difficulty Milestones")]
+        [Tooltip("Minutes between difficulty increases. With four milestones, 2 creates increases at 2, 4, 6, and 8 minutes.")]
+        [SerializeField, Min(0.1f)] private float minutesBetweenMilestones = 2f;
 
-        [Tooltip("Seconds between budget cycles. The horizontal axis is elapsed run time in minutes.")]
-        [SerializeField] private AnimationCurve intervalByMinute =
-            new AnimationCurve(
-                new Keyframe(0f, 2f),
-                new Keyframe(5f, 1.25f),
-                new Keyframe(10f, 0.65f));
+        [Tooltip("Number of difficulty increases before the run stays at maximum difficulty.")]
+        [SerializeField, Min(0)] private int maximumDifficultyMilestones = 4;
+
+        [Tooltip("Spawn budget before the first milestone.")]
+        [SerializeField, Min(0)] private int startingSpawnBudget = 4;
+
+        [Tooltip("Spawn budget added whenever a milestone is reached.")]
+        [SerializeField, Min(0)] private int spawnBudgetIncreasePerMilestone = 4;
+
+        [Tooltip("Seconds between spawn cycles before the first milestone.")]
+        [SerializeField, Min(0.05f)] private float startingSpawnInterval = 2f;
+
+        [Tooltip("Multiplier applied to the spawn interval at every milestone. Lower values make enemies appear faster.")]
+        [SerializeField, Range(0.01f, 1f)] private float spawnIntervalMultiplierPerMilestone = 0.8f;
+
+        [Tooltip("Fastest allowed delay between spawn cycles, in seconds.")]
+        [SerializeField, Min(0.05f)] private float minimumSpawnInterval = 0.25f;
 
         [Tooltip("Chance that a cycle selects elite entries. The horizontal axis is elapsed run time in minutes.")]
         [SerializeField] private AnimationCurve eliteChanceByMinute =
@@ -138,9 +145,9 @@ namespace WorldOfSpirits.Spawning
             }
 
             float elapsedMinutes = elapsedRunTime / 60f;
-            float interval = Mathf.Max(0.05f, intervalByMinute.Evaluate(elapsedMinutes));
+            float interval = EvaluateSpawnInterval(elapsedMinutes);
             nextSpawnTime = Time.time + interval;
-            SpendBudget(Mathf.Max(0, Mathf.FloorToInt(budgetByMinute.Evaluate(elapsedMinutes))));
+            SpendBudget(EvaluateSpawnBudget(elapsedMinutes));
         }
 
         public void PauseSpawning()
@@ -209,6 +216,27 @@ namespace WorldOfSpirits.Spawning
             activeBoss.Died += HandleBossDied;
             BossStarted?.Invoke(activeBoss);
             return true;
+        }
+
+        private int EvaluateSpawnBudget(float elapsedMinutes)
+        {
+            return startingSpawnBudget +
+                   EvaluateDifficultyMilestone(elapsedMinutes) * spawnBudgetIncreasePerMilestone;
+        }
+
+        private float EvaluateSpawnInterval(float elapsedMinutes)
+        {
+            int milestone = EvaluateDifficultyMilestone(elapsedMinutes);
+            float interval = startingSpawnInterval *
+                             Mathf.Pow(spawnIntervalMultiplierPerMilestone, milestone);
+            return Mathf.Max(minimumSpawnInterval, interval);
+        }
+
+        private int EvaluateDifficultyMilestone(float elapsedMinutes)
+        {
+            float milestoneMinutes = Mathf.Max(0.1f, minutesBetweenMilestones);
+            int milestone = Mathf.FloorToInt(elapsedMinutes / milestoneMinutes);
+            return Mathf.Clamp(milestone, 0, maximumDifficultyMilestones);
         }
 
         private void SpendBudget(int budget)
@@ -412,6 +440,14 @@ namespace WorldOfSpirits.Spawning
         {
             maximumAliveEnemies = Mathf.Max(1, maximumAliveEnemies);
             maximumSpawnsPerCycle = Mathf.Max(1, maximumSpawnsPerCycle);
+            minutesBetweenMilestones = Mathf.Max(0.1f, minutesBetweenMilestones);
+            maximumDifficultyMilestones = Mathf.Max(0, maximumDifficultyMilestones);
+            startingSpawnBudget = Mathf.Max(0, startingSpawnBudget);
+            spawnBudgetIncreasePerMilestone = Mathf.Max(0, spawnBudgetIncreasePerMilestone);
+            startingSpawnInterval = Mathf.Max(0.05f, startingSpawnInterval);
+            spawnIntervalMultiplierPerMilestone =
+                Mathf.Clamp(spawnIntervalMultiplierPerMilestone, 0.01f, 1f);
+            minimumSpawnInterval = Mathf.Max(0.05f, minimumSpawnInterval);
             minimumSpawnRadius = Mathf.Max(0.1f, minimumSpawnRadius);
             maximumSpawnRadius = Mathf.Max(minimumSpawnRadius, maximumSpawnRadius);
             viewportMargin = Mathf.Max(0f, viewportMargin);

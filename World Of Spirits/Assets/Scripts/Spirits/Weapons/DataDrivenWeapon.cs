@@ -148,7 +148,13 @@ namespace WorldOfSpirits.Spirits
                         spiritOwner != null && spiritOwner.Definition != null
                             ? spiritOwner.Definition.SpiritName
                             : string.Empty));
-                target.TakeDamage(damage);
+                int strikeCount = upgradeStats != null
+                    ? upgradeStats.GetMeleeStrikeCount(1)
+                    : 1;
+                for (int strike = 0; strike < strikeCount; strike++)
+                {
+                    target.TakeDamage(damage);
+                }
                 float attackSpeed = upgradeStats != null
                     ? upgradeStats.GetMultiplier(UpgradeStat.AttackSpeed)
                     : 1f;

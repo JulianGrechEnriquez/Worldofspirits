@@ -8489,7 +8489,7 @@ MonoBehaviour:
   maximumSpawnRadius: 18
   viewportMargin: 0.05
   clearanceRadius: 0.4
-  minimumEnemySpacing: 1
+  minimumEnemySpacing: 1.2
   positionAttempts: 12
   validGroundLayers:
     serializedVersion: 2
@@ -8530,7 +8530,7 @@ MonoBehaviour:
   playerCharacter: {fileID: 1970536390}
   cellSize: 2
   expectedEnemyCapacity: 1000
-  steeringRefreshesPerStep: 30
+  steeringRefreshesPerStep: 100
   enemyLayer: 6
   playerLayer: 7
   obstacleLayers:

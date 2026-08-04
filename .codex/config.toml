@@ -1,0 +1,7 @@
+[mcp_servers.unity_ai_game_developer]
+url = "https://ai-game.dev/mcp"
+auth = "oauth"
+enabled = true
+startup_timeout_sec = 30
+tool_timeout_sec = 120
+default_tools_approval_mode = "writes"

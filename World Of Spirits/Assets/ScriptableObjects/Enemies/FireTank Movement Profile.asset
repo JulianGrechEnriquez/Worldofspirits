@@ -12,17 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c14d7b9a23e841a49f0a001c950ad103, type: 3}
   m_Name: FireTank Movement Profile
   m_EditorClassIdentifier: Assembly-CSharp::WorldOfSpirits.Crowd.EnemyMovementProfile
-  movementSpeed: 4
-  acceleration: 18
+  movementSpeed: 6
+  acceleration: 24
   stoppingDistance: 0.45
   collisionRadius: 0.4
-  separationRadius: 0.9
-  separationStrength: 1.5
+  separationRadius: 1
+  separationStrength: 3
   weight: 1
   pushStrength: 1
-  maximumNeighbours: 6
+  maximumNeighbours: 8
   seekWeight: 1
-  separationWeight: 1.25
+  separationWeight: 2
   avoidanceWeight: 1.5
   maximumSteeringForce: 2.5
   obstacleCheckDistance: 1.25

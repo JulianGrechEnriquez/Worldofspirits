@@ -13,22 +13,22 @@ MonoBehaviour:
   m_Name: Water - Tidal Wave
   m_EditorClassIdentifier: Assembly-CSharp::WorldOfSpirits.Spirits.AbilityDefinition
   abilityName: Tidal Wave
-  description: A wave crashes outward, knocking enemies back.
+  description: Tsunami waves damage and carry enemies, then explode at the end of their lifetime.
   icon: {fileID: 21300000, guid: b4e2d8f1187a4ed49f247ec6a75d9302, type: 3}
   executionType: 0
   targetingMode: 4
   levels:
   - level: 1
-    upgradeDescription: Wave in front
-    cooldown: 2
+    upgradeDescription: Fires tsunami waves north and south
+    cooldown: 3
     targetingRange: 15
     projectile:
-      projectilePrefab: {fileID: 0}
-      count: 1
+      projectilePrefab: {fileID: 740000000000000004, guid: c98bb859f58f4079a7ba3640df0ca5c8, type: 3}
+      count: 2
       spreadAngle: 0
       spreadMode: 0
-      speed: 9
-      damage: 10
+      speed: 6.5
+      damage: 12
       homeOnEnemies: 0
       homingStrength: 6
       homingRange: 10
@@ -39,6 +39,9 @@ MonoBehaviour:
       status: 0
       statusDuration: 2
       statusStrength: 2
+      directionPattern: 1
+      sizeMultiplier: 1
+      lifetimeMultiplier: 1
     spawnedEffectPrefab: {fileID: 0}
     spawnCount: 1
     areaRadius: 3
@@ -48,16 +51,16 @@ MonoBehaviour:
     chainRange: 5
     effects: []
   - level: 2
-    upgradeDescription: Additional wave behind
-    cooldown: 1.88
+    upgradeDescription: Also fires tsunami waves east and west
+    cooldown: 2.85
     targetingRange: 15
     projectile:
-      projectilePrefab: {fileID: 0}
-      count: 2
-      spreadAngle: 180
+      projectilePrefab: {fileID: 740000000000000004, guid: c98bb859f58f4079a7ba3640df0ca5c8, type: 3}
+      count: 4
+      spreadAngle: 0
       spreadMode: 0
-      speed: 9.5
-      damage: 13
+      speed: 6.75
+      damage: 15
       homeOnEnemies: 0
       homingStrength: 6
       homingRange: 10
@@ -68,6 +71,9 @@ MonoBehaviour:
       status: 0
       statusDuration: 2
       statusStrength: 2
+      directionPattern: 1
+      sizeMultiplier: 1
+      lifetimeMultiplier: 1
     spawnedEffectPrefab: {fileID: 0}
     spawnCount: 1
     areaRadius: 3.5
@@ -77,16 +83,16 @@ MonoBehaviour:
     chainRange: 6
     effects: []
   - level: 3
-    upgradeDescription: Wider waves
-    cooldown: 1.76
+    upgradeDescription: Increases tsunami size and lifetime
+    cooldown: 2.7
     targetingRange: 15
     projectile:
-      projectilePrefab: {fileID: 0}
-      count: 2
-      spreadAngle: 180
+      projectilePrefab: {fileID: 740000000000000004, guid: c98bb859f58f4079a7ba3640df0ca5c8, type: 3}
+      count: 4
+      spreadAngle: 0
       spreadMode: 0
-      speed: 10
-      damage: 16
+      speed: 7
+      damage: 18
       homeOnEnemies: 0
       homingStrength: 6
       homingRange: 10
@@ -97,6 +103,9 @@ MonoBehaviour:
       status: 0
       statusDuration: 2
       statusStrength: 2
+      directionPattern: 1
+      sizeMultiplier: 1.5
+      lifetimeMultiplier: 1.5
     spawnedEffectPrefab: {fileID: 0}
     spawnCount: 1
     areaRadius: 5
@@ -106,16 +115,16 @@ MonoBehaviour:
     chainRange: 7
     effects: []
   - level: 4
-    upgradeDescription: Waves left and right
-    cooldown: 1.64
+    upgradeDescription: Also fires waves in the four remaining diagonal directions
+    cooldown: 2.55
     targetingRange: 15
     projectile:
-      projectilePrefab: {fileID: 0}
-      count: 4
-      spreadAngle: 270
+      projectilePrefab: {fileID: 740000000000000004, guid: c98bb859f58f4079a7ba3640df0ca5c8, type: 3}
+      count: 8
+      spreadAngle: 0
       spreadMode: 0
-      speed: 10.5
-      damage: 19
+      speed: 7.25
+      damage: 22
       homeOnEnemies: 0
       homingStrength: 6
       homingRange: 10
@@ -126,6 +135,9 @@ MonoBehaviour:
       status: 0
       statusDuration: 2
       statusStrength: 2
+      directionPattern: 1
+      sizeMultiplier: 1.5
+      lifetimeMultiplier: 1.5
     spawnedEffectPrefab: {fileID: 0}
     spawnCount: 1
     areaRadius: 5.5

@@ -23,7 +23,7 @@ MonoBehaviour:
     weaponPrefab: {fileID: 610920000000000001, guid: 6e1cbbbc9eeb42a39c228475056ffe82, type: 3}
     damage: 18
     attackCooldown: 0.4
-    targetingRange: 7
+    targetingRange: 3
     projectileSpeed: 12
     homeOnEnemies: 0
     homingStrength: 6
@@ -43,7 +43,7 @@ MonoBehaviour:
     weaponPrefab: {fileID: 610920000000000001, guid: 6e1cbbbc9eeb42a39c228475056ffe82, type: 3}
     damage: 24
     attackCooldown: 0.34
-    targetingRange: 7.5
+    targetingRange: 3.2
     projectileSpeed: 12
     homeOnEnemies: 0
     homingStrength: 6
@@ -63,7 +63,7 @@ MonoBehaviour:
     weaponPrefab: {fileID: 610920000000000001, guid: 6e1cbbbc9eeb42a39c228475056ffe82, type: 3}
     damage: 31
     attackCooldown: 0.3
-    targetingRange: 8
+    targetingRange: 3.5
     projectileSpeed: 12
     homeOnEnemies: 0
     homingStrength: 6
@@ -83,7 +83,7 @@ MonoBehaviour:
     weaponPrefab: {fileID: 610920000000000001, guid: 6e1cbbbc9eeb42a39c228475056ffe82, type: 3}
     damage: 40
     attackCooldown: 0.26
-    targetingRange: 9
+    targetingRange: 3.8
     projectileSpeed: 12
     homeOnEnemies: 0
     homingStrength: 6
@@ -103,7 +103,7 @@ MonoBehaviour:
     weaponPrefab: {fileID: 610920000000000001, guid: 6e1cbbbc9eeb42a39c228475056ffe82, type: 3}
     damage: 52
     attackCooldown: 0.22
-    targetingRange: 10
+    targetingRange: 4.1
     projectileSpeed: 12
     homeOnEnemies: 0
     homingStrength: 6

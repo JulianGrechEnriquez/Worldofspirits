@@ -70,6 +70,7 @@ namespace WorldOfSpirits.Spirits
         private GameObject pooledVisualPrefab;
         private Transform originOverride;
         private Transform activeGauntlet;
+        private Transform punchTarget;
         private Vector2 punchDirection = Vector2.right;
         private Vector3 punchStart;
         private Vector3 punchEnd;
@@ -145,24 +146,21 @@ namespace WorldOfSpirits.Spirits
                 return;
             }
 
-            Vector2 toTarget = target.Transform.position - center.position;
-            if (toTarget.sqrMagnitude <= 0.0001f)
-            {
-                return;
-            }
-
-            punchDirection = toTarget.normalized;
             activeGauntlet = useLeftNext ? leftGauntlet : rightGauntlet;
             useLeftNext = !useLeftNext;
             punchStart = GetRestPosition(activeGauntlet == leftGauntlet);
-            float activePunchDistance =
-                ActiveLevel != null ? ActiveLevel.punchDistance : punchDistance;
-            punchEnd = punchStart + (Vector3)(punchDirection * activePunchDistance);
+            punchTarget = target.Transform;
+            if (!UpdatePunchAim())
+            {
+                activeGauntlet = null;
+                punchTarget = null;
+                return;
+            }
+
             phaseTime = 0f;
             targetsHit = 0;
             hitTargets.Clear();
             phase = PunchPhase.Extending;
-            FaceDirection(activeGauntlet, punchDirection);
         }
 
         public void SetOriginOverride(Transform origin)
@@ -243,6 +241,7 @@ namespace WorldOfSpirits.Spirits
             {
                 phase = PunchPhase.Idle;
                 activeGauntlet = null;
+                punchTarget = null;
                 hitTargets.Clear();
                 PositionAtRest();
             }
@@ -267,6 +266,9 @@ namespace WorldOfSpirits.Spirits
             phaseTime += Time.deltaTime;
             if (phase == PunchPhase.Extending)
             {
+                // Track the target during extension so a fast enemy cannot
+                // sidestep the alternating second punch.
+                UpdatePunchAim();
                 float duration = ActiveLevel != null
                     ? ActiveLevel.extendDuration
                     : extendDuration;
@@ -298,6 +300,7 @@ namespace WorldOfSpirits.Spirits
                 {
                     phase = PunchPhase.Idle;
                     activeGauntlet = null;
+                    punchTarget = null;
                     PositionAtRest();
                 }
             }
@@ -352,7 +355,13 @@ namespace WorldOfSpirits.Spirits
                         spiritOwner != null && spiritOwner.Definition != null
                             ? spiritOwner.Definition.SpiritName
                             : string.Empty));
-                target.TakeDamage(damageContext);
+                int strikeCount = upgradeStats != null
+                    ? upgradeStats.GetMeleeStrikeCount(1)
+                    : 1;
+                for (int strike = 0; strike < strikeCount; strike++)
+                {
+                    target.TakeDamage(damageContext);
+                }
                 float activeStatusDuration = ActiveLevel != null
                     ? ActiveLevel.statusDuration
                     : freezeDuration;
@@ -417,6 +426,27 @@ namespace WorldOfSpirits.Spirits
         {
         }
 
+        private bool UpdatePunchAim()
+        {
+            if (punchTarget == null || !punchTarget.gameObject.activeInHierarchy)
+            {
+                return false;
+            }
+
+            Vector2 toTarget = punchTarget.position - punchStart;
+            if (toTarget.sqrMagnitude <= 0.0001f)
+            {
+                return false;
+            }
+
+            punchDirection = toTarget.normalized;
+            float activePunchDistance =
+                ActiveLevel != null ? ActiveLevel.punchDistance : punchDistance;
+            punchEnd = punchStart + (Vector3)(punchDirection * activePunchDistance);
+            FaceDirection(activeGauntlet, punchDirection);
+            return true;
+        }
+
         private void PositionAtRest()
         {
             if (leftGauntlet == null || rightGauntlet == null)
@@ -455,6 +485,7 @@ namespace WorldOfSpirits.Spirits
         {
             phase = PunchPhase.Idle;
             activeGauntlet = null;
+            punchTarget = null;
             hitTargets.Clear();
             EnsurePooledVisuals();
             PositionAtRest();
@@ -465,6 +496,7 @@ namespace WorldOfSpirits.Spirits
         {
             phase = PunchPhase.Idle;
             activeGauntlet = null;
+            punchTarget = null;
             hitTargets.Clear();
             combatActive = false;
             ReleasePooledVisuals();

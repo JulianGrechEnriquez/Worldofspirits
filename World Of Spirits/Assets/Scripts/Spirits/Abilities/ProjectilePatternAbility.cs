@@ -80,7 +80,7 @@ namespace WorldOfSpirits.Spirits
                 return (target.Transform.position - transform.position).normalized;
             }
 
-            return context.Player != null ? (context.Player.right).normalized : Vector2.right;
+            return context.Player != null ? ((Vector2)context.Player.right).normalized : Vector2.right;
         }
 
         private void SpawnArc(Vector2 centerDirection, int count, float arc, bool fullCircle)

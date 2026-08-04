@@ -136,6 +136,16 @@ namespace WorldOfSpirits.Spirits
             if (data.projectilePrefab == null) return;
             Vector2 center = ResolveDirection(context, level);
             int count = Mathf.Max(1, data.count + (UpgradeStats != null ? Mathf.RoundToInt(UpgradeStats.GetFlat(UpgradeStat.MultiShot)) : 0));
+
+            if (data.directionPattern == ProjectileDirectionPattern.CardinalThenDiagonal)
+            {
+                Vector3 spawnPosition = context.Player != null
+                    ? context.Player.position
+                    : transform.position;
+                CastDirectionalProjectiles(data, count, spawnPosition);
+                return;
+            }
+
             float centerAngle = Mathf.Atan2(center.y, center.x) * Mathf.Rad2Deg;
             for (int i = 0; i < count; i++)
             {
@@ -145,22 +155,47 @@ namespace WorldOfSpirits.Spirits
                 else
                     angle = centerAngle - data.spreadAngle * 0.5f + (count > 1 ? data.spreadAngle * i / (count - 1) : 0f);
 
-                Vector2 direction = new Vector2(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad));
-                ProjectileBase projectile = ProjectilePool.Spawn(
-                    data.projectilePrefab, transform.position, Quaternion.identity);
-                projectile.ConfigureHoming(data.homeOnEnemies, data.homingStrength, data.homingRange);
-                projectile.ConfigureUpgradeModifiers(UpgradeStats);
-                DamageContext damage = CreateSpiritDamage(data.damage);
-                projectile.ConfigureDamageContext(damage);
-                if (projectile is ConfigurableProjectile configurable)
-                {
-                    configurable.Configure(data.pierceCount, data.explosionRadius, data.growthPerSecond,
-                        data.appliesStatus, data.status, data.statusDuration, data.statusStrength,
-                        data.bounceCount, data.bounceRange);
-                }
-                float speed = data.speed * (UpgradeStats != null ? UpgradeStats.GetMultiplier(UpgradeStat.ProjectileSpeed) : 1f);
-                projectile.Launch(direction, speed, damage.BaseDamage, Faction.Player);
+                SpawnProjectile(data, new Vector2(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad)), transform.position);
             }
+        }
+
+        private void CastDirectionalProjectiles(AbilityProjectileData data, int count, Vector3 spawnPosition)
+        {
+            Vector2[] unlockOrder =
+            {
+                Vector2.up, Vector2.down, Vector2.right, Vector2.left,
+                new Vector2(1f, 1f).normalized, new Vector2(-1f, 1f).normalized,
+                new Vector2(1f, -1f).normalized, new Vector2(-1f, -1f).normalized
+            };
+
+            for (int i = 0; i < count; i++)
+            {
+                Vector2 direction = i < unlockOrder.Length
+                    ? unlockOrder[i]
+                    : new Vector2(
+                        Mathf.Cos(Mathf.PI * 2f * i / count),
+                        Mathf.Sin(Mathf.PI * 2f * i / count));
+                SpawnProjectile(data, direction, spawnPosition);
+            }
+        }
+
+        private void SpawnProjectile(AbilityProjectileData data, Vector2 direction, Vector3 spawnPosition)
+        {
+            ProjectileBase projectile = ProjectilePool.Spawn(
+                data.projectilePrefab, spawnPosition, Quaternion.identity);
+            projectile.ConfigureHoming(data.homeOnEnemies, data.homingStrength, data.homingRange);
+            projectile.ConfigureUpgradeModifiers(UpgradeStats);
+            projectile.ConfigureCastModifiers(data.sizeMultiplier, data.lifetimeMultiplier);
+            DamageContext damage = CreateSpiritDamage(data.damage);
+            projectile.ConfigureDamageContext(damage);
+            if (projectile is ConfigurableProjectile configurable)
+            {
+                configurable.Configure(data.pierceCount, data.explosionRadius, data.growthPerSecond,
+                    data.appliesStatus, data.status, data.statusDuration, data.statusStrength,
+                    data.bounceCount, data.bounceRange);
+            }
+            float speed = data.speed * (UpgradeStats != null ? UpgradeStats.GetMultiplier(UpgradeStat.ProjectileSpeed) : 1f);
+            projectile.Launch(direction, speed, damage.BaseDamage, Faction.Player);
         }
 
         private void CastArea(SpiritAbilityContext context, AbilityLevelData level)

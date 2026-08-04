@@ -14,7 +14,7 @@ namespace WorldOfSpirits.Progression.Upgrades
         ExperienceGain, GoldGain, HealthRegeneration, DodgeChance, ShieldGeneration,
         HealingPower, SpiritDamage, AreaSize, Knockback, ProjectileSpeed,
         EliteDamage, ExecuteThreshold, ProjectileSize, Pierce, Ricochet,
-        Homing, MultiShot, Duration, Armor, Count
+        Homing, MultiShot, Duration, Armor, MeleeEcho, PrimarySpiritAbility, Count
     }
 
     public enum ModifierOperation { Add, Multiply }

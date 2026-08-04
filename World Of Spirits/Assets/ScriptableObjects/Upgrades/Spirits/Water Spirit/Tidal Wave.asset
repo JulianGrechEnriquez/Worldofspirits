@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WorldOfSpirits.Progression.Upgrades.UpgradeCardDefinition
   cardId: ability_water_spirit_0
   cardName: Tidal Wave
-  description: Improves this spirit's first ability.
+  description: Fires enemy-dragging tsunami waves that explode at the end of their lifetime.
   flavorText: 
   icon: {fileID: 21300000, guid: b4e2d8f1187a4ed49f247ec6a75d9302, type: 3}
   suggestedIconTheme: Elemental ability glyph

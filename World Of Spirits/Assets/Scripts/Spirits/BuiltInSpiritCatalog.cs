@@ -31,7 +31,7 @@ namespace WorldOfSpirits.Spirits
                 Ability("Quicksand Domain", "Slows enemies around the player.", "Bigger radius", "Stronger slow", "Damage over time", "Pulls enemies inward", "Immobilizes elites briefly"),
                 Ability("Stone Spikes", "Stone pillars erupt from the ground.", "More spikes", "Larger spikes", "Faster spawn rate", "Bleed effect", "Chain eruptions"));
             Add(definitions, "Water", "Leviathan", "Water Trident",
-                Ability("Tidal Wave", "A wave crashes outward, knocking enemies back.", "Fires a wave in front of the player", "Fires an additional wave behind the player", "Waves become wider", "Fires waves to the left and right"),
+                Ability("Tidal Wave", "Tsunami waves damage and carry enemies, then explode at the end of their lifetime.", "Fires waves north and south", "Also fires waves east and west", "Increased wave size and lifetime", "Also fires in the four diagonal directions"),
                 Ability("Whirlpool", "Summons whirlpools that pull enemies inward.", "Summons one whirlpool near the player", "Whirlpool radius increased", "Summons two whirlpools", "Whirlpool deals damage over time"),
                 Ability("Rain Clouds", "Rain clouds follow enemies and continuously damage them.", "One cloud", "Two clouds", "Increased rain damage", "Clouds move faster"));
             Add(definitions, "Wind", "Roc", "Chakrams",

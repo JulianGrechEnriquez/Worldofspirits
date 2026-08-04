@@ -10,19 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ef4b4a2100beabc4d9dbab206fe54156, type: 3}
-  m_Name: Twin Invocation
+  m_Name: Split Shot
   m_EditorClassIdentifier: Assembly-CSharp::WorldOfSpirits.Progression.Upgrades.UpgradeCardDefinition
-  cardId: twin_invocation
-  cardName: Twin Invocation
-  description: Projectiles fire one additional shot, and melee weapons strike one additional time.
-  flavorText: 
+  cardId: split_shot
+  cardName: Split Shot
+  description: +1 projectile for projectile weapons and projectile abilities.
+  flavorText: One cast becomes two.
   icon: {fileID: 0}
-  suggestedIconTheme: Mirrored spell bolts
+  suggestedIconTheme: One glowing projectile dividing into two
   category: 0
-  rarity: 3
-  maximumLevel: 1
+  rarity: 2
+  maximumLevel: 2
   minimumPlayerLevel: 1
-  baseWeight: 100
+  baseWeight: 80
   repeatableAfterMaximum: 0
   requirements: []
   targetSpirit: {fileID: 0}
@@ -30,8 +30,5 @@ MonoBehaviour:
   spiritPrefab: {fileID: 0}
   modifiers:
   - stat: 26
-    operation: 0
-    valuePerLevel: 1
-  - stat: 29
     operation: 0
     valuePerLevel: 1

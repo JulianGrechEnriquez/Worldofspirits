@@ -36,6 +36,8 @@ namespace WorldOfSpirits.Combat
         private Vector3 authoredScale;
         private float lifetimeMultiplier = 1f;
         private float projectileScaleMultiplier = 1f;
+        private float castLifetimeMultiplier = 1f;
+        private float castScaleMultiplier = 1f;
         private DamageContext damageContext;
         private bool hasConfiguredDamageContext;
         protected UpgradeRuntimeStats UpgradeStats { get; private set; }
@@ -64,11 +66,11 @@ namespace WorldOfSpirits.Combat
             if (!hasConfiguredDamageContext) damageContext = new DamageContext(damage);
             OwnerFaction = ownerFaction;
             launchSpeed = speed;
-            despawnTime = Time.time + lifetime * lifetimeMultiplier;
+            despawnTime = Time.time + lifetime * lifetimeMultiplier * castLifetimeMultiplier;
             nextHomingTargetRefresh = Time.time;
             homingTarget = null;
             homingIgnoredTargets.Clear();
-            transform.localScale = authoredScale * projectileScaleMultiplier;
+            transform.localScale = authoredScale * projectileScaleMultiplier * castScaleMultiplier;
             Vector2 normalizedDirection = direction.normalized;
 
             FaceDirection(normalizedDirection);
@@ -98,6 +100,8 @@ namespace WorldOfSpirits.Combat
             homingIgnoredTargets.Clear();
             lifetimeMultiplier = 1f;
             projectileScaleMultiplier = 1f;
+            castLifetimeMultiplier = 1f;
+            castScaleMultiplier = 1f;
             damageContext = default;
             hasConfiguredDamageContext = false;
             ResetPooledConfiguration(prefab);
@@ -150,6 +154,13 @@ namespace WorldOfSpirits.Combat
             hasConfiguredDamageContext = true;
         }
 
+        public void ConfigureCastModifiers(float sizeMultiplier, float durationMultiplier)
+        {
+            castScaleMultiplier = Mathf.Max(0.1f, sizeMultiplier);
+            castLifetimeMultiplier = Mathf.Max(0.1f, durationMultiplier);
+            transform.localScale = authoredScale * projectileScaleMultiplier * castScaleMultiplier;
+        }
+
         protected DamageContext DamageSourceContext => damageContext;
         protected float GetDamageAgainst(IDamageable target) =>
             DamageResolver.Calculate(damageContext, target);
@@ -170,7 +181,7 @@ namespace WorldOfSpirits.Combat
         {
             if (Time.time >= despawnTime)
             {
-                Despawn();
+                OnLifetimeExpired();
                 return;
             }
 
@@ -201,6 +212,8 @@ namespace WorldOfSpirits.Combat
                 Mathf.Clamp01(homingStrength * Time.deltaTime));
             FaceDirection(Body.linearVelocity);
         }
+
+        protected virtual void OnLifetimeExpired() => Despawn();
 
         private void FaceDirection(Vector2 direction)
         {

@@ -107,6 +107,12 @@ namespace WorldOfSpirits.Progression.Upgrades
         public int GetProjectileCount(int baseCount) =>
             Mathf.Max(1, baseCount + Mathf.RoundToInt(GetFlat(UpgradeStat.MultiShot)));
 
+        public int GetMeleeStrikeCount(int baseCount) =>
+            Mathf.Max(1, baseCount + Mathf.RoundToInt(GetFlat(UpgradeStat.MeleeEcho)));
+
+        public bool PrimarySpiritAbilitiesEnabled =>
+            GetFlat(UpgradeStat.PrimarySpiritAbility) > 0f;
+
         public float ScaleDuration(float baseDuration) =>
             baseDuration * GetMultiplier(UpgradeStat.Duration);
 

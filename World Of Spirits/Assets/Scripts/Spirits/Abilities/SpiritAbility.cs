@@ -45,7 +45,9 @@ namespace WorldOfSpirits.Spirits
 
             // Support spirits continue casting in either movement state. Movement
             // restrictions only control the currently selected primary spirit.
-            bool movementStateAllowed = !context.IsPrimary ||
+            bool primaryAbilityMastered = UpgradeStats != null &&
+                UpgradeStats.PrimarySpiritAbilitiesEnabled;
+            bool movementStateAllowed = !context.IsPrimary || primaryAbilityMastered ||
                 (context.PlayerIsMoving ? castWhileMoving : castWhileStandingStill);
             if (!movementStateAllowed || !CanCast(context))
             {
