@@ -26,13 +26,13 @@ MonoBehaviour:
       projectilePrefab: {fileID: 750000000000000007, guid: 031353b371fa441aa321a8d33c4d1534, type: 3}
       count: 2
       spreadAngle: 360
-      spreadMode: 0
+      spreadMode: 1
       speed: 9
       damage: 10
       homeOnEnemies: 0
       homingStrength: 6
       homingRange: 10
-      pierceCount: 0
+      pierceCount: 2
       bounceCount: 0
       bounceRange: 5
       explosionRadius: 0
@@ -62,13 +62,13 @@ MonoBehaviour:
       projectilePrefab: {fileID: 750000000000000007, guid: 031353b371fa441aa321a8d33c4d1534, type: 3}
       count: 4
       spreadAngle: 360
-      spreadMode: 0
+      spreadMode: 1
       speed: 9.5
       damage: 13
       homeOnEnemies: 0
       homingStrength: 6
       homingRange: 10
-      pierceCount: 0
+      pierceCount: 4
       bounceCount: 0
       bounceRange: 5
       explosionRadius: 0
@@ -96,15 +96,15 @@ MonoBehaviour:
     targetingRange: 15
     projectile:
       projectilePrefab: {fileID: 750000000000000007, guid: 031353b371fa441aa321a8d33c4d1534, type: 3}
-      count: 4
+      count: 6
       spreadAngle: 360
-      spreadMode: 0
+      spreadMode: 1
       speed: 10
       damage: 16
       homeOnEnemies: 0
       homingStrength: 6
       homingRange: 10
-      pierceCount: 0
+      pierceCount: 6
       bounceCount: 0
       bounceRange: 5
       explosionRadius: 0
@@ -132,15 +132,15 @@ MonoBehaviour:
     targetingRange: 15
     projectile:
       projectilePrefab: {fileID: 750000000000000007, guid: 031353b371fa441aa321a8d33c4d1534, type: 3}
-      count: 4
+      count: 8
       spreadAngle: 360
-      spreadMode: 0
+      spreadMode: 1
       speed: 10.5
       damage: 19
       homeOnEnemies: 0
       homingStrength: 6
       homingRange: 10
-      pierceCount: 3
+      pierceCount: 8
       bounceCount: 0
       bounceRange: 5
       explosionRadius: 0
