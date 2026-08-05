@@ -10,23 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ef4b4a2100beabc4d9dbab206fe54156, type: 3}
-  m_Name: Contract the Wind Spirit
+  m_Name: Gale Barrier
   m_EditorClassIdentifier: Assembly-CSharp::WorldOfSpirits.Progression.Upgrades.UpgradeCardDefinition
-  cardId: contract_wind_spirit
-  cardName: Contract the Wind Spirit
-  description: Adds the Wind Spirit to your formation and unlocks its weapon and
-    ability upgrade paths.
-  flavorText: 
+  cardId: ability_wind_spirit_2
+  cardName: Gale Barrier
+  description: Shields the player and blasts nearby enemies away.
+  flavorText:
   icon: {fileID: 21300000, guid: d96e7457f7bd45fe84e2e72e5ebf4239, type: 3}
-  suggestedIconTheme: Ancient spirit seal and elemental silhouette
-  category: 3
-  rarity: 2
-  maximumLevel: 1
-  minimumPlayerLevel: 4
-  baseWeight: 18
+  suggestedIconTheme: A green circular wind barrier surrounding the Roc spirit
+  category: 2
+  rarity: 1
+  maximumLevel: 4
+  minimumPlayerLevel: 6
+  baseWeight: 65
   repeatableAfterMaximum: 0
   requirements: []
   targetSpirit: {fileID: 11400000, guid: 31fbfeb2d4d52d74592ca3eca83950f9, type: 2}
-  abilityIndex: -1
-  spiritPrefab: {fileID: 740000000000000001, guid: 596cc1c1d59b46fd9e91858be973534a, type: 3}
+  abilityIndex: 2
+  spiritPrefab: {fileID: 0}
   modifiers: []

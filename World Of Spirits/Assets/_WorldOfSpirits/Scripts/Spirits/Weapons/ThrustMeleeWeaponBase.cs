@@ -71,6 +71,8 @@ namespace WorldOfSpirits.Spirits
         private Vector3 fallbackRightScale;
         private Transform primaryWeaponSlot;
         private Transform secondaryWeaponSlot;
+        private Transform tertiaryWeaponSlot;
+        private Transform quaternaryWeaponSlot;
         private GameObject pooledVisualPrefab;
         private Transform originOverride;
         private Transform activeGauntlet;
@@ -193,11 +195,19 @@ namespace WorldOfSpirits.Spirits
                 slots != null && slots.Count > 0 ? slots[0] : null;
             Transform newSecondarySlot =
                 slots != null && slots.Count > 1 ? slots[1] : null;
+            Transform newTertiarySlot =
+                slots != null && slots.Count > 2 ? slots[2] : null;
+            Transform newQuaternarySlot =
+                slots != null && slots.Count > 3 ? slots[3] : null;
             bool slotsChanged =
                 primaryWeaponSlot != newPrimarySlot ||
-                secondaryWeaponSlot != newSecondarySlot;
+                secondaryWeaponSlot != newSecondarySlot ||
+                tertiaryWeaponSlot != newTertiarySlot ||
+                quaternaryWeaponSlot != newQuaternarySlot;
             primaryWeaponSlot = newPrimarySlot;
             secondaryWeaponSlot = newSecondarySlot;
+            tertiaryWeaponSlot = newTertiarySlot;
+            quaternaryWeaponSlot = newQuaternarySlot;
 
             if (isActiveAndEnabled && slots != null)
             {
@@ -215,6 +225,16 @@ namespace WorldOfSpirits.Spirits
                     secondaryWeaponSlot != null)
                 {
                     rightGauntlet.SetParent(secondaryWeaponSlot, false);
+                }
+                if (slotsChanged && leftEchoGauntlet != null &&
+                    tertiaryWeaponSlot != null)
+                {
+                    leftEchoGauntlet.SetParent(tertiaryWeaponSlot, false);
+                }
+                if (slotsChanged && rightEchoGauntlet != null &&
+                    quaternaryWeaponSlot != null)
+                {
+                    rightEchoGauntlet.SetParent(quaternaryWeaponSlot, false);
                 }
                 if (slotsChanged)
                 {
@@ -503,7 +523,7 @@ namespace WorldOfSpirits.Spirits
             bool isEcho = gauntlet == leftEchoGauntlet || gauntlet == rightEchoGauntlet;
             Transform slot = !isEcho
                 ? (isLeft ? primaryWeaponSlot : secondaryWeaponSlot)
-                : null;
+                : (isLeft ? tertiaryWeaponSlot : quaternaryWeaponSlot);
             if (slot != null)
             {
                 return slot.position;
@@ -528,6 +548,11 @@ namespace WorldOfSpirits.Spirits
 
         protected virtual void OnEnable()
         {
+            if (upgradeStats != null)
+            {
+                upgradeStats.UpgradeApplied -= HandleUpgradeApplied;
+                upgradeStats.UpgradeApplied += HandleUpgradeApplied;
+            }
             phase = PunchPhase.Idle;
             activeGauntlet = null;
             activeEchoGauntlet = null;
@@ -540,6 +565,8 @@ namespace WorldOfSpirits.Spirits
 
         protected virtual void OnDisable()
         {
+            if (upgradeStats != null)
+                upgradeStats.UpgradeApplied -= HandleUpgradeApplied;
             phase = PunchPhase.Idle;
             activeGauntlet = null;
             activeEchoGauntlet = null;
@@ -547,6 +574,14 @@ namespace WorldOfSpirits.Spirits
             hitTargets.Clear();
             combatActive = false;
             ReleasePooledVisuals();
+        }
+
+        private void HandleUpgradeApplied(UpgradeCardDefinition unusedCard, int unusedLevel)
+        {
+            SyncEchoGauntlets();
+            ApplyWeaponSize();
+            if (phase == PunchPhase.Idle) PositionAtRest();
+            SetVisualsActive(combatActive);
         }
 
         private void EnsurePooledVisuals()
@@ -602,10 +637,10 @@ namespace WorldOfSpirits.Spirits
             {
                 leftEchoGauntlet = SceneObjectPool.Spawn(
                     pooledVisualPrefab, ActiveOrigin.position, Quaternion.identity,
-                    PoolCategory.Effects).transform;
+                    PoolCategory.Effects, tertiaryWeaponSlot).transform;
                 rightEchoGauntlet = SceneObjectPool.Spawn(
                     pooledVisualPrefab, ActiveOrigin.position, Quaternion.identity,
-                    PoolCategory.Effects).transform;
+                    PoolCategory.Effects, quaternaryWeaponSlot).transform;
             }
             else
             {

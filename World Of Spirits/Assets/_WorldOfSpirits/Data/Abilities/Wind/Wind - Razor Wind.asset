@@ -23,7 +23,7 @@ MonoBehaviour:
     cooldown: 2
     targetingRange: 15
     projectile:
-      projectilePrefab: {fileID: 0}
+      projectilePrefab: {fileID: 750000000000000007, guid: 031353b371fa441aa321a8d33c4d1534, type: 3}
       count: 2
       spreadAngle: 360
       spreadMode: 0
@@ -33,15 +33,22 @@ MonoBehaviour:
       homingStrength: 6
       homingRange: 10
       pierceCount: 0
+      bounceCount: 0
+      bounceRange: 5
       explosionRadius: 0
       growthPerSecond: 0
       appliesStatus: 0
       status: 0
+      statusChance: 1
       statusDuration: 2
       statusStrength: 2
+      directionPattern: 0
+      sizeMultiplier: 1
+      lifetimeMultiplier: 1
     spawnedEffectPrefab: {fileID: 0}
     spawnCount: 1
     areaRadius: 3
+    activeDuration: 3
     orbitRadius: 1.5
     orbitSpeed: 100
     chainCount: 3
@@ -52,7 +59,7 @@ MonoBehaviour:
     cooldown: 1.88
     targetingRange: 15
     projectile:
-      projectilePrefab: {fileID: 0}
+      projectilePrefab: {fileID: 750000000000000007, guid: 031353b371fa441aa321a8d33c4d1534, type: 3}
       count: 4
       spreadAngle: 360
       spreadMode: 0
@@ -62,15 +69,22 @@ MonoBehaviour:
       homingStrength: 6
       homingRange: 10
       pierceCount: 0
+      bounceCount: 0
+      bounceRange: 5
       explosionRadius: 0
       growthPerSecond: 0
       appliesStatus: 0
       status: 0
+      statusChance: 1
       statusDuration: 2
       statusStrength: 2
+      directionPattern: 0
+      sizeMultiplier: 1
+      lifetimeMultiplier: 1
     spawnedEffectPrefab: {fileID: 0}
     spawnCount: 1
     areaRadius: 3.5
+    activeDuration: 3
     orbitRadius: 1.6
     orbitSpeed: 120
     chainCount: 4
@@ -81,7 +95,7 @@ MonoBehaviour:
     cooldown: 1.76
     targetingRange: 15
     projectile:
-      projectilePrefab: {fileID: 0}
+      projectilePrefab: {fileID: 750000000000000007, guid: 031353b371fa441aa321a8d33c4d1534, type: 3}
       count: 4
       spreadAngle: 360
       spreadMode: 0
@@ -91,15 +105,22 @@ MonoBehaviour:
       homingStrength: 6
       homingRange: 10
       pierceCount: 0
+      bounceCount: 0
+      bounceRange: 5
       explosionRadius: 0
       growthPerSecond: 0
       appliesStatus: 0
       status: 0
+      statusChance: 1
       statusDuration: 2
       statusStrength: 2
+      directionPattern: 0
+      sizeMultiplier: 1
+      lifetimeMultiplier: 1
     spawnedEffectPrefab: {fileID: 0}
     spawnCount: 1
     areaRadius: 4
+    activeDuration: 3
     orbitRadius: 1.7
     orbitSpeed: 140
     chainCount: 5
@@ -110,7 +131,7 @@ MonoBehaviour:
     cooldown: 1.64
     targetingRange: 15
     projectile:
-      projectilePrefab: {fileID: 0}
+      projectilePrefab: {fileID: 750000000000000007, guid: 031353b371fa441aa321a8d33c4d1534, type: 3}
       count: 4
       spreadAngle: 360
       spreadMode: 0
@@ -120,15 +141,22 @@ MonoBehaviour:
       homingStrength: 6
       homingRange: 10
       pierceCount: 3
+      bounceCount: 0
+      bounceRange: 5
       explosionRadius: 0
       growthPerSecond: 0
       appliesStatus: 0
       status: 0
+      statusChance: 1
       statusDuration: 2
       statusStrength: 2
+      directionPattern: 0
+      sizeMultiplier: 1
+      lifetimeMultiplier: 1
     spawnedEffectPrefab: {fileID: 0}
     spawnCount: 1
     areaRadius: 4.5
+    activeDuration: 3
     orbitRadius: 1.8
     orbitSpeed: 160
     chainCount: 6

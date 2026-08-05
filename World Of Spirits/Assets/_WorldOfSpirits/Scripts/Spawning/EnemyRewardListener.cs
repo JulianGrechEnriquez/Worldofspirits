@@ -9,11 +9,14 @@ namespace WorldOfSpirits.Spawning
     [RequireComponent(typeof(EnemyPool))]
     public sealed class EnemyRewardListener : MonoBehaviour
     {
+        [SerializeField, Min(0.01f)] private float spiritDustPerExperience = 0.25f;
         private EnemyPool enemyPool;
+        private SpiritDustWallet spiritDustWallet;
 
         private void Awake()
         {
             enemyPool = GetComponent<EnemyPool>();
+            spiritDustWallet = FindFirstObjectByType<SpiritDustWallet>();
         }
 
         private void OnEnable()
@@ -26,10 +29,12 @@ namespace WorldOfSpirits.Spawning
             if (enemyPool != null) enemyPool.EnemyKilled -= HandleEnemyKilled;
         }
 
-        private static void HandleEnemyKilled(EnemyBase enemy)
+        private void HandleEnemyKilled(EnemyBase enemy)
         {
             if (enemy is not IRewardSource reward || reward.ExperienceReward <= 0f) return;
             ExperienceOrbService.Spawn(enemy.transform.position, reward.ExperienceReward);
+            if (spiritDustWallet == null) spiritDustWallet = FindFirstObjectByType<SpiritDustWallet>();
+            spiritDustWallet?.Add(Mathf.Max(1, Mathf.RoundToInt(reward.ExperienceReward * spiritDustPerExperience)));
         }
     }
 }

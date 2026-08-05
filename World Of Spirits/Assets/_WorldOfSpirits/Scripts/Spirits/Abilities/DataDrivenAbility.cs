@@ -207,7 +207,41 @@ namespace WorldOfSpirits.Spirits
             CombatTargeting.FindAllNonAlloc(
                 transform.position, level.areaRadius * (UpgradeStats != null ? UpgradeStats.GetMultiplier(UpgradeStat.AreaSize) : 1f), Faction.Player, targetBuffer);
             foreach (IDamageable target in targetBuffer)
-                ApplyEffects(target.Transform, context.Player, level.effects);
+                ApplyEffects(target.Transform, context.Player, level.effects, true);
+            ApplyDefensiveAreaEffects(context.Player, level.effects);
+        }
+
+        private void ApplyDefensiveAreaEffects(
+            Transform player,
+            IReadOnlyList<AbilityEffectData> effects)
+        {
+            if (player == null) return;
+            LivingEntity living = player.GetComponentInParent<LivingEntity>();
+            if (living == null) return;
+
+            foreach (AbilityEffectData effect in effects)
+            {
+                switch (effect.effectType)
+                {
+                    case AbilityEffectType.Heal:
+                        living.Heal(UpgradeStats != null
+                            ? UpgradeStats.ScaleHealing(effect.value)
+                            : effect.value);
+                        break;
+                    case AbilityEffectType.Shield:
+                        living.AddShield(
+                            UpgradeStats != null
+                                ? UpgradeStats.ScaleShield(effect.value)
+                                : effect.value,
+                            UpgradeStats != null
+                                ? UpgradeStats.ScaleDuration(effect.duration)
+                                : effect.duration);
+                        break;
+                    case AbilityEffectType.GrantRevive:
+                        living.GrantRevive(Mathf.Max(1, Mathf.RoundToInt(effect.value)));
+                        break;
+                }
+            }
         }
 
         private void SpawnEffects(SpiritAbilityContext context, AbilityLevelData level)
@@ -357,13 +391,25 @@ namespace WorldOfSpirits.Spirits
             return best;
         }
 
-        private void ApplyEffects(Transform target, Transform player, IReadOnlyList<AbilityEffectData> effects)
+        private void ApplyEffects(
+            Transform target,
+            Transform player,
+            IReadOnlyList<AbilityEffectData> effects,
+            bool skipDefensiveEffects = false)
         {
             if (target == null) return;
             IDamageable damageable = target.GetComponentInParent<IDamageable>();
             LivingEntity living = target.GetComponentInParent<LivingEntity>();
             foreach (AbilityEffectData effect in effects)
             {
+                if (skipDefensiveEffects &&
+                    (effect.effectType == AbilityEffectType.Heal ||
+                     effect.effectType == AbilityEffectType.Shield ||
+                     effect.effectType == AbilityEffectType.GrantRevive))
+                {
+                    continue;
+                }
+
                 switch (effect.effectType)
                 {
                     case AbilityEffectType.Damage:

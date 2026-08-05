@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using WorldOfSpirits.Spirits;
 using WorldOfSpirits.Core;
+using WorldOfSpirits.Progression;
 
 namespace WorldOfSpirits.Progression.Upgrades
 {
@@ -14,6 +15,7 @@ namespace WorldOfSpirits.Progression.Upgrades
         [SerializeField] private PlayerLevelSystem levelSystem;
         [SerializeField] private UpgradeRuntimeStats runtimeStats;
         [SerializeField] private SpiritManager spiritManager;
+        [SerializeField] private SpiritDustWallet spiritDustWallet;
 
         [Header("Choice Rules")]
         [SerializeField, Range(1, 5)] private int choicesPerLevel = 3;
@@ -21,6 +23,7 @@ namespace WorldOfSpirits.Progression.Upgrades
         [SerializeField, Min(1)] private int epicPityAfterLevels = 12;
         [Tooltip("Makes an already-started ability path more likely to return.")]
         [SerializeField, Min(1f)] private float focusedPathWeight = 1.75f;
+        [SerializeField, Min(1)] private int rerollSpiritDustCost = 5;
 
         private readonly List<UpgradeCardDefinition> candidates = new List<UpgradeCardDefinition>(128);
         private readonly List<float> candidateWeights = new List<float>(128);
@@ -33,6 +36,8 @@ namespace WorldOfSpirits.Progression.Upgrades
 
         public IReadOnlyList<UpgradeCardDefinition> CurrentOffers => offers;
         public bool IsSelectionOpen => selectionOpen;
+        public SpiritDustWallet SpiritDustWallet => spiritDustWallet;
+        public int RerollSpiritDustCost => rerollSpiritDustCost;
         public event Action<IReadOnlyList<UpgradeCardDefinition>> ChoicesReady;
         public event Action<UpgradeCardDefinition> CardChosen;
 
@@ -41,6 +46,8 @@ namespace WorldOfSpirits.Progression.Upgrades
             if (levelSystem == null) levelSystem = GetComponent<PlayerLevelSystem>();
             if (runtimeStats == null) runtimeStats = GetComponent<UpgradeRuntimeStats>();
             if (spiritManager == null) spiritManager = GetComponent<SpiritManager>();
+            if (spiritDustWallet == null) spiritDustWallet = GetComponent<SpiritDustWallet>();
+            if (spiritDustWallet == null) spiritDustWallet = gameObject.AddComponent<SpiritDustWallet>();
         }
 
         private void OnEnable()
@@ -81,6 +88,16 @@ namespace WorldOfSpirits.Progression.Upgrades
             return true;
         }
 
+        public bool TryReroll()
+        {
+            if (!selectionOpen || spiritDustWallet == null ||
+                !spiritDustWallet.TrySpend(rerollSpiritDustCost)) return false;
+
+            BuildOffers();
+            ChoicesReady?.Invoke(offers);
+            return offers.Count > 0;
+        }
+
         [ContextMenu("Debug Open Upgrade Choice")]
         public void DebugOpenChoice()
         {
@@ -90,6 +107,20 @@ namespace WorldOfSpirits.Progression.Upgrades
         }
 
         private void CreateChoices()
+        {
+            BuildOffers();
+            if (offers.Count == 0) return;
+
+            selectionOpen = true;
+            previousTimeScale = Time.timeScale;
+            if (GameManager.Instance != null)
+                GameManager.Instance.SetState(GameState.LevelUp);
+            else
+                Time.timeScale = 0f;
+            ChoicesReady?.Invoke(offers);
+        }
+
+        private void BuildOffers()
         {
             candidates.Clear();
             candidateWeights.Clear();
@@ -107,22 +138,13 @@ namespace WorldOfSpirits.Progression.Upgrades
 
             int count = Mathf.Min(choicesPerLevel, candidates.Count);
             for (int i = 0; i < count; i++) PickOneWithoutReplacement();
-            if (offers.Count == 0) return;
-
-            selectionOpen = true;
-            previousTimeScale = Time.timeScale;
-            if (GameManager.Instance != null)
-                GameManager.Instance.SetState(GameState.LevelUp);
-            else
-                Time.timeScale = 0f;
-            ChoicesReady?.Invoke(offers);
         }
 
         private bool IsEligible(UpgradeCardDefinition card)
         {
             if (card == null || card.BaseWeight <= 0f) return false;
             int level = runtimeStats.GetCardLevel(card.Id);
-            if (level >= card.MaximumLevel && !card.RepeatableAfterMaximum) return false;
+            if (level >= card.MaximumLevel) return false;
 
             if (card.Category == UpgradeCategory.SpiritContract)
                 return spiritManager != null && spiritManager.HasOpenSpiritSlot &&
@@ -205,6 +227,7 @@ namespace WorldOfSpirits.Progression.Upgrades
             rarePityAfterLevels = Mathf.Max(1, rarePityAfterLevels);
             epicPityAfterLevels = Mathf.Max(1, epicPityAfterLevels);
             focusedPathWeight = Mathf.Max(1f, focusedPathWeight);
+            rerollSpiritDustCost = Mathf.Max(1, rerollSpiritDustCost);
         }
     }
 }

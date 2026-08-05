@@ -38,8 +38,10 @@ namespace WorldOfSpirits.Spawning
             new Dictionary<EnemyBase, EnemyCrowdAgent>(256);
         private readonly HashSet<BiomeSpawnData> preloadedBiomes =
             new HashSet<BiomeSpawnData>();
+        private int aliveEliteCount;
 
         public int AliveCount => activeEnemies.Count;
+        public int AliveEliteCount => aliveEliteCount;
         public event Action<EnemyBase> EnemyKilled;
 
         private void Awake()
@@ -64,6 +66,7 @@ namespace WorldOfSpirits.Spawning
             crowdAgents.Clear();
             trackedInstances.Clear();
             activeEnemies.Clear();
+            aliveEliteCount = 0;
         }
 
         /// <summary>
@@ -130,6 +133,7 @@ namespace WorldOfSpirits.Spawning
             TrackInstance(enemy);
             if (activeEnemies.Add(enemy))
             {
+                if (spawnData.IsElite) aliveEliteCount++;
                 if (crowdAgents.TryGetValue(enemy, out EnemyCrowdAgent crowdAgent) &&
                     crowdAgent != null && crowdSimulation != null)
                 {
@@ -200,6 +204,8 @@ namespace WorldOfSpirits.Spawning
             {
                 return;
             }
+
+            if (enemy.IsElite) aliveEliteCount = Mathf.Max(0, aliveEliteCount - 1);
 
             if (crowdAgents.TryGetValue(enemy, out EnemyCrowdAgent crowdAgent) &&
                 crowdAgent != null && crowdSimulation != null)

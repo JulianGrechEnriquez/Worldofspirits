@@ -35,6 +35,9 @@ namespace WorldOfSpirits.Spawning
         [Tooltip("Maximum enemies a single budget cycle may create. This prevents frame spikes.")]
         [SerializeField, Min(1)] private int maximumSpawnsPerCycle = 20;
 
+        [Tooltip("Maximum elite enemies that may be alive together.")]
+        [SerializeField, Min(0)] private int maximumAliveElites = 5;
+
         [Header("Difficulty Milestones")]
         [Tooltip("Minutes between difficulty increases. With four milestones, 2 creates increases at 2, 4, 6, and 8 minutes.")]
         [SerializeField, Min(0.1f)] private float minutesBetweenMilestones = 2f;
@@ -63,6 +66,21 @@ namespace WorldOfSpirits.Spawning
                 new Keyframe(0f, 0f),
                 new Keyframe(5f, 0.05f),
                 new Keyframe(10f, 0.15f));
+
+        [Header("Enemy Squads")]
+        [Tooltip("How many nearby enemies form one squad as the run progresses.")]
+        [SerializeField] private AnimationCurve squadSizeByMinute =
+            new AnimationCurve(
+                new Keyframe(0f, 1f),
+                new Keyframe(4f, 2f),
+                new Keyframe(8f, 3f),
+                new Keyframe(12f, 4f));
+
+        [Tooltip("Maximum distance between squad members.")]
+        [SerializeField, Min(0.1f)] private float squadScatterRadius = 2.25f;
+
+        [Tooltip("Failed position searches allowed before ending the current cycle.")]
+        [SerializeField, Min(1)] private int failedPositionSearchesPerCycle = 3;
 
         [Header("Spawn Ring")]
         [Tooltip("Closest permitted spawn distance from the player.")]
@@ -107,6 +125,13 @@ namespace WorldOfSpirits.Spawning
         public bool IsSpawningPaused => spawningPaused;
         public bool IsBossEventActive => bossEventActive;
         public BiomeSpawnData ActiveBiome => activeBiome;
+        public int CurrentDifficultyMilestone =>
+            EvaluateDifficultyMilestone(elapsedRunTime / 60f);
+        public float CurrentDifficulty01 => maximumDifficultyMilestones <= 0
+            ? 1f
+            : CurrentDifficultyMilestone / (float)maximumDifficultyMilestones;
+        public int CurrentSpawnBudget => EvaluateSpawnBudget(elapsedRunTime / 60f);
+        public float CurrentSpawnInterval => EvaluateSpawnInterval(elapsedRunTime / 60f);
         public event System.Action<EnemyBase> BossStarted;
         public event System.Action<EnemyBase> BossDefeated;
 
@@ -247,6 +272,7 @@ namespace WorldOfSpirits.Spawning
             }
 
             int spawnedThisCycle = 0;
+            int failedPositionSearches = 0;
             bool requestElite = Random.value <
                 Mathf.Clamp01(eliteChanceByMinute.Evaluate(elapsedRunTime / 60f));
 
@@ -254,6 +280,11 @@ namespace WorldOfSpirits.Spawning
                    spawnedThisCycle < maximumSpawnsPerCycle &&
                    enemyPool.AliveCount < maximumAliveEnemies)
             {
+                if (requestElite && enemyPool.AliveEliteCount >= maximumAliveElites)
+                {
+                    requestElite = false;
+                }
+
                 EnemySpawnData selected = SelectWeightedEnemy(budget, requestElite);
                 if (selected == null && requestElite)
                 {
@@ -263,20 +294,60 @@ namespace WorldOfSpirits.Spawning
                     selected = SelectWeightedEnemy(budget, false);
                 }
 
-                if (selected == null || !TryGetSpawnPosition(out Vector3 position))
+                if (selected == null)
                 {
                     break;
                 }
 
-                EnemyBase spawned = enemyPool.Spawn(selected, position, Quaternion.identity);
-                if (spawned == null)
+                if (!TryGetSpawnPosition(out Vector3 squadCenter))
                 {
-                    break;
+                    failedPositionSearches++;
+                    if (failedPositionSearches >= failedPositionSearchesPerCycle) break;
+                    continue;
                 }
 
-                budget -= selected.SpawnCost;
-                spawnedThisCycle++;
+                int desiredSquadSize = Mathf.Max(1, Mathf.RoundToInt(
+                    squadSizeByMinute.Evaluate(elapsedRunTime / 60f)));
+                int affordableSquadSize = budget / selected.SpawnCost;
+                int availableSlots = Mathf.Min(
+                    maximumSpawnsPerCycle - spawnedThisCycle,
+                    maximumAliveEnemies - enemyPool.AliveCount);
+                int squadSize = Mathf.Min(desiredSquadSize, affordableSquadSize, availableSlots);
+                if (requestElite) squadSize = Mathf.Min(1, squadSize);
+
+                for (int member = 0; member < squadSize; member++)
+                {
+                    Vector3 position = squadCenter;
+                    if (member > 0 && !TryFindSquadPosition(squadCenter, out position))
+                    {
+                        continue;
+                    }
+                    EnemyBase spawned = enemyPool.Spawn(selected, position, Quaternion.identity);
+                    if (spawned == null) break;
+                    budget -= selected.SpawnCost;
+                    spawnedThisCycle++;
+                }
+
+                requestElite = false;
             }
+        }
+
+        private bool TryFindSquadPosition(Vector3 center, out Vector3 position)
+        {
+            for (int attempt = 0; attempt < positionAttempts; attempt++)
+            {
+                Vector3 candidate = center +
+                    (Vector3)(Random.insideUnitCircle * squadScatterRadius);
+                if (!IsVisible(candidate) && !IsBlocked(candidate) &&
+                    !IsOccupiedByEnemy(candidate) && IsValidGround(candidate))
+                {
+                    position = candidate;
+                    return true;
+                }
+            }
+
+            position = default;
+            return false;
         }
 
         private EnemySpawnData SelectWeightedEnemy(int remainingBudget, bool eliteOnly)
@@ -440,6 +511,7 @@ namespace WorldOfSpirits.Spawning
         {
             maximumAliveEnemies = Mathf.Max(1, maximumAliveEnemies);
             maximumSpawnsPerCycle = Mathf.Max(1, maximumSpawnsPerCycle);
+            maximumAliveElites = Mathf.Max(0, maximumAliveElites);
             minutesBetweenMilestones = Mathf.Max(0.1f, minutesBetweenMilestones);
             maximumDifficultyMilestones = Mathf.Max(0, maximumDifficultyMilestones);
             startingSpawnBudget = Mathf.Max(0, startingSpawnBudget);
@@ -454,6 +526,8 @@ namespace WorldOfSpirits.Spawning
             clearanceRadius = Mathf.Max(0.01f, clearanceRadius);
             minimumEnemySpacing = Mathf.Max(0f, minimumEnemySpacing);
             positionAttempts = Mathf.Max(1, positionAttempts);
+            squadScatterRadius = Mathf.Max(0.1f, squadScatterRadius);
+            failedPositionSearchesPerCycle = Mathf.Max(1, failedPositionSearchesPerCycle);
         }
 #endif
     }
