@@ -93,6 +93,10 @@ namespace WorldOfSpirits.Spirits
         [TextArea(1, 3)] public string upgradeDescription;
         [Min(0.05f)] public float cooldown = 1f;
         [Min(0.1f)] public float targetingRange = 15f;
+        [Tooltip("Closest distance a random-position effect may spawn from the player. Zero uses the legacy area radius.")]
+        [Min(0f)] public float minimumSpawnDistance;
+        [Tooltip("Farthest distance a random-position effect may spawn from the player. Zero uses the legacy area radius.")]
+        [Min(0f)] public float maximumSpawnDistance;
         public AbilityProjectileData projectile = new AbilityProjectileData();
         public GameObject spawnedEffectPrefab;
         [Min(1)] public int spawnCount = 1;

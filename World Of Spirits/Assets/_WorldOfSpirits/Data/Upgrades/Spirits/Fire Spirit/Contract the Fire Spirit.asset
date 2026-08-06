@@ -22,7 +22,6 @@ MonoBehaviour:
   category: 3
   rarity: 0
   maximumLevel: 1
-  minimumPlayerLevel: 1
   baseWeight: 18
   repeatableAfterMaximum: 0
   requirements: []

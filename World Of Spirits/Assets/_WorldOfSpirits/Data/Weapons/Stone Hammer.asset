@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Stone Hammer
   m_EditorClassIdentifier: Assembly-CSharp::WorldOfSpirits.Spirits.WeaponDefinition
   weaponName: Stone Hammer
-  description: 
+  description: A massive stone hammer that circles the wielder and crushes groups of nearby enemies.
   icon: {fileID: 0}
   executionType: 1
   levels:

@@ -16,7 +16,7 @@ MonoBehaviour:
   shape: Biblical Angel
   weapon:
     weaponName: Holy Sword
-    description: The primary weapon used while standing still.
+    description: A radiant holy sword designed to cleave groups of enemies and punish corrupted targets.
     levels:
     - level: 1
       effect: Weapon unlocked

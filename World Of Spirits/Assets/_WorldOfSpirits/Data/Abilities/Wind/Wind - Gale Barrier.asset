@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WorldOfSpirits.Spirits.AbilityDefinition
   abilityName: Gale Barrier
   description: A defensive wind pulse shields the player and blasts nearby enemies away.
-  icon: {fileID: 21300000, guid: d96e7457f7bd45fe84e2e72e5ebf4239, type: 3}
+  icon: {fileID: 21300000, guid: 92e055d0b8134f67a7b4cb784115c7fb, type: 3}
   executionType: 1
   targetingMode: 5
   levels:
@@ -45,7 +45,7 @@ MonoBehaviour:
       directionPattern: 0
       sizeMultiplier: 1
       lifetimeMultiplier: 1
-    spawnedEffectPrefab: {fileID: 0}
+    spawnedEffectPrefab: {fileID: 760000000000000001, guid: 49c777fb65e847c6bacb9eff30cc3600, type: 3}
     spawnCount: 1
     areaRadius: 3
     activeDuration: 4
@@ -96,7 +96,7 @@ MonoBehaviour:
       directionPattern: 0
       sizeMultiplier: 1
       lifetimeMultiplier: 1
-    spawnedEffectPrefab: {fileID: 0}
+    spawnedEffectPrefab: {fileID: 760000000000000001, guid: 49c777fb65e847c6bacb9eff30cc3600, type: 3}
     spawnCount: 1
     areaRadius: 3.5
     activeDuration: 4
@@ -147,7 +147,7 @@ MonoBehaviour:
       directionPattern: 0
       sizeMultiplier: 1
       lifetimeMultiplier: 1
-    spawnedEffectPrefab: {fileID: 0}
+    spawnedEffectPrefab: {fileID: 760000000000000001, guid: 49c777fb65e847c6bacb9eff30cc3600, type: 3}
     spawnCount: 1
     areaRadius: 4
     activeDuration: 5
@@ -198,7 +198,7 @@ MonoBehaviour:
       directionPattern: 0
       sizeMultiplier: 1
       lifetimeMultiplier: 1
-    spawnedEffectPrefab: {fileID: 0}
+    spawnedEffectPrefab: {fileID: 760000000000000001, guid: 49c777fb65e847c6bacb9eff30cc3600, type: 3}
     spawnCount: 2
     areaRadius: 4.75
     activeDuration: 6

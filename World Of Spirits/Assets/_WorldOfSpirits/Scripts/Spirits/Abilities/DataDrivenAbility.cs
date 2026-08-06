@@ -204,11 +204,23 @@ namespace WorldOfSpirits.Spirits
 
         private void CastArea(SpiritAbilityContext context, AbilityLevelData level)
         {
+            float radius = level.areaRadius *
+                (UpgradeStats != null ? UpgradeStats.GetMultiplier(UpgradeStat.AreaSize) : 1f);
             CombatTargeting.FindAllNonAlloc(
-                transform.position, level.areaRadius * (UpgradeStats != null ? UpgradeStats.GetMultiplier(UpgradeStat.AreaSize) : 1f), Faction.Player, targetBuffer);
+                transform.position, radius, Faction.Player, targetBuffer);
             foreach (IDamageable target in targetBuffer)
                 ApplyEffects(target.Transform, context.Player, level.effects, true);
             ApplyDefensiveAreaEffects(context.Player, level.effects);
+
+            if (level.spawnedEffectPrefab != null &&
+                level.spawnedEffectPrefab.TryGetComponent(out AreaPulseVisual _))
+            {
+                Vector3 position = context.Player != null ? context.Player.position : transform.position;
+                GameObject spawned = SceneObjectPool.Spawn(
+                    level.spawnedEffectPrefab, position, Quaternion.identity,
+                    PoolCategory.Effects);
+                spawned.GetComponent<AreaPulseVisual>().Configure(radius);
+            }
         }
 
         private void ApplyDefensiveAreaEffects(
@@ -272,6 +284,7 @@ namespace WorldOfSpirits.Spirits
                     zone.SetOwner(context.Player);
                     zone.ConfigureUpgradeModifiers(UpgradeStats);
                     zone.ConfigureDamageSource(CreateSpiritDamage(0f));
+                    zone.ConfigureCast(level.areaRadius, level.projectile.homingStrength / 6f);
                 }
                 else SceneObjectPool.ReleaseAfter(spawned, Mathf.Max(0.1f,
                     UpgradeStats != null ? UpgradeStats.ScaleDuration(level.activeDuration) : level.activeDuration));
@@ -464,9 +477,22 @@ namespace WorldOfSpirits.Spirits
         {
             Transform target = ResolveTarget(context, level);
             Vector3 origin = context.Player != null ? context.Player.position : transform.position;
-            return definition.TargetingMode == AbilityTargetingMode.RandomPositionNearPlayer
-                ? origin + (Vector3)(Random.insideUnitCircle * level.areaRadius)
-                : target != null ? target.position : origin;
+            if (definition.TargetingMode == AbilityTargetingMode.RandomPositionNearPlayer)
+            {
+                if (level.maximumSpawnDistance > 0f)
+                {
+                    float minimum = Mathf.Min(level.minimumSpawnDistance, level.maximumSpawnDistance);
+                    float distance = Mathf.Sqrt(Random.Range(
+                        minimum * minimum,
+                        level.maximumSpawnDistance * level.maximumSpawnDistance));
+                    float angle = Random.Range(0f, Mathf.PI * 2f);
+                    return origin + new Vector3(Mathf.Cos(angle), Mathf.Sin(angle)) * distance;
+                }
+
+                return origin + (Vector3)(Random.insideUnitCircle * level.areaRadius);
+            }
+
+            return target != null ? target.position : origin;
         }
 
         private Transform ResolveTarget(SpiritAbilityContext context, AbilityLevelData level)

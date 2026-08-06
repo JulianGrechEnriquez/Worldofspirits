@@ -16,7 +16,7 @@ MonoBehaviour:
   shape: Scorpion
   weapon:
     weaponName: Poison Daggers
-    description: The primary weapon used while standing still.
+    description: Venom-coated daggers designed for rapid throws that poison and weaken enemies over time.
     levels:
     - level: 1
       effect: Weapon unlocked

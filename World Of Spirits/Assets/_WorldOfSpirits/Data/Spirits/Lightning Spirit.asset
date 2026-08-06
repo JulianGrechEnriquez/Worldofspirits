@@ -16,7 +16,7 @@ MonoBehaviour:
   shape: Thunder Dragon
   weapon:
     weaponName: Lightning Spear
-    description: The primary weapon used while standing still.
+    description: A lightning-charged spear designed for rapid piercing strikes and arcing electrical damage.
     levels:
     - level: 1
       effect: Weapon unlocked

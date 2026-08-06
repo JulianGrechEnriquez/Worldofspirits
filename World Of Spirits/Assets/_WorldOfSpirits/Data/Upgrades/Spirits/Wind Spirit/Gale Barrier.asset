@@ -16,12 +16,11 @@ MonoBehaviour:
   cardName: Gale Barrier
   description: Shields the player and blasts nearby enemies away.
   flavorText:
-  icon: {fileID: 21300000, guid: d96e7457f7bd45fe84e2e72e5ebf4239, type: 3}
+  icon: {fileID: 21300000, guid: 92e055d0b8134f67a7b4cb784115c7fb, type: 3}
   suggestedIconTheme: A green circular wind barrier surrounding the Roc spirit
   category: 2
   rarity: 1
   maximumLevel: 4
-  minimumPlayerLevel: 6
   baseWeight: 65
   repeatableAfterMaximum: 0
   requirements: []

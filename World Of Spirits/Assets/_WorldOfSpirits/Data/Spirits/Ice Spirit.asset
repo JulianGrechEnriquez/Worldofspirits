@@ -16,7 +16,7 @@ MonoBehaviour:
   shape: Yeti
   weapon:
     weaponName: 'Ice gauntlets '
-    description: 
+    description: Twin frozen gauntlets punch toward nearby enemies, pierce crowds, and briefly freeze targets.
     levels:
     - level: 1
       effect: punches enemies

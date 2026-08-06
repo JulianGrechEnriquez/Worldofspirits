@@ -31,6 +31,7 @@ namespace WorldOfSpirits.Crowd
         private Vector2 cachedSeparation;
         private Vector2 cachedAvoidance;
         private Vector2 finalSteering;
+        private Vector2 externalVelocity;
         private float nextNeighbourTime;
         private float nextObstacleTime;
         private float nextAttackTime;
@@ -95,6 +96,7 @@ namespace WorldOfSpirits.Crowd
             cachedSeparation = Vector2.zero;
             cachedAvoidance = Vector2.zero;
             finalSteering = Vector2.zero;
+            externalVelocity = Vector2.zero;
             nextAttackTime = 0f;
             nextNeighbourTime = 0f;
             nextObstacleTime = 0f;
@@ -190,12 +192,15 @@ namespace WorldOfSpirits.Crowd
                 desiredVelocity = finalSteering.normalized * profile.MovementSpeed;
             }
 
+            desiredVelocity += externalVelocity;
+
             Vector2 velocity = Vector2.MoveTowards(
                 body.linearVelocity,
                 desiredVelocity,
                 profile.Acceleration * deltaTime);
             body.linearVelocity = velocity;
             body.MovePosition(position + velocity * deltaTime);
+            externalVelocity = Vector2.MoveTowards(externalVelocity, Vector2.zero, 0.5f * deltaTime);
 
             TryDamagePlayer(simulation, playerPosition);
         }
@@ -208,6 +213,16 @@ namespace WorldOfSpirits.Crowd
             cachedSeparation = Vector2.zero;
             cachedAvoidance = Vector2.zero;
             finalSteering = Vector2.zero;
+            externalVelocity = Vector2.zero;
+        }
+
+        /// <summary>Applies a continuous gameplay force without changing the kinematic crowd body.</summary>
+        public void ApplyExternalAcceleration(Vector2 acceleration, float deltaTime)
+        {
+            if (!IsSimulationActive) return;
+            externalVelocity = Vector2.ClampMagnitude(
+                externalVelocity + acceleration * deltaTime,
+                5f);
         }
 
         private void SimulateDormantMovement(

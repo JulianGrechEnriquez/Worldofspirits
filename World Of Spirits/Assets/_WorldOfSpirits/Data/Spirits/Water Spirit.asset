@@ -16,7 +16,7 @@ MonoBehaviour:
   shape: Leviathan
   weapon:
     weaponName: Water Trident
-    description: The primary weapon used while standing still.
+    description: A leviathan-forged trident hurled through lines of enemies with the force of the tide.
     levels:
     - level: 1
       effect: Weapon unlocked

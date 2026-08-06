@@ -16,7 +16,7 @@ MonoBehaviour:
   shape: Golem
   weapon:
     weaponName: Stone Hammer
-    description: The primary weapon used while standing still.
+    description: A massive stone hammer that sweeps around the player and crushes groups of nearby enemies.
     levels:
     - level: 1
       effect: Weapon unlocked

@@ -21,7 +21,9 @@ MonoBehaviour:
   - level: 1
     upgradeDescription: One tornado
     cooldown: 2
-    targetingRange: 15
+    targetingRange: 5
+    minimumSpawnDistance: 5
+    maximumSpawnDistance: 9
     projectile:
       projectilePrefab: {fileID: 0}
       count: 1
@@ -33,15 +35,22 @@ MonoBehaviour:
       homingStrength: 6
       homingRange: 10
       pierceCount: 0
+      bounceCount: 0
+      bounceRange: 5
       explosionRadius: 0
       growthPerSecond: 0
       appliesStatus: 0
       status: 0
+      statusChance: 1
       statusDuration: 2
       statusStrength: 2
-    spawnedEffectPrefab: {fileID: 0}
+      directionPattern: 0
+      sizeMultiplier: 1
+      lifetimeMultiplier: 1
+    spawnedEffectPrefab: {fileID: 700000000000000001, guid: 77c0a1b2c3d44e55a6b7c8d9e0f12345, type: 3}
     spawnCount: 1
     areaRadius: 3
+    activeDuration: 3
     orbitRadius: 1.5
     orbitSpeed: 100
     chainCount: 3
@@ -50,7 +59,9 @@ MonoBehaviour:
   - level: 2
     upgradeDescription: Larger tornado
     cooldown: 1.88
-    targetingRange: 15
+    targetingRange: 5
+    minimumSpawnDistance: 5
+    maximumSpawnDistance: 9
     projectile:
       projectilePrefab: {fileID: 0}
       count: 1
@@ -62,15 +73,22 @@ MonoBehaviour:
       homingStrength: 6
       homingRange: 10
       pierceCount: 0
+      bounceCount: 0
+      bounceRange: 5
       explosionRadius: 0
       growthPerSecond: 0
       appliesStatus: 0
       status: 0
+      statusChance: 1
       statusDuration: 2
       statusStrength: 2
-    spawnedEffectPrefab: {fileID: 0}
+      directionPattern: 0
+      sizeMultiplier: 1
+      lifetimeMultiplier: 1
+    spawnedEffectPrefab: {fileID: 700000000000000001, guid: 77c0a1b2c3d44e55a6b7c8d9e0f12345, type: 3}
     spawnCount: 1
     areaRadius: 4.5
+    activeDuration: 3
     orbitRadius: 1.6
     orbitSpeed: 120
     chainCount: 4
@@ -79,7 +97,9 @@ MonoBehaviour:
   - level: 3
     upgradeDescription: Increased pull strength
     cooldown: 1.76
-    targetingRange: 15
+    targetingRange: 5
+    minimumSpawnDistance: 5
+    maximumSpawnDistance: 9
     projectile:
       projectilePrefab: {fileID: 0}
       count: 1
@@ -88,18 +108,25 @@ MonoBehaviour:
       speed: 10
       damage: 16
       homeOnEnemies: 0
-      homingStrength: 6
+      homingStrength: 10
       homingRange: 10
       pierceCount: 0
+      bounceCount: 0
+      bounceRange: 5
       explosionRadius: 0
       growthPerSecond: 0
       appliesStatus: 0
       status: 0
+      statusChance: 1
       statusDuration: 2
       statusStrength: 2
-    spawnedEffectPrefab: {fileID: 0}
+      directionPattern: 0
+      sizeMultiplier: 1
+      lifetimeMultiplier: 1
+    spawnedEffectPrefab: {fileID: 700000000000000001, guid: 77c0a1b2c3d44e55a6b7c8d9e0f12345, type: 3}
     spawnCount: 1
-    areaRadius: 5
+    areaRadius: 2
+    activeDuration: 3
     orbitRadius: 1.7
     orbitSpeed: 140
     chainCount: 5
@@ -108,7 +135,9 @@ MonoBehaviour:
   - level: 4
     upgradeDescription: Two tornadoes
     cooldown: 1.64
-    targetingRange: 15
+    targetingRange: 2
+    minimumSpawnDistance: 5
+    maximumSpawnDistance: 9
     projectile:
       projectilePrefab: {fileID: 0}
       count: 1
@@ -117,18 +146,25 @@ MonoBehaviour:
       speed: 10.5
       damage: 19
       homeOnEnemies: 0
-      homingStrength: 6
+      homingStrength: 10
       homingRange: 10
       pierceCount: 0
+      bounceCount: 0
+      bounceRange: 5
       explosionRadius: 0
       growthPerSecond: 0
       appliesStatus: 0
       status: 0
+      statusChance: 1
       statusDuration: 2
       statusStrength: 2
-    spawnedEffectPrefab: {fileID: 0}
+      directionPattern: 0
+      sizeMultiplier: 1
+      lifetimeMultiplier: 1
+    spawnedEffectPrefab: {fileID: 700000000000000001, guid: 77c0a1b2c3d44e55a6b7c8d9e0f12345, type: 3}
     spawnCount: 2
-    areaRadius: 5.5
+    areaRadius: 2
+    activeDuration: 3
     orbitRadius: 1.8
     orbitSpeed: 160
     chainCount: 6

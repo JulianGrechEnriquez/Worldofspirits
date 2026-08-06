@@ -1,0 +1,74 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31342a0c190e58d49bf04376fd127bb4, type: 3}
+  m_Name: Chakrams
+  m_EditorClassIdentifier: Assembly-CSharp::WorldOfSpirits.Spirits.WeaponDefinition
+  weaponName: Chakrams
+  description: Wind-forged throwing rings that cut through enemies before returning to their owner.
+  icon: {fileID: 21300000, guid: 710ded71d3284cfdac9349c486cc264a, type: 3}
+  executionType: 0
+  levels:
+  - level: 1
+    upgradeDescription: Chakrams unlocked
+    projectilePrefab: {fileID: 770000000000000006, guid: 6b509c0ccb1043128b3e147463a0c505, type: 3}
+    weaponPrefab: {fileID: 780000000000000001, guid: 43a9a36b01f34f4197ea8623abb0665c, type: 3}
+    damage: 8
+    attackCooldown: 0.9
+    targetingRange: 13
+    projectileSpeed: 10
+    homeOnEnemies: 0
+    homingStrength: 0
+    homingRange: 10
+  - level: 2
+    upgradeDescription: Faster throws and sharper edges
+    projectilePrefab: {fileID: 770000000000000006, guid: 6b509c0ccb1043128b3e147463a0c505, type: 3}
+    weaponPrefab: {fileID: 780000000000000001, guid: 43a9a36b01f34f4197ea8623abb0665c, type: 3}
+    damage: 11
+    attackCooldown: 0.82
+    targetingRange: 14
+    projectileSpeed: 11
+    homeOnEnemies: 0
+    homingStrength: 0
+    homingRange: 10
+  - level: 3
+    upgradeDescription: Longer reach and stronger wind blades
+    projectilePrefab: {fileID: 770000000000000006, guid: 6b509c0ccb1043128b3e147463a0c505, type: 3}
+    weaponPrefab: {fileID: 780000000000000001, guid: 43a9a36b01f34f4197ea8623abb0665c, type: 3}
+    damage: 14
+    attackCooldown: 0.74
+    targetingRange: 15
+    projectileSpeed: 12
+    homeOnEnemies: 0
+    homingStrength: 0
+    homingRange: 10
+  - level: 4
+    upgradeDescription: Twin currents increase throw rate
+    projectilePrefab: {fileID: 770000000000000006, guid: 6b509c0ccb1043128b3e147463a0c505, type: 3}
+    weaponPrefab: {fileID: 780000000000000001, guid: 43a9a36b01f34f4197ea8623abb0665c, type: 3}
+    damage: 18
+    attackCooldown: 0.64
+    targetingRange: 16
+    projectileSpeed: 13
+    homeOnEnemies: 0
+    homingStrength: 0
+    homingRange: 10
+  - level: 5
+    upgradeDescription: Tempest Chakrams reach full power
+    projectilePrefab: {fileID: 770000000000000006, guid: 6b509c0ccb1043128b3e147463a0c505, type: 3}
+    weaponPrefab: {fileID: 780000000000000001, guid: 43a9a36b01f34f4197ea8623abb0665c, type: 3}
+    damage: 23
+    attackCooldown: 0.54
+    targetingRange: 17
+    projectileSpeed: 14
+    homeOnEnemies: 0
+    homingStrength: 0
+    homingRange: 10

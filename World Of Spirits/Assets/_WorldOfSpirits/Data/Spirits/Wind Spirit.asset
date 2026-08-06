@@ -16,7 +16,7 @@ MonoBehaviour:
   shape: Roc
   weapon:
     weaponName: Chakrams
-    description: The primary weapon used while standing still.
+    description: Wind-forged chakrams fly through enemies and return to the player like boomerangs.
     levels:
     - level: 1
       effect: Weapon unlocked
