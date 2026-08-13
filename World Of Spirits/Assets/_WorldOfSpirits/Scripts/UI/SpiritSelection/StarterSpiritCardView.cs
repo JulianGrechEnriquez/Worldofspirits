@@ -64,7 +64,9 @@ namespace WorldOfSpirits.UI
             SpriteRenderer preview = prefab.GetComponentInChildren<SpriteRenderer>(true);
             if (portrait != null)
             {
-                portrait.sprite = preview != null ? preview.sprite : null;
+                portrait.sprite = definition.CardPortrait != null
+                    ? definition.CardPortrait
+                    : preview != null ? preview.sprite : null;
                 portrait.color = preview != null ? preview.color : Color.white;
                 portrait.preserveAspect = true;
             }

@@ -13,6 +13,8 @@ namespace WorldOfSpirits.Progression.Upgrades
         [TextArea(2, 5), SerializeField] private string description;
         [TextArea(1, 3), SerializeField] private string flavorText;
         [SerializeField] private Sprite icon;
+        [Tooltip("Optional full card illustration. Leave empty to show only the icon.")]
+        [SerializeField] private Sprite cardArtwork;
         [SerializeField] private string suggestedIconTheme;
 
         [Header("Availability")]
@@ -36,6 +38,7 @@ namespace WorldOfSpirits.Progression.Upgrades
         public string Description => description;
         public string FlavorText => flavorText;
         public Sprite Icon => icon;
+        public Sprite CardArtwork => cardArtwork;
         public string SuggestedIconTheme => suggestedIconTheme;
         public UpgradeCategory Category => category;
         public UpgradeRarity Rarity => rarity;

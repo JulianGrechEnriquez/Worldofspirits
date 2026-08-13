@@ -100,6 +100,72 @@ MonoBehaviour:
   castWhileMoving: 1
   castWhileStandingStill: 0
   definition: {fileID: 11400000, guid: 1d90114f7f0810049992f0a59816ecdf, type: 2}
+--- !u!1 &6647147741196955014
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4045640694667900231}
+  - component: {fileID: 5322774687158187584}
+  m_Layer: 0
+  m_Name: Ability 2 - Avalanche (Needs Snowball Projectile)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4045640694667900231
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6647147741196955014}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 42979624625530286}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5322774687158187584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6647147741196955014}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48b0ef25c58df8943b062c2a0ccec32d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WorldOfSpirits.Spirits.ProjectilePatternAbility
+  abilityIndex: 1
+  cooldown: 2
+  primarySpiritOnly: 0
+  castWhileMoving: 1
+  castWhileStandingStill: 0
+  projectilePrefab: {fileID: 0}
+  pattern: 0
+  projectileCount:
+    baseValue: 1
+    increasePerLevel: 0
+  damage:
+    baseValue: 1
+    increasePerLevel: 0
+  speed:
+    baseValue: 1
+    increasePerLevel: 0
+  spreadAngle: 45
+  spreadMode: 0
+  homeOnEnemies: 0
+  homingStrength: 5
+  homingRange: 8
+  targetingRange: 15
 --- !u!1 &7463225176532276333
 GameObject:
   m_ObjectHideFlags: 0
@@ -136,6 +202,9 @@ Transform:
   - {fileID: 994127458983776562}
   - {fileID: 3558503634400425577}
   - {fileID: 4034615769223617230}
+  - {fileID: 8395737897963979268}
+  - {fileID: 4045640694667900231}
+  - {fileID: 8185464763934672784}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6349169034217764554
@@ -320,3 +389,122 @@ MonoBehaviour:
   castWhileMoving: 1
   castWhileStandingStill: 0
   definition: {fileID: 11400000, guid: 59e3049209e13fb48947f3865f59ac01, type: 2}
+--- !u!1 &8761157856028505986
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8395737897963979268}
+  - component: {fileID: 7907132501199188623}
+  m_Layer: 0
+  m_Name: Ability 1 - Orbital Snowball (Needs Snowball Prefab)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8395737897963979268
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8761157856028505986}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 42979624625530286}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7907132501199188623
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8761157856028505986}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07eb97ead06e7754f83a05b337076be3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WorldOfSpirits.Spirits.OrbitingProjectileAbility
+  abilityIndex: 0
+  cooldown: 1
+  primarySpiritOnly: 0
+  castWhileMoving: 1
+  castWhileStandingStill: 0
+  orbPrefab: {fileID: 0}
+  orbCount:
+    baseValue: 1
+    increasePerLevel: 0
+  radius:
+    baseValue: 1
+    increasePerLevel: 0
+  rotationSpeed:
+    baseValue: 1
+    increasePerLevel: 0
+  spawnOnEnable: 1
+--- !u!1 &9201461273175673786
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8185464763934672784}
+  - component: {fileID: 8778497776021443116}
+  m_Layer: 0
+  m_Name: Ability 3 - Ice Crystal (Needs Crystal Prefab)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8185464763934672784
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9201461273175673786}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 42979624625530286}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8778497776021443116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9201461273175673786}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5eed7159eef058e4d903ca7be5003665, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WorldOfSpirits.Spirits.SpawnEffectAbility
+  abilityIndex: 2
+  cooldown: 3
+  primarySpiritOnly: 0
+  castWhileMoving: 1
+  castWhileStandingStill: 0
+  effectPrefab: {fileID: 0}
+  spawnPosition: 0
+  spawnCount:
+    baseValue: 1
+    increasePerLevel: 0
+  spawnRadius:
+    baseValue: 1
+    increasePerLevel: 0
+  targetingRange: 15
+  effectLifetime: 3

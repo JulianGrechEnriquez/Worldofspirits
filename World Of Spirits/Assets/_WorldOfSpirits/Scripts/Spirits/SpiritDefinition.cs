@@ -9,6 +9,8 @@ namespace WorldOfSpirits.Spirits
     {
         [SerializeField] private string spiritName;
         [SerializeField] private string shape;
+        [Tooltip("Optional portrait used by starter selection and other card UI.")]
+        [SerializeField] private Sprite cardPortrait;
         [SerializeField] private SpiritWeaponDefinition weapon = new SpiritWeaponDefinition();
         [Tooltip("Data-driven runtime weapon. New spirits should use this field.")]
         [SerializeField] private WeaponDefinition runtimeWeapon;
@@ -18,6 +20,7 @@ namespace WorldOfSpirits.Spirits
 
         public string SpiritName => spiritName;
         public string Shape => shape;
+        public Sprite CardPortrait => cardPortrait;
         public SpiritWeaponDefinition Weapon => weapon;
         public WeaponDefinition RuntimeWeapon => runtimeWeapon;
         public IReadOnlyList<SpiritAbilityDefinition> Abilities => abilities;

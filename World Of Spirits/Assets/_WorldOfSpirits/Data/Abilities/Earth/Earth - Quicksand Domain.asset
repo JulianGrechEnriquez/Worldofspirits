@@ -22,6 +22,8 @@ MonoBehaviour:
     upgradeDescription: Bigger radius
     cooldown: 2
     targetingRange: 15
+    minimumSpawnDistance: 0
+    maximumSpawnDistance: 0
     projectile:
       projectilePrefab: {fileID: 0}
       count: 1
@@ -33,13 +35,19 @@ MonoBehaviour:
       homingStrength: 6
       homingRange: 10
       pierceCount: 0
+      bounceCount: 0
+      bounceRange: 5
       explosionRadius: 0
       growthPerSecond: 0
       appliesStatus: 0
       status: 0
+      statusChance: 1
       statusDuration: 2
       statusStrength: 2
-    spawnedEffectPrefab: {fileID: 1728612343264657921, guid: 9eb8b35368dbbbf4cbecdcd076650e57, type: 3}
+      directionPattern: 0
+      sizeMultiplier: 1
+      lifetimeMultiplier: 1
+    spawnedEffectPrefab: {fileID: 0}
     spawnCount: 1
     areaRadius: 3
     activeDuration: 3
@@ -62,6 +70,8 @@ MonoBehaviour:
     upgradeDescription: Stronger slow
     cooldown: 1.88
     targetingRange: 15
+    minimumSpawnDistance: 0
+    maximumSpawnDistance: 0
     projectile:
       projectilePrefab: {fileID: 0}
       count: 1
@@ -73,12 +83,18 @@ MonoBehaviour:
       homingStrength: 6
       homingRange: 10
       pierceCount: 0
+      bounceCount: 0
+      bounceRange: 5
       explosionRadius: 0
       growthPerSecond: 0
       appliesStatus: 0
       status: 0
+      statusChance: 1
       statusDuration: 2
       statusStrength: 2
+      directionPattern: 0
+      sizeMultiplier: 1
+      lifetimeMultiplier: 1
     spawnedEffectPrefab: {fileID: 0}
     spawnCount: 1
     areaRadius: 3.5
@@ -102,6 +118,8 @@ MonoBehaviour:
     upgradeDescription: Damage over time
     cooldown: 1.76
     targetingRange: 15
+    minimumSpawnDistance: 0
+    maximumSpawnDistance: 0
     projectile:
       projectilePrefab: {fileID: 0}
       count: 1
@@ -113,12 +131,18 @@ MonoBehaviour:
       homingStrength: 6
       homingRange: 10
       pierceCount: 0
+      bounceCount: 0
+      bounceRange: 5
       explosionRadius: 0
       growthPerSecond: 0
       appliesStatus: 0
       status: 0
+      statusChance: 1
       statusDuration: 2
       statusStrength: 2
+      directionPattern: 0
+      sizeMultiplier: 1
+      lifetimeMultiplier: 1
     spawnedEffectPrefab: {fileID: 0}
     spawnCount: 1
     areaRadius: 4
@@ -142,6 +166,8 @@ MonoBehaviour:
     upgradeDescription: Pulls enemies inward
     cooldown: 1.64
     targetingRange: 15
+    minimumSpawnDistance: 0
+    maximumSpawnDistance: 0
     projectile:
       projectilePrefab: {fileID: 0}
       count: 1
@@ -153,12 +179,18 @@ MonoBehaviour:
       homingStrength: 6
       homingRange: 10
       pierceCount: 0
+      bounceCount: 0
+      bounceRange: 5
       explosionRadius: 0
       growthPerSecond: 0
       appliesStatus: 0
       status: 0
+      statusChance: 1
       statusDuration: 2
       statusStrength: 2
+      directionPattern: 0
+      sizeMultiplier: 1
+      lifetimeMultiplier: 1
     spawnedEffectPrefab: {fileID: 0}
     spawnCount: 1
     areaRadius: 4.5
@@ -187,6 +219,8 @@ MonoBehaviour:
     upgradeDescription: Immobilizes elites briefly
     cooldown: 1.52
     targetingRange: 15
+    minimumSpawnDistance: 0
+    maximumSpawnDistance: 0
     projectile:
       projectilePrefab: {fileID: 0}
       count: 1
@@ -198,12 +232,18 @@ MonoBehaviour:
       homingStrength: 6
       homingRange: 10
       pierceCount: 0
+      bounceCount: 0
+      bounceRange: 5
       explosionRadius: 0
       growthPerSecond: 0
       appliesStatus: 0
       status: 0
+      statusChance: 1
       statusDuration: 2
       statusStrength: 2
+      directionPattern: 0
+      sizeMultiplier: 1
+      lifetimeMultiplier: 1
     spawnedEffectPrefab: {fileID: 0}
     spawnCount: 1
     areaRadius: 5

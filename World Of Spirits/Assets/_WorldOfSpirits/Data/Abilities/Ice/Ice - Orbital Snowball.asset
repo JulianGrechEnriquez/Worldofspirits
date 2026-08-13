@@ -22,6 +22,8 @@ MonoBehaviour:
     upgradeDescription: 2 snowballs
     cooldown: 2
     targetingRange: 15
+    minimumSpawnDistance: 0
+    maximumSpawnDistance: 0
     projectile:
       projectilePrefab: {fileID: 0}
       count: 1
@@ -33,15 +35,22 @@ MonoBehaviour:
       homingStrength: 6
       homingRange: 10
       pierceCount: 0
+      bounceCount: 0
+      bounceRange: 5
       explosionRadius: 0
       growthPerSecond: 0
       appliesStatus: 0
       status: 0
+      statusChance: 1
       statusDuration: 2
       statusStrength: 2
+      directionPattern: 0
+      sizeMultiplier: 1
+      lifetimeMultiplier: 1
     spawnedEffectPrefab: {fileID: 100000, guid: 8f3b70d640c84bb49dcedaaab5a3a715, type: 3}
     spawnCount: 2
     areaRadius: 3
+    activeDuration: 3
     orbitRadius: 1.5
     orbitSpeed: 100
     chainCount: 3
@@ -51,6 +60,8 @@ MonoBehaviour:
     upgradeDescription: 3 snowballs
     cooldown: 1.88
     targetingRange: 15
+    minimumSpawnDistance: 0
+    maximumSpawnDistance: 0
     projectile:
       projectilePrefab: {fileID: 0}
       count: 1
@@ -62,15 +73,22 @@ MonoBehaviour:
       homingStrength: 6
       homingRange: 10
       pierceCount: 0
+      bounceCount: 0
+      bounceRange: 5
       explosionRadius: 0
       growthPerSecond: 0
       appliesStatus: 0
       status: 0
+      statusChance: 1
       statusDuration: 2
       statusStrength: 2
+      directionPattern: 0
+      sizeMultiplier: 1
+      lifetimeMultiplier: 1
     spawnedEffectPrefab: {fileID: 100000, guid: 8f3b70d640c84bb49dcedaaab5a3a715, type: 3}
     spawnCount: 3
     areaRadius: 3.5
+    activeDuration: 3
     orbitRadius: 1.6
     orbitSpeed: 120
     chainCount: 4
@@ -80,6 +98,8 @@ MonoBehaviour:
     upgradeDescription: Increased rotation speed and freeze chance
     cooldown: 1.76
     targetingRange: 15
+    minimumSpawnDistance: 0
+    maximumSpawnDistance: 0
     projectile:
       projectilePrefab: {fileID: 0}
       count: 1
@@ -91,15 +111,22 @@ MonoBehaviour:
       homingStrength: 6
       homingRange: 10
       pierceCount: 0
+      bounceCount: 0
+      bounceRange: 5
       explosionRadius: 0
       growthPerSecond: 0
       appliesStatus: 1
       status: 4
+      statusChance: 1
       statusDuration: 2
       statusStrength: 2
+      directionPattern: 0
+      sizeMultiplier: 1
+      lifetimeMultiplier: 1
     spawnedEffectPrefab: {fileID: 100000, guid: 8f3b70d640c84bb49dcedaaab5a3a715, type: 3}
     spawnCount: 3
     areaRadius: 4
+    activeDuration: 3
     orbitRadius: 1.7
     orbitSpeed: 140
     chainCount: 5
@@ -109,6 +136,8 @@ MonoBehaviour:
     upgradeDescription: Additional snowball
     cooldown: 1.64
     targetingRange: 15
+    minimumSpawnDistance: 0
+    maximumSpawnDistance: 0
     projectile:
       projectilePrefab: {fileID: 0}
       count: 1
@@ -120,15 +149,22 @@ MonoBehaviour:
       homingStrength: 6
       homingRange: 10
       pierceCount: 0
+      bounceCount: 0
+      bounceRange: 5
       explosionRadius: 0
       growthPerSecond: 0
       appliesStatus: 1
       status: 4
+      statusChance: 1
       statusDuration: 2
       statusStrength: 2
+      directionPattern: 0
+      sizeMultiplier: 1
+      lifetimeMultiplier: 1
     spawnedEffectPrefab: {fileID: 100000, guid: 8f3b70d640c84bb49dcedaaab5a3a715, type: 3}
     spawnCount: 4
     areaRadius: 4.5
+    activeDuration: 3
     orbitRadius: 1.8
     orbitSpeed: 160
     chainCount: 6

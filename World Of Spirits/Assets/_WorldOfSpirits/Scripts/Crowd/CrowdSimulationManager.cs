@@ -15,6 +15,8 @@ namespace WorldOfSpirits.Crowd
             new ProfilerMarker("WorldOfSpirits.Crowd.Steering");
         private static readonly ProfilerMarker MovementMarker =
             new ProfilerMarker("WorldOfSpirits.Crowd.Movement");
+        private static readonly ProfilerMarker ContactDamageMarker =
+            new ProfilerMarker("WorldOfSpirits.Crowd.ContactDamage");
 
         [Header("Shared References")]
         [SerializeField] private Transform player;
@@ -50,6 +52,7 @@ namespace WorldOfSpirits.Crowd
         private int nextHandle = 1;
         private int nextSteeringIndex;
         private int physicsStep;
+        private float playerCollisionRadius;
 
         public Transform Player => player;
         public PlayerCharacter PlayerCharacter => playerCharacter;
@@ -87,6 +90,7 @@ namespace WorldOfSpirits.Crowd
 
             float deltaTime = Time.fixedDeltaTime;
             Vector2 playerPosition = player.position;
+            playerCollisionRadius = PlayerCollisionRadius;
             physicsStep++;
 
             using (GridMarker.Auto())
@@ -190,6 +194,19 @@ namespace WorldOfSpirits.Crowd
         public bool TryGetAgent(int handle, out EnemyCrowdAgent agent)
         {
             return agentsByHandle.TryGetValue(handle, out agent);
+        }
+
+        public void TryDamagePlayer(EnemyCrowdAgent agent, Vector2 playerPosition)
+        {
+            if (agent == null || playerCharacter == null || playerCollider == null)
+            {
+                return;
+            }
+
+            using (ContactDamageMarker.Auto())
+            {
+                agent.TryDamagePlayer(playerCharacter, playerPosition, playerCollisionRadius);
+            }
         }
 
         public bool HasAgentWithin(Vector2 center, float radius)

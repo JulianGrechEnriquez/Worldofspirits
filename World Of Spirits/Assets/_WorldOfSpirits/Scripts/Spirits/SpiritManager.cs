@@ -26,6 +26,7 @@ namespace WorldOfSpirits.Spirits
         [SerializeField] private bool logRotation;
 
         private readonly List<Transform> slots = new List<Transform>();
+        private readonly List<Transform> bonusSlots = new List<Transform>();
         private readonly List<SpiritMember> spirits = new List<SpiritMember>();
         private PlayerMovement playerMovement;
         private UpgradeRuntimeStats upgradeStats;
@@ -56,6 +57,31 @@ namespace WorldOfSpirits.Spirits
 
         public bool OwnsSpirit(SpiritDefinition definition) => FindSpirit(definition) != null;
         public bool HasOpenSpiritSlot => spirits.Count < slots.Count;
+
+        /// <summary>Adds runtime support slots granted by player upgrades.</summary>
+        public void SetBonusSpiritSlots(int requestedCount)
+        {
+            requestedCount = Mathf.Max(0, requestedCount);
+            while (bonusSlots.Count < requestedCount)
+            {
+                int slotNumber = bonusSlots.Count + 1;
+                GameObject slotObject = new GameObject($"Bonus Spirit Slot {slotNumber}");
+                Transform slot = slotObject.transform;
+                slot.SetParent(transform, false);
+                slot.localPosition = GetBonusSlotPosition(slotNumber);
+                bonusSlots.Add(slot);
+                slots.Add(slot);
+            }
+
+            while (bonusSlots.Count > requestedCount)
+            {
+                int last = bonusSlots.Count - 1;
+                Transform slot = bonusSlots[last];
+                bonusSlots.RemoveAt(last);
+                slots.Remove(slot);
+                if (slot != null) Destroy(slot.gameObject);
+            }
+        }
 
         public string GetSpiritNameAt(int index)
         {
@@ -299,6 +325,14 @@ namespace WorldOfSpirits.Spirits
                 }
             }
 
+            foreach (Transform bonusSlot in bonusSlots)
+            {
+                if (bonusSlot != null && !slots.Contains(bonusSlot))
+                {
+                    slots.Add(bonusSlot);
+                }
+            }
+
             foreach (Transform slot in slots)
             {
                 if (slot.childCount == 0)
@@ -351,6 +385,13 @@ namespace WorldOfSpirits.Spirits
                     meleeWeaponSlots.Add(children[i]);
                 }
             }
+        }
+
+        private static Vector3 GetBonusSlotPosition(int slotNumber)
+        {
+            // A small ring keeps extra spirits readable without needing scene setup.
+            float angle = (-90f + (slotNumber - 1) * 72f) * Mathf.Deg2Rad;
+            return new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0f) * 1.4f;
         }
     }
 }

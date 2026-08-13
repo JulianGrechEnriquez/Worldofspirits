@@ -14,9 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WorldOfSpirits.Spirits.SpiritDefinition
   spiritName: Ice Spirit
   shape: Yeti
+  cardPortrait: {fileID: 0}
   weapon:
     weaponName: 'Ice gauntlets '
-    description: Twin frozen gauntlets punch toward nearby enemies, pierce crowds, and briefly freeze targets.
+    description: Twin frozen gauntlets punch toward nearby enemies, pierce crowds,
+      and briefly freeze targets.
     levels:
     - level: 1
       effect: punches enemies

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using WorldOfSpirits.Enemies;
+using WorldOfSpirits.Player;
 
 namespace WorldOfSpirits.Crowd
 {
@@ -23,7 +24,6 @@ namespace WorldOfSpirits.Crowd
         [SerializeField] private bool drawDebug;
 
         private Rigidbody2D body;
-        private Collider2D bodyCollider;
         private Animator[] animators;
         private EnemyBase enemy;
         private CrowdSimulationManager manager;
@@ -49,7 +49,6 @@ namespace WorldOfSpirits.Crowd
         private void Awake()
         {
             body = GetComponent<Rigidbody2D>();
-            bodyCollider = GetComponent<Collider2D>();
             enemy = GetComponent<EnemyBase>();
             animators = GetComponentsInChildren<Animator>(true);
             for (int i = 0; i < animators.Length; i++)
@@ -202,7 +201,7 @@ namespace WorldOfSpirits.Crowd
             body.MovePosition(position + velocity * deltaTime);
             externalVelocity = Vector2.MoveTowards(externalVelocity, Vector2.zero, 0.5f * deltaTime);
 
-            TryDamagePlayer(simulation, playerPosition);
+            simulation.TryDamagePlayer(this, playerPosition);
         }
 
         public void TeleportForSimulation(Vector2 position)
@@ -254,13 +253,9 @@ namespace WorldOfSpirits.Crowd
                 return;
             }
 
-            // Compensate for skipped physics steps so average travel speed is
-            // stable while far-away work is distributed across frames.
-            float simulatedDeltaTime = deltaTime * interval;
             float speed = profile.MovementSpeed * profile.DormantSpeedMultiplier;
             Vector2 velocity = toPlayer.normalized * speed;
             body.linearVelocity = velocity;
-            body.MovePosition(position + velocity * simulatedDeltaTime);
         }
 
         private Vector2 CalculateSeparation(
@@ -325,30 +320,25 @@ namespace WorldOfSpirits.Crowd
             return Vector2.ClampMagnitude(force, profile.MaximumSteeringForce);
         }
 
-        private void TryDamagePlayer(
-            CrowdSimulationManager simulation,
-            Vector2 playerPosition)
+        public void TryDamagePlayer(
+            PlayerCharacter playerCharacter,
+            Vector2 playerPosition,
+            float playerCollisionRadius)
         {
-            if (simulation.PlayerCharacter == null || Time.time < nextAttackTime)
+            if (Time.time < nextAttackTime)
             {
                 return;
             }
 
-            Collider2D playerCollider = simulation.PlayerCollider;
-            if (bodyCollider == null || playerCollider == null)
-            {
-                return;
-            }
-
-            ColliderDistance2D colliderDistance = bodyCollider.Distance(playerCollider);
-            const float contactTolerance = 0.01f;
-            if (!colliderDistance.isOverlapped && colliderDistance.distance > contactTolerance)
-            {
-                return;
-            }
-
+            float contactDistance =
+                profile.CollisionRadius + playerCollisionRadius + profile.AttackRange;
             Vector2 direction = playerPosition - body.position;
-            simulation.PlayerCharacter.TryTakeContactDamage(
+            if (direction.sqrMagnitude > contactDistance * contactDistance)
+            {
+                return;
+            }
+
+            playerCharacter.TryTakeContactDamage(
                 profile.ContactDamage,
                 direction.sqrMagnitude > 0.001f ? direction.normalized : Vector2.zero,
                 profile.Knockback);

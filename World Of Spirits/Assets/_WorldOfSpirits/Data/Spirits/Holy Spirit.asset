@@ -14,12 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WorldOfSpirits.Spirits.SpiritDefinition
   spiritName: Holy Spirit
   shape: Biblical Angel
+  cardPortrait: {fileID: 0}
   weapon:
     weaponName: Holy Sword
-    description: A radiant holy sword designed to cleave groups of enemies and punish corrupted targets.
+    description: A radiant holy sword designed to cleave groups of enemies and punish
+      corrupted targets.
     levels:
     - level: 1
       effect: Weapon unlocked
+  runtimeWeapon: {fileID: 0}
   abilities: []
   runtimeAbilities:
   - {fileID: 11400000, guid: d8fc31048fca54d44bff5db21c632fee, type: 2}

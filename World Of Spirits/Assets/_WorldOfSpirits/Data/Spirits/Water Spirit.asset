@@ -14,15 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WorldOfSpirits.Spirits.SpiritDefinition
   spiritName: Water Spirit
   shape: Leviathan
+  cardPortrait: {fileID: 0}
   weapon:
     weaponName: Water Trident
-    description: A leviathan-forged trident hurled through lines of enemies with the force of the tide.
+    description: A leviathan-forged trident hurled through lines of enemies with
+      the force of the tide.
     levels:
     - level: 1
       effect: Weapon unlocked
+  runtimeWeapon: {fileID: 11400000, guid: df73f1284c5a0b044a029de26bc7acdd, type: 2}
   abilities: []
   runtimeAbilities:
   - {fileID: 11400000, guid: 4750291c3506e6d4c8556417f5ff6b1d, type: 2}
   - {fileID: 11400000, guid: 92233e488be9ab341a3e2ba169f99126, type: 2}
   - {fileID: 11400000, guid: 6da74ab588990d943967c020f97ca8f8, type: 2}
-  runtimeWeapon: {fileID: 11400000, guid: df73f1284c5a0b044a029de26bc7acdd, type: 2}

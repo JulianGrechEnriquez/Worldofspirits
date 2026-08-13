@@ -14,9 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WorldOfSpirits.Spirits.SpiritDefinition
   spiritName: Earth Spirit
   shape: Golem
+  cardPortrait: {fileID: 0}
   weapon:
     weaponName: Stone Hammer
-    description: A massive stone hammer that sweeps around the player and crushes groups of nearby enemies.
+    description: A massive stone hammer that sweeps around the player and crushes
+      groups of nearby enemies.
     levels:
     - level: 1
       effect: Weapon unlocked

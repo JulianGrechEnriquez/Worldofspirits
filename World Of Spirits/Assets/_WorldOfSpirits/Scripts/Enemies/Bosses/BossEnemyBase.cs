@@ -1,128 +1,109 @@
+using System;
 using UnityEngine;
 using WorldOfSpirits.Combat;
-using WorldOfSpirits.Player;
-using WorldOfSpirits.UI;
-using WorldOfSpirits.Core;
-using WorldOfSpirits.Progression;
 
 namespace WorldOfSpirits.Enemies
 {
+    /// <summary>
+    /// Shared base for every boss. Bosses are normal EnemyBase instances so
+    /// SpawnDirector can pool, classify, and track them like every other enemy.
+    /// </summary>
     [RequireComponent(typeof(Rigidbody2D), typeof(Collider2D))]
-    public abstract class BossEnemyBase : LivingEntity, IRewardSource, IEnemyClassification
+    public abstract class BossEnemyBase : EnemyBase
     {
-        [Header("Boss Target")]
-        [SerializeField] private Transform target;
-        [SerializeField] private bool faceTarget;
+        [Header("Boss Phases")]
+        [Tooltip("Health fractions at which a new phase begins, in descending order.")]
+        [SerializeField] private float[] phaseThresholds = { 0.66f, 0.33f };
+        [SerializeField] private bool faceTarget = true;
         [SerializeField] private SpriteRenderer bossRenderer;
 
-        [Header("Rewards")]
-        [SerializeField, Min(0f)] private float experienceReward = 25f;
+        private int currentPhase;
 
-        protected Rigidbody2D Body { get; private set; }
-        protected Transform Target => target;
-        public override Faction Faction => global::WorldOfSpirits.Combat.Faction.Enemy;
-        public float ExperienceReward => experienceReward;
-        public bool IsElite => false;
-        public bool IsBoss => true;
-        private static PlayerCharacter cachedPlayer;
+        public int CurrentPhase => currentPhase;
+        public int PhaseCount => phaseThresholds.Length + 1;
+        public event Action<int> PhaseStarted;
+        public event Action BossDefeated;
 
         protected override void Awake()
         {
             base.Awake();
-            Died += AwardExperience;
-
-            Body = GetComponent<Rigidbody2D>();
-            Body.gravityScale = 0f;
-            Body.freezeRotation = true;
-
-            if (GetComponent<DamageNumberEmitter>() == null)
-            {
-                gameObject.AddComponent<DamageNumberEmitter>();
-            }
-
-            if (target == null)
-            {
-                target = GetPlayerTransform();
-            }
-
-            if (bossRenderer == null)
-            {
-                bossRenderer = GetComponentInChildren<SpriteRenderer>();
-            }
+            if (bossRenderer == null) bossRenderer = GetComponentInChildren<SpriteRenderer>();
+            HealthChanged += CheckPhaseTransition;
+            Died += HandleDied;
         }
 
-        private void Update()
+        protected override void OnDestroy()
         {
-            if (IsAlive && target != null)
-            {
-                UpdateBoss(target);
-                UpdateFacing();
-            }
+            HealthChanged -= CheckPhaseTransition;
+            Died -= HandleDied;
+            base.OnDestroy();
         }
 
-        protected virtual void FixedUpdate()
+        protected sealed override void MoveTowardsTarget()
         {
-            // Bosses do not inherit chase movement. They remain stationary unless
-            // a derived boss explicitly implements a dash, leap, or teleport.
-            Body.linearVelocity = Vector2.zero;
+            // A boss moves only when its current attack explicitly assigns velocity.
+            if (!IsPerformingMovementAttack) Body.linearVelocity = Vector2.zero;
+        }
+
+        protected virtual bool IsPerformingMovementAttack => false;
+
+        protected virtual void Update()
+        {
+            if (!IsAlive || Target == null) return;
+            if (faceTarget && bossRenderer != null)
+                bossRenderer.flipX = Target.position.x < transform.position.x;
+            UpdateBoss(Target);
         }
 
         protected abstract void UpdateBoss(Transform playerTarget);
 
-        private void AwardExperience()
-        {
-            if (experienceReward > 0f) ExperienceOrbService.Spawn(transform.position, experienceReward);
-        }
-
         public override void OnSpawnedFromPool(GameObject prefab)
         {
             base.OnSpawnedFromPool(prefab);
+            currentPhase = 0;
             Body.linearVelocity = Vector2.zero;
-            if (target == null)
-            {
-                target = GetPlayerTransform();
-            }
-        }
-
-        private static Transform GetPlayerTransform()
-        {
-            if (cachedPlayer == null)
-            {
-                cachedPlayer = FindFirstObjectByType<PlayerCharacter>();
-            }
-            return cachedPlayer != null ? cachedPlayer.transform : null;
-        }
-
-        protected virtual void Start()
-        {
-            SceneObjectPool.AdoptExisting(gameObject, PoolCategory.Enemies);
+            ResetBossState();
+            PhaseStarted?.Invoke(currentPhase);
         }
 
         public override void OnReturnedToPool()
         {
             Body.linearVelocity = Vector2.zero;
+            ResetBossState();
             base.OnReturnedToPool();
         }
 
-        private void UpdateFacing()
-        {
-            if (!faceTarget || bossRenderer == null)
-            {
-                return;
-            }
+        protected virtual void ResetBossState() { }
 
-            bossRenderer.flipX = target.position.x < transform.position.x;
+        private void CheckPhaseTransition(float health, float maxHealth)
+        {
+            if (maxHealth <= 0f) return;
+            float healthFraction = health / maxHealth;
+            while (currentPhase < phaseThresholds.Length &&
+                   healthFraction <= phaseThresholds[currentPhase])
+            {
+                currentPhase++;
+                PhaseStarted?.Invoke(currentPhase);
+                OnPhaseStarted(currentPhase);
+            }
         }
 
-        protected virtual void OnDrawGizmosSelected()
-        {
-            if (target == null)
-            {
-                return;
-            }
+        protected virtual void OnPhaseStarted(int phase) { }
 
-            Gizmos.color = Color.magenta;
-            Gizmos.DrawLine(transform.position, target.position);
+        private void HandleDied() => BossDefeated?.Invoke();
+
+#if UNITY_EDITOR
+        protected override void OnValidate()
+        {
+            base.OnValidate();
+            if (phaseThresholds == null) return;
+            float previous = 1f;
+            for (int i = 0; i < phaseThresholds.Length; i++)
+            {
+                phaseThresholds[i] = Mathf.Clamp(phaseThresholds[i], 0.01f, previous - 0.01f);
+                previous = phaseThresholds[i];
+            }
         }
+#endif
     }
 }

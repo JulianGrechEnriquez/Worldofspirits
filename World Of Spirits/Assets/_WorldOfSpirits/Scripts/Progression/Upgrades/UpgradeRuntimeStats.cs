@@ -62,6 +62,10 @@ namespace WorldOfSpirits.Progression.Upgrades
 
                 if (modifier.stat == UpgradeStat.MaxHealth && player != null)
                     player.IncreaseMaximumHealth(modifier.valuePerLevel);
+
+                if (modifier.stat == UpgradeStat.SpiritCapacity && spiritManager != null)
+                    spiritManager.SetBonusSpiritSlots(
+                        Mathf.Max(0, Mathf.RoundToInt(GetFlat(UpgradeStat.SpiritCapacity))));
             }
 
             int newLevel = oldLevel + 1;

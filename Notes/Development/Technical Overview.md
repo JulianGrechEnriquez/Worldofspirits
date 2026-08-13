@@ -12,8 +12,8 @@ tags:
 
 - Engine: Unity
 - Solution: `World Of Spirits/World of Spirits.slnx`
-- Main source: `World Of Spirits/Assets/Scripts`
-- Project organization reference: `World Of Spirits/Assets/Docs/PROJECT_STRUCTURE.md`
+- Main source: `World Of Spirits/Assets/_WorldOfSpirits/Scripts`
+- Project organization reference: `World Of Spirits/Assets/_WorldOfSpirits/Documentation/PROJECT_STRUCTURE.md`
 
 ## Runtime architecture
 
@@ -24,6 +24,28 @@ tags:
 - **Progression:** experience, upgrades, unlocks, and pickups.
 - **World:** area flow, timers, waves, and spawning.
 - **UI:** gameplay controls and temporary debug feedback.
+
+## Architecture strengths
+
+- ScriptableObject definitions separate content from runtime state.
+- Combat and crowd simulations centralize high-volume work.
+- Spatial indexes avoid full enemy scans for common queries.
+- Enemies, projectiles, pickups, effects, and damage numbers use pooling.
+- Interfaces define damage, status, reward, and enemy-classification boundaries.
+- Biome spawning, abilities, weapons, and upgrades are data-driven.
+
+## Current technical priorities
+
+- Complete and profile one full Burning Plains run before expanding content breadth.
+- Exclude development-only NuGet, MCP, and compiler DLLs from player builds.
+- Add Runtime, Editor, and Tests assembly definitions.
+- Add automated Edit Mode and Play Mode coverage.
+- Split oversized classes only where responsibility mixing is slowing work or profiling shows a cost.
+- Reduce per-object update work for high-volume pickups and combat UI.
+- Remove or centralize forced physics synchronization in melee attacks.
+- Use stable content IDs rather than GameObject names before implementing saves.
+
+See [[Notes/Planning/Project Audit and Backlog|Project audit and backlog]] for the full audit and checklist.
 
 ## Current invariants
 

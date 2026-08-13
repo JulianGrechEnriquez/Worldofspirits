@@ -11,6 +11,15 @@ tags:
 
 Each area lasts ten minutes and contains unique enemies, mini-bosses, and a final boss.
 
+## Demo areas
+
+| Order | Area | Boss | Status |
+|---:|---|---|---|
+| 1 | Burning Plains | Fire Phoenix | First demo milestone |
+| 2 | Earth Plains (working title) | Earth Golem | Second demo milestone |
+
+Each demo area needs final environment art, at least three normal enemy roles, an elite variation, an area hazard, tuned spawning, music and ambience, a multi-attack boss, victory rewards, and complete retry/return flow. See [[Notes/Planning/Demo Scope and Completion Plan|Demo scope and completion plan]].
+
 | # | Area | Boss |
 |---:|---|---|
 | 1 | Burning Plains | Fire Phoenix |
@@ -32,8 +41,8 @@ Each area lasts ten minutes and contains unique enemies, mini-bosses, and a fina
 - **Necrotic Bat King:** not designed.
 - **Fallen Angel:** not designed.
 
-> [!warning] Scope mismatch
-> Earth Golem and Wind Roc have move sets, but neither appears in the current six-area sequence. Decide whether they are challenge bosses, mini-bosses, or missing areas.
+> [!note] Demo campaign decision
+> Earth Golem is the final boss of Earth Plains and the second demo boss. Wind Roc remains a playable demo spirit; its long-term boss role can be decided after the demo.
 
 ## Enemy archetypes
 

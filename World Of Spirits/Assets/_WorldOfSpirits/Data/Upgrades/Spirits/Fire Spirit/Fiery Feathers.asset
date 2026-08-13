@@ -17,13 +17,13 @@ MonoBehaviour:
   description: Improves this spirit's first ability.
   flavorText: 
   icon: {fileID: 21300000, guid: 435900491ae6f2041b45dae3cb1a1862, type: 3}
+  cardArtwork: {fileID: 2689669376687705436, guid: a7787d74c30519a489f959d2d728a3c1, type: 3}
   suggestedIconTheme: Elemental ability glyph
   category: 2
   rarity: 0
   maximumLevel: 5
   baseWeight: 100
   repeatableAfterMaximum: 0
-  requirements: []
   targetSpirit: {fileID: 11400000, guid: a8ae57fa9212cc641a5de9051fa7816a, type: 2}
   abilityIndex: 0
   spiritPrefab: {fileID: 0}

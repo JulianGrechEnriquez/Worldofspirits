@@ -13,15 +13,18 @@ MonoBehaviour:
   m_Name: Water - Tidal Wave
   m_EditorClassIdentifier: Assembly-CSharp::WorldOfSpirits.Spirits.AbilityDefinition
   abilityName: Tidal Wave
-  description: Tsunami waves damage and carry enemies, then explode at the end of their lifetime.
+  description: Tsunami waves damage and carry enemies, then explode at the end of
+    their lifetime.
   icon: {fileID: 21300000, guid: b4e2d8f1187a4ed49f247ec6a75d9302, type: 3}
   executionType: 0
-  targetingMode: 4
+  targetingMode: 5
   levels:
   - level: 1
-    upgradeDescription: Fires tsunami waves north and south
+    upgradeDescription: Fires waves north and south
     cooldown: 3
     targetingRange: 15
+    minimumSpawnDistance: 0
+    maximumSpawnDistance: 0
     projectile:
       projectilePrefab: {fileID: 740000000000000004, guid: c98bb859f58f4079a7ba3640df0ca5c8, type: 3}
       count: 2
@@ -33,10 +36,13 @@ MonoBehaviour:
       homingStrength: 6
       homingRange: 10
       pierceCount: 0
+      bounceCount: 0
+      bounceRange: 5
       explosionRadius: 0
       growthPerSecond: 0
       appliesStatus: 0
       status: 0
+      statusChance: 1
       statusDuration: 2
       statusStrength: 2
       directionPattern: 1
@@ -45,15 +51,18 @@ MonoBehaviour:
     spawnedEffectPrefab: {fileID: 0}
     spawnCount: 1
     areaRadius: 3
+    activeDuration: 3
     orbitRadius: 1.5
     orbitSpeed: 100
     chainCount: 3
     chainRange: 5
     effects: []
   - level: 2
-    upgradeDescription: Also fires tsunami waves east and west
+    upgradeDescription: Also fires waves east and west
     cooldown: 2.85
     targetingRange: 15
+    minimumSpawnDistance: 0
+    maximumSpawnDistance: 0
     projectile:
       projectilePrefab: {fileID: 740000000000000004, guid: c98bb859f58f4079a7ba3640df0ca5c8, type: 3}
       count: 4
@@ -65,10 +74,13 @@ MonoBehaviour:
       homingStrength: 6
       homingRange: 10
       pierceCount: 0
+      bounceCount: 0
+      bounceRange: 5
       explosionRadius: 0
       growthPerSecond: 0
       appliesStatus: 0
       status: 0
+      statusChance: 1
       statusDuration: 2
       statusStrength: 2
       directionPattern: 1
@@ -77,15 +89,18 @@ MonoBehaviour:
     spawnedEffectPrefab: {fileID: 0}
     spawnCount: 1
     areaRadius: 3.5
+    activeDuration: 3
     orbitRadius: 1.6
     orbitSpeed: 120
     chainCount: 4
     chainRange: 6
     effects: []
   - level: 3
-    upgradeDescription: Increases tsunami size and lifetime
+    upgradeDescription: Increased wave size and lifetime
     cooldown: 2.7
     targetingRange: 15
+    minimumSpawnDistance: 0
+    maximumSpawnDistance: 0
     projectile:
       projectilePrefab: {fileID: 740000000000000004, guid: c98bb859f58f4079a7ba3640df0ca5c8, type: 3}
       count: 4
@@ -97,10 +112,13 @@ MonoBehaviour:
       homingStrength: 6
       homingRange: 10
       pierceCount: 0
+      bounceCount: 0
+      bounceRange: 5
       explosionRadius: 0
       growthPerSecond: 0
       appliesStatus: 0
       status: 0
+      statusChance: 1
       statusDuration: 2
       statusStrength: 2
       directionPattern: 1
@@ -108,16 +126,19 @@ MonoBehaviour:
       lifetimeMultiplier: 1.5
     spawnedEffectPrefab: {fileID: 0}
     spawnCount: 1
-    areaRadius: 5
+    areaRadius: 4
+    activeDuration: 3
     orbitRadius: 1.7
     orbitSpeed: 140
     chainCount: 5
     chainRange: 7
     effects: []
   - level: 4
-    upgradeDescription: Also fires waves in the four remaining diagonal directions
+    upgradeDescription: Also fires in the four diagonal directions
     cooldown: 2.55
     targetingRange: 15
+    minimumSpawnDistance: 0
+    maximumSpawnDistance: 0
     projectile:
       projectilePrefab: {fileID: 740000000000000004, guid: c98bb859f58f4079a7ba3640df0ca5c8, type: 3}
       count: 8
@@ -129,10 +150,13 @@ MonoBehaviour:
       homingStrength: 6
       homingRange: 10
       pierceCount: 0
+      bounceCount: 0
+      bounceRange: 5
       explosionRadius: 0
       growthPerSecond: 0
       appliesStatus: 0
       status: 0
+      statusChance: 1
       statusDuration: 2
       statusStrength: 2
       directionPattern: 1
@@ -140,7 +164,8 @@ MonoBehaviour:
       lifetimeMultiplier: 1.5
     spawnedEffectPrefab: {fileID: 0}
     spawnCount: 1
-    areaRadius: 5.5
+    areaRadius: 4.5
+    activeDuration: 3
     orbitRadius: 1.8
     orbitSpeed: 160
     chainCount: 6

@@ -22,17 +22,19 @@ MonoBehaviour:
     upgradeDescription: 2 blades
     cooldown: 2
     targetingRange: 15
+    minimumSpawnDistance: 0
+    maximumSpawnDistance: 0
     projectile:
-      projectilePrefab: {fileID: 750000000000000007, guid: 031353b371fa441aa321a8d33c4d1534, type: 3}
+      projectilePrefab: {fileID: 0}
       count: 2
       spreadAngle: 360
-      spreadMode: 1
+      spreadMode: 0
       speed: 9
       damage: 10
       homeOnEnemies: 0
       homingStrength: 6
       homingRange: 10
-      pierceCount: 2
+      pierceCount: 0
       bounceCount: 0
       bounceRange: 5
       explosionRadius: 0
@@ -58,17 +60,19 @@ MonoBehaviour:
     upgradeDescription: 4 blades
     cooldown: 1.88
     targetingRange: 15
+    minimumSpawnDistance: 0
+    maximumSpawnDistance: 0
     projectile:
-      projectilePrefab: {fileID: 750000000000000007, guid: 031353b371fa441aa321a8d33c4d1534, type: 3}
+      projectilePrefab: {fileID: 0}
       count: 4
       spreadAngle: 360
-      spreadMode: 1
+      spreadMode: 0
       speed: 9.5
       damage: 13
       homeOnEnemies: 0
       homingStrength: 6
       homingRange: 10
-      pierceCount: 4
+      pierceCount: 0
       bounceCount: 0
       bounceRange: 5
       explosionRadius: 0
@@ -94,17 +98,19 @@ MonoBehaviour:
     upgradeDescription: Increased projectile speed
     cooldown: 1.76
     targetingRange: 15
+    minimumSpawnDistance: 0
+    maximumSpawnDistance: 0
     projectile:
-      projectilePrefab: {fileID: 750000000000000007, guid: 031353b371fa441aa321a8d33c4d1534, type: 3}
-      count: 6
+      projectilePrefab: {fileID: 0}
+      count: 4
       spreadAngle: 360
-      spreadMode: 1
+      spreadMode: 0
       speed: 10
       damage: 16
       homeOnEnemies: 0
       homingStrength: 6
       homingRange: 10
-      pierceCount: 6
+      pierceCount: 0
       bounceCount: 0
       bounceRange: 5
       explosionRadius: 0
@@ -130,17 +136,19 @@ MonoBehaviour:
     upgradeDescription: Blades pierce enemies
     cooldown: 1.64
     targetingRange: 15
+    minimumSpawnDistance: 0
+    maximumSpawnDistance: 0
     projectile:
-      projectilePrefab: {fileID: 750000000000000007, guid: 031353b371fa441aa321a8d33c4d1534, type: 3}
-      count: 8
+      projectilePrefab: {fileID: 0}
+      count: 4
       spreadAngle: 360
-      spreadMode: 1
+      spreadMode: 0
       speed: 10.5
       damage: 19
       homeOnEnemies: 0
       homingStrength: 6
       homingRange: 10
-      pierceCount: 8
+      pierceCount: 3
       bounceCount: 0
       bounceRange: 5
       explosionRadius: 0

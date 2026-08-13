@@ -14,12 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WorldOfSpirits.Spirits.SpiritDefinition
   spiritName: Lightning Spirit
   shape: Thunder Dragon
+  cardPortrait: {fileID: 0}
   weapon:
     weaponName: Lightning Spear
-    description: A lightning-charged spear designed for rapid piercing strikes and arcing electrical damage.
+    description: A lightning-charged spear designed for rapid piercing strikes and
+      arcing electrical damage.
     levels:
     - level: 1
       effect: Weapon unlocked
+  runtimeWeapon: {fileID: 0}
   abilities: []
   runtimeAbilities:
   - {fileID: 11400000, guid: a8c5c17d73b8f60468cf812eed2222ea, type: 2}

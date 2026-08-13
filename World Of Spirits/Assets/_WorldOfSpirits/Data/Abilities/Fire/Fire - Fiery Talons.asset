@@ -22,6 +22,8 @@ MonoBehaviour:
     upgradeDescription: Larger trail
     cooldown: 2
     targetingRange: 15
+    minimumSpawnDistance: 0
+    maximumSpawnDistance: 0
     projectile:
       projectilePrefab: {fileID: 0}
       count: 1
@@ -39,9 +41,13 @@ MonoBehaviour:
       growthPerSecond: 0
       appliesStatus: 0
       status: 0
+      statusChance: 1
       statusDuration: 2
       statusStrength: 2
-    spawnedEffectPrefab: {fileID: 6966402938049929962, guid: e675da6e2b2d63f4bad70720de97918e, type: 3}
+      directionPattern: 0
+      sizeMultiplier: 1
+      lifetimeMultiplier: 1
+    spawnedEffectPrefab: {fileID: 0}
     spawnCount: 1
     areaRadius: 4
     activeDuration: 3
@@ -49,16 +55,13 @@ MonoBehaviour:
     orbitSpeed: 100
     chainCount: 3
     chainRange: 5
-    effects:
-    - effectType: 1
-      value: 0
-      duration: 0
-      status: 0
-      effectPrefab: {fileID: 0}
+    effects: []
   - level: 2
     upgradeDescription: Longer duration
     cooldown: 1.88
     targetingRange: 15
+    minimumSpawnDistance: 0
+    maximumSpawnDistance: 0
     projectile:
       projectilePrefab: {fileID: 0}
       count: 1
@@ -76,9 +79,13 @@ MonoBehaviour:
       growthPerSecond: 0
       appliesStatus: 0
       status: 0
+      statusChance: 1
       statusDuration: 2
       statusStrength: 2
-    spawnedEffectPrefab: {fileID: 6966402938049929962, guid: e675da6e2b2d63f4bad70720de97918e, type: 3}
+      directionPattern: 0
+      sizeMultiplier: 1
+      lifetimeMultiplier: 1
+    spawnedEffectPrefab: {fileID: 0}
     spawnCount: 1
     areaRadius: 4.5
     activeDuration: 3
@@ -91,6 +98,8 @@ MonoBehaviour:
     upgradeDescription: More damage
     cooldown: 1.76
     targetingRange: 15
+    minimumSpawnDistance: 0
+    maximumSpawnDistance: 0
     projectile:
       projectilePrefab: {fileID: 0}
       count: 1
@@ -108,9 +117,13 @@ MonoBehaviour:
       growthPerSecond: 0
       appliesStatus: 0
       status: 0
+      statusChance: 1
       statusDuration: 2
       statusStrength: 2
-    spawnedEffectPrefab: {fileID: 6966402938049929962, guid: e675da6e2b2d63f4bad70720de97918e, type: 3}
+      directionPattern: 0
+      sizeMultiplier: 1
+      lifetimeMultiplier: 1
+    spawnedEffectPrefab: {fileID: 0}
     spawnCount: 1
     areaRadius: 5
     activeDuration: 3
@@ -123,6 +136,8 @@ MonoBehaviour:
     upgradeDescription: Trail spreads to nearby enemies
     cooldown: 1.64
     targetingRange: 15
+    minimumSpawnDistance: 0
+    maximumSpawnDistance: 0
     projectile:
       projectilePrefab: {fileID: 0}
       count: 1
@@ -140,9 +155,13 @@ MonoBehaviour:
       growthPerSecond: 0
       appliesStatus: 0
       status: 0
+      statusChance: 1
       statusDuration: 2
       statusStrength: 2
-    spawnedEffectPrefab: {fileID: 6966402938049929962, guid: e675da6e2b2d63f4bad70720de97918e, type: 3}
+      directionPattern: 0
+      sizeMultiplier: 1
+      lifetimeMultiplier: 1
+    spawnedEffectPrefab: {fileID: 0}
     spawnCount: 1
     areaRadius: 5.5
     activeDuration: 3
@@ -155,6 +174,8 @@ MonoBehaviour:
     upgradeDescription: Burning enemies explode
     cooldown: 1.52
     targetingRange: 15
+    minimumSpawnDistance: 0
+    maximumSpawnDistance: 0
     projectile:
       projectilePrefab: {fileID: 0}
       count: 1
@@ -172,8 +193,12 @@ MonoBehaviour:
       growthPerSecond: 0
       appliesStatus: 0
       status: 0
+      statusChance: 1
       statusDuration: 2
       statusStrength: 2
+      directionPattern: 0
+      sizeMultiplier: 1
+      lifetimeMultiplier: 1
     spawnedEffectPrefab: {fileID: 0}
     spawnCount: 1
     areaRadius: 6

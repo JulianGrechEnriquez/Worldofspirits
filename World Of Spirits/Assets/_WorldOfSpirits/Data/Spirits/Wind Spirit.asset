@@ -14,14 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WorldOfSpirits.Spirits.SpiritDefinition
   spiritName: Wind Spirit
   shape: Roc
+  cardPortrait: {fileID: 0}
   weapon:
     weaponName: Chakrams
-    description: Wind-forged chakrams fly through enemies and return to the player like boomerangs.
+    description: Wind-forged chakrams fly through enemies and return to the player
+      like boomerangs.
     levels:
     - level: 1
       effect: Weapon unlocked
+  runtimeWeapon: {fileID: 0}
   abilities: []
   runtimeAbilities:
   - {fileID: 11400000, guid: e5674a4357271434487a66e4a175961d, type: 2}
   - {fileID: 11400000, guid: 1c08faca5cd1f454890e1b479206d85b, type: 2}
-  - {fileID: 11400000, guid: a25f459782a748f99d438aa8b8ab346a, type: 2}

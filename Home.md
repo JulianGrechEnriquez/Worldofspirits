@@ -16,14 +16,18 @@ status: active
 - [[Notes/Game Design/Areas and Bosses|Areas and bosses]]
 - [[Notes/Development/Technical Overview|Technical overview]]
 - [[Notes/Planning/Roadmap|Roadmap]]
+- [[Notes/Planning/Demo Scope and Completion Plan|Demo scope and completion plan]]
+- [[Notes/Planning/Project Audit and Backlog|Project audit and backlog]]
 - [[Notes/Planning/Decision Log|Decision log]]
 
 ## Current focus
 
-- [ ] Define the progression system.
-- [ ] Finish Necrotic and Holy Spirit abilities.
-- [ ] Establish the first playable area from start to boss.
-- [ ] Validate every spirit prefab and ability configuration in Unity.
+- [ ] Complete the short Burning Plains loop with Fire Spirit.
+- [ ] Finish Fire, Wind, Water, and Earth as the four demo spirits.
+- [ ] Complete Burning Plains and Earth Plains as the two demo areas.
+- [ ] Validate menu, saving, victory, retry, performance, and controller flow.
+
+See [[Notes/Planning/Demo Scope and Completion Plan|Demo scope and completion plan]] for the demo requirements and [[Notes/Planning/Project Audit and Backlog|Project audit and backlog]] for the wider technical backlog.
 
 ## Working habits
 

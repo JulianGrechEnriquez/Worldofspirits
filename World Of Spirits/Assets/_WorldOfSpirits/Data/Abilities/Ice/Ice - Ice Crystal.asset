@@ -23,16 +23,18 @@ MonoBehaviour:
     upgradeDescription: 3 crystals, 18 damage, 10% freeze chance
     cooldown: 5
     targetingRange: 15
+    minimumSpawnDistance: 0
+    maximumSpawnDistance: 0
     projectile:
       projectilePrefab: {fileID: 0}
       count: 1
-      spreadAngle: 0
+      spreadAngle: 35
       spreadMode: 0
       speed: 9
       damage: 18
       homeOnEnemies: 0
-      homingStrength: 5
-      homingRange: 8
+      homingStrength: 6
+      homingRange: 10
       pierceCount: 0
       bounceCount: 0
       bounceRange: 5
@@ -51,24 +53,26 @@ MonoBehaviour:
     areaRadius: 2.25
     activeDuration: 1.2
     orbitRadius: 1.5
-    orbitSpeed: 120
-    chainCount: 1
+    orbitSpeed: 100
+    chainCount: 3
     chainRange: 5
     effects: []
   - level: 2
     upgradeDescription: 4 crystals, 26 damage, 20% freeze chance
     cooldown: 4.65
     targetingRange: 15
+    minimumSpawnDistance: 0
+    maximumSpawnDistance: 0
     projectile:
       projectilePrefab: {fileID: 0}
       count: 1
-      spreadAngle: 0
+      spreadAngle: 35
       spreadMode: 0
-      speed: 9
+      speed: 9.5
       damage: 26
       homeOnEnemies: 0
-      homingStrength: 5
-      homingRange: 8
+      homingStrength: 6
+      homingRange: 10
       pierceCount: 0
       bounceCount: 0
       bounceRange: 5
@@ -86,25 +90,27 @@ MonoBehaviour:
     spawnCount: 4
     areaRadius: 2.5
     activeDuration: 0.9
-    orbitRadius: 1.5
+    orbitRadius: 1.6
     orbitSpeed: 120
-    chainCount: 1
-    chainRange: 5
+    chainCount: 4
+    chainRange: 6
     effects: []
   - level: 3
     upgradeDescription: 5 crystals, 34 damage, 35% freeze chance
     cooldown: 4.3
     targetingRange: 15
+    minimumSpawnDistance: 0
+    maximumSpawnDistance: 0
     projectile:
       projectilePrefab: {fileID: 0}
       count: 1
-      spreadAngle: 0
+      spreadAngle: 35
       spreadMode: 0
-      speed: 9
+      speed: 10
       damage: 34
       homeOnEnemies: 0
-      homingStrength: 5
-      homingRange: 8
+      homingStrength: 6
+      homingRange: 10
       pierceCount: 0
       bounceCount: 0
       bounceRange: 5
@@ -122,25 +128,27 @@ MonoBehaviour:
     spawnCount: 5
     areaRadius: 2.75
     activeDuration: 0.8
-    orbitRadius: 1.5
-    orbitSpeed: 120
-    chainCount: 1
-    chainRange: 5
+    orbitRadius: 1.7
+    orbitSpeed: 140
+    chainCount: 5
+    chainRange: 7
     effects: []
   - level: 4
     upgradeDescription: 6 crystals, 42 damage, 50% freeze chance
     cooldown: 3.95
     targetingRange: 15
+    minimumSpawnDistance: 0
+    maximumSpawnDistance: 0
     projectile:
       projectilePrefab: {fileID: 0}
       count: 1
-      spreadAngle: 0
+      spreadAngle: 35
       spreadMode: 0
-      speed: 9
+      speed: 10.5
       damage: 42
       homeOnEnemies: 0
-      homingStrength: 5
-      homingRange: 8
+      homingStrength: 6
+      homingRange: 10
       pierceCount: 0
       bounceCount: 0
       bounceRange: 5
@@ -158,8 +166,8 @@ MonoBehaviour:
     spawnCount: 6
     areaRadius: 3
     activeDuration: 0.8
-    orbitRadius: 1.5
-    orbitSpeed: 120
-    chainCount: 1
-    chainRange: 5
+    orbitRadius: 1.8
+    orbitSpeed: 160
+    chainCount: 6
+    chainRange: 8
     effects: []

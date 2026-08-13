@@ -8,6 +8,7 @@ namespace WorldOfSpirits.Progression.Upgrades
     {
         [Header("UI")]
         [SerializeField] private Button button;
+        [SerializeField] private Image artwork;
         [SerializeField] private Image icon;
         [SerializeField] private Image border;
         [SerializeField] private TMP_Text titleText;
@@ -33,6 +34,12 @@ namespace WorldOfSpirits.Progression.Upgrades
             if (descriptionText != null) descriptionText.text = card.Description;
             if (rarityText != null) rarityText.text = card.Rarity.ToString();
             if (levelText != null) levelText.text = $"Level {currentLevel + 1}/{card.MaximumLevel}";
+            if (artwork != null)
+            {
+                artwork.sprite = card.CardArtwork;
+                artwork.enabled = card.CardArtwork != null;
+                artwork.preserveAspect = true;
+            }
             if (icon != null) { icon.sprite = card.Icon; icon.enabled = card.Icon != null; }
             if (border != null) border.color = RarityColor(card.Rarity);
             gameObject.SetActive(true);
@@ -47,6 +54,12 @@ namespace WorldOfSpirits.Progression.Upgrades
             if (descriptionText != null) descriptionText.text = card.Description;
             if (rarityText != null) rarityText.text = card.Rarity.ToString();
             if (levelText != null) levelText.text = $"Level {currentLevel}/{card.MaximumLevel}";
+            if (artwork != null)
+            {
+                artwork.sprite = card.CardArtwork;
+                artwork.enabled = card.CardArtwork != null;
+                artwork.preserveAspect = true;
+            }
             if (icon != null) { icon.sprite = card.Icon; icon.enabled = card.Icon != null; }
             if (border != null) border.color = RarityColor(card.Rarity);
             gameObject.SetActive(true);

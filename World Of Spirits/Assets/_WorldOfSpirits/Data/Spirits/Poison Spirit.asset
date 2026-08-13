@@ -14,12 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WorldOfSpirits.Spirits.SpiritDefinition
   spiritName: Poison Spirit
   shape: Scorpion
+  cardPortrait: {fileID: 0}
   weapon:
     weaponName: Poison Daggers
-    description: Venom-coated daggers designed for rapid throws that poison and weaken enemies over time.
+    description: Venom-coated daggers designed for rapid throws that poison and weaken
+      enemies over time.
     levels:
     - level: 1
       effect: Weapon unlocked
+  runtimeWeapon: {fileID: 0}
   abilities: []
   runtimeAbilities:
   - {fileID: 11400000, guid: 6a0f8faec7be8e148a9fa79b51427234, type: 2}

@@ -62,7 +62,12 @@ namespace WorldOfSpirits.Enemies
 
         protected virtual void FixedUpdate()
         {
-            if (!externalMovement && IsAlive && target != null)
+            if (externalMovement)
+            {
+                return;
+            }
+
+            if (IsAlive && target != null)
             {
                 if (Time.fixedTime >= nextMovementRefresh)
                 {

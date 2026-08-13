@@ -8,12 +8,16 @@ tags:
 
 # Spirits
 
+## Demo roster
+
+The playable demo roster is limited to **Fire, Wind, Water, and Earth**. Each requires a finished weapon, three finished abilities, full upgrade paths, final in-game art, animation, VFX, icons, descriptions, and audio. See [[Notes/Planning/Demo Scope and Completion Plan|Demo scope and completion plan]].
+
 | Spirit | Form | Weapon | Ability status |
 |---|---|---|---|
 | Fire | Phoenix | Fire bow | Defined |
 | Earth | Golem | Stone hammer | Defined; RockFall needs clarification |
 | Water | Leviathan | Water trident | Defined |
-| Wind | Roc | Chakrams | Partially defined |
+| Wind | Roc | Chakrams | Demo scope; Razor Wind, Tornado, and Gale Barrier |
 | Ice | Yeti | Ice gauntlets | Defined; Ice Crystal upgrades need correction |
 | Lightning | Thunder Dragon | Lightning spear | Defined |
 | Poison | Scorpion | Poison daggers | Defined |
@@ -45,7 +49,7 @@ tags:
 
 - **Razor Wind:** radial piercing blades.
 - **Tornado:** moving pull effect with increased size, strength, and count.
-- Third ability is not defined.
+- **Gale Barrier:** the third demo ability; finalize its damage, protection, projectile-interaction, duration, and upgrade rules.
 
 ### Ice
 
