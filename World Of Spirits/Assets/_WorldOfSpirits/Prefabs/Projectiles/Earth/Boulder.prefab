@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 3467963294448358471}
   - component: {fileID: 6903201631955804396}
   - component: {fileID: 611196794430965595}
-  m_Layer: 0
-  m_Name: boulder
+  m_Layer: 6
+  m_Name: Boulder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -111,6 +111,7 @@ MonoBehaviour:
   homeOnEnemies: 0
   homingStrength: 5
   homingRange: 8
+  homingTargetRefreshInterval: 0.15
   logProjectileEvents: 0
   drawVelocity: 1
   pierceCount: 0

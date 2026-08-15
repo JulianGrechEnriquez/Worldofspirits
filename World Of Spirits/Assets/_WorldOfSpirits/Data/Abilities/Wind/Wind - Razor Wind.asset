@@ -25,7 +25,7 @@ MonoBehaviour:
     minimumSpawnDistance: 0
     maximumSpawnDistance: 0
     projectile:
-      projectilePrefab: {fileID: 0}
+      projectilePrefab: {fileID: 750000000000000007, guid: 031353b371fa441aa321a8d33c4d1534, type: 3}
       count: 2
       spreadAngle: 360
       spreadMode: 0
@@ -63,7 +63,7 @@ MonoBehaviour:
     minimumSpawnDistance: 0
     maximumSpawnDistance: 0
     projectile:
-      projectilePrefab: {fileID: 0}
+      projectilePrefab: {fileID: 750000000000000007, guid: 031353b371fa441aa321a8d33c4d1534, type: 3}
       count: 4
       spreadAngle: 360
       spreadMode: 0
@@ -101,7 +101,7 @@ MonoBehaviour:
     minimumSpawnDistance: 0
     maximumSpawnDistance: 0
     projectile:
-      projectilePrefab: {fileID: 0}
+      projectilePrefab: {fileID: 750000000000000007, guid: 031353b371fa441aa321a8d33c4d1534, type: 3}
       count: 4
       spreadAngle: 360
       spreadMode: 0
@@ -139,7 +139,7 @@ MonoBehaviour:
     minimumSpawnDistance: 0
     maximumSpawnDistance: 0
     projectile:
-      projectilePrefab: {fileID: 0}
+      projectilePrefab: {fileID: 750000000000000007, guid: 031353b371fa441aa321a8d33c4d1534, type: 3}
       count: 4
       spreadAngle: 360
       spreadMode: 0

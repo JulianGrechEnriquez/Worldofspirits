@@ -1406,7 +1406,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 154361504}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 47e4f4bcb50c9294aa6bfe49170862f2, type: 3}
   m_Name: 
@@ -1727,6 +1727,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WorldOfSpirits.Progression.Upgrades.UpgradeCardView
   button: {fileID: 279900388}
+  artwork: {fileID: 0}
   icon: {fileID: 2098922843}
   border: {fileID: 1087026719}
   titleText: {fileID: 648950143}
@@ -2339,9 +2340,14 @@ MonoBehaviour:
   hitFlashColor: {r: 1, g: 0, b: 0, a: 1}
   hitFlashDuration: 0.12
   target: {fileID: 1970536384}
+  movementRefreshInterval: 0.06
+  experienceReward: 25
+  drawTargetLine: 1
+  phaseThresholds:
+  - 0.66
+  - 0.33
   faceTarget: 0
   bossRenderer: {fileID: 0}
-  experienceReward: 25
 --- !u!50 &467052618
 Rigidbody2D:
   serializedVersion: 5
@@ -3035,6 +3041,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WorldOfSpirits.Progression.Upgrades.UpgradeCardView
   button: {fileID: 507580160}
+  artwork: {fileID: 0}
   icon: {fileID: 1562202082}
   border: {fileID: 1396220529}
   titleText: {fileID: 1765893029}
@@ -10174,6 +10181,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WorldOfSpirits.Progression.Upgrades.UpgradeCardView
   button: {fileID: 1735835090}
+  artwork: {fileID: 0}
   icon: {fileID: 1074167837}
   border: {fileID: 143743967}
   titleText: {fileID: 1882369872}

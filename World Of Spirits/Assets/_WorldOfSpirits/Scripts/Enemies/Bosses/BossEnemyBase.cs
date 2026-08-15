@@ -32,11 +32,10 @@ namespace WorldOfSpirits.Enemies
             Died += HandleDied;
         }
 
-        protected override void OnDestroy()
+        protected void OnDestroy()
         {
             HealthChanged -= CheckPhaseTransition;
             Died -= HandleDied;
-            base.OnDestroy();
         }
 
         protected sealed override void MoveTowardsTarget()

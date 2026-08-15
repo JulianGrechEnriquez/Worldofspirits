@@ -10,7 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 376406604224759106}
   - component: {fileID: 8725526431394702199}
-  m_Layer: 0
+  - component: {fileID: 8892802158266760184}
+  - component: {fileID: -2309056655330776266}
+  m_Layer: 3
   m_Name: Quicksand Domain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -91,3 +93,65 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!58 &8892802158266760184
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1728612343264657921}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_Radius: 0.5
+--- !u!114 &-2309056655330776266
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1728612343264657921}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 854ec0ef4b630764b84640faffd3c146, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WorldOfSpirits.Spirits.PersistentDamageZone
+  damagePerTick: 5
+  tickInterval: 0.5
+  duration: 3
+  destroyAfterDuration: 1
+  ownerFaction: 0
+  pullStyle: 1
+  pullForce: 0.54
+  swirlForce: 5
+  distanceFalloff: 1
+  minimumRadius: 0.25
+  quicksandWobble: 0.5
+  blackHoleMultiplier: 3
+  followOwner: 1
+  resizeColliderOnly: 0

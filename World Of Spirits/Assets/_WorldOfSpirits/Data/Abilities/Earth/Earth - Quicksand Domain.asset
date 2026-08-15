@@ -15,7 +15,7 @@ MonoBehaviour:
   abilityName: Quicksand Domain
   description: Slows enemies around the player.
   icon: {fileID: 0}
-  executionType: 1
+  executionType: 2
   targetingMode: 5
   levels:
   - level: 1
@@ -47,7 +47,7 @@ MonoBehaviour:
       directionPattern: 0
       sizeMultiplier: 1
       lifetimeMultiplier: 1
-    spawnedEffectPrefab: {fileID: 0}
+    spawnedEffectPrefab: {fileID: 1728612343264657921, guid: 9eb8b35368dbbbf4cbecdcd076650e57, type: 3}
     spawnCount: 1
     areaRadius: 3
     activeDuration: 3
@@ -95,7 +95,7 @@ MonoBehaviour:
       directionPattern: 0
       sizeMultiplier: 1
       lifetimeMultiplier: 1
-    spawnedEffectPrefab: {fileID: 0}
+    spawnedEffectPrefab: {fileID: 1728612343264657921, guid: 9eb8b35368dbbbf4cbecdcd076650e57, type: 3}
     spawnCount: 1
     areaRadius: 3.5
     activeDuration: 3
@@ -143,7 +143,7 @@ MonoBehaviour:
       directionPattern: 0
       sizeMultiplier: 1
       lifetimeMultiplier: 1
-    spawnedEffectPrefab: {fileID: 0}
+    spawnedEffectPrefab: {fileID: 1728612343264657921, guid: 9eb8b35368dbbbf4cbecdcd076650e57, type: 3}
     spawnCount: 1
     areaRadius: 4
     activeDuration: 3
@@ -191,7 +191,7 @@ MonoBehaviour:
       directionPattern: 0
       sizeMultiplier: 1
       lifetimeMultiplier: 1
-    spawnedEffectPrefab: {fileID: 0}
+    spawnedEffectPrefab: {fileID: 1728612343264657921, guid: 9eb8b35368dbbbf4cbecdcd076650e57, type: 3}
     spawnCount: 1
     areaRadius: 4.5
     activeDuration: 3
@@ -244,7 +244,7 @@ MonoBehaviour:
       directionPattern: 0
       sizeMultiplier: 1
       lifetimeMultiplier: 1
-    spawnedEffectPrefab: {fileID: 0}
+    spawnedEffectPrefab: {fileID: 1728612343264657921, guid: 9eb8b35368dbbbf4cbecdcd076650e57, type: 3}
     spawnCount: 1
     areaRadius: 5
     activeDuration: 3
