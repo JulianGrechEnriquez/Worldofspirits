@@ -196,6 +196,12 @@ namespace WorldOfSpirits.Spawning
             spawningPaused = true;
         }
 
+        /// <summary>Clears active normal enemies for a clean boss arena.</summary>
+        public void ClearNormalEnemies()
+        {
+            if (enemyPool != null) enemyPool.DespawnAllNonBosses();
+        }
+
         /// <summary>
         /// Changes the normal enemy roster and prepares its pools.
         /// Existing enemies are not removed.

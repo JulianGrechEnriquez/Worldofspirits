@@ -38,6 +38,7 @@ namespace WorldOfSpirits.Spawning
             new Dictionary<EnemyBase, EnemyCrowdAgent>(256);
         private readonly HashSet<BiomeSpawnData> preloadedBiomes =
             new HashSet<BiomeSpawnData>();
+        private readonly List<EnemyBase> despawnBuffer = new List<EnemyBase>(256);
         private int aliveEliteCount;
 
         public int AliveCount => activeEnemies.Count;
@@ -129,6 +130,10 @@ namespace WorldOfSpirits.Spawning
             }
 
             enemy.ConfigureClassification(spawnData.IsElite, spawnData.IsBoss);
+            if (enemy is BossEnemyBase boss && spawnData.BossData != null)
+            {
+                boss.Initialize(spawnData.BossData);
+            }
 
             TrackInstance(enemy);
             if (activeEnemies.Add(enemy))
@@ -158,6 +163,21 @@ namespace WorldOfSpirits.Spawning
 
             DeactivateTracking(enemy);
             SceneObjectPool.ReleaseOrDestroy(enemy.gameObject);
+        }
+
+        /// <summary>Returns all active normal enemies to their pools while preserving bosses.</summary>
+        public void DespawnAllNonBosses()
+        {
+            despawnBuffer.Clear();
+            foreach (EnemyBase enemy in activeEnemies)
+            {
+                if (enemy != null && !enemy.IsBoss)
+                    despawnBuffer.Add(enemy);
+            }
+
+            for (int i = 0; i < despawnBuffer.Count; i++)
+                Despawn(despawnBuffer[i]);
+            despawnBuffer.Clear();
         }
 
         private static EnemyBase SpawnLowLevel(

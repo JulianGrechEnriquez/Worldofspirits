@@ -34,12 +34,16 @@ namespace WorldOfSpirits.Spawning
         [Tooltip("Whether this entry represents a boss. Bosses are excluded from normal budget spawning.")]
         [SerializeField] private bool boss;
 
+        [Tooltip("Optional data-driven boss identity and stats. Used only when Boss is enabled.")]
+        [SerializeField] private BossData bossData;
+
         public EnemyBase EnemyPrefab => enemyPrefab;
         public int SpawnCost => spawnCost;
         public float SpawnWeight => spawnWeight;
         public string BiomeId => biomeId;
         public bool IsElite => elite;
         public bool IsBoss => boss;
+        public BossData BossData => bossData;
 
         /// <summary>
         /// Returns true when this entry is eligible for the active biome.

@@ -9,7 +9,7 @@ namespace WorldOfSpirits.Enemies
     /// SpawnDirector can pool, classify, and track them like every other enemy.
     /// </summary>
     [RequireComponent(typeof(Rigidbody2D), typeof(Collider2D))]
-    public abstract class BossEnemyBase : EnemyBase
+    public abstract class BossEnemyBase : EnemyBase, IBoss
     {
         [Header("Boss Phases")]
         [Tooltip("Health fractions at which a new phase begins, in descending order.")]
@@ -18,11 +18,16 @@ namespace WorldOfSpirits.Enemies
         [SerializeField] private SpriteRenderer bossRenderer;
 
         private int currentPhase;
+        private BossData runtimeData;
+        private bool invulnerable;
 
         public int CurrentPhase => currentPhase;
+        public BossData Data => runtimeData;
+        public string BossName => runtimeData != null ? runtimeData.BossName : name;
         public int PhaseCount => phaseThresholds.Length + 1;
         public event Action<int> PhaseStarted;
         public event Action BossDefeated;
+        public event Action<BossEnemyBase> BossReady;
 
         protected override void Awake()
         {
@@ -31,6 +36,24 @@ namespace WorldOfSpirits.Enemies
             HealthChanged += CheckPhaseTransition;
             Died += HandleDied;
         }
+
+        public void Initialize(BossData data)
+        {
+            runtimeData = data;
+            if (runtimeData != null)
+                ConfigureMaximumHealth(runtimeData.MaximumHealth);
+            BossReady?.Invoke(this);
+        }
+
+        public override void TakeDamage(DamageContext context)
+        {
+            if (!invulnerable) base.TakeDamage(context);
+        }
+
+        public void SetInvulnerable(bool value) => invulnerable = value;
+
+        public void RestoreHealthFraction(float fraction) =>
+            RestoreAfterPreventedDeath(Mathf.Clamp01(fraction));
 
         protected void OnDestroy()
         {
@@ -60,6 +83,7 @@ namespace WorldOfSpirits.Enemies
         {
             base.OnSpawnedFromPool(prefab);
             currentPhase = 0;
+            invulnerable = false;
             Body.linearVelocity = Vector2.zero;
             ResetBossState();
             PhaseStarted?.Invoke(currentPhase);

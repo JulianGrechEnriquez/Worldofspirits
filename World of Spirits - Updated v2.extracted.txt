@@ -1,0 +1,477 @@
+# World of Spirits - Updated v2.docx
+
+[Heading 1] World of Spirits (Working Title)
+[Normal] Genre
+[Normal] 2D Roguelike Survival
+[Normal] Inspiration
+[Normal] Vampire Survivors
+[Normal] Soulstone Survivors
+[Normal] Halls of Torment
+[Normal] Theme
+[Normal] Fantasy Adventure
+[Heading 2] Game Level Design
+[Normal] The game consists of 6 different themed areas.
+[Normal] Each area lasts 10 minutes
+[Normal] Each area contains unique enemies, mini-bosses, and a final boss
+[Normal] Total playtime: approximately 60 minutes
+[Heading 2] Game Lore
+[Normal] Long ago, the Spirit World and Human World existed in harmony.
+[Normal] A powerful corruption known as The Void began consuming spirits and twisting them into dangerous creatures known as the Elemental Kin.
+[Normal] Spirit Tamers are warriors capable of forming contracts with powerful elemental spirits and channeling their power through magical weapons.
+[Normal] The player must travel across six corrupted regions, purify the elemental guardians, and restore balance between the two worlds.
+[Heading 2] Core Gameplay Loop
+[Normal] Select Spirit
+[Normal] Enter Area
+[Normal] Defeat Enemies
+[Normal] Gain Experience
+[Normal] Level Up
+[Normal] Choose an Upgrade
+[Normal] Survive for 10 Minutes
+[Normal] Defeat the Area Boss
+[Normal] Unlock Rewards
+[Normal] Proceed to the Next Area
+[Normal] Starting Spirit System
+[Normal] The player begins with:
+[Normal] Fire Spirit (unlocked by default)
+[Normal] Other spirits are unlocked through special summoning challenges.
+[Normal] Example Progression
+[Normal] Defeat the Fire Phoenix → Unlock Ice Challenge
+[Normal] Defeat the Ice Yeti → Unlock Lightning Challenge
+[Normal] Continue unlocking spirits through gameplay
+[Normal] This system rewards players for progression rather than relying on random summons or gambling mechanics.
+[Normal] Leveling System
+[Normal] Whenever the player levels up, the game randomly offers upgrades for spirit abilities, player stats, or new spirit contracts. Upgrade cards have no minimum player-level requirement; valid cards can appear from the beginning of a run. Spirit ownership, ability order, maximum ranks, and other functional prerequisites still apply.
+[Normal] The player can have a maximum of three spirits during a run:
+[Normal] One starting spirit
+[Normal] Up to two additional spirits acquired during the run
+[Normal] Fusion System
+[Normal] When two spirits reach the maximum level of a specific ability, one of the available upgrade choices may become a Fusion Ability.
+[Normal] Fusion abilities are based on the combination of the two spirits and provide powerful new attacks or effects.
+[Normal] Progression System
+[Normal] (To be designed)
+[Heading 2] Current Gameplay Details
+[Detail Note] Design snapshot: The current game structure combines automatic combat, movement-based spirit behavior, and build choices across a ten-minute area run.
+[Heading 3] Run Rules
+[List Paragraph] A run supports up to three contracted spirits: one starting spirit and up to two spirits acquired through level-up choices.
+[List Paragraph] The active main spirit can be changed during play, allowing the player to switch weapon forms and combat roles.
+[List Paragraph] While the player is stationary, the main spirit becomes its elemental weapon and attacks automatically.
+[List Paragraph] While the player is moving, the main spirit casts abilities like a support spirit; support spirits continue attacking in both movement states.
+[List Paragraph] Each area lasts ten minutes and ends with a boss encounter.
+[Heading 3] Spirit Roster at a Glance
+[Heading 3] Area Progression
+[Normal] The six-area sequence currently moves through Burning Plains, Frozen Wastes, Thunder Peaks, Poison Marsh, Shadow Realm, and Celestial Temple. Their final bosses are the Fire Phoenix, Ice Yeti, Storm Dragon, Giant Scorpion, Necrotic Bat King, and Fallen Angel.
+[Heading 3] Enemy Roles
+[Heading 3] Recently Implemented Systems
+[List Paragraph] Upgrade offers are randomized without minimum player-level gates.
+[List Paragraph] Wind Tornadoes spawn in a random ring 5-9 units from the player, damage nearby enemies over time, and steadily pull enemies toward their center.
+[List Paragraph] Gale Barrier creates a visible expanding wind pulse, shields the player, and damages and pushes nearby enemies away.
+[List Paragraph] Wind Chakrams behave as boomerangs: they damage enemies while travelling outward, return to the player, and can damage the same enemy again on the return path.
+[List Paragraph] Flying enemies pressure positioning and can approach over obstacles.
+[List Paragraph] Fast enemies pursue aggressively, while slow chargers telegraph heavier attacks.
+[List Paragraph] Ranged enemies force the player to keep moving and manage projectile space.
+[List Paragraph] Death-explosion enemies create temporary danger zones after defeat.
+[Heading 3] Open Design Questions
+[List Paragraph] Define the long-term meta-progression system.
+[List Paragraph] Specify the exact ability levels, spirit pairings, and offer rules required to unlock fusion abilities.
+[List Paragraph] Complete the Necrotic ability set and finalize the Holy Spirit abilities.
+[List Paragraph] Decide whether the Earth Golem and Wind Roc are challenge bosses, mini-bosses, or missing entries in the six-area sequence.
+[Heading 1] Spirits
+[Heading 2] Fire Spirit
+[Heading 3] Shape
+[Normal] Phoenix
+[Heading 3] Weapon
+[Normal] Fire bow
+[Heading 4] Description
+[Normal] A phoenix-forged bow that automatically fires burning feathers at nearby enemies. The feathers home toward targets, and higher weapon levels improve damage, firing speed, projectile speed, and effective range.
+[Heading 3] Abilities
+[Heading 4] Ability 1: Fiery Feathers
+[Normal] Shoots homing feathers in a fan shape.
+[Normal] Upgrades
+[Normal] Lv1: 3 feathers
+[Normal] Lv2: +2 feathers
+[Normal] Lv3: Increased damage
+[Normal] Lv4: Exploding feathers
+[Normal] Lv5: Burning feathers leave fire patches
+[Heading 4] Ability 2: Fiery Talons
+[Normal] Leaves a trail of fire behind the player.
+[Normal] Upgrades
+[Normal] Larger trail
+[Normal] Longer duration
+[Normal] More damage
+[Normal] Trail spreads to nearby enemies
+[Normal] Burning enemies explode
+[Heading 4] Ability 3: Phoenix Dive
+[Normal] A flaming phoenix dives through enemies.
+[Normal] Upgrades
+[Normal] More damage
+[Normal] Multiple dives
+[Normal] Leaves fire zones
+[Normal] Larger area
+[Normal] Revives once per run when maxed
+[Heading 2] Earth Spirit
+[Heading 3] Shape
+[Normal] Golem
+[Heading 3] Weapon
+[Normal] Stone hammer
+[Heading 4] Description
+[Normal] A massive stone hammer that continuously sweeps around the player while the Earth Spirit is in weapon form. Its broad orbit crushes groups of nearby enemies, with later levels improving damage, rotation speed, reach, and the number of targets struck.
+[Heading 3] Abilities
+[Heading 4] Ability 1: Quicksand Domain
+[Normal (Web)] Slows enemies around the player.
+[Normal (Web)] Upgrades
+[Normal] Bigger radius
+[Normal] Stronger slow
+[Normal] Damage over time
+[Normal] Pulls enemies inward
+[Normal] Immobilizes elites briefly
+[Heading 4] Ability 2: Boulder Throw
+[Normal (Web)] Throws bouncing boulders.
+[Normal (Web)] Upgrades
+[Normal] More bounces
+[Normal] More damage
+[Normal] Splits into smaller rocks
+[Normal] Stuns enemies
+[Normal] Explodes on final bounce
+[Heading 4] Ability 3: Stone Spikes
+[Normal] Stone pillars erupt from the ground.
+[Normal] Upgrades
+[Normal] More spikes
+[Normal] Larger spikes
+[Normal] Faster spawn rate
+[Normal] Bleed effect
+[Normal] Chain eruptions
+[Heading 4] Ability 4:RockFall
+[Normal] Stone pillars erupt from the ground.
+[Normal] Upgrades
+[Normal] More spikes
+[Normal] Larger spikes
+[Normal] Faster spawn rate
+[Normal] Bleed effect
+[Normal] Chain eruptions
+[Heading 2] Water Spirit
+[Heading 3] Shape
+[Normal] Leviathan
+[Heading 3] Weapon
+[Normal] Water trident
+[Heading 4] Description
+[Normal] A leviathan-forged trident hurled through lines of enemies with the force of the tide. Weapon upgrades increase its damage, throwing speed, attack rate, and targeting range.
+[Heading 3] Abilities
+[Heading 4] Ability 1: Tidal Wave
+[Normal] Description
+A wave crashes outward, knocking enemies back.
+[Normal] Upgrades
+[List Paragraph] Lv1 Fires a wave in front of the player.
+[List Paragraph] Lv2 Fires an additional wave behind the player.
+[List Paragraph] Lv3 Waves become wider.
+[List Paragraph] Lv4 Fires waves to the left and right.
+[Heading 4] Ability 2: Whirlpool
+[Normal] Description
+Summons whirlpools that pull enemies inward.
+[Normal] Upgrades
+[Normal] Lv1 Summons one whirlpool near the player.
+[Normal] Lv2 Whirlpool radius increased.
+[Normal] Lv3 Summons two whirlpools.
+[Normal] Lv4 Whirlpool deals damage over time.
+[Heading 4] Ability 3: Rain Clouds
+[Normal] Description
+Rain clouds follow enemies and continuously damage them.
+[Normal] Upgrades
+[Normal] Lv1 One cloud.
+[Normal] Lv2 Two clouds.
+[Normal] Lv3 Increased rain damage.
+[Normal] Lv4 Clouds move faster.
+[Heading 2] Wind Spirit
+[Heading 3] Shape
+[Normal] Roc
+[Heading 3] Weapon
+[Normal] Chakrams
+[Heading 4] Weapon Behavior
+[Normal] The Roc throws wind-forged chakrams toward nearby enemies. Each chakram spins outward, travels up to seven units, then homes back to the player and disappears when caught. An enemy can be hit once on the outward trip and once again on the return trip. Damage, attack speed, projectile speed, projectile size, and multishot upgrades affect the weapon.
+[Heading 4] Weapon Levels
+[List Paragraph] Lv1: 8 damage, 0.90-second cooldown, 13-unit targeting range.
+[List Paragraph] Lv2: 11 damage with faster throws.
+[List Paragraph] Lv3: 14 damage, longer targeting range, and faster flight.
+[List Paragraph] Lv4: 18 damage with a substantially shorter cooldown.
+[List Paragraph] Lv5: 23 damage and maximum base throw speed.
+[Heading 3] Abilities
+[Heading 4] Ability 1: Razor Wind
+[Normal] Description
+[Normal] Wind blades shoot outward from the player.
+[Normal] Upgrades
+[Normal] Lv1 2 blades.
+[Normal] Lv2 4 blades.
+[Normal] Lv3 Increased projectile speed.
+[Normal] Lv4 Blades pierce enemies.
+[Heading 4] Ability 2: Tornado
+[Normal] Description
+[Normal] Creates a moving tornado.
+[Normal] Upgrades
+[Normal] Lv1 One tornado.
+[Normal] Lv2 Larger tornado.
+[Normal] Lv3 Increased pull strength.
+[Normal] Lv4 Two tornadoes.
+[Heading 4] Implementation Notes
+[List Paragraph] Tornadoes spawn randomly between five and nine units from the player rather than directly beside them.
+[List Paragraph] Each tornado lasts four seconds, deals damage every 0.5 seconds, and pulls enemies inward.
+[List Paragraph] The visible tornado remains at its authored size while its invisible pull radius scales independently.
+[Heading 4] Ability 3: Gale Barrier
+[Normal] A defensive wind pulse surrounds the player, grants a temporary shield, damages nearby enemies, and blasts them away. The pixel-art barrier expands to match the active area radius and then fades.
+[Normal] Upgrades
+[List Paragraph] Lv1: Gain 10 shield and push nearby enemies away.
+[List Paragraph] Lv2: Larger barrier with 16 shield.
+[List Paragraph] Lv3: Stronger blast with 24 shield.
+[List Paragraph] Lv4: Twin gale blast with 35 shield.
+[Heading 2] Ice Spirit
+[Heading 3] Shape
+[Normal] Yeti
+[Heading 3] Weapon
+[Normal] Ice gauntlets
+[Heading 4] Description
+[Normal] Twin frozen gauntlets punch toward the nearest enemies. Their strikes can pierce clustered targets, knock enemies back, and briefly freeze anything they hit. Higher levels add a second fist and improve damage, reach, speed, and crowd control.
+[Heading 4] Upgrades
+[Normal] Lvl1 sumons a single fist
+[Normal] Lvl2 increas the knock back and chance to freez
+[Normal] Lvl3sumons 2 fists now
+[Normal] Lvl4 increas there dameg
+[Heading 3] Abilities
+[Heading 4] Ability 1: Frozen Orbs
+[Normal] Description
+Ice orbs orbit around the player.
+[Normal] Upgrades
+[Normal] Lv1 2 orbs.
+[Normal] Lv2 3 orbs.
+[Normal] Lv3 Increased rotation speed and Freeze chance.
+[Normal] Lv4 Additional orb.
+[Heading 4] Ability 2: Avalanche
+[Normal] Description
+[Normal] Throws a snowball that grows larger as it travels.
+[Normal] Upgrades
+[Normal] Lv1 Small snowball.
+[Normal] Lv2 Faster growth.
+[Normal] Lv3 Increased damage.
+[Normal] Lv4 Freeze enemies hit.
+[Heading 4] Ability 3: Ice Crystal
+[Normal] Description
+[Normal] Spawns ice crystal that grow then explode
+[Normal] Upgrades
+[Normal] Lv1 Small snowball.
+[Normal] Lv2 Faster growth.
+[Normal] Lv3 Increased damage.
+[Normal] Lv4 Freeze enemies hit.
+[Heading 2] Lightning Spirit
+[Heading 3] Shape
+[Normal] Thunder Dragon
+[Heading 3] Weapon
+[Normal] Lightning spear
+[Heading 4] Description
+[Normal] Design intent: a lightning-charged spear built for rapid piercing attacks. Its strikes will focus on speed, precision, and electrical damage that can arc from the primary target into nearby enemies.
+[Heading 3] Abilities
+[Heading 4] Ability 1: Lightning Strike
+[Normal] Description
+[Normal] Lightning strikes random enemies.
+[Normal] Upgrades
+[Normal] Lv1 3 strike.
+[Normal] Lv2 6 strikes.
+[Normal] Lv3 Increased damage.
+[Normal] Lv4 when lighting strkis there is a tint aoe.
+[Heading 4] Ability 2: Chain Lightning bolt
+[Normal] Description
+shoots a lighting bolt that jumps between enemies.
+[Normal] Upgrades
+[Normal] Lv1 3 jumps.
+[Normal] Lv2 5 jumps.
+[Normal] Lv3 Increased damage.
+[Normal] Lv4 Increased range.
+[Heading 4] Ability 3: thunder roar
+[Normal] Description
+a pulse that sournds the player
+[Normal] Upgrades
+[Normal] Lv1 1 ring of lightning.
+[Normal] Lv2 puch the enmies back and stuns them.
+[Normal] Lv3 3 rings of lightning.
+[Normal] Lv4 Increased range.
+[Heading 2] Poison Spirit
+[Heading 3] Shape
+[Normal] Scorpion
+[Heading 3] Weapon
+[Normal] Poison daggers
+[Heading 4] Description
+[Normal] Design intent: venom-coated daggers thrown in quick succession. Each hit will apply poison or another weakening effect, rewarding sustained attacks against tougher enemies while still providing fast crowd pressure.
+[Heading 3] Abilities
+[Heading 4] Ability 1: Toxic Glob
+[Normal] Description
+Launches poisonous blobs that explode into toxic pools.
+[Normal] Upgrades
+[Normal] Lv1 1 poison blob
+[Normal] Lv2 2 poison blobs
+[Normal] Lv3 Larger poison pools
+[Normal] Lv4 Pools last longer
+[Heading 4] Ability 2: Venom Needles
+[Normal] Description
+Rapidly fires piercing poison needles.
+[Normal] Upgrades
+[Normal] Lv1 3 needles
+[Normal] Lv2 5 needles
+[Normal] Lv3 Increased piercing
+[Normal] Lv4 Increased attack speed
+[Heading 4] Ability3: Acid Spray
+[Normal] Description
+[Normal] Sprays acid in a cone in front of the player.
+[Normal] Upgrades
+[Normal] Wider cone
+[Normal] Longer range
+[Normal] Increased damage
+[Normal] Melts enemy armor
+[Normal] Leaves acid pools
+[Heading 2] Necrotic Spirit
+[Heading 3] Shape
+[Normal] Bat
+[Heading 3] Weapon
+[Normal] Necrotic katana
+[Heading 4] Description
+[Normal] Design intent: a cursed katana that delivers fast sweeping cuts infused with necrotic energy. The weapon will specialize in finishing weakened enemies and spreading death-themed effects through tightly packed groups.
+[Heading 3] Abilities
+[Normal] (To be designed)
+[Heading 2] Holy Spirit
+[Heading 3] Shape
+[Normal] Biblical Angel
+[Heading 3] Weapon
+[Normal] Holy sword
+[Heading 4] Description
+[Normal] Design intent: a radiant sword that cleaves groups of corrupted enemies with wide arcs of holy energy. Its upgrades will emphasize area coverage, protection, and bonus damage against elite or corrupted targets.
+[Heading 3] Abilities
+[Normal] Healing
+[Normal] Shields
+[Normal] Light Beams
+[Heading 1] Player Character
+[Heading 2] Description
+[Normal] The player takes on the role of a Spirit Tamer. Spirit Tamers form contracts with powerful elemental spirits and channel their powers through enchanted crystals.
+[Normal] Each spirit grants unique attacks, abilities, and passive bonuses that allow the player to create different combat builds throughout a run.
+[Heading 2] Combat System
+[Heading 3] Weapon – Spirit Gauntlet
+[Normal] The Spirit Gauntlet is a magical glove containing a central gemstone used to summon and channel elemental spirits. Spirits channelled through the main gemstone manifest as powerful elemental weapons, each unique to its corresponding spirit.
+[Heading 3] Attacking
+[Normal] The player has two methods of attacking.
+[Heading 4] Method 1 – Primary Attack
+[Normal] Condition: The player must be standing still.
+[Normal] Description:
+While standing still, the player channels their Primary Spirit through the Spirit Gauntlet, transforming it into that spirit's elemental weapon. The player then attacks automatically with this weapon until they begin moving.
+[Heading 4] Method 2 – Spirit Attack
+[Normal] Condition: The player must be moving.
+[Normal] Description:
+While moving, the Primary Spirit stops using its weapon form and instead fights like a support spirit, automatically casting its unique abilities. Any additional contracted spirits also continue using their abilities, allowing the player to focus on movement and dodging enemy attacks.
+[Heading 2] Player Stats
+[Heading 3] Core Stats
+[Normal] Health
+[Normal] Attack Damage
+[Normal] Attack Speed
+[Normal] Critical Chance
+[Normal] Critical Damage
+[Normal] Movement Speed
+[Normal] Cooldown Reduction
+[Normal] Pick up Area Size
+[Normal] Elemental Damage
+[Normal] Luck
+[Heading 2] Player Upgrades
+[Normal] Max Health
+[Normal] Player speed
+[Normal] Player attack speed
+[Normal] Player increase collect range
+[Normal] Player exp earned bonus
+[Heading 1] Enemies
+[Heading 2] Types
+[Normal] Flying enemies
+[Normal] Fast enemy
+[Normal] Slow enemy that charges
+[Normal] Range enemies
+[Normal] Enemies that explode when they die
+[Heading 1] Bosses
+[Heading 2] Fire Phoenix
+[Heading 3] Moves
+[Normal] Fire Dash
+[Normal] Feather Barrage
+[Normal] Flame Tornado
+[Normal] Meteor Rain
+[Normal] Rebirth
+[Heading 2] Earth Golem
+[Heading 3] Moves
+[Normal] Bolder leap
+[Normal] Ground spike
+[Normal] Quik sand
+[Normal] Rock fall
+[Normal] Bolder bounce
+[Heading 2] Water Leviathan
+[Heading 3] Moves
+[Normal] Wave dash
+[Normal] Rushes through the arena as a giant wave.
+[Normal] Wave crash
+[Normal] Summons 2 waves on sides of the map that move closer to each other
+[Normal] Whirlpool
+[Normal] Creates whirlpools that pull the player inward.
+[Normal] Rain clouds
+[Normal] Dark clouds follow the player, dropping damaging rain.
+[Normal] Bubble beam
+[Normal] Fires bouncing water bubbles.
+[Heading 2] Wind Roc
+[Heading 3] Moves
+[Normal] Sky Dive
+The Roc flies up and dives down across the arena, damaging enemies/player in a straight line.
+[Normal] Razor Gust
+Shoots sharp wind blades in multiple directions.
+[Normal] Tornado Trail
+Creates moving tornadoes that pull the player inward.
+[Normal] Wing Cyclone
+Flaps its wings, pushing the player back and creating a large wind shockwave.
+[Heading 2] Ice Yeti
+[Heading 3] Moves
+[Normal] Snowball
+shoots a ball that grows
+[Normal] Ice shards
+Shoots sharp ice blades in multiple directions.
+[Normal] blizzard
+Creates moving tornadoes that pull the player inward.
+[Normal] Frozen Slam
+[Normal] Smashes the ground, creating expanding rings of ice.
+[Heading 2] Storm Dragon
+[Heading 3] Moves
+[Normal] Lightning strike
+Random lightning bolts target the player's last known position.
+[Normal] Thunder Roar
+[Normal] Releases expanding rings of electricity.
+[Normal] Lightning dash
+Creates moving tornadoes that pull the player inward.
+[Normal] Thunder Dash
+[Normal] Charges across the arena, leaving electrified ground.
+[Heading 2] Giant Scorpion
+[Heading 3] Moves
+[Normal] Venom Tail
+[Normal] Stabs the ground, creating poisonous spikes.
+[Normal] Toxic Glob
+[Normal] Throws poisonous sacs that burst into lingering pools.
+[Normal] Poison stinger 
+shoots 3 darts of poison
+[Normal] Acid Spray
+[Normal] Sweeps a cone of acid in front of it.
+[Heading 2] Necrotic Bat King
+[Heading 2] Fallen Angel
+
+## TABLE 1
+Area | Theme | Boss
+1 | Burning Plains | Fire Phoenix
+2 | Frozen Wastes | Ice Yeti
+3 | Thunder Peaks | Storm Dragon
+4 | Poison Marsh | Giant Scorpion
+5 | Shadow Realm | Necrotic Bat King
+6 | Celestial Temple | Fallen Angel
+
+## TABLE 2
+Spirit | Form / Weapon | Signature Abilities
+Fire | Phoenix / Fire bow | Fiery Feathers, Fiery Talons, Phoenix Dive
+Earth | Golem / Stone hammer | Quicksand Domain, Boulder Throw, Stone Spikes
+Water | Leviathan / Water trident | Tidal Wave, Whirlpool, Rain Clouds
+Wind | Roc / Boomerang chakrams | Razor Wind, Tornado, Gale Barrier
+Ice | Yeti / Ice gauntlets | Orbital Snowball, Avalanche, Ice Crystal
+Lightning | Thunder Dragon / Lightning spear | Lightning Strike, Chain Lightning Bolt, Thunder Roar
+Poison | Scorpion / Poison daggers | Toxic Glob, Venom Needles, Acid Spray
+Necrotic | Bat / Necrotic katana | Abilities not yet designed
+Holy | Biblical Angel / Holy sword | Healing, Shields, Light Beams (concept stage)

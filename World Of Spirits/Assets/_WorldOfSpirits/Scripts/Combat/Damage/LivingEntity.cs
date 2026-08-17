@@ -171,6 +171,23 @@ namespace WorldOfSpirits.Combat
             }
         }
 
+        /// <summary>Applies authored runtime health, primarily for data-driven bosses.</summary>
+        protected void ConfigureMaximumHealth(float value, bool fullyHeal = true)
+        {
+            maxHealth = Mathf.Max(1f, value);
+            currentHealth = fullyHeal ? maxHealth : Mathf.Min(currentHealth, maxHealth);
+            HealthChanged?.Invoke(currentHealth, maxHealth);
+        }
+
+        /// <summary>Allows a specialized entity to replace a lethal hit with a mechanic such as rebirth.</summary>
+        protected virtual bool TryPreventDeath() => false;
+
+        protected void RestoreAfterPreventedDeath(float healthFraction)
+        {
+            currentHealth = Mathf.Clamp(maxHealth * healthFraction, 1f, maxHealth);
+            HealthChanged?.Invoke(currentHealth, maxHealth);
+        }
+
         public void AddShield(float amount, float duration)
         {
             if (!IsAlive || amount <= 0f) return;
@@ -193,6 +210,11 @@ namespace WorldOfSpirits.Combat
 
         protected virtual void Die()
         {
+            if (TryPreventDeath())
+            {
+                return;
+            }
+
             if (reviveCharges > 0)
             {
                 reviveCharges--;
