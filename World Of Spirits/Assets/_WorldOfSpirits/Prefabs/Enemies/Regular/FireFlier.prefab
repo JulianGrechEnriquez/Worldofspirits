@@ -208,4 +208,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WorldOfSpirits.Crowd.EnemyCrowdAgent
   profile: {fileID: 11400000, guid: cfeb2d8eea411134b92cb3be75851913, type: 2}
+  isFlying: 1
   drawDebug: 0

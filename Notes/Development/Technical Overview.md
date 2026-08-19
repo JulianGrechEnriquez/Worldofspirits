@@ -51,12 +51,17 @@ See [[Notes/Planning/Project Audit and Backlog|Project audit and backlog]] for t
 
 - The player owns no more than three spirits.
 - Spirit slots are main, support one, and support two.
+- Spirit rotation has a one-second cooldown.
+- Selecting Fire, Earth, Water, or Wind as the main spirit grants its three-second rotation buff.
+- Stationary weapon form begins after a 0.25-second transition and charges through Focused and Empowered states.
 - Normal enemies inherit `EnemyBase`.
 - Bosses inherit `BossEnemyBase`.
+- Bosses use phase gates, elemental weaknesses and resistances, and reduced hard-control effects.
 - Damageable characters inherit `LivingEntity`.
 - Ranged attacks use `ProjectileBase`.
 - Orbiting melee attacks use `OrbitingMeleeWeapon`.
-- Areas last ten minutes and finish with a boss encounter.
+- Story Mode stages last ten minutes and finish with a guardian encounter.
+- Infinity Mode unlocks after all six Story Mode stages and runs the six guardians sequentially before endless scaling.
 
 ## Definition of done for a feature
 

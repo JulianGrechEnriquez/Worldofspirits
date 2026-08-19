@@ -24,7 +24,7 @@ status: active
 
 - [ ] Complete the short Burning Plains loop with Fire Spirit.
 - [ ] Finish Fire, Wind, Water, and Earth as the four demo spirits.
-- [ ] Complete Burning Plains and Earth Plains as the two demo areas.
+- [ ] Finish the Fire Phoenix phases, telegraphs, Rebirth, and Water weakness.
 - [ ] Validate menu, saving, victory, retry, performance, and controller flow.
 
 See [[Notes/Planning/Demo Scope and Completion Plan|Demo scope and completion plan]] for the demo requirements and [[Notes/Planning/Project Audit and Backlog|Project audit and backlog]] for the wider technical backlog.
@@ -38,6 +38,5 @@ See [[Notes/Planning/Demo Scope and Completion Plan|Demo scope and completion pl
 
 ## Source material
 
-- `World of Spirits.docx` — original design document.
-- `World Of Spirits/Assets/Docs/PROJECT_STRUCTURE.md` — current Unity organization.
-- `World Of Spirits/Assets/Docs/SPIRIT_ABILITY_SETUP.md` — current ability component setup.
+- `World of Spirits - Updated v3.docx` — current long-form design source.
+- `World Of Spirits/Assets/_WorldOfSpirits/Documentation` — current Unity organization and implementation guidance.

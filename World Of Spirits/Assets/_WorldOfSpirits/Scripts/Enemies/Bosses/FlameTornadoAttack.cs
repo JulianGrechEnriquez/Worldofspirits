@@ -18,22 +18,30 @@ namespace WorldOfSpirits.Enemies
         {
             context.Movement.TakeAttackControl();
             Vector2 spawnPosition = context.Target.position;
-            if (spawnTelegraph != null) spawnTelegraph.ShowCircle(spawnPosition, warningRadius);
-            yield return Wait(warningDuration);
-            if (spawnTelegraph != null) spawnTelegraph.Hide();
+            AttackTelegraph warning = null;
+            if (spawnTelegraph != null)
+            {
+                warning = Instantiate(spawnTelegraph, spawnPosition, Quaternion.identity);
+                warning.ShowCircle(spawnPosition, warningRadius);
+            }
+            yield return Wait(warningDuration * Mathf.Max(0.7f, 1f - context.Boss.CurrentPhase * 0.1f));
+            if (warning != null) Destroy(warning.gameObject);
 
-            for (int i = 0; i < tornadoCount; i++)
+            int activeCount = tornadoCount + context.Boss.CurrentPhase;
+            for (int i = 0; i < activeCount; i++)
             {
                 if (tornadoPrefab == null) break;
-                float angle = tornadoCount == 1 ? Random.Range(0f, 360f) : i * 360f / tornadoCount;
-                Vector2 direction = Quaternion.Euler(0f, 0f, angle) * Vector2.right;
-                BossDamageZone tornado = Instantiate(tornadoPrefab, spawnPosition, Quaternion.identity);
+                float angle = activeCount == 1 ? Random.Range(0f, 360f) : i * 360f / activeCount;
+                Vector2 offset = Quaternion.Euler(0f, 0f, angle) * Vector2.right * (i == 0 ? 0f : 1.25f);
+                Vector2 direction = ((Vector2)context.Target.position - (spawnPosition + offset)).normalized;
+                direction = Quaternion.Euler(0f, 0f, Mathf.Lerp(-35f, 35f, activeCount == 1 ? 0.5f : i / (float)(activeCount - 1))) * direction;
+                BossDamageZone tornado = Instantiate(tornadoPrefab, spawnPosition + offset, Quaternion.identity);
                 tornado.Activate(transform, damage, lifetime, direction * movementSpeed);
                 Destroy(tornado.gameObject, lifetime + 0.1f);
             }
             context.Movement.ReleaseAttackControl();
         }
 
-        public override void Cancel() { if (spawnTelegraph != null) spawnTelegraph.Hide(); }
+        public override void Cancel() { }
     }
 }

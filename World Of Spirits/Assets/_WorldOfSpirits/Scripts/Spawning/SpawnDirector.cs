@@ -101,6 +101,10 @@ namespace WorldOfSpirits.Spawning
         [Tooltip("Number of candidate positions tested before abandoning one spawn.")]
         [SerializeField, Min(1)] private int positionAttempts = 12;
 
+        [Header("Boss Spawn")]
+        [Tooltip("Keeps the initial boss position away from the screen edge.")]
+        [SerializeField, Range(0.05f, 0.4f)] private float bossViewportMargin = 0.18f;
+
         [Header("Valid Locations")]
         [Tooltip("Layers representing valid walkable ground. Leave empty to accept any unobstructed position.")]
         [SerializeField] private LayerMask validGroundLayers;
@@ -218,7 +222,7 @@ namespace WorldOfSpirits.Spawning
         }
 
         /// <summary>
-        /// Stops normal spawning and creates one boss outside the camera.
+        /// Stops normal spawning and creates one boss inside the camera.
         /// The boss must be marked as a boss in EnemySpawnData.
         /// </summary>
         public bool StartBossEvent(EnemySpawnData bossData)
@@ -229,9 +233,9 @@ namespace WorldOfSpirits.Spawning
                 return false;
             }
 
-            if (!TryGetSpawnPosition(out Vector3 position))
+            if (!TryGetBossSpawnPosition(out Vector3 position))
             {
-                Debug.LogWarning("Boss event could not find a valid off-camera spawn position.", this);
+                Debug.LogWarning("Boss event could not find a valid on-camera spawn position.", this);
                 return false;
             }
 
@@ -442,6 +446,39 @@ namespace WorldOfSpirits.Spawning
 
             position = default;
             return false;
+        }
+
+        private bool TryGetBossSpawnPosition(out Vector3 position)
+        {
+            Camera cameraToUse = gameplayCamera != null ? gameplayCamera : Camera.main;
+            if (cameraToUse == null)
+            {
+                position = player.position + Vector3.up * 3f;
+                return true;
+            }
+
+            float depth = Mathf.Abs(cameraToUse.transform.position.z - player.position.z);
+            for (int attempt = 0; attempt < positionAttempts; attempt++)
+            {
+                float viewportX = Random.Range(bossViewportMargin, 1f - bossViewportMargin);
+                float viewportY = Random.Range(
+                    Mathf.Max(0.58f, bossViewportMargin), 1f - bossViewportMargin);
+                Vector3 candidate = cameraToUse.ViewportToWorldPoint(
+                    new Vector3(viewportX, viewportY, depth));
+                candidate.z = player.position.z;
+
+                if (IsBlocked(candidate) || IsOccupiedByEnemy(candidate) || !IsValidGround(candidate))
+                    continue;
+
+                position = candidate;
+                return true;
+            }
+
+            Vector3 fallback = cameraToUse.ViewportToWorldPoint(
+                new Vector3(0.5f, 0.72f, depth));
+            fallback.z = player.position.z;
+            position = fallback;
+            return true;
         }
 
         private bool IsVisible(Vector3 worldPosition)

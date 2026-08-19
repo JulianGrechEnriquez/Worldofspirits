@@ -73,7 +73,13 @@ namespace WorldOfSpirits.Enemies
         {
             if (!IsAlive || Target == null) return;
             if (faceTarget && bossRenderer != null)
-                bossRenderer.flipX = Target.position.x < transform.position.x;
+            {
+                bool movingHorizontally = IsPerformingMovementAttack &&
+                    Mathf.Abs(Body.linearVelocity.x) > 0.05f;
+                bossRenderer.flipX = movingHorizontally
+                    ? Body.linearVelocity.x < 0f
+                    : Target.position.x < transform.position.x;
+            }
             UpdateBoss(Target);
         }
 

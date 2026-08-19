@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using WorldOfSpirits.Combat;
 
 namespace WorldOfSpirits.Enemies
 {
@@ -59,6 +60,13 @@ namespace WorldOfSpirits.Enemies
                 if (movement != null) movement.ReleaseAttackControl();
                 float cooldown = attack.RecoveryDuration +
                     (boss.Data != null ? boss.Data.AttackCooldown : 0f);
+                cooldown *= Mathf.Max(0.5f, 1f - boss.CurrentPhase * 0.14f);
+                LivingEntity player = target.GetComponentInParent<LivingEntity>();
+                if (player != null && player.MaxHealth > 0f)
+                {
+                    float playerHealth = player.CurrentHealth / player.MaxHealth;
+                    cooldown *= Mathf.Lerp(1.18f, 0.92f, playerHealth);
+                }
                 if (cooldown > 0f) yield return new WaitForSeconds(cooldown);
             }
             loop = null;

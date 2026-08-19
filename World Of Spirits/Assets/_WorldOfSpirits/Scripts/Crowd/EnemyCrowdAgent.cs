@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 using WorldOfSpirits.Enemies;
 using WorldOfSpirits.Player;
 
@@ -19,6 +20,10 @@ namespace WorldOfSpirits.Crowd
     {
         [Header("Profile")]
         [SerializeField] private EnemyMovementProfile profile;
+
+        [Header("Terrain")]
+        [Tooltip("Flying enemies ignore terrain obstacles such as lava pools.")]
+        [SerializeField] private bool isFlying;
 
         [Header("Debug")]
         [SerializeField] private bool drawDebug;
@@ -43,6 +48,7 @@ namespace WorldOfSpirits.Crowd
         public float CollisionRadius => profile != null ? profile.CollisionRadius : 0.4f;
         public float Weight => profile != null ? profile.Weight : 1f;
         public float PushStrength => profile != null ? profile.PushStrength : 1f;
+        public bool IsFlying => isFlying;
         public bool IsSimulationActive =>
             isActiveAndEnabled && enemy != null && enemy.IsAlive && profile != null;
 
@@ -63,6 +69,12 @@ namespace WorldOfSpirits.Crowd
             // CrowdSimulationManager now owns movement while EnemyBase remains
             // enabled for health, status effects, and pooling callbacks.
             enemy.SetExternalMovement(true);
+            RefreshTerrainCollision();
+        }
+
+        private void OnEnable()
+        {
+            RefreshTerrainCollision();
         }
 
         private void OnDisable()
@@ -121,7 +133,7 @@ namespace WorldOfSpirits.Crowd
                 nextNeighbourTime = Time.time + neighbourInterval;
             }
 
-            if (lod == EnemyCollisionLod.Near && Time.time >= nextObstacleTime)
+            if (!isFlying && lod == EnemyCollisionLod.Near && Time.time >= nextObstacleTime)
             {
                 cachedAvoidance = simulation.CalculateObstacleAvoidance(
                     position,
@@ -131,7 +143,7 @@ namespace WorldOfSpirits.Crowd
                     profile.AlternativeDirectionAngle);
                 nextObstacleTime = Time.time + profile.ObstacleInterval;
             }
-            else if (lod != EnemyCollisionLod.Near)
+            else
             {
                 cachedAvoidance = Vector2.zero;
             }
@@ -222,6 +234,31 @@ namespace WorldOfSpirits.Crowd
             externalVelocity = Vector2.ClampMagnitude(
                 externalVelocity + acceleration * deltaTime,
                 5f);
+        }
+
+        public void RefreshTerrainCollision()
+        {
+            if (!isFlying)
+            {
+                return;
+            }
+
+            Collider2D ownCollider = GetComponent<Collider2D>();
+            if (ownCollider == null)
+            {
+                return;
+            }
+
+            TilemapCollider2D[] tilemapColliders =
+                FindObjectsByType<TilemapCollider2D>(FindObjectsSortMode.None);
+            for (int i = 0; i < tilemapColliders.Length; i++)
+            {
+                TilemapCollider2D terrainCollider = tilemapColliders[i];
+                if (terrainCollider != null && terrainCollider.gameObject.name == "Lava Pools")
+                {
+                    Physics2D.IgnoreCollision(ownCollider, terrainCollider, true);
+                }
+            }
         }
 
         private void SimulateDormantMovement(

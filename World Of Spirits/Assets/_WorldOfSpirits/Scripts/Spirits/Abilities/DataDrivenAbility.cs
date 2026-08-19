@@ -35,7 +35,10 @@ namespace WorldOfSpirits.Spirits
             AbilityLevelData level = ActiveLevel;
             switch (definition.ExecutionType)
             {
-                case AbilityExecutionType.Projectile: CastProjectiles(context, level); break;
+                case AbilityExecutionType.Projectile:
+                    CastProjectiles(context, level);
+                    ApplyProjectileSelfEffects(context.Player, level.effects);
+                    break;
                 case AbilityExecutionType.Area: CastArea(context, level); break;
                 case AbilityExecutionType.SpawnEffect: SpawnEffects(context, level); break;
                 case AbilityExecutionType.Orbiting: EnsureOrbiting(level); break;
@@ -220,6 +223,22 @@ namespace WorldOfSpirits.Spirits
                     level.spawnedEffectPrefab, position, Quaternion.identity,
                     PoolCategory.Effects);
                 spawned.GetComponent<AreaPulseVisual>().Configure(radius);
+            }
+        }
+
+        private static void ApplyProjectileSelfEffects(
+            Transform player,
+            IReadOnlyList<AbilityEffectData> effects)
+        {
+            if (player == null || effects == null) return;
+            LivingEntity living = player.GetComponentInParent<LivingEntity>();
+            if (living == null) return;
+
+            for (int i = 0; i < effects.Count; i++)
+            {
+                AbilityEffectData effect = effects[i];
+                if (effect != null && effect.effectType == AbilityEffectType.GrantRevive)
+                    living.GrantRevive(Mathf.Max(1, Mathf.RoundToInt(effect.value)));
             }
         }
 

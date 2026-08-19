@@ -4,6 +4,7 @@ using WorldOfSpirits.Combat;
 namespace WorldOfSpirits.Enemies
 {
     [DisallowMultipleComponent]
+    [RequireComponent(typeof(Collider2D))]
     public sealed class BossDamageZone : MonoBehaviour
     {
         [SerializeField, Min(0f)] private float damage = 15f;
@@ -15,6 +16,12 @@ namespace WorldOfSpirits.Enemies
         private Transform source;
         private float expiresAt;
         private float nextHitAt;
+
+        private void Awake()
+        {
+            Collider2D zoneCollider = GetComponent<Collider2D>();
+            zoneCollider.isTrigger = true;
+        }
 
         public void Activate(Transform damageSource, float configuredDamage, float configuredLifetime, Vector2 velocity)
         {

@@ -213,6 +213,12 @@ namespace WorldOfSpirits.Combat
             FaceDirection(Body.linearVelocity);
         }
 
+        protected virtual void LateUpdate()
+        {
+            if (Body != null && Body.linearVelocity.sqrMagnitude > Mathf.Epsilon)
+                FaceDirection(Body.linearVelocity);
+        }
+
         protected virtual void OnLifetimeExpired() => Despawn();
 
         private void FaceDirection(Vector2 direction)
@@ -223,7 +229,9 @@ namespace WorldOfSpirits.Combat
             }
 
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.Euler(0f, 0f, angle + rotationOffset);
+            float facingAngle = angle + rotationOffset;
+            Body.rotation = facingAngle;
+            transform.rotation = Quaternion.Euler(0f, 0f, facingAngle);
         }
 
         protected virtual void OnTriggerEnter2D(Collider2D other)

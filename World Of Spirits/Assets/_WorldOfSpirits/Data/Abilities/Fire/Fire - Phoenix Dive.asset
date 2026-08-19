@@ -15,7 +15,7 @@ MonoBehaviour:
   abilityName: Phoenix Dive
   description: A flaming phoenix dives through enemies.
   icon: {fileID: 21300000, guid: a1e961bcfac85ee4a85a52701bcdceb1, type: 3}
-  executionType: 2
+  executionType: 0
   targetingMode: 0
   levels:
   - level: 1
@@ -25,7 +25,7 @@ MonoBehaviour:
     minimumSpawnDistance: 0
     maximumSpawnDistance: 0
     projectile:
-      projectilePrefab: {fileID: 0}
+      projectilePrefab: {fileID: 6071903274419026613, guid: ea50021cfd1f2c64aaffdcd0a6f1af97, type: 3}
       count: 1
       spreadAngle: 35
       spreadMode: 0
@@ -34,7 +34,7 @@ MonoBehaviour:
       homeOnEnemies: 0
       homingStrength: 6
       homingRange: 10
-      pierceCount: 0
+      pierceCount: 1
       bounceCount: 0
       bounceRange: 5
       explosionRadius: 0
@@ -63,16 +63,16 @@ MonoBehaviour:
     minimumSpawnDistance: 0
     maximumSpawnDistance: 0
     projectile:
-      projectilePrefab: {fileID: 0}
-      count: 1
-      spreadAngle: 35
+      projectilePrefab: {fileID: 6071903274419026613, guid: ea50021cfd1f2c64aaffdcd0a6f1af97, type: 3}
+      count: 2
+      spreadAngle: 18
       spreadMode: 0
       speed: 9.5
       damage: 13
       homeOnEnemies: 0
       homingStrength: 6
       homingRange: 10
-      pierceCount: 0
+      pierceCount: 1
       bounceCount: 0
       bounceRange: 5
       explosionRadius: 0
@@ -101,25 +101,25 @@ MonoBehaviour:
     minimumSpawnDistance: 0
     maximumSpawnDistance: 0
     projectile:
-      projectilePrefab: {fileID: 0}
-      count: 1
-      spreadAngle: 35
+      projectilePrefab: {fileID: 6071903274419026613, guid: ea50021cfd1f2c64aaffdcd0a6f1af97, type: 3}
+      count: 2
+      spreadAngle: 18
       spreadMode: 0
       speed: 10
       damage: 16
       homeOnEnemies: 0
       homingStrength: 6
       homingRange: 10
-      pierceCount: 0
+      pierceCount: 2
       bounceCount: 0
       bounceRange: 5
       explosionRadius: 0
       growthPerSecond: 0
-      appliesStatus: 0
+      appliesStatus: 1
       status: 0
       statusChance: 1
       statusDuration: 2
-      statusStrength: 2
+      statusStrength: 3
       directionPattern: 0
       sizeMultiplier: 1
       lifetimeMultiplier: 1
@@ -139,27 +139,27 @@ MonoBehaviour:
     minimumSpawnDistance: 0
     maximumSpawnDistance: 0
     projectile:
-      projectilePrefab: {fileID: 0}
-      count: 1
-      spreadAngle: 35
+      projectilePrefab: {fileID: 6071903274419026613, guid: ea50021cfd1f2c64aaffdcd0a6f1af97, type: 3}
+      count: 2
+      spreadAngle: 20
       spreadMode: 0
       speed: 10.5
       damage: 19
       homeOnEnemies: 0
       homingStrength: 6
       homingRange: 10
-      pierceCount: 0
+      pierceCount: 2
       bounceCount: 0
       bounceRange: 5
-      explosionRadius: 0
+      explosionRadius: 1.5
       growthPerSecond: 0
-      appliesStatus: 0
+      appliesStatus: 1
       status: 0
       statusChance: 1
       statusDuration: 2
       statusStrength: 2
       directionPattern: 0
-      sizeMultiplier: 1
+      sizeMultiplier: 1.25
       lifetimeMultiplier: 1
     spawnedEffectPrefab: {fileID: 0}
     spawnCount: 1
@@ -177,27 +177,27 @@ MonoBehaviour:
     minimumSpawnDistance: 0
     maximumSpawnDistance: 0
     projectile:
-      projectilePrefab: {fileID: 0}
-      count: 1
-      spreadAngle: 35
+      projectilePrefab: {fileID: 6071903274419026613, guid: ea50021cfd1f2c64aaffdcd0a6f1af97, type: 3}
+      count: 3
+      spreadAngle: 26
       spreadMode: 0
       speed: 11
       damage: 22
       homeOnEnemies: 0
       homingStrength: 6
       homingRange: 10
-      pierceCount: 0
+      pierceCount: 3
       bounceCount: 0
       bounceRange: 5
-      explosionRadius: 0
+      explosionRadius: 2
       growthPerSecond: 0
-      appliesStatus: 0
+      appliesStatus: 1
       status: 0
       statusChance: 1
       statusDuration: 2
-      statusStrength: 2
+      statusStrength: 4
       directionPattern: 0
-      sizeMultiplier: 1
+      sizeMultiplier: 1.4
       lifetimeMultiplier: 1
     spawnedEffectPrefab: {fileID: 0}
     spawnCount: 1

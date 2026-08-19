@@ -535,7 +535,7 @@ GameObject:
   - component: {fileID: 4510190881966063928}
   - component: {fileID: 8722417199495855844}
   m_Layer: 0
-  m_Name: Ability 2 - Fiery Talons (Needs Fire Trail Prefab)
+  m_Name: Ability 2 - Fiery Talons
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -573,7 +573,7 @@ MonoBehaviour:
   primarySpiritOnly: 0
   castWhileMoving: 1
   castWhileStandingStill: 0
-  effectPrefab: {fileID: 0}
+  effectPrefab: {fileID: 6847701205791021120, guid: dc10866f21f24231a93e947c41ae2228, type: 3}
   spawnPosition: 0
   spawnCount:
     baseValue: 1

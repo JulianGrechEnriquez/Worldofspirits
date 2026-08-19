@@ -1,79 +1,88 @@
 ---
 type: design
-status: draft
-tags:
-  - game-design
-  - spirits
+status: active
+updated: 2026-08-17
+tags: [game-design, spirits]
 ---
 
 # Spirits
 
-## Demo roster
+## Shared structure
 
-The playable demo roster is limited to **Fire, Wind, Water, and Earth**. Each requires a finished weapon, three finished abilities, full upgrade paths, final in-game art, animation, VFX, icons, descriptions, and audio. See [[Notes/Planning/Demo Scope and Completion Plan|Demo scope and completion plan]].
+Every production-ready spirit requires one five-level weapon, exactly three five-level support abilities, a distinct combat identity, all three party roles, a rotation buff, and complete presentation.
 
-| Spirit | Form | Weapon | Ability status |
-|---|---|---|---|
-| Fire | Phoenix | Fire bow | Defined |
-| Earth | Golem | Stone hammer | Defined; RockFall needs clarification |
-| Water | Leviathan | Water trident | Defined |
-| Wind | Roc | Chakrams | Demo scope; Razor Wind, Tornado, and Gale Barrier |
-| Ice | Yeti | Ice gauntlets | Defined; Ice Crystal upgrades need correction |
-| Lightning | Thunder Dragon | Lightning spear | Defined |
-| Poison | Scorpion | Poison daggers | Defined |
-| Necrotic | Bat | Necrotic katana | Not designed |
-| Holy | Biblical Angel | Holy sword | Concepts only |
+Fire, Earth, Water, and Wind are the first standardized kits. Ice, Lightning, Poison, Necrotic, and Holy remain later production work.
 
-## Ability index
+## Rotation buffs
 
-### Fire
+Rotation has a one-second cooldown. Selecting a new main spirit grants a three-second buff. A repeated buff refreshes but does not stack.
 
-- **Fiery Feathers:** homing fan; later explosions, burning, and fire patches.
-- **Fiery Talons:** fire trail with increased size, duration, spread, and explosive finish.
-- **Phoenix Dive:** diving attack with multiple dives, fire zones, and a max-level revive.
+| Spirit | Buff | Effect |
+|---|---|---|
+| Fire | Blazing Resolve | +20% damage dealt |
+| Earth | Stoneguard | 25% damage reduction |
+| Wind | Tailwind | +20% movement speed |
+| Water | Flow | Cooldowns recover 25% faster |
 
-### Earth
+## Standardized spirit kits
 
-- **Quicksand Domain:** slow field that grows, damages, pulls, and briefly immobilizes elites.
-- **Boulder Throw:** bouncing projectile that splits, stuns, and explodes.
-- **Stone Spikes:** erupting pillars with more spikes, bleed, and chain eruptions.
-- **RockFall:** present in the source design but duplicates Stone Spikes; define its distinct role.
+### Fire — Phoenix
 
-### Water
+**Identity:** aggressive damage, Burn, explosions, and offensive momentum.  
+**Weapon:** Flame Bow — homing burning feathers; later levels add multishot, piercing, death explosions, and fire patches.
 
-- **Tidal Wave:** expands from forward-only to four directions.
-- **Whirlpool:** pulling damage zone with increased radius and count.
-- **Rain Clouds:** enemy-following clouds with increased count, damage, and speed.
+- **Fiery Feathers:** homing fan → improved tracking → piercing Burn → explosions → Ashen Flock.
+- **Fiery Talons:** fire trail → wider/longer trail → bonus against burning enemies → spreading flames → Phoenix Footsteps.
+- **Phoenix Dive:** line attack → greater width → burning path → second dive → Rebirth Dive and one revive per run.
 
-### Wind
+### Earth — Golem
 
-- **Razor Wind:** radial piercing blades.
-- **Tornado:** moving pull effect with increased size, strength, and count.
-- **Gale Barrier:** the third demo ability; finalize its damage, protection, projectile-interaction, duration, and upgrade rules.
+**Identity:** durability, stun, Bleed, and space control.  
+**Weapon:** Stone Hammer — orbiting sweep; later levels add reach, knockback, shockwaves, and a second hammer.
 
-### Ice
+- **Quicksand Domain:** slow → larger/stronger field → damage → inward pull → Sinking Kingdom.
+- **Boulder Throw:** bouncing boulder → more bounces → fragments → stun → Continental Breaker.
+- **Stone Spikes:** targeted eruptions → more spikes and Bleed → chained fault lines → two waves and cracked ground → Worldspine.
 
-- **Frozen Orbs:** orbiting projectiles with increased count, speed, and freeze chance.
-- **Avalanche:** growing snowball with increased damage and freeze.
-- **Ice Crystal:** delayed growing crystal that explodes; its source upgrades currently duplicate Avalanche and need redesign.
+> [!note]
+> Rockfall is not part of the Earth Spirit's three-ability kit. It remains an Earth Golem or challenge-boss attack.
 
-### Lightning
+### Water — Leviathan
 
-- **Lightning Strike:** strikes random enemies; gains more strikes, damage, and area damage.
-- **Chain Lightning Bolt:** jumps between enemies with increasing jump count, damage, and range.
-- **Thunder Roar:** expanding electrical pulse that knocks back and stuns.
+**Identity:** push, pull, grouping, Soaked, and ability flow.  
+**Weapon:** Water Trident — piercing outward-and-return throw; later levels add Soaked, multishot, and waves.
 
-### Poison
+- **Tidal Wave:** front wave → front/back → wider and Soaked → four directions → High Tide.
+- **Whirlpool:** one pull zone → larger/stronger → two zones → damage and Soaked → Maelstrom.
+- **Rain Clouds:** following cloud → two clouds → stronger rain and Soaked → downpours → Endless Monsoon.
 
-- **Toxic Glob:** exploding blobs that leave longer-lasting pools.
-- **Venom Needles:** rapid piercing projectiles.
-- **Acid Spray:** frontal cone that grows, damages, breaks armor, and leaves pools.
+### Wind — Roc
 
-### Necrotic and Holy
+**Identity:** mobility, displacement, projectile control, and shielding.  
+**Weapon:** Chakrams — damage outward and on return; later levels add piercing, multishot, and catch bursts.
 
-- Necrotic abilities are not designed.
-- Holy concepts are healing, shields, and light beams.
+- **Razor Wind:** two blades → four blades → more speed/range → piercing → Thousand Cuts.
+- **Tornado:** moving pull zone → larger/longer → stronger pull → two tornadoes → Eye of the Storm.
+- **Gale Barrier:** shield and push → larger shield → projectile destruction → second pulse → Sanctuary of Wind.
+
+## Later spirit concepts
+
+| Spirit | Form | Weapon | Intended identity | Status |
+|---|---|---|---|---|
+| Ice | Yeti | Ice gauntlets | Freeze, defensive traps, enemy gathering | Partial redesign complete |
+| Lightning | Thunder Dragon | Lightning spear | Rapid hits, chaining, Shock | Concept defined |
+| Poison | Scorpion | Poison daggers | Stacking damage and weakening | Concept defined |
+| Necrotic | Bat | Necrotic katana | Execution, curses, life steal | Abilities not designed |
+| Holy | Biblical Angel | Holy sword | Healing, shielding, anti-corruption | Concepts only |
+
+## Ice ability distinction
+
+- **Avalanche:** growing directional snowball that carries normal enemies, leaves a frozen wake, and finishes with radial ice shards.
+- **Ice Crystal:** defensive crystals around the player that damage nearby enemies, shatter on proximity or expiry, and apply Freeze.
+
+Avalanche is moving crowd control; Ice Crystal protects immediate space.
 
 ## Implementation reference
 
-See `World Of Spirits/Assets/Docs/SPIRIT_ABILITY_SETUP.md` for current Unity components and prefab guidance.
+See the spirit scripts under `World Of Spirits/Assets/_WorldOfSpirits/Scripts/Spirits` for implementation details.
+

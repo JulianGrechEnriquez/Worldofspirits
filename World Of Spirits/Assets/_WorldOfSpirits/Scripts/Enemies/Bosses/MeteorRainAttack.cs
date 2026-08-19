@@ -24,6 +24,7 @@ namespace WorldOfSpirits.Enemies
         private AttackTelegraph[] warnings;
         private GameObject[] meteorVisuals;
         private Vector3[] meteorStartPositions;
+        private int activeMeteorCount;
 
         private void Awake()
         {
@@ -36,11 +37,15 @@ namespace WorldOfSpirits.Enemies
         public override IEnumerator Execute(BossContext context)
         {
             context.Movement.TakeAttackControl();
-            EnsureCapacity();
+            activeMeteorCount = meteorCount + context.Boss.CurrentPhase * 2;
+            EnsureCapacity(activeMeteorCount);
             Vector2 lockedCenter = context.Target.position;
-            for (int i = 0; i < meteorCount; i++)
+            Rigidbody2D targetBody = context.Target.GetComponentInParent<Rigidbody2D>();
+            if (context.Boss.CurrentPhase > 0 && targetBody != null)
+                lockedCenter += targetBody.linearVelocity * 0.35f;
+            for (int i = 0; i < activeMeteorCount; i++)
             {
-                positions[i] = lockedCenter + Random.insideUnitCircle * scatterRadius;
+                positions[i] = GetPatternPosition(lockedCenter, i, activeMeteorCount, context.Boss.CurrentPhase);
                 if (telegraphPrefab != null)
                 {
                     warnings[i] = Instantiate(telegraphPrefab, positions[i], Quaternion.identity);
@@ -69,12 +74,12 @@ namespace WorldOfSpirits.Enemies
             }
 
             float elapsed = 0f;
-            float duration = Mathf.Max(0.05f, warningDuration);
+            float duration = Mathf.Max(0.05f, warningDuration * Mathf.Max(0.72f, 1f - context.Boss.CurrentPhase * 0.1f));
             while (elapsed < duration)
             {
                 elapsed += Time.deltaTime;
                 float t = Mathf.SmoothStep(0f, 1f, Mathf.Clamp01(elapsed / duration));
-                for (int i = 0; i < meteorCount; i++)
+                for (int i = 0; i < activeMeteorCount; i++)
                 {
                     if (meteorVisuals[i] != null)
                         meteorVisuals[i].transform.position = Vector3.Lerp(
@@ -83,7 +88,7 @@ namespace WorldOfSpirits.Enemies
                 yield return null;
             }
 
-            for (int i = 0; i < meteorCount; i++)
+            for (int i = 0; i < activeMeteorCount; i++)
             {
                 if (warnings[i] != null) Destroy(warnings[i].gameObject);
                 if (meteorVisuals[i] != null)
@@ -111,14 +116,31 @@ namespace WorldOfSpirits.Enemies
             }
         }
 
-        private void EnsureCapacity()
+        private Vector2 GetPatternPosition(Vector2 center, int index, int count, int phase)
         {
-            if (positions == null || positions.Length != meteorCount) positions = new Vector2[meteorCount];
-            if (warnings == null || warnings.Length != meteorCount) warnings = new AttackTelegraph[meteorCount];
-            if (meteorVisuals == null || meteorVisuals.Length != meteorCount)
-                meteorVisuals = new GameObject[meteorCount];
-            if (meteorStartPositions == null || meteorStartPositions.Length != meteorCount)
-                meteorStartPositions = new Vector3[meteorCount];
+            if (phase == 1)
+            {
+                float t = count == 1 ? 0.5f : index / (float)(count - 1);
+                Vector2 line = Vector2.Lerp(Vector2.left, Vector2.right, t) * scatterRadius;
+                return center + line;
+            }
+            if (phase >= 2)
+            {
+                float angle = index * 137.5f * Mathf.Deg2Rad;
+                float radius = scatterRadius * Mathf.Sqrt((index + 1f) / count);
+                return center + new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * radius;
+            }
+            return center + Random.insideUnitCircle * scatterRadius;
+        }
+
+        private void EnsureCapacity(int count)
+        {
+            if (positions == null || positions.Length != count) positions = new Vector2[count];
+            if (warnings == null || warnings.Length != count) warnings = new AttackTelegraph[count];
+            if (meteorVisuals == null || meteorVisuals.Length != count)
+                meteorVisuals = new GameObject[count];
+            if (meteorStartPositions == null || meteorStartPositions.Length != count)
+                meteorStartPositions = new Vector3[count];
         }
 
         public override void Cancel()

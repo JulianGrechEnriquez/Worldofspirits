@@ -47,7 +47,7 @@ MonoBehaviour:
       directionPattern: 0
       sizeMultiplier: 1
       lifetimeMultiplier: 1
-    spawnedEffectPrefab: {fileID: 0}
+    spawnedEffectPrefab: {fileID: 6847701205791021120, guid: dc10866f21f24231a93e947c41ae2228, type: 3}
     spawnCount: 1
     areaRadius: 4
     activeDuration: 3
@@ -85,7 +85,7 @@ MonoBehaviour:
       directionPattern: 0
       sizeMultiplier: 1
       lifetimeMultiplier: 1
-    spawnedEffectPrefab: {fileID: 0}
+    spawnedEffectPrefab: {fileID: 6847701205791021120, guid: dc10866f21f24231a93e947c41ae2228, type: 3}
     spawnCount: 1
     areaRadius: 4.5
     activeDuration: 3
@@ -123,7 +123,7 @@ MonoBehaviour:
       directionPattern: 0
       sizeMultiplier: 1
       lifetimeMultiplier: 1
-    spawnedEffectPrefab: {fileID: 0}
+    spawnedEffectPrefab: {fileID: 6847701205791021120, guid: dc10866f21f24231a93e947c41ae2228, type: 3}
     spawnCount: 1
     areaRadius: 5
     activeDuration: 3
@@ -161,7 +161,7 @@ MonoBehaviour:
       directionPattern: 0
       sizeMultiplier: 1
       lifetimeMultiplier: 1
-    spawnedEffectPrefab: {fileID: 0}
+    spawnedEffectPrefab: {fileID: 6847701205791021120, guid: dc10866f21f24231a93e947c41ae2228, type: 3}
     spawnCount: 1
     areaRadius: 5.5
     activeDuration: 3
@@ -199,7 +199,7 @@ MonoBehaviour:
       directionPattern: 0
       sizeMultiplier: 1
       lifetimeMultiplier: 1
-    spawnedEffectPrefab: {fileID: 0}
+    spawnedEffectPrefab: {fileID: 6847701205791021120, guid: dc10866f21f24231a93e947c41ae2228, type: 3}
     spawnCount: 1
     areaRadius: 6
     activeDuration: 3

@@ -13,7 +13,7 @@ tags:
 
 ## Demo scope
 
-The current release target is a demo with **four complete spirits** (Fire, Wind, Water, and Earth) and **two complete areas** (Burning Plains and Earth Plains). See [[Notes/Planning/Demo Scope and Completion Plan|Demo scope and completion plan]] for the authoritative scope and definition of done.
+The current release target is a **Burning Plains vertical-slice demo** with four production spirits (Fire, Wind, Water, and Earth), the Fire Phoenix guardian, and a complete menu-to-results flow. See [[Notes/Planning/Demo Scope and Completion Plan|Demo scope and completion plan]] for the authoritative scope and definition of done.
 
 ## Recommendation
 
@@ -48,7 +48,7 @@ Reviewed on 2026-08-06 from the Unity project and planning vault.
 - [ ] Profile the complete short run with 50, 100, 200, and 250 enemies.
 - [ ] Fix the largest measured gameplay and performance problems.
 - [ ] Expand the validated run to ten minutes.
-- [ ] Complete the other three demo spirits, then build Earth Plains after the vertical slice is stable.
+- [ ] Complete the other three production spirits, then begin Frozen Wastes after the vertical slice is stable.
 
 ## P0 — Complete the playable loop
 
@@ -230,12 +230,10 @@ Reviewed on 2026-08-06 from the Unity project and planning vault.
 - [ ] Add upgrade comparison text and tags such as Weapon, Projectile, Area, Status, and Support.
 - [ ] Add upgrade filtering and search to development tools.
 - [ ] Clearly explain reroll cost and consider Skip and Banish mechanics.
-- [ ] Add evolution and fusion previews.
+- [ ] Add maximum-level and transformation previews.
 - [ ] Add post-run statistics by spirit, weapon, and ability.
 - [ ] Add collection screens for unlocked and discovered content.
 - [ ] Design the Spirit Dust economy and permanent unlock pacing.
-- [ ] Define exact fusion eligibility and offer rules.
-- [ ] Prototype only two fusion recipes first.
 - [ ] Add duplicate-upgrade and bad-luck protection.
 - [ ] Add deterministic run seeds for testing.
 
@@ -265,7 +263,7 @@ Reviewed on 2026-08-06 from the Unity project and planning vault.
 - [ ] Add consistent tooltips and improve upgrade-card readability.
 - [ ] Move player-facing text into localization-ready data.
 - [ ] Avoid embedding player-facing strings directly in scripts.
-- [ ] Add a compendium for spirits, enemies, bosses, upgrades, and fusions.
+- [ ] Add a compendium for spirits, enemies, bosses, upgrades, statuses, and elemental weaknesses.
 
 ## P3 — Content after the vertical slice
 
@@ -277,8 +275,7 @@ Reviewed on 2026-08-06 from the Unity project and planning vault.
 - [ ] Decide whether Earth Golem and Wind Roc are bosses, mini-bosses, or challenge encounters.
 - [ ] Build reusable boss-phase, wave, and event data.
 - [ ] Add challenge modes, achievements, seeded runs, and difficulty modifiers after the campaign loop works.
-- [ ] Add Endless Mode only after the normal campaign is stable.
-- [ ] Add fusion-specific VFX and UI.
+- [ ] Add Infinity Mode only after all six Story Mode stages are stable.
 - [ ] Add narrative area introductions and boss conclusions.
 - [ ] Add music, ambience, and a complete audio mix.
 
@@ -292,8 +289,8 @@ Reviewed on 2026-08-06 from the Unity project and planning vault.
 6. Add automated tests for progression, pooling, spawning, and scene flow.
 7. Improve combat feedback, settings, and accessibility.
 8. Add versioned saves and meta-progression.
-9. Prototype two fusion recipes.
-10. Start the second area.
+9. Start Frozen Wastes and standardize the Ice Spirit.
+10. Build the remaining Story Mode planes only after the vertical slice is stable.
 
 ## Related notes
 
