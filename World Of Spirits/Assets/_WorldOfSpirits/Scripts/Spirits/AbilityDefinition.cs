@@ -5,6 +5,12 @@ using WorldOfSpirits.Combat;
 
 namespace WorldOfSpirits.Spirits
 {
+    public enum ProjectileSpreadMode
+    {
+        EvenlySpaced,
+        Random
+    }
+
     public enum AbilityExecutionType
     {
         Projectile,

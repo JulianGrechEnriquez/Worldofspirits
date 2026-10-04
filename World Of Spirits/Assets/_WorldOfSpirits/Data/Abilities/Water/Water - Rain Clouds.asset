@@ -14,13 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WorldOfSpirits.Spirits.AbilityDefinition
   abilityName: Rain Clouds
   description: Rain clouds follow enemies and damage them.
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 80c0c87a8c91a7143a4e54ad6a3a6c0c, type: 3}
   executionType: 2
   targetingMode: 0
   levels:
   - level: 1
     upgradeDescription: One cloud
-    cooldown: 2
+    cooldown: 4
     targetingRange: 15
     minimumSpawnDistance: 0
     maximumSpawnDistance: 0
@@ -29,10 +29,10 @@ MonoBehaviour:
       count: 1
       spreadAngle: 35
       spreadMode: 0
-      speed: 9
-      damage: 10
+      speed: 2.5
+      damage: 5
       homeOnEnemies: 0
-      homingStrength: 6
+      homingStrength: 4
       homingRange: 10
       pierceCount: 0
       bounceCount: 0
@@ -47,10 +47,10 @@ MonoBehaviour:
       directionPattern: 0
       sizeMultiplier: 1
       lifetimeMultiplier: 1
-    spawnedEffectPrefab: {fileID: 0}
+    spawnedEffectPrefab: {fileID: 2006444889152789413, guid: 59b5d9ef39a6cba41b0fc2721998ec84, type: 3}
     spawnCount: 1
-    areaRadius: 3
-    activeDuration: 3
+    areaRadius: 0.85
+    activeDuration: 4
     orbitRadius: 1.5
     orbitSpeed: 100
     chainCount: 3
@@ -58,7 +58,7 @@ MonoBehaviour:
     effects: []
   - level: 2
     upgradeDescription: Two clouds
-    cooldown: 1.88
+    cooldown: 4
     targetingRange: 15
     minimumSpawnDistance: 0
     maximumSpawnDistance: 0
@@ -67,10 +67,10 @@ MonoBehaviour:
       count: 1
       spreadAngle: 35
       spreadMode: 0
-      speed: 9.5
-      damage: 13
+      speed: 2.5
+      damage: 5
       homeOnEnemies: 0
-      homingStrength: 6
+      homingStrength: 4
       homingRange: 10
       pierceCount: 0
       bounceCount: 0
@@ -85,10 +85,10 @@ MonoBehaviour:
       directionPattern: 0
       sizeMultiplier: 1
       lifetimeMultiplier: 1
-    spawnedEffectPrefab: {fileID: 0}
+    spawnedEffectPrefab: {fileID: 2006444889152789413, guid: 59b5d9ef39a6cba41b0fc2721998ec84, type: 3}
     spawnCount: 2
-    areaRadius: 3.5
-    activeDuration: 3
+    areaRadius: 0.85
+    activeDuration: 4
     orbitRadius: 1.6
     orbitSpeed: 120
     chainCount: 4
@@ -96,7 +96,7 @@ MonoBehaviour:
     effects: []
   - level: 3
     upgradeDescription: Increased rain damage
-    cooldown: 1.76
+    cooldown: 4
     targetingRange: 15
     minimumSpawnDistance: 0
     maximumSpawnDistance: 0
@@ -105,10 +105,10 @@ MonoBehaviour:
       count: 1
       spreadAngle: 35
       spreadMode: 0
-      speed: 10
-      damage: 16
+      speed: 2.5
+      damage: 8
       homeOnEnemies: 0
-      homingStrength: 6
+      homingStrength: 4
       homingRange: 10
       pierceCount: 0
       bounceCount: 0
@@ -123,10 +123,10 @@ MonoBehaviour:
       directionPattern: 0
       sizeMultiplier: 1
       lifetimeMultiplier: 1
-    spawnedEffectPrefab: {fileID: 0}
+    spawnedEffectPrefab: {fileID: 2006444889152789413, guid: 59b5d9ef39a6cba41b0fc2721998ec84, type: 3}
     spawnCount: 2
-    areaRadius: 4
-    activeDuration: 3
+    areaRadius: 0.85
+    activeDuration: 4
     orbitRadius: 1.7
     orbitSpeed: 140
     chainCount: 5
@@ -134,7 +134,7 @@ MonoBehaviour:
     effects: []
   - level: 4
     upgradeDescription: Clouds move faster
-    cooldown: 1.64
+    cooldown: 4
     targetingRange: 15
     minimumSpawnDistance: 0
     maximumSpawnDistance: 0
@@ -143,10 +143,10 @@ MonoBehaviour:
       count: 1
       spreadAngle: 35
       spreadMode: 0
-      speed: 10.5
-      damage: 19
+      speed: 5
+      damage: 8
       homeOnEnemies: 0
-      homingStrength: 6
+      homingStrength: 4
       homingRange: 10
       pierceCount: 0
       bounceCount: 0
@@ -161,10 +161,10 @@ MonoBehaviour:
       directionPattern: 0
       sizeMultiplier: 1
       lifetimeMultiplier: 1
-    spawnedEffectPrefab: {fileID: 0}
+    spawnedEffectPrefab: {fileID: 2006444889152789413, guid: 59b5d9ef39a6cba41b0fc2721998ec84, type: 3}
     spawnCount: 2
-    areaRadius: 4.5
-    activeDuration: 3
+    areaRadius: 0.85
+    activeDuration: 4
     orbitRadius: 1.8
     orbitSpeed: 160
     chainCount: 6

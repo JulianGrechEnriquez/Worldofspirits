@@ -48,11 +48,13 @@ namespace WorldOfSpirits.Spirits
         [Header("Visuals")]
         [SerializeField] private float spriteRotationOffset = -90f;
 
+#if UNITY_EDITOR
         [Header("Hitbox Debug")]
         [SerializeField] private bool drawHitboxes = true;
         [SerializeField] private Color targetingGizmoColor = new Color(0.15f, 0.8f, 1f, 0.45f);
         [SerializeField] private Color punchPathGizmoColor = new Color(1f, 0.8f, 0.1f, 0.8f);
         [SerializeField] private Color activeHitboxGizmoColor = new Color(1f, 0.15f, 0.1f, 0.9f);
+#endif
 
         private readonly List<IDamageable> targetBuffer = new List<IDamageable>(16);
         private readonly List<Collider2D> colliderBuffer = new List<Collider2D>(16);
@@ -753,6 +755,8 @@ namespace WorldOfSpirits.Spirits
             }
         }
 
+#endif
+
         private void ApplyWeaponSize()
         {
             float multiplier = upgradeStats != null
@@ -774,6 +778,7 @@ namespace WorldOfSpirits.Spirits
                 rightEchoGauntlet.localScale = pooledScale * multiplier;
         }
 
+#if UNITY_EDITOR
         protected virtual void OnValidate()
         {
             sideOffset = Mathf.Max(0.1f, sideOffset);

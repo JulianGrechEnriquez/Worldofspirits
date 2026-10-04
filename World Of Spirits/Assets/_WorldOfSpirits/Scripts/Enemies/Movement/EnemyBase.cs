@@ -62,7 +62,7 @@ namespace WorldOfSpirits.Enemies
 
         protected virtual void FixedUpdate()
         {
-            if (externalMovement)
+            if (externalMovement || !Body.simulated)
             {
                 return;
             }

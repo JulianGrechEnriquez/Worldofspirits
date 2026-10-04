@@ -14,8 +14,9 @@ namespace WorldOfSpirits.Spirits
         [SerializeField] private SpiritWeaponDefinition weapon = new SpiritWeaponDefinition();
         [Tooltip("Data-driven runtime weapon. New spirits should use this field.")]
         [SerializeField] private WeaponDefinition runtimeWeapon;
-        [SerializeField] private List<SpiritAbilityDefinition> abilities = new List<SpiritAbilityDefinition>();
-        [Tooltip("Data-driven runtime abilities. New spirits should use this list.")]
+        // Retained for catalog/backward compatibility; gameplay authoring uses runtimeAbilities.
+        [SerializeField, HideInInspector] private List<SpiritAbilityDefinition> abilities = new List<SpiritAbilityDefinition>();
+        [Tooltip("Ability definitions in slot order. Edit these assets to change ability behaviour and levels.")]
         [SerializeField] private List<AbilityDefinition> runtimeAbilities = new List<AbilityDefinition>();
 
         public string SpiritName => spiritName;

@@ -27,6 +27,8 @@ namespace WorldOfSpirits.Combat
         private Color[] originalSpriteColors;
         private Coroutine hitFlashRoutine;
         private float statusEndTime;
+        private readonly Dictionary<UnityEngine.Object, float> areaSlows =
+            new Dictionary<UnityEngine.Object, float>();
         private float statusStrength;
         private CombatStatus activeStatus;
         private float nextStatusDamageTime;
@@ -41,7 +43,28 @@ namespace WorldOfSpirits.Combat
         public float MaxHealth => maxHealth;
         public float CurrentHealth => currentHealth;
         public float CurrentShield => Time.time < shieldEndTime ? currentShield : 0f;
-        public float MoveSpeed => IsMovementDisabled ? 0f : moveSpeed * MovementMultiplier;
+        public float MoveSpeed => moveSpeed * MovementSpeedMultiplier;
+        public float MovementSpeedMultiplier
+        {
+            get
+            {
+                if (IsMovementDisabled) return 0f;
+                float reduction = 0f;
+                foreach (var slow in areaSlows)
+                    if (slow.Key != null) reduction = Mathf.Max(reduction, slow.Value);
+                return MovementMultiplier * (1f - reduction);
+            }
+        }
+
+        public void SetAreaSlow(UnityEngine.Object source, float reduction)
+        {
+            if (source != null) areaSlows[source] = Mathf.Clamp01(reduction);
+        }
+
+        public void RemoveAreaSlow(UnityEngine.Object source)
+        {
+            if (source != null) areaSlows.Remove(source);
+        }
         public bool IsMovementDisabled => Time.time < statusEndTime &&
             (activeStatus == CombatStatus.Freeze || activeStatus == CombatStatus.Stun);
         private float MovementMultiplier => Time.time < statusEndTime && activeStatus == CombatStatus.Slow
@@ -69,6 +92,7 @@ namespace WorldOfSpirits.Combat
 
         protected virtual void OnDisable()
         {
+            areaSlows.Clear();
             activeEntities.Remove(this);
             if (CombatSimulationManager.TryGetExisting(out CombatSimulationManager simulation))
             {
@@ -122,7 +146,7 @@ namespace WorldOfSpirits.Combat
 
         protected void ApplyResolvedDamage(float amount, DamageContext context)
         {
-            if (!IsAlive || amount <= 0f)
+            if (!isActiveAndEnabled || !IsAlive || amount <= 0f)
             {
                 return;
             }
@@ -284,6 +308,7 @@ namespace WorldOfSpirits.Combat
 
         private void PlayHitFlash()
         {
+            if (!isActiveAndEnabled) return;
             if (spriteRenderers == null || spriteRenderers.Length == 0)
             {
                 CacheSpriteColors();

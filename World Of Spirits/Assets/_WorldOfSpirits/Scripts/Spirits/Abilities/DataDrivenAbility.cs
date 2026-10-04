@@ -15,10 +15,39 @@ namespace WorldOfSpirits.Spirits
         private readonly List<Transform> crystalTargetBuffer = new List<Transform>(16);
         private readonly HashSet<Transform> chainHitBuffer = new HashSet<Transform>();
         private GameObject followingArea;
+        private readonly List<(GameObject Object, PooledSceneObject Pool, int Version)> activeEffects =
+            new List<(GameObject, PooledSceneObject, int)>();
         private float followingAreaDisableTime;
         private AbilityLevelData ActiveLevel => definition != null ? definition.GetLevel(CurrentLevel) : null;
 
         public AbilityDefinition Definition => definition;
+
+        private void TrackEffect(GameObject effect)
+        {
+            activeEffects.RemoveAll(item => item.Object == null || !item.Object.activeSelf ||
+                (item.Pool != null && item.Pool.SpawnVersion != item.Version));
+            var pool = effect.GetComponent<PooledSceneObject>();
+            activeEffects.Add((effect, pool, pool != null ? pool.SpawnVersion : 0));
+        }
+
+        private void ReleaseActiveEffects()
+        {
+            foreach (var item in activeEffects)
+            {
+                if (item.Object != null && item.Object.activeSelf &&
+                    (item.Pool == null || item.Pool.SpawnVersion == item.Version))
+                    SceneObjectPool.ReleaseOrDestroy(item.Object);
+            }
+            activeEffects.Clear();
+        }
+
+        protected override void OnActivationStateChanged(bool allowed)
+        {
+            if (allowed) return;
+            if (followingArea != null) followingArea.SetActive(false);
+            SetOrbitingVisible(false);
+            ReleaseActiveEffects();
+        }
 
         protected override float GetCooldown()
         {
@@ -59,8 +88,7 @@ namespace WorldOfSpirits.Spirits
             }
 
             bool movementStateAllowsOrbit = HasContext &&
-                (!LatestContext.IsPrimary || LatestContext.PlayerIsMoving ||
-                 LatestContext.PrimaryWeaponAndAbilitiesEnabled);
+                IsMovementStateAllowed(LatestContext);
             bool shouldShowOrbit = HasContext && IsAbilityUnlocked &&
                 movementStateAllowsOrbit &&
                 LatestContext.Player != null;
@@ -97,6 +125,7 @@ namespace WorldOfSpirits.Spirits
 
         private void OnDisable()
         {
+            ReleaseActiveEffects();
             foreach (Transform item in orbitingObjects)
             {
                 if (item != null) SceneObjectPool.ReleaseOrDestroy(item.gameObject);
@@ -190,6 +219,7 @@ namespace WorldOfSpirits.Spirits
         {
             ProjectileBase projectile = ProjectilePool.Spawn(
                 data.projectilePrefab, spawnPosition, Quaternion.identity);
+            TrackEffect(projectile.gameObject);
             projectile.ConfigureHoming(data.homeOnEnemies, data.homingStrength, data.homingRange);
             projectile.ConfigureUpgradeModifiers(UpgradeStats);
             projectile.ConfigureCastModifiers(data.sizeMultiplier, data.lifetimeMultiplier);
@@ -223,6 +253,7 @@ namespace WorldOfSpirits.Spirits
                     level.spawnedEffectPrefab, position, Quaternion.identity,
                     PoolCategory.Effects);
                 spawned.GetComponent<AreaPulseVisual>().Configure(radius);
+                TrackEffect(spawned);
             }
         }
 
@@ -280,15 +311,19 @@ namespace WorldOfSpirits.Spirits
             if (level.spawnedEffectPrefab == null) return;
             int effectCount = Mathf.Max(1, level.spawnCount);
             bool isIceCrystal = level.spawnedEffectPrefab.GetComponent<IceCrystalEffect>() != null;
-            if (isIceCrystal) BuildCrystalTargetList(level);
+            bool isStoneSpike = level.spawnedEffectPrefab.GetComponent<StoneSpikeEffect>() != null;
+            WaterAreaEffect waterPrefab = level.spawnedEffectPrefab.GetComponent<WaterAreaEffect>();
+            bool isRain = waterPrefab != null && waterPrefab.Kind == WaterAreaEffect.WaterEffectKind.RainCloud;
+            if (isIceCrystal || isStoneSpike || isRain) BuildCrystalTargetList(level);
             for (int i = 0; i < effectCount; i++)
             {
-                Vector3 position = isIceCrystal
+                Vector3 position = isIceCrystal || isStoneSpike || isRain
                     ? ResolveCrystalPosition(context, level, i, effectCount)
                     : ResolvePosition(context, level);
                 GameObject spawned = SceneObjectPool.Spawn(
                     level.spawnedEffectPrefab, position, Quaternion.identity,
                     PoolCategory.FloorEffects);
+                TrackEffect(spawned);
                 IceCrystalEffect crystal = spawned.GetComponent<IceCrystalEffect>();
                 if (crystal != null)
                 {
@@ -297,6 +332,18 @@ namespace WorldOfSpirits.Spirits
                         CreateSpiritDamage(burst.damage), UpgradeStats, burst.damage,
                         level.areaRadius, level.activeDuration, burst.appliesStatus,
                         burst.statusChance, burst.statusDuration, burst.statusStrength);
+                }
+                else if (spawned.TryGetComponent(out WaterAreaEffect water))
+                {
+                    IDamageable rainTarget = isRain && crystalTargetBuffer.Count > 0
+                        ? crystalTargetBuffer[i % crystalTargetBuffer.Count].GetComponentInParent<IDamageable>()
+                        : null;
+                    water.Configure(CreateSpiritDamage(level.projectile.damage), level, UpgradeStats,
+                        context.Player, rainTarget);
+                }
+                else if (spawned.TryGetComponent(out StoneSpikeEffect spike))
+                {
+                    spike.Configure(CreateSpiritDamage(level.projectile.damage), level, UpgradeStats);
                 }
                 else if (spawned.TryGetComponent(out PersistentDamageZone zone))
                 {
@@ -470,6 +517,7 @@ namespace WorldOfSpirits.Spirits
                             GameObject spawnedEffect = SceneObjectPool.Spawn(
                                 effect.effectPrefab, target.position, Quaternion.identity,
                                 PoolCategory.FloorEffects);
+                            TrackEffect(spawnedEffect);
                             SceneObjectPool.ReleaseAfter(
                                 spawnedEffect, Mathf.Max(0.1f,
                                     UpgradeStats != null ? UpgradeStats.ScaleDuration(effect.duration) : effect.duration));

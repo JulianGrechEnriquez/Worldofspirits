@@ -23,6 +23,8 @@ namespace WorldOfSpirits.Combat
         private Vector3 initialScale;
         private float activeExplosionRadius;
 
+        protected virtual bool ConsumePierceOnHit => true;
+
         protected override void Awake()
         {
             base.Awake();
@@ -75,7 +77,7 @@ namespace WorldOfSpirits.Combat
         protected override void Update()
         {
             base.Update();
-            if (growthPerSecond > 0f)
+            if (isActiveAndEnabled && growthPerSecond > 0f)
             {
                 transform.localScale += Vector3.one * (growthPerSecond * Time.deltaTime);
             }
@@ -123,7 +125,7 @@ namespace WorldOfSpirits.Combat
                 }
             }
 
-            if (remainingPierces-- <= 0)
+            if (ConsumePierceOnHit && remainingPierces-- <= 0)
             {
                 Despawn();
             }

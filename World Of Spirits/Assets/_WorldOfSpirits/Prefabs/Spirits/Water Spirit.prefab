@@ -12,9 +12,6 @@ GameObject:
   - component: {fileID: 730000000000000003}
   - component: {fileID: 730000000000000004}
   - component: {fileID: 730000000000000005}
-  - component: {fileID: 730000000000000006}
-  - component: {fileID: 730000000000000007}
-  - component: {fileID: 730000000000000008}
   m_Layer: 0
   m_Name: Water Spirit
   m_TagString: Untagged
@@ -137,60 +134,6 @@ MonoBehaviour:
   drawHitboxes: 1
   orbitGizmoColor: {r: 0.15, g: 0.65, b: 1, a: 0.8}
   hitboxGizmoColor: {r: 0.1, g: 0.4, b: 1, a: 0.9}
---- !u!114 &730000000000000006
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 730000000000000001}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59463a8d5a7449f3a1ef4c6f88e1a242, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::WorldOfSpirits.Spirits.DataDrivenAbility
-  abilityIndex: 0
-  cooldown: 1
-  primarySpiritOnly: 0
-  castWhileMoving: 1
-  castWhileStandingStill: 0
-  definition: {fileID: 11400000, guid: 4750291c3506e6d4c8556417f5ff6b1d, type: 2}
---- !u!114 &730000000000000007
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 730000000000000001}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59463a8d5a7449f3a1ef4c6f88e1a242, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::WorldOfSpirits.Spirits.DataDrivenAbility
-  abilityIndex: 1
-  cooldown: 1
-  primarySpiritOnly: 0
-  castWhileMoving: 1
-  castWhileStandingStill: 0
-  definition: {fileID: 11400000, guid: 92233e488be9ab341a3e2ba169f99126, type: 2}
---- !u!114 &730000000000000008
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 730000000000000001}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59463a8d5a7449f3a1ef4c6f88e1a242, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::WorldOfSpirits.Spirits.DataDrivenAbility
-  abilityIndex: 2
-  cooldown: 1
-  primarySpiritOnly: 0
-  castWhileMoving: 1
-  castWhileStandingStill: 0
-  definition: {fileID: 11400000, guid: 6da74ab588990d943967c020f97ca8f8, type: 2}
 --- !u!1 &2881030281992021063
 GameObject:
   m_ObjectHideFlags: 0

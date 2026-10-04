@@ -20,19 +20,19 @@ MonoBehaviour:
   levels:
   - level: 1
     upgradeDescription: One whirlpool
-    cooldown: 2
+    cooldown: 5
     targetingRange: 15
-    minimumSpawnDistance: 0
-    maximumSpawnDistance: 0
+    minimumSpawnDistance: 1.5
+    maximumSpawnDistance: 4
     projectile:
       projectilePrefab: {fileID: 0}
       count: 1
       spreadAngle: 35
       spreadMode: 0
-      speed: 9
-      damage: 10
+      speed: 2.5
+      damage: 0
       homeOnEnemies: 0
-      homingStrength: 6
+      homingStrength: 4
       homingRange: 10
       pierceCount: 0
       bounceCount: 0
@@ -47,10 +47,10 @@ MonoBehaviour:
       directionPattern: 0
       sizeMultiplier: 1
       lifetimeMultiplier: 1
-    spawnedEffectPrefab: {fileID: 0}
+    spawnedEffectPrefab: {fileID: 590448951921741479, guid: 8e2c92a186eb1a941af17616da117c6a, type: 3}
     spawnCount: 1
-    areaRadius: 3
-    activeDuration: 3
+    areaRadius: 1.5
+    activeDuration: 4
     orbitRadius: 1.5
     orbitSpeed: 100
     chainCount: 3
@@ -58,19 +58,19 @@ MonoBehaviour:
     effects: []
   - level: 2
     upgradeDescription: Increased radius
-    cooldown: 1.88
+    cooldown: 5
     targetingRange: 15
-    minimumSpawnDistance: 0
-    maximumSpawnDistance: 0
+    minimumSpawnDistance: 1.5
+    maximumSpawnDistance: 4
     projectile:
       projectilePrefab: {fileID: 0}
       count: 1
       spreadAngle: 35
       spreadMode: 0
-      speed: 9.5
-      damage: 13
+      speed: 2.5
+      damage: 0
       homeOnEnemies: 0
-      homingStrength: 6
+      homingStrength: 4
       homingRange: 10
       pierceCount: 0
       bounceCount: 0
@@ -85,10 +85,10 @@ MonoBehaviour:
       directionPattern: 0
       sizeMultiplier: 1
       lifetimeMultiplier: 1
-    spawnedEffectPrefab: {fileID: 0}
+    spawnedEffectPrefab: {fileID: 590448951921741479, guid: 8e2c92a186eb1a941af17616da117c6a, type: 3}
     spawnCount: 1
-    areaRadius: 3.5
-    activeDuration: 3
+    areaRadius: 2
+    activeDuration: 4
     orbitRadius: 1.6
     orbitSpeed: 120
     chainCount: 4
@@ -96,19 +96,19 @@ MonoBehaviour:
     effects: []
   - level: 3
     upgradeDescription: Two whirlpools
-    cooldown: 1.76
+    cooldown: 5
     targetingRange: 15
-    minimumSpawnDistance: 0
-    maximumSpawnDistance: 0
+    minimumSpawnDistance: 1.5
+    maximumSpawnDistance: 4
     projectile:
       projectilePrefab: {fileID: 0}
       count: 1
       spreadAngle: 35
       spreadMode: 0
-      speed: 10
-      damage: 16
+      speed: 2.5
+      damage: 0
       homeOnEnemies: 0
-      homingStrength: 6
+      homingStrength: 4
       homingRange: 10
       pierceCount: 0
       bounceCount: 0
@@ -123,10 +123,10 @@ MonoBehaviour:
       directionPattern: 0
       sizeMultiplier: 1
       lifetimeMultiplier: 1
-    spawnedEffectPrefab: {fileID: 0}
+    spawnedEffectPrefab: {fileID: 590448951921741479, guid: 8e2c92a186eb1a941af17616da117c6a, type: 3}
     spawnCount: 2
-    areaRadius: 4
-    activeDuration: 3
+    areaRadius: 2
+    activeDuration: 4
     orbitRadius: 1.7
     orbitSpeed: 140
     chainCount: 5
@@ -134,19 +134,19 @@ MonoBehaviour:
     effects: []
   - level: 4
     upgradeDescription: Damage over time
-    cooldown: 1.64
+    cooldown: 5
     targetingRange: 15
-    minimumSpawnDistance: 0
-    maximumSpawnDistance: 0
+    minimumSpawnDistance: 1.5
+    maximumSpawnDistance: 4
     projectile:
       projectilePrefab: {fileID: 0}
       count: 1
       spreadAngle: 35
       spreadMode: 0
-      speed: 10.5
-      damage: 19
+      speed: 2.5
+      damage: 6
       homeOnEnemies: 0
-      homingStrength: 6
+      homingStrength: 4
       homingRange: 10
       pierceCount: 0
       bounceCount: 0
@@ -161,10 +161,10 @@ MonoBehaviour:
       directionPattern: 0
       sizeMultiplier: 1
       lifetimeMultiplier: 1
-    spawnedEffectPrefab: {fileID: 0}
+    spawnedEffectPrefab: {fileID: 590448951921741479, guid: 8e2c92a186eb1a941af17616da117c6a, type: 3}
     spawnCount: 2
-    areaRadius: 4.5
-    activeDuration: 3
+    areaRadius: 2
+    activeDuration: 4
     orbitRadius: 1.8
     orbitSpeed: 160
     chainCount: 6

@@ -20,6 +20,7 @@ namespace WorldOfSpirits.UI
         private int displayedSecond = -1;
         private Color normalColor;
         private Coroutine flashRoutine;
+        private bool bossWarningActive;
 
         private void Awake()
         {
@@ -84,6 +85,7 @@ namespace WorldOfSpirits.UI
 
         private void Update()
         {
+            if (bossWarningActive) return;
             int totalSeconds = Mathf.Max(0, Mathf.FloorToInt(spawnDirector.ElapsedRunTime));
             if (totalSeconds == displayedSecond)
             {
@@ -103,6 +105,7 @@ namespace WorldOfSpirits.UI
 
         private void BeginBossWarning(float duration)
         {
+            bossWarningActive = true;
             if (flashRoutine != null) StopCoroutine(flashRoutine);
             flashRoutine = StartCoroutine(FlashRoutine(duration));
         }

@@ -11,6 +11,8 @@ namespace WorldOfSpirits.UI
         [SerializeField] private Transform cardContainer;
         [SerializeField] private List<GameObject> availableSpiritPrefabs = new List<GameObject>();
         [SerializeField] private GameObject defaultStarterSpirit;
+        [SerializeField] private CanvasGroup[] gameplayHudGroups;
+        private readonly List<Vector3> previousHudStates = new List<Vector3>();
 
         private SpiritManager spiritManager;
         private float previousTimeScale = 1f;
@@ -30,13 +32,40 @@ namespace WorldOfSpirits.UI
             previousTimeScale = Time.timeScale;
             Time.timeScale = 0f;
             selectionOpen = true;
+            SetGameplayHudHidden(true);
         }
 
         private void OnDisable()
         {
+            SetGameplayHudHidden(false);
             if (!selectionOpen) return;
             Time.timeScale = previousTimeScale;
             selectionOpen = false;
+        }
+
+        private void SetGameplayHudHidden(bool hidden)
+        {
+            if (gameplayHudGroups == null) return;
+            if (hidden) previousHudStates.Clear();
+            for (int i = 0; i < gameplayHudGroups.Length; i++)
+            {
+                CanvasGroup group = gameplayHudGroups[i];
+                if (hidden)
+                {
+                    previousHudStates.Add(group != null ? new Vector3(group.alpha, group.interactable ? 1f : 0f, group.blocksRaycasts ? 1f : 0f) : Vector3.zero);
+                    if (group == null) continue;
+                    group.alpha = 0f;
+                    group.interactable = false;
+                    group.blocksRaycasts = false;
+                }
+                else if (group != null && i < previousHudStates.Count)
+                {
+                    group.alpha = previousHudStates[i].x;
+                    group.interactable = previousHudStates[i].y > 0f;
+                    group.blocksRaycasts = previousHudStates[i].z > 0f;
+                }
+            }
+            if (!hidden) previousHudStates.Clear();
         }
 
         private void BuildUnlockedCards()

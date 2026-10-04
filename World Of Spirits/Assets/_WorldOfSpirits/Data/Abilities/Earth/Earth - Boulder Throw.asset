@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WorldOfSpirits.Spirits.AbilityDefinition
   abilityName: Boulder Throw
   description: Throws bouncing boulders.
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: a18ee6d9250113a4691d162bf08f1eb9, type: 3}
   executionType: 0
   targetingMode: 0
   levels:

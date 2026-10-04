@@ -33,22 +33,17 @@ namespace WorldOfSpirits.Spirits
             LatestContext = context;
             HasContext = true;
 
-            if (OwnerSpirit != null && !OwnerSpirit.Progression.IsAbilityUnlocked(abilityIndex))
+            bool stateAllowed = IsAbilityUnlocked && isActiveAndEnabled &&
+                (!primarySpiritOnly || context.IsPrimary) && IsMovementStateAllowed(context);
+            OnActivationStateChanged(stateAllowed);
+            if (!stateAllowed) return;
+
+            if (Time.time < nextCastTime)
             {
                 return;
             }
 
-            if (!isActiveAndEnabled || Time.time < nextCastTime || primarySpiritOnly && !context.IsPrimary)
-            {
-                return;
-            }
-
-            // Support spirits continue casting in either movement state. Movement
-            // restrictions only control the currently selected primary spirit.
-            bool primaryAbilityMastered = context.PrimaryWeaponAndAbilitiesEnabled;
-            bool movementStateAllowed = !context.IsPrimary || primaryAbilityMastered ||
-                (context.PlayerIsMoving ? castWhileMoving : castWhileStandingStill);
-            if (!movementStateAllowed || !CanCast(context))
+            if (!CanCast(context))
             {
                 return;
             }
@@ -58,6 +53,11 @@ namespace WorldOfSpirits.Spirits
         }
 
         protected virtual float GetCooldown() => ScaleCooldown(cooldown);
+        // Support spirits and the mastery upgrade bypass primary movement restrictions.
+        protected bool IsMovementStateAllowed(SpiritAbilityContext context) =>
+            !context.IsPrimary || context.PrimaryWeaponAndAbilitiesEnabled ||
+            (context.PlayerIsMoving ? castWhileMoving : castWhileStandingStill);
+        protected virtual void OnActivationStateChanged(bool allowed) { }
         protected bool IsAbilityUnlocked => OwnerSpirit == null ||
             OwnerSpirit.Progression.IsAbilityUnlocked(abilityIndex);
         protected float ScaleCooldown(float value) => value /

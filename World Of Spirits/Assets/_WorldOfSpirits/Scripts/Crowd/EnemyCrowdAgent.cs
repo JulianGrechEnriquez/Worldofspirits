@@ -50,7 +50,8 @@ namespace WorldOfSpirits.Crowd
         public float PushStrength => profile != null ? profile.PushStrength : 1f;
         public bool IsFlying => isFlying;
         public bool IsSimulationActive =>
-            isActiveAndEnabled && enemy != null && enemy.IsAlive && profile != null;
+            isActiveAndEnabled && body != null && body.simulated &&
+            enemy != null && enemy.IsAlive && profile != null;
 
         private void Awake()
         {
@@ -187,6 +188,7 @@ namespace WorldOfSpirits.Crowd
                 profile.CollisionRadius + simulation.PlayerCollisionRadius;
 
             Vector2 desiredVelocity;
+            float movementSpeed = profile.MovementSpeed * enemy.MovementSpeedMultiplier;
             if (distance <= stopDistance)
             {
                 // Retain separation and a subtle deterministic tangent so a
@@ -196,11 +198,11 @@ namespace WorldOfSpirits.Crowd
                     ? new Vector2(-toPlayer.y, toPlayer.x).normalized * side
                     : Vector2.right * side;
                 desiredVelocity =
-                    (cachedSeparation + tangent * 0.12f) * profile.MovementSpeed;
+                    (cachedSeparation + tangent * 0.12f) * movementSpeed;
             }
             else
             {
-                desiredVelocity = finalSteering.normalized * profile.MovementSpeed;
+                desiredVelocity = finalSteering.normalized * movementSpeed;
             }
 
             desiredVelocity += externalVelocity;
@@ -290,7 +292,8 @@ namespace WorldOfSpirits.Crowd
                 return;
             }
 
-            float speed = profile.MovementSpeed * profile.DormantSpeedMultiplier;
+            float speed = profile.MovementSpeed * profile.DormantSpeedMultiplier *
+                enemy.MovementSpeedMultiplier;
             Vector2 velocity = toPlayer.normalized * speed;
             body.linearVelocity = velocity;
         }

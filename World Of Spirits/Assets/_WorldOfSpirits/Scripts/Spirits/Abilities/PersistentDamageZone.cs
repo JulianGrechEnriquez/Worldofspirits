@@ -35,6 +35,10 @@ namespace WorldOfSpirits.Spirits
             public Rigidbody2D Body;
             public float NextHitTime;
             public int ColliderCount;
+            public LivingEntity SlowedEntity;
+            public Transform TargetTransform;
+            public PooledSceneObject Pool;
+            public int SpawnVersion;
         }
 
         [Header("Damage")]
@@ -92,6 +96,9 @@ namespace WorldOfSpirits.Spirits
         [SerializeField, Tooltip(
             "Grow only a CircleCollider2D, keeping the artwork at its authored size.")]
         private bool resizeColliderOnly;
+
+        [SerializeField, Range(0f, 1f), Tooltip("Movement speed reduction while inside this zone.")]
+        private float slowStrength;
 
 
         private readonly Dictionary<int, Occupant> occupants =
@@ -297,8 +304,7 @@ namespace WorldOfSpirits.Spirits
                     pair.Value;
 
 
-                if (occupant.Target == null ||
-                    !occupant.Target.IsAlive)
+                if (!IsOccupantActive(occupant))
                 {
                     occupantsToRemove.Add(
                         pair.Key);
@@ -324,6 +330,7 @@ namespace WorldOfSpirits.Spirits
                  i < occupantsToRemove.Count;
                  i++)
             {
+                RemoveSlow(occupants[occupantsToRemove[i]]);
                 occupants.Remove(
                     occupantsToRemove[i]);
             }
@@ -342,9 +349,7 @@ namespace WorldOfSpirits.Spirits
                 Occupant occupant
                 in occupants.Values)
             {
-                if (occupant.Body == null ||
-                    occupant.Target == null ||
-                    !occupant.Target.IsAlive)
+                if (occupant.Body == null || !IsOccupantActive(occupant))
                 {
                     continue;
                 }
@@ -664,6 +669,7 @@ namespace WorldOfSpirits.Spirits
 
             if (target == null ||
                 !target.IsAlive ||
+                !target.Transform.gameObject.activeInHierarchy ||
                 target.Faction == ownerFaction)
             {
                 return;
@@ -679,17 +685,26 @@ namespace WorldOfSpirits.Spirits
                     id,
                     out Occupant existing))
             {
-                existing.ColliderCount++;
-
-                return;
+                if (IsOccupantActive(existing))
+                {
+                    existing.ColliderCount++;
+                    return;
+                }
+                RemoveSlow(existing);
+                occupants.Remove(id);
             }
 
+            PooledSceneObject targetPool =
+                target.Transform.GetComponent<PooledSceneObject>();
 
             occupants.Add(
                 id,
                 new Occupant
                 {
                     Target = target,
+                    TargetTransform = target.Transform,
+                    Pool = targetPool,
+                    SpawnVersion = targetPool != null ? targetPool.SpawnVersion : 0,
 
                     Body =
                         target.Transform
@@ -700,6 +715,11 @@ namespace WorldOfSpirits.Spirits
 
                     ColliderCount = 1
                 });
+            if (slowStrength > 0f && target is LivingEntity living)
+            {
+                occupants[id].SlowedEntity = living;
+                living.SetAreaSlow(this, slowStrength);
+            }
         }
 
 
@@ -726,6 +746,7 @@ namespace WorldOfSpirits.Spirits
                     out Occupant occupant) &&
                 --occupant.ColliderCount <= 0)
             {
+                RemoveSlow(occupant);
                 occupants.Remove(id);
             }
         }
@@ -733,7 +754,21 @@ namespace WorldOfSpirits.Spirits
 
         private void OnDisable()
         {
+            foreach (Occupant occupant in occupants.Values) RemoveSlow(occupant);
             occupants.Clear();
+        }
+
+        private void RemoveSlow(Occupant occupant)
+        {
+            if (occupant.SlowedEntity != null) occupant.SlowedEntity.RemoveAreaSlow(this);
+        }
+
+        private static bool IsOccupantActive(Occupant occupant)
+        {
+            return occupant.TargetTransform != null &&
+                occupant.TargetTransform.gameObject.activeInHierarchy &&
+                (occupant.Pool == null || occupant.Pool.SpawnVersion == occupant.SpawnVersion) &&
+                occupant.Target != null && occupant.Target.IsAlive;
         }
 
 
@@ -787,6 +822,7 @@ namespace WorldOfSpirits.Spirits
 
                 resizeColliderOnly =
                     prefabZone.resizeColliderOnly;
+                slowStrength = prefabZone.slowStrength;
 
 
                 authoredScale =
@@ -845,6 +881,7 @@ namespace WorldOfSpirits.Spirits
 
         public void OnReturnedToPool()
         {
+            foreach (Occupant occupant in occupants.Values) RemoveSlow(occupant);
             occupants.Clear();
 
             owner = null;

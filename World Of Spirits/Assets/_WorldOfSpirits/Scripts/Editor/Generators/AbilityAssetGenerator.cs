@@ -47,9 +47,14 @@ namespace WorldOfSpirits.EditorTools
             foreach (KeyValuePair<string, List<AbilityDefinition>> entry in bySpirit)
             {
                 SpiritDefinition spirit = EnsureSpiritDefinition(entry.Key);
-                spirit.SetRuntimeAbilities(entry.Value);
-                EditorUtility.SetDirty(spirit);
-                ConnectPrefab(entry.Key, spirit, entry.Value);
+                if (spirit.RuntimeAbilities.Count == 0)
+                {
+                    spirit.SetRuntimeAbilities(entry.Value);
+                    EditorUtility.SetDirty(spirit);
+                }
+                string prefabPath = $"{ProjectRoot}/Prefabs/Spirits/{entry.Key} Spirit.prefab";
+                if (entry.Key == "Wind") prefabPath = $"{ProjectRoot}/Prefabs/Spirits/Wind Roc Spirit.prefab";
+                ConnectPrefab(prefabPath, spirit);
             }
 
             AssetDatabase.SaveAssets();
@@ -63,6 +68,8 @@ namespace WorldOfSpirits.EditorTools
             EnsureFolder(elementFolder);
             string path = $"{elementFolder}/{spec.Spirit} - {spec.Name}.asset";
             AbilityDefinition asset = AssetDatabase.LoadAssetAtPath<AbilityDefinition>(path);
+            // Preserve authored tuning and prefab references when generating missing content.
+            if (asset != null) return asset;
             if (asset == null)
             {
                 asset = ScriptableObject.CreateInstance<AbilityDefinition>();
@@ -184,6 +191,35 @@ namespace WorldOfSpirits.EditorTools
             if (all.Contains("additional orb") || all.Contains("additional snowball")) level.spawnCount = 4;
 
             AddDefaultEffects(spec, level, index);
+            if (spec.Name == "Whirlpool" || spec.Name == "Rain Clouds")
+            {
+                bool rain = spec.Name == "Rain Clouds";
+                level.spawnedEffectPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(
+                    ProjectRoot + "/Prefabs/Spirits/Effects/" + (rain ? "Rain Cloud" : "Whirlpool") + ".prefab");
+                level.spawnCount = rain ? (index == 0 ? 1 : 2) : (index >= 2 ? 2 : 1);
+                level.areaRadius = rain ? 0.85f : (index == 0 ? 1.5f : 2f);
+                level.activeDuration = 4f;
+                level.cooldown = rain ? 4f : 5f;
+                level.projectile.damage = rain ? (index >= 2 ? 8f : 5f) : (index >= 3 ? 6f : 0f);
+                level.projectile.speed = rain && index >= 3 ? 5f : 2.5f;
+                level.projectile.homingStrength = 4f;
+                level.minimumSpawnDistance = rain ? 0f : 1.5f;
+                level.maximumSpawnDistance = rain ? 0f : 4f;
+            }
+            if (spec.Name == "Stone Spikes")
+            {
+                level.spawnedEffectPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(
+                    ProjectRoot + "/Prefabs/Spirits/Effects/Stone Spikes.prefab");
+                level.spawnCount = new[] { 3, 3, 4, 4, 6 }[index];
+                level.areaRadius = index == 0 ? 0.65f : 0.85f;
+                level.activeDuration = 0.9f;
+                level.cooldown = new[] { 2f, 2f, 1.6f, 1.6f, 1.3f }[index];
+                level.projectile.damage = 12f + index * 4f;
+                level.projectile.appliesStatus = index >= 3;
+                level.projectile.status = CombatStatus.Bleed;
+                level.projectile.statusDuration = 2f;
+                level.projectile.statusStrength = 3f;
+            }
             return level;
         }
 
@@ -229,38 +265,64 @@ namespace WorldOfSpirits.EditorTools
             return asset;
         }
 
-        private static void ConnectPrefab(string spiritName, SpiritDefinition spirit, List<AbilityDefinition> abilities)
+        public static void ConnectPrefab(string path, SpiritDefinition spirit)
         {
-            string path = $"{ProjectRoot}/Prefabs/Spirits/{spiritName} Spirit.prefab";
+            if (spirit == null) throw new ArgumentNullException(nameof(spirit));
+            IReadOnlyList<AbilityDefinition> abilities = spirit.RuntimeAbilities;
             if (AssetDatabase.LoadAssetAtPath<GameObject>(path) == null) return;
             GameObject root = PrefabUtility.LoadPrefabContents(path);
             if (root == null) return;
-            SpiritMember member = root.GetComponent<SpiritMember>() ?? root.AddComponent<SpiritMember>();
-            SerializedObject memberData = new SerializedObject(member);
-            memberData.FindProperty("definition").objectReferenceValue = spirit;
-            memberData.ApplyModifiedPropertiesWithoutUndo();
-
-            SpiritAbility[] oldAbilities = root.GetComponentsInChildren<SpiritAbility>(true);
-            foreach (SpiritAbility old in oldAbilities)
-                if (!(old is DataDrivenAbility)) old.enabled = false;
-
-            for (int i = 0; i < abilities.Count; i++)
+            try
             {
-                string childName = $"Runtime Ability {i + 1} - {abilities[i].AbilityName}";
-                Transform child = root.transform.Find(childName);
-                GameObject objectWithAbility = child != null ? child.gameObject : new GameObject(childName);
-                objectWithAbility.transform.SetParent(root.transform, false);
-                DataDrivenAbility runner = objectWithAbility.GetComponent<DataDrivenAbility>() ?? objectWithAbility.AddComponent<DataDrivenAbility>();
-                SerializedObject runnerData = new SerializedObject(runner);
-                runnerData.FindProperty("abilityIndex").intValue = i;
-                runnerData.FindProperty("definition").objectReferenceValue = abilities[i];
-                runnerData.FindProperty("primarySpiritOnly").boolValue = false;
-                runnerData.FindProperty("castWhileMoving").boolValue = true;
-                runnerData.FindProperty("castWhileStandingStill").boolValue = false;
-                runnerData.ApplyModifiedPropertiesWithoutUndo();
+                bool changed = false;
+                SpiritMember member = root.GetComponent<SpiritMember>();
+                if (member == null)
+                {
+                    member = root.AddComponent<SpiritMember>();
+                    changed = true;
+                }
+                SerializedObject memberData = new SerializedObject(member);
+                memberData.FindProperty("definition").objectReferenceValue = spirit;
+                changed |= memberData.ApplyModifiedPropertiesWithoutUndo();
+
+                DataDrivenAbility[] existing = root.GetComponentsInChildren<DataDrivenAbility>(true);
+                foreach (var group in existing.GroupBy(a => a.AbilityIndex))
+                    if (group.Count() > 1)
+                        throw new InvalidOperationException($"{path}: duplicate ability slot {group.Key}. Resolve its settings before reconnecting.");
+
+                for (int i = 0; i < abilities.Count; i++)
+                {
+                    if (abilities[i] == null)
+                        throw new InvalidOperationException($"{path}: missing ability definition in slot {i}.");
+                    DataDrivenAbility runner = existing.FirstOrDefault(a => a.AbilityIndex == i);
+                    if (runner != null)
+                    {
+                        // Keep the original component, transform, and casting settings.
+                        SerializedObject existingData = new SerializedObject(runner);
+                        existingData.FindProperty("definition").objectReferenceValue = abilities[i];
+                        changed |= existingData.ApplyModifiedPropertiesWithoutUndo();
+                        continue;
+                    }
+                    string childName = $"Runtime Ability {i + 1} - {abilities[i].AbilityName}";
+                    Transform child = root.transform.Find(childName);
+                    GameObject objectWithAbility = child != null ? child.gameObject : new GameObject(childName);
+                    objectWithAbility.transform.SetParent(root.transform, false);
+                    runner = objectWithAbility.AddComponent<DataDrivenAbility>();
+                    changed = true;
+                    SerializedObject runnerData = new SerializedObject(runner);
+                    runnerData.FindProperty("abilityIndex").intValue = i;
+                    runnerData.FindProperty("definition").objectReferenceValue = abilities[i];
+                    runnerData.FindProperty("primarySpiritOnly").boolValue = false;
+                    runnerData.FindProperty("castWhileMoving").boolValue = true;
+                    runnerData.FindProperty("castWhileStandingStill").boolValue = false;
+                    runnerData.ApplyModifiedPropertiesWithoutUndo();
+                }
+                if (changed) PrefabUtility.SaveAsPrefabAsset(root, path);
             }
-            PrefabUtility.SaveAsPrefabAsset(root, path);
-            PrefabUtility.UnloadPrefabContents(root);
+            finally
+            {
+                PrefabUtility.UnloadPrefabContents(root);
+            }
         }
 
         private static void EnsureFolder(string path)
