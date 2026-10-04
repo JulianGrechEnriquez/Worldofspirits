@@ -1,7 +1,7 @@
 ---
 type: backlog
 status: active
-reviewed: 2026-08-06
+reviewed: 2026-10-04
 tags:
   - planning
   - performance
@@ -21,11 +21,21 @@ The next milestone is a complete **Burning Plains vertical slice**:
 
 > Main menu → select Fire Spirit → survive ten minutes → fight Fire Phoenix → receive a reward → return to the menu.
 
-Use Burning Plains as the first production milestone. Do not expand beyond the four demo spirits and two demo areas until this loop is playable. The project already has broad content and strong technical foundations, but a complete run is needed to validate whether combat, progression, performance, and architecture work together.
+Use Burning Plains as the first production milestone. Do not expand beyond the four demo spirits and Burning Plains until this loop is playable. The project already has broad content and strong technical foundations, but a complete run is needed to validate whether combat, progression, performance, and architecture work together.
 
 For faster development, first make the run two to three minutes long. Expand it to ten minutes after the full loop works and has been profiled.
 
-## Current audit snapshot
+## Latest implementation review — 4 October 2026
+
+- MainMenu and Game are enabled in build settings, with MainMenu first.
+- MainMenu has Play, help, saved master volume/fullscreen settings and Quit. Credits, complete results/retry flow and progression saving still need follow-up.
+- Earth artwork/effects, Rain Clouds, Whirlpool, Fire trail particles and Avalanche received implementation updates.
+- Movement-dependent effects stop when activation fails; pooled effect/enemy references have additional lifecycle guards.
+- The latest available Windows build succeeded with zero errors. After removal of a stale lava-builder component, both enabled scenes contain zero missing scripts. This does not establish full gameplay or performance acceptance.
+- [[Notes/Development/Spirit Ability Implementation Status|Ability implementation status]] records unfinished upgrade behavior.
+- [[Notes/Development/Cleanup Review|Cleanup review]] lists candidates without treating an unused dependency result as deletion approval.
+
+## Historical audit snapshot — 6 August 2026
 
 Reviewed on 2026-08-06 from the Unity project and planning vault.
 
@@ -52,7 +62,7 @@ Reviewed on 2026-08-06 from the Unity project and planning vault.
 
 ## P0 — Complete the playable loop
 
-- [ ] Build a functional main menu.
+- [x] Build a functional main menu.
 - [ ] Add Play, Settings, Credits, and Quit actions.
 - [ ] Connect the menu to starter-spirit selection.
 - [ ] Let the player select the Fire Spirit.

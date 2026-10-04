@@ -1,4 +1,13 @@
+---
+type: development-log
+status: recorded
+updated: 2026-10-04
+tags: [development, gameplay, ui]
+---
+
 # Gameplay and UI update — 4 October 2026
+
+Source update: [GitHub commit 27a5491](https://github.com/JulianGrechEnriquez/Worldofspirits/commit/27a54919ad2b179479b0b1f57b9c73f4ebf58680). See [[Notes/Development/Spirit Ability Implementation Status|the ability checklist]] and [[Notes/Development/Cleanup Review|cleanup review]] for follow-up work.
 
 ## Earth spirit
 

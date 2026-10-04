@@ -1,7 +1,7 @@
 ---
 type: design
 status: active
-updated: 2026-08-17
+updated: 2026-10-04
 tags: [game-design, spirits]
 ---
 
@@ -25,6 +25,8 @@ Rotation has a one-second cooldown. Selecting a new main spirit grants a three-s
 | Water | Flow | Cooldowns recover 25% faster |
 
 ## Standardized spirit kits
+
+The progression descriptions below are design targets. For what is currently connected in Unity and which upgrades remain unfinished, see [[Notes/Development/Spirit Ability Implementation Status|Spirit ability implementation status]]. The latest changes are recorded in [[Notes/Development/2026-10-04 Gameplay and UI Update|the October development update]].
 
 ### Fire — Phoenix
 

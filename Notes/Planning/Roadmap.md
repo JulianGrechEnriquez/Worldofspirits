@@ -1,7 +1,7 @@
 ---
 type: roadmap
 status: active
-updated: 2026-08-17
+updated: 2026-10-04
 tags: [planning]
 ---
 
@@ -16,6 +16,10 @@ tags: [planning]
 
 ## Milestone 1 — Burning Plains vertical slice
 
+- [x] Add MainMenu Play, help, saved master volume/fullscreen settings and Quit.
+- [x] Add health HUD fill/tint and update starter selection presentation.
+- [ ] Finish and validate results, retry and return-to-menu flow.
+
 - [ ] Connect menu → Burning Plains → Fire Phoenix → reward → menu.
 - [ ] Use a two-to-three-minute development timer, then validate the ten-minute version.
 - [ ] Complete Fire Runner, Fire Flier, and Fire Tank roles.
@@ -29,6 +33,8 @@ tags: [planning]
 - [ ] Profile 50, 100, 200, and 250 enemies in a Development Build.
 
 ## Milestone 2 — Four production-ready spirits
+
+Progress on 4 October: Earth art/core effects, Water Rain Clouds/Whirlpool and Fire trail particles are connected. Higher-level behaviors remain unfinished, so the spirit completion boxes stay open. See [[Notes/Development/Spirit Ability Implementation Status|the implementation checklist]].
 
 - [ ] Complete Fire: Flame Bow, Fiery Feathers, Fiery Talons, Phoenix Dive.
 - [ ] Complete Earth: Stone Hammer, Quicksand Domain, Boulder Throw, Stone Spikes.

@@ -2,7 +2,7 @@
 type: milestone
 status: active
 milestone: vertical-slice
-reviewed: 2026-08-17
+reviewed: 2026-10-04
 tags: [planning, demo, vertical-slice]
 ---
 
@@ -82,6 +82,8 @@ The demo is a production milestone for the larger six-stage Story Mode. It does 
 - [ ] Complete at least one external playtest pass.
 
 ## Production order
+
+As of 4 October, the menu entry, basic settings and several spirit effects are implemented. The complete menu-to-results loop, every five-level upgrade behavior, performance target and controller acceptance remain to be validated. See [[Notes/Development/Spirit Ability Implementation Status|the current ability checklist]] and [[Notes/Development/2026-10-04 Gameplay and UI Update|the latest changelog]].
 
 1. Finish the short menu-to-Phoenix loop.
 2. Complete movement-state, charging, rotation, and buff feedback.

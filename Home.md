@@ -22,6 +22,14 @@ status: active
 
 ## Current focus
 
+Earth now has updated Quicksand layering and slowing, Boulder artwork/damage fixes, and Stone Spikes. Water has Rain Clouds and Whirlpool prefabs with particles. Fire trails, movement activation, pooling, MainMenu and the HUD were updated on 4 October 2026.
+
+- [[Notes/Development/2026-10-04 Gameplay and UI Update|Latest changelog and verification]]
+- [[Notes/Development/Spirit Ability Implementation Status|Implemented abilities and remaining upgrades]]
+- [[Notes/Development/Cleanup Review|Cleanup candidates and what to keep]]
+
+## Next work
+
 - [ ] Complete the short Burning Plains loop with Fire Spirit.
 - [ ] Finish Fire, Wind, Water, and Earth as the four demo spirits.
 - [ ] Finish the Fire Phoenix phases, telegraphs, Rebirth, and Water weakness.

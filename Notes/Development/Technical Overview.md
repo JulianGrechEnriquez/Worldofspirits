@@ -23,7 +23,7 @@ tags:
 - **Enemies:** regular enemy and boss foundations with separate movement behavior.
 - **Progression:** experience, upgrades, unlocks, and pickups.
 - **World:** area flow, timers, waves, and spawning.
-- **UI:** gameplay controls and temporary debug feedback.
+- **UI:** main menu, starter selection, health/timer HUD, gameplay controls and development feedback.
 
 ## Architecture strengths
 
@@ -48,6 +48,14 @@ tags:
 See [[Notes/Planning/Project Audit and Backlog|Project audit and backlog]] for the full audit and checklist.
 
 ## Current invariants
+
+- MainMenu is the first enabled build scene; Play loads Game.
+- Movement-dependent abilities reevaluate activation before cooldown processing and release their spawned effects when activation fails.
+- Pool spawn versions protect retained effect and enemy references from object reuse.
+- Area movement slows are tracked separately from statuses, use the strongest overlapping slow and reset on exit/pool release.
+- Ground area visuals render below characters; pooled particle effects clear and restart when reused.
+
+See [[Notes/Development/2026-10-04 Gameplay and UI Update|the October update]] and [[Notes/Development/Spirit Ability Implementation Status|ability implementation status]] for current feature details and limitations.
 
 - The player owns no more than three spirits.
 - Spirit slots are main, support one, and support two.
