@@ -23,9 +23,16 @@ Record durable design and technical choices here. Link to a detailed note when t
 | 2026-08-17 | Use Water's Flow buff to accelerate cooldown recovery by 25%. | Supports Water's control identity without overlapping Earth defense, Fire damage, or Wind speed. | Accepted |
 | 2026-08-17 | Add Focused and Empowered stationary weapon charge stages. | Strengthens the risk/reward of stopping in a survival game. | Accepted |
 | 2026-08-17 | Give bosses elemental weaknesses, same-element resistance, and control conversion. | Rewards party composition without allowing permanent boss shutdown. | Accepted |
-| 2026-08-17 | Remove fusion from the current design. | Keeps production focused on the core spirit, stance, progression, and boss systems. | Accepted |
+| 2026-08-17 | Remove fusion from the current design. | Keeps production focused on the core spirit, stance, progression, and boss systems. | Clarified 2026-10-05: spirit fusion remains excluded; Shepherd-only combined ability moves are allowed. |
+| 2026-10-05 | Replace spirit fusion with combined ability moves exclusive to Spirit Shepherd. | Adds ability synergy while keeping each spirit separate; Whirlpool + Tornado is the first example. | Accepted direction; maximum-level prerequisites and casting rules remain open. |
 
 ## Open decisions
+
+**2026-10-05 — Demo character roster:** plan Spirit Tamer, Spirit Warrior and Spirit Shepherd as the three demo characters. Keep Spirit Beastmaster for later development. This preserves three distinct form-based playstyles while deferring independent creature AI, health and recovery. See [[Notes/Planning/Demo Scope and Completion Plan|the updated scope]].
+
+On 5 October 2026, the initial nine [[Notes/Game Design/Spirit Warrior#Main-slot weapon pairs|Warrior weapon pairings]] were selected as a concept direction. Their mechanics, main-slot activation, unlock requirements and balancing remain under discussion.
+
+- [ ] Finalize [[Notes/Game Design/Playable Characters|Spirit Warrior and Spirit Shepherd]] weapon/party limits, upgrade effects, controls and implementation order. Both are planned for the demo; balance and implementation are pending.
 
 - [ ] Long-term campaign role for Wind Roc.
 - [ ] Meta-progression model.

@@ -142,7 +142,7 @@ namespace WorldOfSpirits.Progression.Upgrades
 
         private bool IsEligible(UpgradeCardDefinition card)
         {
-            if (card == null || card.BaseWeight <= 0f) return false;
+            if (card == null || card.BaseWeight <= 0f || !card.IsAvailableFor(runtimeStats.Character)) return false;
             int level = runtimeStats.GetCardLevel(card.Id);
             if (level >= card.MaximumLevel) return false;
 

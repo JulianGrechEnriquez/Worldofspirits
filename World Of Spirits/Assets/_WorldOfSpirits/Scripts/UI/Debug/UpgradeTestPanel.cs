@@ -25,6 +25,7 @@ namespace WorldOfSpirits.UI
         private string search = string.Empty;
         private string statusMessage = "Choose an upgrade to add it to this run.";
         private UpgradeCategory? categoryFilter;
+        private UpgradeGroup? groupFilter;
         private GUIStyle titleStyle;
         private GUIStyle cardTitleStyle;
         private GUIStyle descriptionStyle;
@@ -102,6 +103,12 @@ namespace WorldOfSpirits.UI
             GUILayout.EndHorizontal();
 
             GUILayout.BeginHorizontal();
+            DrawGroupButton("All types", null);
+            foreach (UpgradeGroup group in Enum.GetValues(typeof(UpgradeGroup)))
+                DrawGroupButton(group.ToString(), group);
+            GUILayout.EndHorizontal();
+
+            GUILayout.BeginHorizontal();
             DrawCategoryButton("All", null);
             foreach (UpgradeCategory category in Enum.GetValues(typeof(UpgradeCategory)))
                 DrawCategoryButton(category.ToString(), category);
@@ -131,6 +138,17 @@ namespace WorldOfSpirits.UI
             GUI.enabled = true;
         }
 
+        private void DrawGroupButton(string label, UpgradeGroup? group)
+        {
+            GUI.enabled = groupFilter != group;
+            if (GUILayout.Button(label))
+            {
+                groupFilter = group;
+                RebuildVisibleCards();
+            }
+            GUI.enabled = true;
+        }
+
         private void DrawCard(UpgradeCardDefinition card)
         {
             if (card == null) return;
@@ -145,16 +163,17 @@ namespace WorldOfSpirits.UI
             GUILayout.BeginHorizontal();
             GUILayout.BeginVertical();
             GUILayout.Label(
-                $"{card.CardName}  [{card.Rarity}]  {card.Category}",
+                $"{card.CardName}  [{card.Rarity}]  {card.Group} / {card.Category}",
                 cardTitleStyle);
             GUILayout.Label(card.Description, descriptionStyle);
             GUILayout.Label(
                 $"Level {currentLevel}/{card.MaximumLevel}" +
-                (card.TargetSpirit != null ? $"  •  {card.TargetSpirit.SpiritName}" : string.Empty),
+                (card.TargetSpirit != null ? $"  •  {card.TargetSpirit.SpiritName}" : string.Empty) +
+                (card.RequiredCharacter != UpgradeCharacter.Any ? $"  •  {card.RequiredCharacter} only" : string.Empty),
                 descriptionStyle);
             GUILayout.EndVertical();
 
-            GUI.enabled = runtimeStats != null && !atMaximum;
+            GUI.enabled = runtimeStats != null && !atMaximum && card.IsAvailableFor(runtimeStats.Character);
             string buttonText = atMaximum ? "MAX" : "APPLY";
             if (GUILayout.Button(buttonText, GUILayout.Width(92f), GUILayout.Height(54f)))
                 ApplyCard(card);
@@ -193,6 +212,7 @@ namespace WorldOfSpirits.UI
                 UpgradeCardDefinition card = catalog.Cards[i];
                 if (card == null || categoryFilter.HasValue && card.Category != categoryFilter.Value)
                     continue;
+                if (groupFilter.HasValue && card.Group != groupFilter.Value) continue;
                 if (query.Length > 0 &&
                     card.CardName.IndexOf(query, StringComparison.OrdinalIgnoreCase) < 0 &&
                     (string.IsNullOrEmpty(card.Description) ||
@@ -203,6 +223,8 @@ namespace WorldOfSpirits.UI
 
             visibleCards.Sort((left, right) =>
             {
+                int group = left.Group.CompareTo(right.Group);
+                if (group != 0) return group;
                 int category = left.Category.CompareTo(right.Category);
                 return category != 0
                     ? category

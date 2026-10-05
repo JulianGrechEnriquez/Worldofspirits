@@ -13,14 +13,15 @@ MonoBehaviour:
   m_Name: WaterTrident
   m_EditorClassIdentifier: Assembly-CSharp::WorldOfSpirits.Spirits.WeaponDefinition
   weaponName: Water Trident
-  description: A leviathan-forged trident hurled through enemies with the force of the tide.
+  description: A leviathan-forged trident hurled through enemies with the force of
+    the tide.
   icon: {fileID: 4964105713486744106, guid: b690bc9d86a11034eb681c4075980565, type: 3}
   executionType: 0
   levels:
   - level: 1
     upgradeDescription: Water Trident unlocked
     projectilePrefab: {fileID: 720000000000000006, guid: a1b2c3d4e5f6478899aabbccddeeff02, type: 3}
-    weaponPrefab: {fileID: 710000000000000001, guid: a1b2c3d4e5f6478899aabbccddeeff01, type: 3}
+    weaponPrefab: {fileID: 0}
     damage: 12
     attackCooldown: 0.9
     targetingRange: 13
@@ -40,7 +41,7 @@ MonoBehaviour:
   - level: 2
     upgradeDescription: Sharpened tides increase damage and throwing speed
     projectilePrefab: {fileID: 720000000000000006, guid: a1b2c3d4e5f6478899aabbccddeeff02, type: 3}
-    weaponPrefab: {fileID: 710000000000000001, guid: a1b2c3d4e5f6478899aabbccddeeff01, type: 3}
+    weaponPrefab: {fileID: 0}
     damage: 15
     attackCooldown: 0.82
     targetingRange: 14
@@ -60,7 +61,7 @@ MonoBehaviour:
   - level: 3
     upgradeDescription: Current-guided throws track nearby enemies
     projectilePrefab: {fileID: 720000000000000006, guid: a1b2c3d4e5f6478899aabbccddeeff02, type: 3}
-    weaponPrefab: {fileID: 710000000000000001, guid: a1b2c3d4e5f6478899aabbccddeeff01, type: 3}
+    weaponPrefab: {fileID: 0}
     damage: 18
     attackCooldown: 0.74
     targetingRange: 15
@@ -80,7 +81,7 @@ MonoBehaviour:
   - level: 4
     upgradeDescription: Riptide force greatly increases attack speed
     projectilePrefab: {fileID: 720000000000000006, guid: a1b2c3d4e5f6478899aabbccddeeff02, type: 3}
-    weaponPrefab: {fileID: 710000000000000001, guid: a1b2c3d4e5f6478899aabbccddeeff01, type: 3}
+    weaponPrefab: {fileID: 0}
     damage: 22
     attackCooldown: 0.64
     targetingRange: 16
@@ -100,7 +101,7 @@ MonoBehaviour:
   - level: 5
     upgradeDescription: Leviathan's Trident reaches its full power
     projectilePrefab: {fileID: 720000000000000006, guid: a1b2c3d4e5f6478899aabbccddeeff02, type: 3}
-    weaponPrefab: {fileID: 710000000000000001, guid: a1b2c3d4e5f6478899aabbccddeeff01, type: 3}
+    weaponPrefab: {fileID: 0}
     damage: 28
     attackCooldown: 0.54
     targetingRange: 18

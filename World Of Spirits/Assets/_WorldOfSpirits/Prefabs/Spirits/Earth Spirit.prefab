@@ -135,7 +135,6 @@ Transform:
   - {fileID: 3648151183838121042}
   - {fileID: 1643286875522105678}
   - {fileID: 2162719911662910801}
-  - {fileID: 3924693158634573900}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &881250671039397578
@@ -235,6 +234,7 @@ MonoBehaviour:
   progression:
     weaponLevel: 1
     abilityLevels: 
+  weaponPrefab: {fileID: 6270414751681784163, guid: c73000ce033820d4ba1aaaf15a49072f, type: 3}
   changeAnimationState: 
   remergeAnimationState: 
   idleAnimationState: 
@@ -288,65 +288,3 @@ MonoBehaviour:
   castWhileMoving: 1
   castWhileStandingStill: 0
   definition: {fileID: 11400000, guid: 182c93e18b2aa3849a9e192142de44c2, type: 2}
---- !u!1001 &613672384177346062
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 3939549601579696684}
-    m_Modifications:
-    - target: {fileID: 757564496604831664, guid: d06a6bdd67a02f544835b2e0cfa7051c, type: 3}
-      propertyPath: m_Name
-      value: Stone Hammer
-      objectReference: {fileID: 0}
-    - target: {fileID: 4536106046406149698, guid: d06a6bdd67a02f544835b2e0cfa7051c, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4536106046406149698, guid: d06a6bdd67a02f544835b2e0cfa7051c, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4536106046406149698, guid: d06a6bdd67a02f544835b2e0cfa7051c, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4536106046406149698, guid: d06a6bdd67a02f544835b2e0cfa7051c, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4536106046406149698, guid: d06a6bdd67a02f544835b2e0cfa7051c, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4536106046406149698, guid: d06a6bdd67a02f544835b2e0cfa7051c, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4536106046406149698, guid: d06a6bdd67a02f544835b2e0cfa7051c, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4536106046406149698, guid: d06a6bdd67a02f544835b2e0cfa7051c, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4536106046406149698, guid: d06a6bdd67a02f544835b2e0cfa7051c, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4536106046406149698, guid: d06a6bdd67a02f544835b2e0cfa7051c, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: d06a6bdd67a02f544835b2e0cfa7051c, type: 3}
---- !u!4 &3924693158634573900 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4536106046406149698, guid: d06a6bdd67a02f544835b2e0cfa7051c, type: 3}
-  m_PrefabInstance: {fileID: 613672384177346062}
-  m_PrefabAsset: {fileID: 0}

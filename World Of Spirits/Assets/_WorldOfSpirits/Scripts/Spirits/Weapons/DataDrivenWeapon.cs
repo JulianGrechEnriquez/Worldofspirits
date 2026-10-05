@@ -33,17 +33,22 @@ namespace WorldOfSpirits.Spirits
         private Transform projectileWeaponVisual;
         private float orbitAngle;
         private UpgradeRuntimeStats upgradeStats;
+        private SpriteRenderer weaponRenderer;
+        private Vector3 authoredScale;
 
         private WeaponLevelData ActiveLevel => definition != null && spiritOwner != null
             ? definition.GetLevel(spiritOwner.Progression.WeaponLevel) : null;
 
         public WeaponDefinition Definition => definition;
+        public void BindSpiritOwner(SpiritMember member) => spiritOwner = member;
 
         private void Awake()
         {
             spiritOwner = GetComponentInParent<SpiritMember>();
             owner = GetComponentInParent<LivingEntity>();
             upgradeStats = GetComponentInParent<UpgradeRuntimeStats>();
+            weaponRenderer = GetComponent<SpriteRenderer>();
+            authoredScale = transform.localScale;
         }
 
         protected override float AttackCooldown => ActiveLevel != null
@@ -85,6 +90,7 @@ namespace WorldOfSpirits.Spirits
                 projectile.ConfigureHoming(level.homeOnEnemies, level.homingStrength, level.homingRange);
                 projectile.ConfigureUpgradeModifiers(upgradeStats);
                 projectile.ConfigureDamageContext(damage);
+                projectile.ConfigureTriggerContext(spiritOwner.Progression.WeaponLevel);
                 projectile.Launch(shotDirection, speed, damage.BaseDamage, owner.Faction);
             }
         }
@@ -99,14 +105,14 @@ namespace WorldOfSpirits.Spirits
             }
 
             WeaponLevelData level = ActiveLevel;
-            if (level == null || level.weaponPrefab == null) return;
+            if (level == null || weaponRenderer == null) return;
             if (orbitingWeapon == null)
             {
-                orbitingWeapon = SceneObjectPool.Spawn(
-                    level.weaponPrefab, transform.position, Quaternion.identity,
-                    PoolCategory.Effects).transform;
-                orbitingWeaponHitbox = orbitingWeapon.GetComponentInChildren<Collider2D>(true);
+                orbitingWeapon = transform;
+                orbitingWeaponHitbox = GetComponent<Collider2D>();
             }
+            weaponRenderer.enabled = true;
+            if (orbitingWeaponHitbox != null) orbitingWeaponHitbox.enabled = true;
 
             float attackSpeed = upgradeStats != null
                 ? upgradeStats.GetMultiplier(UpgradeStat.AttackSpeed)
@@ -116,14 +122,14 @@ namespace WorldOfSpirits.Spirits
                 360f);
             float radians = orbitAngle * Mathf.Deg2Rad;
             Vector2 outward = new Vector2(Mathf.Cos(radians), Mathf.Sin(radians));
-            Transform center = firePointOverride != null ? firePointOverride : transform;
+            Transform center = firePointOverride != null ? firePointOverride : spiritOwner.transform;
             orbitingWeapon.position = center.position + (Vector3)(outward * level.orbitRadius);
             orbitingWeapon.rotation = Quaternion.Euler(0f, 0f,
                 Mathf.Atan2(outward.y, outward.x) * Mathf.Rad2Deg - 90f);
             float weaponSize = upgradeStats != null
                 ? upgradeStats.GetMultiplier(UpgradeStat.ProjectileSize)
                 : 1f;
-            orbitingWeapon.localScale = level.weaponPrefab.transform.localScale * weaponSize;
+            orbitingWeapon.localScale = authoredScale * weaponSize;
 
             if (definition.ExecutionType == WeaponExecutionType.OrbitingMelee)
                 DamageAtOrbitingWeapon(level);
@@ -215,7 +221,7 @@ namespace WorldOfSpirits.Spirits
         private void UpdateProjectileVisual()
         {
             WeaponLevelData level = ActiveLevel;
-            if (level == null || level.weaponPrefab == null)
+            if (level == null || weaponRenderer == null)
             {
                 ReleaseProjectileVisual();
                 return;
@@ -227,19 +233,15 @@ namespace WorldOfSpirits.Spirits
             Transform visualOrigin = visualPointOverride != null ? visualPointOverride : origin;
             if (projectileWeaponVisual == null)
             {
-                projectileWeaponVisual = SceneObjectPool.Spawn(
-                    level.weaponPrefab,
-                    visualOrigin.position,
-                    Quaternion.identity,
-                    PoolCategory.Effects).transform;
+                projectileWeaponVisual = transform;
             }
-
+            weaponRenderer.enabled = true;
             projectileWeaponVisual.position = visualOrigin.position;
             float weaponSize = upgradeStats != null
                 ? upgradeStats.GetMultiplier(UpgradeStat.ProjectileSize)
                 : 1f;
             projectileWeaponVisual.localScale =
-                level.weaponPrefab.transform.localScale * weaponSize;
+                authoredScale * weaponSize;
             IDamageable target = CombatTargeting.FindClosest(
                 origin.position,
                 level.targetingRange,
@@ -256,7 +258,7 @@ namespace WorldOfSpirits.Spirits
         private void ReleaseProjectileVisual()
         {
             if (projectileWeaponVisual == null) return;
-            SceneObjectPool.ReleaseOrDestroy(projectileWeaponVisual.gameObject);
+            if (weaponRenderer != null) weaponRenderer.enabled = false;
             projectileWeaponVisual = null;
         }
 
@@ -266,7 +268,8 @@ namespace WorldOfSpirits.Spirits
             ReleaseProjectileVisual();
             if (orbitingWeapon != null)
             {
-                SceneObjectPool.ReleaseOrDestroy(orbitingWeapon.gameObject);
+                if (weaponRenderer != null) weaponRenderer.enabled = false;
+                if (orbitingWeaponHitbox != null) orbitingWeaponHitbox.enabled = false;
                 orbitingWeapon = null;
                 orbitingWeaponHitbox = null;
             }

@@ -50,113 +50,6 @@ MonoBehaviour:
   castWhileMoving: 1
   castWhileStandingStill: 0
   definition: {fileID: 11400000, guid: e1a1623014773104c862b5d141f2f050, type: 2}
---- !u!1 &1272786632827056153
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5243621939296672329}
-  - component: {fileID: 7713039110815238196}
-  m_Layer: 0
-  m_Name: Fire Bow Weapon
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5243621939296672329
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1272786632827056153}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 4116971992522366896}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7713039110815238196
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1272786632827056153}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 10a29fcb6e09eb84aa7bbe9bd9112b92, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::WorldOfSpirits.Combat.AutoProjectileWeapon
-  projectilePrefab: {fileID: 1132934643380735030, guid: 34dc7f9e6e7c2984a943df3f31bb774d, type: 3}
-  firePoint: {fileID: 5243621939296672329}
-  damage: 10
-  projectileSpeed: 12
-  damageIncreasePerWeaponLevel: 0.2
-  attackCooldown: 0.75
-  targetingRange: 12
-  targetLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  logTargeting: 0
-  drawTargetingRange: 1
---- !u!1 &1538569564162046143
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8570477629989408523}
-  - component: {fileID: 5127950125909620194}
-  m_Layer: 0
-  m_Name: Runtime Weapon - Flame Bow
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &8570477629989408523
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1538569564162046143}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 4116971992522366896}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5127950125909620194
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1538569564162046143}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c49a0b4f73b5fc47be8ecc15b440909, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::WorldOfSpirits.Spirits.DataDrivenWeapon
-  definition: {fileID: 11400000, guid: 92532ad6435cdd24cbfc6f68823a73c4, type: 2}
-  projectileVisualRotationOffset: -45
-  fireFromVisualPoint: 1
-  hitCooldownPerEnemy: 0.45
-  drawHitboxes: 1
-  orbitGizmoColor: {r: 1, g: 0.8, b: 0.15, a: 0.8}
-  hitboxGizmoColor: {r: 1, g: 0.15, b: 0.1, a: 0.9}
 --- !u!1 &2490549335699204285
 GameObject:
   m_ObjectHideFlags: 0
@@ -242,8 +135,6 @@ Transform:
   - {fileID: 7763064909170682597}
   - {fileID: 7806959382366115011}
   - {fileID: 2447451177828199193}
-  - {fileID: 8570477629989408523}
-  - {fileID: 5243621939296672329}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7831901199194899550
@@ -343,6 +234,7 @@ MonoBehaviour:
   progression:
     weaponLevel: 1
     abilityLevels: 
+  weaponPrefab: {fileID: 8225611406930606332, guid: f4ce46c8ba2c6ea4fb41ecfb135cb9bc, type: 3}
   changeAnimationState: Fire_Change
   remergeAnimationState: Fire_remerg
   idleAnimationState: Fire ideal

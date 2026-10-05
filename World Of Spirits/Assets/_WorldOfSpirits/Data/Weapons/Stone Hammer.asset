@@ -13,14 +13,15 @@ MonoBehaviour:
   m_Name: Stone Hammer
   m_EditorClassIdentifier: Assembly-CSharp::WorldOfSpirits.Spirits.WeaponDefinition
   weaponName: Stone Hammer
-  description: A massive stone hammer that circles the wielder and crushes groups of nearby enemies.
+  description: A massive stone hammer that circles the wielder and crushes groups
+    of nearby enemies.
   icon: {fileID: 0}
   executionType: 1
   levels:
   - level: 1
     upgradeDescription: 'swings a hamer around hte player '
     projectilePrefab: {fileID: 0}
-    weaponPrefab: {fileID: 757564496604831664, guid: a7d1ad94746f185419c1c325103ec395, type: 3}
+    weaponPrefab: {fileID: 0}
     damage: 20
     attackCooldown: 0
     targetingRange: 0
@@ -30,6 +31,9 @@ MonoBehaviour:
     homingRange: 0
     orbitRadius: 1.4
     orbitSpeed: 180
+    punchDistance: 2.25
+    extendDuration: 0.12
+    returnDuration: 0.18
     hitRadius: 0.65
     maximumTargets: 8
     status: 0

@@ -111,6 +111,7 @@ namespace WorldOfSpirits.Combat
                     projectilePrefab, spawnPoint.position, Quaternion.identity);
                 projectile.ConfigureUpgradeModifiers(upgradeStats);
                 projectile.ConfigureDamageContext(damageContext);
+                projectile.ConfigureTriggerContext(weaponLevel);
                 projectile.Launch(shotDirection, speed, scaledDamage, owner.Faction);
             }
         }

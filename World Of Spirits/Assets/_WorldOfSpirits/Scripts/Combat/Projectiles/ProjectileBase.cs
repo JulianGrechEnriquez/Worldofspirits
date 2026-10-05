@@ -8,6 +8,16 @@ namespace WorldOfSpirits.Combat
     public abstract class ProjectileBase : MonoBehaviour
     {
         [SerializeField, Min(0.1f)] private float lifetime = 5f;
+        [Header("Triggered Effects")]
+        [Tooltip("Optional actions on hit, lifetime expiry or normal despawn. Upgrade requirements are evaluated using the firing player.")]
+        [SerializeField] private List<ProjectileTrigger> triggeredEffects = new List<ProjectileTrigger>();
+        private readonly HashSet<int> firedTriggers = new HashSet<int>();
+        private readonly List<IDamageable> triggerTargets = new List<IDamageable>();
+        private int triggerWeaponLevel = 1;
+        private int triggerDepth;
+        private bool shotActive;
+        private bool expiryTriggered;
+        private Vector2 shotDirection;
         [Tooltip("Rotation correction for sprites that do not face right by default.")]
         [SerializeField] private float rotationOffset;
 
@@ -63,6 +73,10 @@ namespace WorldOfSpirits.Combat
             }
 
             Damage = damage;
+            firedTriggers.Clear();
+            shotActive = true;
+            expiryTriggered = false;
+            shotDirection = direction.normalized;
             if (!hasConfiguredDamageContext) damageContext = new DamageContext(damage);
             OwnerFaction = ownerFaction;
             launchSpeed = speed;
@@ -86,6 +100,12 @@ namespace WorldOfSpirits.Combat
         internal void AssignPool(ProjectileBase prefab)
         {
             poolPrefab = prefab;
+            shotActive = false;
+            expiryTriggered = false;
+            firedTriggers.Clear();
+            triggerWeaponLevel = 1;
+            triggerDepth = 0;
+            triggeredEffects = prefab.triggeredEffects;
             homeOnEnemies = prefab.homeOnEnemies;
             homingStrength = prefab.homingStrength;
             homingRange = prefab.homingRange;
@@ -111,6 +131,9 @@ namespace WorldOfSpirits.Combat
 
         protected void Despawn()
         {
+            if (!shotActive) return;
+            EmitTriggers(ProjectileTriggerEvent.Despawn);
+            shotActive = false;
             Body.linearVelocity = Vector2.zero;
             homingTarget = null;
             homingIgnoredTargets.Clear();
@@ -129,6 +152,67 @@ namespace WorldOfSpirits.Combat
             homeOnEnemies = enabled;
             homingStrength = Mathf.Max(0f, strength);
             homingRange = Mathf.Max(0.1f, range);
+        }
+
+        public void ConfigureTriggerContext(int weaponLevel, int generation = 0)
+        {
+            triggerWeaponLevel = Mathf.Max(1, weaponLevel);
+            triggerDepth = Mathf.Max(0, generation);
+        }
+
+        private void EmitTriggers(ProjectileTriggerEvent triggerEvent)
+        {
+            if (!shotActive || triggeredEffects == null || triggerDepth >= 3) return;
+            Vector2 forward = Body != null && Body.linearVelocity.sqrMagnitude > 0.001f
+                ? Body.linearVelocity.normalized : shotDirection;
+            for (int i = 0; i < triggeredEffects.Count; i++)
+            {
+                ProjectileTrigger entry = triggeredEffects[i];
+                if (entry == null || entry.when != triggerEvent ||
+                    (entry.oncePerShot && firedTriggers.Contains(i)) ||
+                    !entry.IsUnlocked(triggerWeaponLevel, UpgradeStats)) continue;
+                firedTriggers.Add(i);
+                DamageContext secondaryDamage = DamageSourceContext.WithBaseDamage(Damage * Mathf.Max(0f, entry.damageMultiplier));
+                switch (entry.action)
+                {
+                    case ProjectileTriggerAction.AreaDamage:
+                        CombatTargeting.FindAllNonAlloc(transform.position,
+                            Mathf.Max(0.05f, entry.areaRadius) * UpgradeAreaMultiplier, OwnerFaction, triggerTargets);
+                        foreach (IDamageable target in triggerTargets) target.TakeDamage(secondaryDamage);
+                        break;
+                    case ProjectileTriggerAction.SpawnEffect:
+                        if (entry.effectPrefab == null || entry.effectPrefab.GetComponent<ProjectileBase>() != null) break;
+                        GameObject effect = WorldOfSpirits.Core.SceneObjectPool.Spawn(entry.effectPrefab,
+                            transform.position, Quaternion.Euler(0f, 0f, Mathf.Atan2(forward.y, forward.x) * Mathf.Rad2Deg),
+                            WorldOfSpirits.Core.PoolCategory.Effects);
+                        if (effect.TryGetComponent(out WorldOfSpirits.Spirits.PersistentDamageZone zone))
+                        {
+                            zone.SetOwner(secondaryDamage.Source);
+                            zone.ConfigureUpgradeModifiers(UpgradeStats);
+                            zone.ConfigureTriggeredDamage(secondaryDamage);
+                            zone.SetReusable(true);
+                        }
+                        WorldOfSpirits.Core.SceneObjectPool.ReleaseAfter(effect,
+                            Mathf.Max(0.05f, entry.effectDuration) * UpgradeDurationMultiplier);
+                        break;
+                    case ProjectileTriggerAction.SpawnProjectiles:
+                        if (entry.projectilePrefab == null) break;
+                        int count = Mathf.Clamp(entry.projectileCount, 1, 16);
+                        float center = Mathf.Atan2(forward.y, forward.x) * Mathf.Rad2Deg;
+                        for (int n = 0; n < count; n++)
+                        {
+                            float angle = center + (count == 1 ? 0f : entry.spreadAngle >= 360f
+                                ? 360f * n / count : -entry.spreadAngle * 0.5f + entry.spreadAngle * n / (count - 1));
+                            Vector2 direction = new Vector2(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad));
+                            ProjectileBase child = ProjectilePool.Spawn(entry.projectilePrefab, transform.position, Quaternion.identity);
+                            child.ConfigureUpgradeModifiers(UpgradeStats);
+                            child.ConfigureDamageContext(secondaryDamage);
+                            child.ConfigureTriggerContext(triggerWeaponLevel, triggerDepth + 1);
+                            child.Launch(direction, Mathf.Max(0.1f, entry.projectileSpeed), secondaryDamage.BaseDamage, OwnerFaction);
+                        }
+                        break;
+                }
+            }
         }
 
         public void ConfigureUpgradeModifiers(UpgradeRuntimeStats stats)
@@ -179,8 +263,14 @@ namespace WorldOfSpirits.Combat
 
         protected virtual void Update()
         {
+            if (!shotActive) return;
             if (Time.time >= despawnTime)
             {
+                if (!expiryTriggered)
+                {
+                    expiryTriggered = true;
+                    EmitTriggers(ProjectileTriggerEvent.LifetimeExpired);
+                }
                 OnLifetimeExpired();
                 return;
             }
@@ -249,7 +339,8 @@ namespace WorldOfSpirits.Combat
 
             // A piercing homing projectile must not turn back into an enemy it
             // already passed through. Force an immediate search for another target.
-            homingIgnoredTargets.Add(target.Transform.gameObject.GetInstanceID());
+            bool firstHit = homingIgnoredTargets.Add(target.Transform.gameObject.GetInstanceID());
+            if (firstHit) EmitTriggers(ProjectileTriggerEvent.EnemyHit);
             if (homingTarget == target ||
                 (homingTarget != null && homingTarget.Transform == target.Transform))
             {
@@ -259,6 +350,8 @@ namespace WorldOfSpirits.Combat
 
             OnHit(target);
         }
+
+        protected virtual void OnDisable() => shotActive = false;
 
         protected virtual void OnDrawGizmosSelected()
         {

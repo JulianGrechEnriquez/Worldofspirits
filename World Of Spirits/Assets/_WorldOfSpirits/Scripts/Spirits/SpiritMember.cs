@@ -9,6 +9,9 @@ namespace WorldOfSpirits.Spirits
         [Header("Spirit Data")]
         [SerializeField] private SpiritDefinition definition;
         [SerializeField] private SpiritProgression progression = new SpiritProgression();
+        [Tooltip("Standalone weapon prefab; weapons are spawned under the player, outside the spirit hierarchy.")]
+        [SerializeField] private SpiritWeaponAttack weaponPrefab;
+        private SpiritWeaponAttack runtimeWeapon;
 
         [Header("Formation Animations (optional)")]
         [SerializeField] private string changeAnimationState;
@@ -59,6 +62,14 @@ namespace WorldOfSpirits.Spirits
             bool primaryWeaponAndAbilitiesEnabled,
             bool combatLocked = false)
         {
+            if (runtimeWeapon == null && weaponPrefab != null && player != null)
+            {
+                runtimeWeapon = Instantiate(weaponPrefab, player);
+                runtimeWeapon.name = weaponPrefab.name;
+                if (runtimeWeapon is DataDrivenWeapon dataWeapon) dataWeapon.BindSpiritOwner(this);
+                if (runtimeWeapon is ThrustMeleeWeaponBase meleeWeapon) meleeWeapon.BindSpiritOwner(this);
+                weapons = new[] { runtimeWeapon };
+            }
             if (renderers == null)
             {
                 CacheComponents();
@@ -68,6 +79,8 @@ namespace WorldOfSpirits.Spirits
             bool spiritVisible = combatLocked || !isPrimary || playerIsMoving;
             foreach (Renderer spiritRenderer in renderers)
             {
+                // Weapon scripts control their own sprite visibility.
+                if (spiritRenderer.GetComponent<SpiritWeaponAttack>() != null) continue;
                 spiritRenderer.enabled = spiritVisible;
             }
 
@@ -125,9 +138,19 @@ namespace WorldOfSpirits.Spirits
         private void CacheComponents()
         {
             renderers = GetComponentsInChildren<Renderer>(true);
-            weapons = GetComponentsInChildren<SpiritWeaponAttack>(true);
+            weapons = runtimeWeapon != null ? new[] { runtimeWeapon } : Array.Empty<SpiritWeaponAttack>();
             abilities = GetComponentsInChildren<SpiritAbility>(true);
             animators = GetComponentsInChildren<Animator>(true);
+        }
+
+        private void OnDisable()
+        {
+            if (runtimeWeapon != null) runtimeWeapon.enabled = false;
+        }
+
+        private void OnDestroy()
+        {
+            if (runtimeWeapon != null) Destroy(runtimeWeapon.gameObject);
         }
 
         public float PlayTransitionAnimation(bool remerging)

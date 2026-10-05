@@ -20,7 +20,7 @@ MonoBehaviour:
   - level: 1
     upgradeDescription: Flame Bow unlocked
     projectilePrefab: {fileID: 1132934643380735030, guid: 34dc7f9e6e7c2984a943df3f31bb774d, type: 3}
-    weaponPrefab: {fileID: 8987451310273595696, guid: f753d299d5f12f0419cf73efc38b1d85, type: 3}
+    weaponPrefab: {fileID: 0}
     damage: 9
     attackCooldown: 0.78
     targetingRange: 14
@@ -40,7 +40,7 @@ MonoBehaviour:
   - level: 2
     upgradeDescription: Faster draw and stronger feathers
     projectilePrefab: {fileID: 1132934643380735030, guid: 34dc7f9e6e7c2984a943df3f31bb774d, type: 3}
-    weaponPrefab: {fileID: 8987451310273595696, guid: f753d299d5f12f0419cf73efc38b1d85, type: 3}
+    weaponPrefab: {fileID: 0}
     damage: 12
     attackCooldown: 0.7
     targetingRange: 15
@@ -60,7 +60,7 @@ MonoBehaviour:
   - level: 3
     upgradeDescription: Ember-tipped arrows deal more damage
     projectilePrefab: {fileID: 1132934643380735030, guid: 34dc7f9e6e7c2984a943df3f31bb774d, type: 3}
-    weaponPrefab: {fileID: 8987451310273595696, guid: f753d299d5f12f0419cf73efc38b1d85, type: 3}
+    weaponPrefab: {fileID: 0}
     damage: 15
     attackCooldown: 0.62
     targetingRange: 16
@@ -80,7 +80,7 @@ MonoBehaviour:
   - level: 4
     upgradeDescription: Phoenix string greatly increases fire rate
     projectilePrefab: {fileID: 1132934643380735030, guid: 34dc7f9e6e7c2984a943df3f31bb774d, type: 3}
-    weaponPrefab: {fileID: 8987451310273595696, guid: f753d299d5f12f0419cf73efc38b1d85, type: 3}
+    weaponPrefab: {fileID: 0}
     damage: 19
     attackCooldown: 0.54
     targetingRange: 17
@@ -100,7 +100,7 @@ MonoBehaviour:
   - level: 5
     upgradeDescription: Inferno Bow reaches its full power
     projectilePrefab: {fileID: 1132934643380735030, guid: 34dc7f9e6e7c2984a943df3f31bb774d, type: 3}
-    weaponPrefab: {fileID: 8987451310273595696, guid: f753d299d5f12f0419cf73efc38b1d85, type: 3}
+    weaponPrefab: {fileID: 0}
     damage: 24
     attackCooldown: 0.46
     targetingRange: 18

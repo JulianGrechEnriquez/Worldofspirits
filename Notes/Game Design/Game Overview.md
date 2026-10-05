@@ -66,6 +66,8 @@ Infinity Mode unlocks after all six Story Mode stages are complete. It combines 
 
 ## Current production focus
 
+Additional playable characters are being discussed in [[Notes/Game Design/Playable Characters|Playable characters]]: a Spirit Warrior whose spirits stay in weapon form, and a Spirit Shepherd with more spirits restricted to companion form. Their exact limits and upgrades are not finalized or implemented. The movement and three-spirit rules in this overview describe the current Spirit Tamer.
+
 The immediate milestone remains a polished Burning Plains vertical slice:
 
 > Menu → Burning Plains → Fire Phoenix → reward → stage completion → menu

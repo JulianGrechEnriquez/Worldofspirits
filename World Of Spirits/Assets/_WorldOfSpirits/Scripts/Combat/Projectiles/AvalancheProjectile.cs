@@ -50,7 +50,11 @@ namespace WorldOfSpirits.Combat
             base.OnLifetimeExpired();
         }
 
-        private void OnDisable() => ReleasePassengers();
+        protected override void OnDisable()
+        {
+            base.OnDisable();
+            ReleasePassengers();
+        }
 
         private void ReleasePassengers()
         {

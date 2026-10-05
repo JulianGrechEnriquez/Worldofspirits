@@ -13,14 +13,15 @@ MonoBehaviour:
   m_Name: Ice Gauntlets
   m_EditorClassIdentifier: Assembly-CSharp::WorldOfSpirits.Spirits.WeaponDefinition
   weaponName: Ice Gauntlets
-  description: Twin frozen fists alternate rapid punches, pierce clustered enemies, and briefly freeze anything they strike.
+  description: Twin frozen fists alternate rapid punches, pierce clustered enemies,
+    and briefly freeze anything they strike.
   icon: {fileID: 5415571930747329433, guid: d25d6ec8f9593be42a20556bfe8f7a9c, type: 3}
   executionType: 2
   levels:
   - level: 1
     upgradeDescription: Alternating ice punches that briefly freeze enemies.
     projectilePrefab: {fileID: 0}
-    weaponPrefab: {fileID: 610920000000000001, guid: 6e1cbbbc9eeb42a39c228475056ffe82, type: 3}
+    weaponPrefab: {fileID: 0}
     damage: 18
     attackCooldown: 0.4
     targetingRange: 3
@@ -40,7 +41,7 @@ MonoBehaviour:
   - level: 2
     upgradeDescription: Increased damage and faster punches.
     projectilePrefab: {fileID: 0}
-    weaponPrefab: {fileID: 610920000000000001, guid: 6e1cbbbc9eeb42a39c228475056ffe82, type: 3}
+    weaponPrefab: {fileID: 0}
     damage: 24
     attackCooldown: 0.34
     targetingRange: 3.2
@@ -60,7 +61,7 @@ MonoBehaviour:
   - level: 3
     upgradeDescription: Larger fists can punch through more enemies.
     projectilePrefab: {fileID: 0}
-    weaponPrefab: {fileID: 610920000000000001, guid: 6e1cbbbc9eeb42a39c228475056ffe82, type: 3}
+    weaponPrefab: {fileID: 0}
     damage: 31
     attackCooldown: 0.3
     targetingRange: 3.5
@@ -80,7 +81,7 @@ MonoBehaviour:
   - level: 4
     upgradeDescription: Longer reach, stronger damage, and a longer freeze.
     projectilePrefab: {fileID: 0}
-    weaponPrefab: {fileID: 610920000000000001, guid: 6e1cbbbc9eeb42a39c228475056ffe82, type: 3}
+    weaponPrefab: {fileID: 0}
     damage: 40
     attackCooldown: 0.26
     targetingRange: 3.8
@@ -100,7 +101,7 @@ MonoBehaviour:
   - level: 5
     upgradeDescription: Relentless glacial punches cleave through dense crowds.
     projectilePrefab: {fileID: 0}
-    weaponPrefab: {fileID: 610920000000000001, guid: 6e1cbbbc9eeb42a39c228475056ffe82, type: 3}
+    weaponPrefab: {fileID: 0}
     damage: 52
     attackCooldown: 0.22
     targetingRange: 4.1

@@ -225,6 +225,7 @@ namespace WorldOfSpirits.Spirits
             projectile.ConfigureCastModifiers(data.sizeMultiplier, data.lifetimeMultiplier);
             DamageContext damage = CreateSpiritDamage(data.damage);
             projectile.ConfigureDamageContext(damage);
+            projectile.ConfigureTriggerContext(OwnerSpirit != null ? OwnerSpirit.Progression.WeaponLevel : 1);
             if (projectile is ConfigurableProjectile configurable)
             {
                 configurable.Configure(data.pierceCount, data.explosionRadius, data.growthPerSecond,

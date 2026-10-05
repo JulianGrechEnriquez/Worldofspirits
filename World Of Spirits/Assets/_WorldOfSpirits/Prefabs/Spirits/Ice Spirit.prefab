@@ -112,7 +112,6 @@ GameObject:
   - component: {fileID: 6349169034217764554}
   - component: {fileID: 8320641373517031800}
   - component: {fileID: -5405293893904458043}
-  - component: {fileID: 901500000000000001}
   m_Layer: 0
   m_Name: Ice Spirit
   m_TagString: Untagged
@@ -235,41 +234,10 @@ MonoBehaviour:
   progression:
     weaponLevel: 1
     abilityLevels: 
+  weaponPrefab: {fileID: 2026058630863327663, guid: 5cb6d21f73367824d86a702c17d11e3a, type: 3}
   changeAnimationState: 
   remergeAnimationState: 
   idleAnimationState: 
---- !u!114 &901500000000000001
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7463225176532276333}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b67c7ff31cb64cd39e327370586f11a8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::WorldOfSpirits.Spirits.IceGauntletsWeapon
-  leftGauntlet: {fileID: 0}
-  rightGauntlet: {fileID: 0}
-  definition: {fileID: 11400000, guid: f3c97ab2e8dd4cfd8b4afdb50eebc821, type: 2}
-  sideOffset: 0.65
-  forwardRestOffset: 0.15
-  punchDistance: 2.25
-  extendDuration: 0.12
-  returnDuration: 0.18
-  attackCooldown: 0.4
-  targetingRange: 3
-  baseDamage: 18
-  damageIncreasePerLevel: 0.25
-  hitRadius: 0.55
-  maximumTargetsPerPunch: 4
-  freezeDuration: 0.2
-  spriteRotationOffset: -90
-  drawHitboxes: 1
-  targetingGizmoColor: {r: 0.15, g: 0.8, b: 1, a: 0.45}
-  punchPathGizmoColor: {r: 1, g: 0.8, b: 0.1, a: 0.8}
-  activeHitboxGizmoColor: {r: 1, g: 0.15, b: 0.1, a: 0.9}
 --- !u!1 &8715549361477964926
 GameObject:
   m_ObjectHideFlags: 0

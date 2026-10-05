@@ -13,14 +13,15 @@ MonoBehaviour:
   m_Name: Chakrams
   m_EditorClassIdentifier: Assembly-CSharp::WorldOfSpirits.Spirits.WeaponDefinition
   weaponName: Chakrams
-  description: Wind-forged throwing rings that cut through enemies before returning to their owner.
+  description: Wind-forged throwing rings that cut through enemies before returning
+    to their owner.
   icon: {fileID: 21300000, guid: 710ded71d3284cfdac9349c486cc264a, type: 3}
   executionType: 0
   levels:
   - level: 1
     upgradeDescription: Chakrams unlocked
     projectilePrefab: {fileID: 770000000000000006, guid: 6b509c0ccb1043128b3e147463a0c505, type: 3}
-    weaponPrefab: {fileID: 780000000000000001, guid: 43a9a36b01f34f4197ea8623abb0665c, type: 3}
+    weaponPrefab: {fileID: 0}
     damage: 8
     attackCooldown: 0.9
     targetingRange: 13
@@ -28,10 +29,19 @@ MonoBehaviour:
     homeOnEnemies: 0
     homingStrength: 0
     homingRange: 10
+    orbitRadius: 1.4
+    orbitSpeed: 180
+    punchDistance: 2.25
+    extendDuration: 0.12
+    returnDuration: 0.18
+    hitRadius: 0.55
+    maximumTargets: 4
+    status: 4
+    statusDuration: 0.2
   - level: 2
     upgradeDescription: Faster throws and sharper edges
     projectilePrefab: {fileID: 770000000000000006, guid: 6b509c0ccb1043128b3e147463a0c505, type: 3}
-    weaponPrefab: {fileID: 780000000000000001, guid: 43a9a36b01f34f4197ea8623abb0665c, type: 3}
+    weaponPrefab: {fileID: 0}
     damage: 11
     attackCooldown: 0.82
     targetingRange: 14
@@ -39,10 +49,19 @@ MonoBehaviour:
     homeOnEnemies: 0
     homingStrength: 0
     homingRange: 10
+    orbitRadius: 1.4
+    orbitSpeed: 180
+    punchDistance: 2.25
+    extendDuration: 0.12
+    returnDuration: 0.18
+    hitRadius: 0.55
+    maximumTargets: 4
+    status: 4
+    statusDuration: 0.2
   - level: 3
     upgradeDescription: Longer reach and stronger wind blades
     projectilePrefab: {fileID: 770000000000000006, guid: 6b509c0ccb1043128b3e147463a0c505, type: 3}
-    weaponPrefab: {fileID: 780000000000000001, guid: 43a9a36b01f34f4197ea8623abb0665c, type: 3}
+    weaponPrefab: {fileID: 0}
     damage: 14
     attackCooldown: 0.74
     targetingRange: 15
@@ -50,10 +69,19 @@ MonoBehaviour:
     homeOnEnemies: 0
     homingStrength: 0
     homingRange: 10
+    orbitRadius: 1.4
+    orbitSpeed: 180
+    punchDistance: 2.25
+    extendDuration: 0.12
+    returnDuration: 0.18
+    hitRadius: 0.55
+    maximumTargets: 4
+    status: 4
+    statusDuration: 0.2
   - level: 4
     upgradeDescription: Twin currents increase throw rate
     projectilePrefab: {fileID: 770000000000000006, guid: 6b509c0ccb1043128b3e147463a0c505, type: 3}
-    weaponPrefab: {fileID: 780000000000000001, guid: 43a9a36b01f34f4197ea8623abb0665c, type: 3}
+    weaponPrefab: {fileID: 0}
     damage: 18
     attackCooldown: 0.64
     targetingRange: 16
@@ -61,10 +89,19 @@ MonoBehaviour:
     homeOnEnemies: 0
     homingStrength: 0
     homingRange: 10
+    orbitRadius: 1.4
+    orbitSpeed: 180
+    punchDistance: 2.25
+    extendDuration: 0.12
+    returnDuration: 0.18
+    hitRadius: 0.55
+    maximumTargets: 4
+    status: 4
+    statusDuration: 0.2
   - level: 5
     upgradeDescription: Tempest Chakrams reach full power
     projectilePrefab: {fileID: 770000000000000006, guid: 6b509c0ccb1043128b3e147463a0c505, type: 3}
-    weaponPrefab: {fileID: 780000000000000001, guid: 43a9a36b01f34f4197ea8623abb0665c, type: 3}
+    weaponPrefab: {fileID: 0}
     damage: 23
     attackCooldown: 0.54
     targetingRange: 17
@@ -72,3 +109,12 @@ MonoBehaviour:
     homeOnEnemies: 0
     homingStrength: 0
     homingRange: 10
+    orbitRadius: 1.4
+    orbitSpeed: 180
+    punchDistance: 2.25
+    extendDuration: 0.12
+    returnDuration: 0.18
+    hitRadius: 0.55
+    maximumTargets: 4
+    status: 4
+    statusDuration: 0.2

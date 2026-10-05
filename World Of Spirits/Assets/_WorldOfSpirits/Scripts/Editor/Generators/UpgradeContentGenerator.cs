@@ -30,15 +30,18 @@ namespace WorldOfSpirits.EditorTools
         public static void Generate()
         {
             EnsureFolder(Root);
-            EnsureFolder(Root + "/Player");
-            EnsureFolder(Root + "/Legendary");
             EnsureFolder(Root + "/Spirits");
             List<UpgradeCardDefinition> cards = new List<UpgradeCardDefinition>(128);
-            AddSeeds(cards, PlayerSeeds, Root + "/Player");
-            AddSeeds(cards, LegendarySeeds, Root + "/Legendary");
+            AddSeeds(cards, PlayerSeeds);
+            AddSeeds(cards, LegendarySeeds);
             AddSpiritCards(cards);
 
             UpgradeCatalog catalog = LoadOrCreate<UpgradeCatalog>(Root + "/Main Upgrade Catalog.asset");
+            // Keep custom/character cards that are not part of the starter seeds.
+            var ids = new HashSet<string>();
+            foreach (var card in cards) ids.Add(card.Id);
+            foreach (var existing in catalog.Cards)
+                if (existing != null && ids.Add(existing.Id)) cards.Add(existing);
             SerializedObject catalogObject = new SerializedObject(catalog);
             SerializedProperty list = catalogObject.FindProperty("cards");
             list.arraySize = cards.Count;
@@ -46,18 +49,24 @@ namespace WorldOfSpirits.EditorTools
             catalogObject.ApplyModifiedPropertiesWithoutUndo();
             EditorUtility.SetDirty(catalog);
             AssetDatabase.SaveAssets();
+            UpgradeCatalogOrganizer.Organize(catalog);
             Selection.activeObject = catalog;
             Debug.Log($"Generated {cards.Count} upgrade cards and selected the Main Upgrade Catalog.");
         }
 
-        private static void AddSeeds(List<UpgradeCardDefinition> output, Seed[] seeds, string folder)
+        private static void AddSeeds(List<UpgradeCardDefinition> output, Seed[] seeds)
         {
             for (int i = 0; i < seeds.Length; i++)
             {
                 Seed seed = seeds[i];
                 string id = Slug(seed.Name);
+                UpgradeCharacter character = id == "spirit_master" ? UpgradeCharacter.SpiritTamer : UpgradeCharacter.Any;
+                UpgradeCategory category = id == "spirit_master" ? UpgradeCategory.CharacterAbility : seed.Category;
+                string folder = UpgradeCatalogOrganizer.FolderFor(character == UpgradeCharacter.Any ? UpgradeGroup.General : UpgradeGroup.Character,
+                    character, category, seed.Rarity);
+                EnsureFolder(folder);
                 UpgradeCardDefinition card = LoadOrCreate<UpgradeCardDefinition>($"{folder}/{Safe(seed.Name)}.asset");
-                Configure(card, id, seed.Name, seed.Description, seed.Icon, seed.Category, seed.Rarity,
+                Configure(card, id, seed.Name, seed.Description, seed.Icon, category, seed.Rarity,
                     seed.Max, seed.Rarity == UpgradeRarity.Legendary ? 15 : 100, 1, null, -1, null,
                     seed.Stat, seed.Value);
                 output.Add(card);
@@ -129,6 +138,7 @@ namespace WorldOfSpirits.EditorTools
             so.FindProperty("description").stringValue = description;
             so.FindProperty("suggestedIconTheme").stringValue = iconTheme;
             so.FindProperty("category").enumValueIndex = (int)category;
+            so.FindProperty("requiredCharacter").intValue = id == "spirit_master" ? (int)UpgradeCharacter.SpiritTamer : (int)UpgradeCharacter.Any;
             so.FindProperty("rarity").enumValueIndex = (int)rarity;
             so.FindProperty("maximumLevel").intValue = Mathf.Max(1, max);
             so.FindProperty("baseWeight").floatValue = weight;
@@ -168,6 +178,13 @@ namespace WorldOfSpirits.EditorTools
         {
             T asset = AssetDatabase.LoadAssetAtPath<T>(path);
             if (asset != null) return asset;
+            // Existing cards may already be in organized folders. Reuse them, preserving GUIDs.
+            foreach (string guid in AssetDatabase.FindAssets("t:" + typeof(T).Name, new[] { Root }))
+            {
+                string existingPath = AssetDatabase.GUIDToAssetPath(guid);
+                if (Path.GetFileName(existingPath) == Path.GetFileName(path))
+                    return AssetDatabase.LoadAssetAtPath<T>(existingPath);
+            }
             asset = ScriptableObject.CreateInstance<T>();
             AssetDatabase.CreateAsset(asset, path);
             return asset;

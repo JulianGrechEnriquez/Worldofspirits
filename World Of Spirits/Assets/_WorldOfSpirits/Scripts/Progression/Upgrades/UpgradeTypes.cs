@@ -3,7 +3,10 @@ using UnityEngine;
 
 namespace WorldOfSpirits.Progression.Upgrades
 {
-    public enum UpgradeCategory { Player, Weapon, SpiritAbility, SpiritContract, Evolution, Legendary }
+    // Values are serialized in existing cards; append new categories rather than reordering.
+    public enum UpgradeCategory { Player = 0, Weapon = 1, SpiritAbility = 2, SpiritContract = 3, Evolution = 4, Legendary = 5, CharacterAbility = 6 }
+    public enum UpgradeGroup { General, Character, Spirit }
+    public enum UpgradeCharacter { Any = 0, SpiritTamer = 1, SpiritWarrior = 2, SpiritShepherd = 3 }
     public enum UpgradeRarity { Common, Uncommon, Rare, Epic, Legendary }
 
     // Array-backed at runtime: keep new values before Count.

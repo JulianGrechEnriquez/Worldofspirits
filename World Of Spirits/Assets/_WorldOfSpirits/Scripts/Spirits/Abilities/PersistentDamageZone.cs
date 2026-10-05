@@ -196,6 +196,12 @@ namespace WorldOfSpirits.Spirits
             damageSource = context;
         }
 
+        public void ConfigureTriggeredDamage(DamageContext context)
+        {
+            damageSource = context;
+            damagePerTick = context.BaseDamage;
+        }
+
 
         public void ConfigureCast(
             float radius,

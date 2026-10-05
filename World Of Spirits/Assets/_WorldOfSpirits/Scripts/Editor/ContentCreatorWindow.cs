@@ -34,6 +34,7 @@ namespace WorldOfSpirits.EditorTools
         private string upgradeDescription = "+10% damage.";
         private UpgradeCategory upgradeCategory = UpgradeCategory.Player;
         private UpgradeRarity upgradeRarity = UpgradeRarity.Common;
+        private UpgradeCharacter upgradeCharacter = UpgradeCharacter.Any;
         private UpgradeStat upgradeStat = UpgradeStat.AttackDamage;
         private ModifierOperation upgradeOperation = ModifierOperation.Multiply;
         private float valuePerLevel = 0.1f;
@@ -90,6 +91,7 @@ namespace WorldOfSpirits.EditorTools
             upgradeDescription = EditorGUILayout.TextArea(upgradeDescription, GUILayout.MinHeight(42f));
             upgradeCategory = (UpgradeCategory)EditorGUILayout.EnumPopup("Category", upgradeCategory);
             upgradeRarity = (UpgradeRarity)EditorGUILayout.EnumPopup("Rarity", upgradeRarity);
+            upgradeCharacter = (UpgradeCharacter)EditorGUILayout.EnumPopup("Character restriction", upgradeCharacter);
             upgradeStat = (UpgradeStat)EditorGUILayout.EnumPopup("Effect", upgradeStat);
             upgradeOperation = (ModifierOperation)EditorGUILayout.EnumPopup("Operation", upgradeOperation);
             valuePerLevel = EditorGUILayout.FloatField("Value Per Level", valuePerLevel);
@@ -198,7 +200,13 @@ namespace WorldOfSpirits.EditorTools
             float weight, SpiritDefinition targetSpirit, int abilityIndex)
         {
             EnsureFolder(UpgradeRoot);
-            string path = AssetDatabase.GenerateUniqueAssetPath(UpgradeRoot + "/" + SafeName(cardName) + ".asset");
+            UpgradeCharacter character = targetSpirit == null ? upgradeCharacter : UpgradeCharacter.Any;
+            UpgradeGroup group = targetSpirit != null ? UpgradeGroup.Spirit :
+                character != UpgradeCharacter.Any || category == UpgradeCategory.CharacterAbility ? UpgradeGroup.Character : UpgradeGroup.General;
+            string folder = UpgradeCatalogOrganizer.FolderFor(group, character, category, rarity,
+                targetSpirit != null ? targetSpirit.SpiritName : null);
+            EnsureFolder(folder);
+            string path = AssetDatabase.GenerateUniqueAssetPath(folder + "/" + SafeName(cardName) + ".asset");
             UpgradeCardDefinition card = CreateInstance<UpgradeCardDefinition>();
             card.name = cardName.Trim();
             AssetDatabase.CreateAsset(card, path);
@@ -208,6 +216,7 @@ namespace WorldOfSpirits.EditorTools
             serializedCard.FindProperty("description").stringValue = description;
             serializedCard.FindProperty("category").enumValueIndex = (int)category;
             serializedCard.FindProperty("rarity").enumValueIndex = (int)rarity;
+            serializedCard.FindProperty("requiredCharacter").intValue = (int)character;
             serializedCard.FindProperty("maximumLevel").intValue = Mathf.Max(1, maxLevel);
             serializedCard.FindProperty("baseWeight").floatValue = Mathf.Max(0f, weight);
             serializedCard.FindProperty("targetSpirit").objectReferenceValue = targetSpirit;

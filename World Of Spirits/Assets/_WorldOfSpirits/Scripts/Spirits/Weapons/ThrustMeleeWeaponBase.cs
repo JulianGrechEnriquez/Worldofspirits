@@ -26,6 +26,8 @@ namespace WorldOfSpirits.Spirits
 
         [Header("Weapon Data")]
         [SerializeField] private WeaponDefinition definition;
+        [SerializeField] private bool singleWeaponObject;
+        public void BindSpiritOwner(SpiritMember member) => spiritOwner = member;
 
         [Header("Resting Formation")]
         [SerializeField, Min(0.1f)] private float sideOffset = 0.65f;
@@ -107,6 +109,7 @@ namespace WorldOfSpirits.Spirits
         {
             spiritOwner = GetComponentInParent<SpiritMember>();
             upgradeStats = GetComponentInParent<UpgradeRuntimeStats>();
+            if (singleWeaponObject) leftGauntlet = rightGauntlet = transform;
             fallbackLeftGauntlet = leftGauntlet;
             fallbackRightGauntlet = rightGauntlet;
             fallbackLeftScale = leftGauntlet != null ? leftGauntlet.localScale : Vector3.one;
@@ -115,7 +118,7 @@ namespace WorldOfSpirits.Spirits
 
             WeaponLevelData firstLevel =
                 definition != null ? definition.GetLevel(1) : null;
-            if (firstLevel != null && firstLevel.weaponPrefab != null)
+            if (!singleWeaponObject && firstLevel != null && firstLevel.weaponPrefab != null)
             {
                 pooledVisualPrefab = firstLevel.weaponPrefab;
                 SceneObjectPool.Preload(
@@ -588,6 +591,12 @@ namespace WorldOfSpirits.Spirits
 
         private void EnsurePooledVisuals()
         {
+            if (singleWeaponObject)
+            {
+                leftGauntlet = rightGauntlet = transform;
+                CacheRenderers();
+                return;
+            }
             WeaponLevelData level = ActiveLevel ??
                 (definition != null ? definition.GetLevel(1) : null);
             GameObject visualPrefab =
@@ -630,6 +639,7 @@ namespace WorldOfSpirits.Spirits
 
         private void SyncEchoGauntlets()
         {
+            if (singleWeaponObject) return;
             bool shouldHaveEchoPair = pooledVisualPrefab != null &&
                 upgradeStats != null && upgradeStats.GetMeleeStrikeCount(1) > 1;
             bool hasEchoPair = leftEchoGauntlet != null && rightEchoGauntlet != null;

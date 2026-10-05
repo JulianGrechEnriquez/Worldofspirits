@@ -20,6 +20,8 @@ namespace WorldOfSpirits.Progression.Upgrades
         [Header("Availability")]
         [SerializeField] private UpgradeCategory category;
         [SerializeField] private UpgradeRarity rarity;
+        [Tooltip("Any keeps this card shared. Choose a character for exclusive upgrades.")]
+        [SerializeField] private UpgradeCharacter requiredCharacter;
         [Min(1), SerializeField] private int maximumLevel = 1;
         [Min(0f), SerializeField] private float baseWeight = 100f;
         [SerializeField] private bool repeatableAfterMaximum;
@@ -42,6 +44,12 @@ namespace WorldOfSpirits.Progression.Upgrades
         public string SuggestedIconTheme => suggestedIconTheme;
         public UpgradeCategory Category => category;
         public UpgradeRarity Rarity => rarity;
+        public UpgradeCharacter RequiredCharacter => requiredCharacter;
+        public UpgradeGroup Group => targetSpirit != null ? UpgradeGroup.Spirit :
+            requiredCharacter != UpgradeCharacter.Any || category == UpgradeCategory.CharacterAbility
+                ? UpgradeGroup.Character : UpgradeGroup.General;
+        public bool IsAvailableFor(UpgradeCharacter character) =>
+            requiredCharacter == UpgradeCharacter.Any || requiredCharacter == character;
         public int MaximumLevel => Mathf.Max(1, maximumLevel);
         public float BaseWeight => Mathf.Max(0f, baseWeight);
         public bool RepeatableAfterMaximum => repeatableAfterMaximum;

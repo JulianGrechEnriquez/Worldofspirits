@@ -11,6 +11,9 @@ namespace WorldOfSpirits.Progression.Upgrades
     [DisallowMultipleComponent]
     public sealed class UpgradeRuntimeStats : MonoBehaviour, IUpgradeable
     {
+        [Tooltip("Upgrade eligibility only. Warrior and Shepherd combat rules are not implemented yet.")]
+        [SerializeField] private UpgradeCharacter character = UpgradeCharacter.SpiritTamer;
+        public UpgradeCharacter Character => character;
         private readonly Dictionary<string, int> cardLevels = new Dictionary<string, int>(64);
         private readonly float[] additive = new float[(int)UpgradeStat.Count];
         private readonly float[] multiplicative = new float[(int)UpgradeStat.Count];
@@ -44,7 +47,7 @@ namespace WorldOfSpirits.Progression.Upgrades
 
         public bool TryApply(UpgradeCardDefinition card)
         {
-            if (card == null) return false;
+            if (card == null || !card.IsAvailableFor(character)) return false;
             int oldLevel = GetCardLevel(card.Id);
             if (oldLevel >= card.MaximumLevel && !card.RepeatableAfterMaximum) return false;
 
