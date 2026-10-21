@@ -1,0 +1,5 @@
+PASS: Fire talons: damage 48, alternating hands 2, phases Extending/Returning/Idle, reach 3.63
+PASS: Shield auto-bash: damage 39, knockback 5.0, phases Idle/Extending/Returning, reach 1.95
+PASS: outgoing shield hidden and disabled on main-spirit change
+
+PASS: paused ready weapon with nearby target did not attack; no invisible cone damage; disabling Warrior cleaned all paired weapons.

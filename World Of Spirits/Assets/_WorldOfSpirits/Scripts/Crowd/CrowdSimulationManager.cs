@@ -63,6 +63,13 @@ namespace WorldOfSpirits.Crowd
         public int AgentCount => agents.Count;
         public int ActiveCellCount => grid != null ? grid.ActiveCellCount : 0;
 
+        public void SetPlayer(PlayerCharacter selectedPlayer)
+        {
+            playerCharacter = selectedPlayer;
+            player = selectedPlayer != null ? selectedPlayer.transform : null;
+            playerCollider = selectedPlayer != null ? selectedPlayer.GetComponent<Collider2D>() : null;
+        }
+
         private void Awake()
         {
             grid = new SpatialHashGrid2D(cellSize, expectedEnemyCapacity);
@@ -118,7 +125,7 @@ namespace WorldOfSpirits.Crowd
                     EnemyCrowdAgent agent = agents[nextSteeringIndex++];
                     if (agent != null && agent.IsSimulationActive)
                     {
-                        agent.RefreshSteering(this, playerPosition);
+                        agent.RefreshSteering(this, GetCombatDestination(agent, playerPosition));
                     }
                 }
             }
@@ -130,10 +137,16 @@ namespace WorldOfSpirits.Crowd
                     EnemyCrowdAgent agent = agents[i];
                     if (agent != null && agent.IsSimulationActive)
                     {
-                        agent.SimulateMovement(this, playerPosition, deltaTime, physicsStep);
+                        agent.SimulateMovement(this, GetCombatDestination(agent, playerPosition), deltaTime, physicsStep);
                     }
                 }
             }
+        }
+
+        private static Vector2 GetCombatDestination(EnemyCrowdAgent agent, Vector2 playerPosition)
+        {
+            var creature = WorldOfSpirits.Spirits.SpiritCreature.FindThreat(agent.Position, playerPosition);
+            return creature != null ? (Vector2)creature.transform.position : playerPosition;
         }
 
         public bool Register(EnemyCrowdAgent agent)
@@ -205,7 +218,7 @@ namespace WorldOfSpirits.Crowd
 
             using (ContactDamageMarker.Auto())
             {
-                agent.TryDamagePlayer(playerCharacter, playerPosition, playerCollisionRadius);
+                agent.TryDamagePlayer(playerCharacter, player.position, playerCollisionRadius);
             }
         }
 

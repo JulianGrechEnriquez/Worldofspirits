@@ -1,0 +1,27 @@
+{
+  "tool": "Built-in image_gen",
+  "date": "2026-10-18",
+  "transparent_background": true,
+  "prompts": [
+    {
+      "name": "Fire Talon",
+      "prompt": "Use case: stylized-concept. Asset type: single game weapon sprite for a top-down 2D fantasy survivor game. Crisp detailed pixel-art with dark one-pixel-style outlines, faceted highlights, limited rich palette, strong readable silhouette matching a blue crystal ice gauntlet sprite. ONE isolated object only, centered, pointing straight UP with handle/wrist at bottom. Square canvas with generous transparent padding on every side. Actual transparent background. No ground, cast shadow, text, labels, border, character, hand, background, extra objects or UI. This is a usable equipment sprite, not a concept sheet. A single phoenix talon gauntlet weapon, a compact charcoal-red and gold armoured wrist with three long hooked orange-gold claw blades pointing upward, small bright yellow ember edges, small restrained red flame details integrated into the blades. Opaque solid weapon silhouette, no diffuse glow. Claws dominate, chunky and readable."
+    },
+    {
+      "name": "Earth Shield",
+      "prompt": "Use case: stylized-concept. Asset type: single game weapon sprite for a top-down 2D fantasy survivor game. Crisp detailed pixel-art with dark one-pixel-style outlines, faceted highlights, limited rich palette, strong readable silhouette matching a blue crystal ice gauntlet sprite. ONE isolated object only, centered, pointing straight UP with handle/wrist at bottom. Square canvas with generous transparent padding on every side. Actual transparent background. No ground, cast shadow, text, labels, border, character, hand, background, extra objects or UI. This is a usable equipment sprite, not a concept sheet. A single chunky golem stone shield weapon viewed face-on, shield top pointing up, mossy tan stone, heavy dark brown rim, angular hexagonal tower-shield silhouette, carved central emerald crystal and stone knuckle-like protrusions for smashing enemies. Compact broad shield, no hand, no arm. Strong impact weapon silhouette."
+    },
+    {
+      "name": "Tide Whip",
+      "prompt": "Use case: stylized-concept. Asset type: single game weapon sprite for a top-down 2D fantasy survivor game. Crisp detailed pixel-art with dark one-pixel-style outlines, faceted highlights, limited rich palette, strong readable silhouette matching a blue crystal ice gauntlet sprite. ONE isolated object only, centered, pointing straight UP with handle/wrist at bottom. Square canvas with generous transparent padding on every side. Actual transparent background. No ground, cast shadow, text, labels, border, character, hand, background, extra objects or UI. This is a usable equipment sprite, not a concept sheet. A single leviathan tide whip weapon, dark navy and turquoise scaled handle at bottom with a long blue water-serpent lash curving into a loose S upwards, faceted opaque cyan water blade edges and silver details. Keep entire coiled lash inside canvas. Sharp pixel-art contours, no semi-transparent mist."
+    },
+    {
+      "name": "Gale Fan",
+      "prompt": "Use case: stylized-concept. Asset type: single game weapon sprite for a top-down 2D fantasy survivor game. Crisp detailed pixel-art with dark one-pixel-style outlines, faceted highlights, limited rich palette, strong readable silhouette matching a blue crystal ice gauntlet sprite. ONE isolated object only, centered, pointing straight UP with handle/wrist at bottom. Square canvas with generous transparent padding on every side. Actual transparent background. No ground, cast shadow, text, labels, border, character, hand, background, extra objects or UI. This is a usable equipment sprite, not a concept sheet. A single roc gale battle fan weapon, open semicircular fan with feather-shaped sharp green and ivory blades, dark teal metal ribs, small emerald jewel at the short handle bottom. Clearly recognisable open folding fan, the arc at top, no stand, no hand."
+    },
+    {
+      "name": "Shard Launcher",
+      "prompt": "Use case: stylized-concept. Asset type: single game weapon sprite for a top-down 2D fantasy survivor game. Crisp detailed pixel-art with dark one-pixel-style outlines, faceted highlights, limited rich palette, strong readable silhouette matching a blue crystal ice gauntlet sprite. ONE isolated object only, centered, pointing straight UP with handle/wrist at bottom. Square canvas with generous transparent padding on every side. Actual transparent background. No ground, cast shadow, text, labels, border, character, hand, background, extra objects or UI. This is a usable equipment sprite, not a concept sheet. A single yeti ice shard launcher weapon, compact crystal-blue frost crossbow/gauntlet launcher, dark blue armoured wrist at bottom and three long icy crystal barrels pointing upward, faceted icy light blue crystals, dark outlines, small silver fittings. Readable top-down equipment silhouette, not a gun held by a character."
+    }
+  ]
+}

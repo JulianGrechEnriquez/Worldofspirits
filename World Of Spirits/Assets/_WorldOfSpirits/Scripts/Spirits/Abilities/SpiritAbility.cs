@@ -14,13 +14,22 @@ namespace WorldOfSpirits.Spirits
         [SerializeField] private bool castWhileStandingStill;
 
         private float nextCastTime;
+        private float scheduledCastSpeed = 1f;
         protected UpgradeRuntimeStats UpgradeStats { get; private set; }
         protected SpiritAbilityContext LatestContext { get; private set; }
         protected bool HasContext { get; private set; }
+        private Transform creatureDamageOwner;
+
+        public void BindCreatureCaster(Transform owner)
+        {
+            creatureDamageOwner = owner;
+            UpgradeStats = owner != null ? owner.GetComponent<UpgradeRuntimeStats>() : null;
+        }
 
         public int AbilityIndex => abilityIndex;
         protected SpiritMember OwnerSpirit { get; private set; }
-        protected int CurrentLevel => OwnerSpirit != null ? Mathf.Max(1, OwnerSpirit.Progression.GetAbilityLevel(abilityIndex)) : 1;
+        public int EffectiveLevel => OwnerSpirit != null ? OwnerSpirit.GetEffectiveAbilityLevel(abilityIndex) : 1;
+        protected int CurrentLevel => Mathf.Max(1, EffectiveLevel);
 
         protected virtual void Awake()
         {
@@ -33,7 +42,14 @@ namespace WorldOfSpirits.Spirits
             LatestContext = context;
             HasContext = true;
 
-            bool stateAllowed = IsAbilityUnlocked && isActiveAndEnabled &&
+            // Preserve cooldown progress when the stationary cast-speed bonus switches.
+            float castSpeed = UpgradeStats != null ? UpgradeStats.CompanionCastSpeedMultiplier : 1f;
+            if (!Mathf.Approximately(castSpeed, scheduledCastSpeed) && nextCastTime > Time.time)
+                nextCastTime = Time.time + (nextCastTime - Time.time) * scheduledCastSpeed / castSpeed;
+            scheduledCastSpeed = castSpeed;
+
+            bool stateAllowed = (UpgradeStats == null || UpgradeStats.Character != UpgradeCharacter.SpiritWarrior) &&
+                IsAbilityUnlocked && isActiveAndEnabled &&
                 (!primarySpiritOnly || context.IsPrimary) && IsMovementStateAllowed(context);
             OnActivationStateChanged(stateAllowed);
             if (!stateAllowed) return;
@@ -55,20 +71,22 @@ namespace WorldOfSpirits.Spirits
         protected virtual float GetCooldown() => ScaleCooldown(cooldown);
         // Support spirits and the mastery upgrade bypass primary movement restrictions.
         protected bool IsMovementStateAllowed(SpiritAbilityContext context) =>
-            !context.IsPrimary || context.PrimaryWeaponAndAbilitiesEnabled ||
-            (context.PlayerIsMoving ? castWhileMoving : castWhileStandingStill);
+            (UpgradeStats == null || UpgradeStats.Character != UpgradeCharacter.SpiritWarrior) &&
+            (context.CompanionsOnly || !context.IsPrimary || context.PrimaryWeaponAndAbilitiesEnabled ||
+             (context.PlayerIsMoving ? castWhileMoving : castWhileStandingStill));
         protected virtual void OnActivationStateChanged(bool allowed) { }
         protected bool IsAbilityUnlocked => OwnerSpirit == null ||
             OwnerSpirit.Progression.IsAbilityUnlocked(abilityIndex);
         protected float ScaleCooldown(float value) => value /
-            (UpgradeStats != null ? UpgradeStats.GetMultiplier(UpgradeStat.CooldownReduction) : 1f);
+            (UpgradeStats != null ? UpgradeStats.GetMultiplier(UpgradeStat.CooldownReduction) *
+                UpgradeStats.CompanionCastSpeedMultiplier : 1f);
         protected DamageElement DamageElement => DamageElementUtility.FromSpiritName(
             OwnerSpirit != null && OwnerSpirit.Definition != null
                 ? OwnerSpirit.Definition.SpiritName
                 : string.Empty);
         protected DamageContext CreateSpiritDamage(float baseDamage) => DamageContext.Spirit(
             baseDamage,
-            OwnerSpirit != null ? OwnerSpirit.transform : transform,
+            creatureDamageOwner != null ? creatureDamageOwner : OwnerSpirit != null ? OwnerSpirit.transform : transform,
             DamageElement);
         protected virtual bool CanCast(SpiritAbilityContext context) => true;
         protected abstract void Cast(SpiritAbilityContext context);
@@ -80,17 +98,20 @@ namespace WorldOfSpirits.Spirits
             Transform player,
             bool playerIsMoving,
             bool isPrimary,
-            bool primaryWeaponAndAbilitiesEnabled = false)
+            bool primaryWeaponAndAbilitiesEnabled = false,
+            bool companionsOnly = false)
         {
             Player = player;
             PlayerIsMoving = playerIsMoving;
             IsPrimary = isPrimary;
             PrimaryWeaponAndAbilitiesEnabled = primaryWeaponAndAbilitiesEnabled;
+            CompanionsOnly = companionsOnly;
         }
 
         public Transform Player { get; }
         public bool PlayerIsMoving { get; }
         public bool IsPrimary { get; }
         public bool PrimaryWeaponAndAbilitiesEnabled { get; }
+        public bool CompanionsOnly { get; }
     }
 }

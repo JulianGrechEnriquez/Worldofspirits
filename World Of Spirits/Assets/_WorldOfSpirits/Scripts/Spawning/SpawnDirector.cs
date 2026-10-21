@@ -120,6 +120,8 @@ namespace WorldOfSpirits.Spawning
         [SerializeField] private bool resumeAfterBoss = true;
 
         private float elapsedRunTime;
+
+        public void SetPlayer(Transform selectedPlayer) => player = selectedPlayer;
         private float nextSpawnTime;
         private bool spawningPaused;
         private bool bossEventActive;

@@ -22,9 +22,11 @@ namespace WorldOfSpirits.Spirits
         private SpiritWeaponAttack[] weapons;
         private SpiritAbility[] abilities;
         private Animator[] animators;
+        private SpiritManager spiritManager;
 
         private void Awake()
         {
+            spiritManager = GetComponentInParent<SpiritManager>();
             if (definition == null)
             {
                 definition = BuiltInSpiritCatalog.Find(name);
@@ -36,6 +38,27 @@ namespace WorldOfSpirits.Spirits
 
         public SpiritDefinition Definition => definition;
         public SpiritProgression Progression => progression;
+        public bool HasLeadAbilityBonus => spiritManager != null &&
+            spiritManager.CompanionsOnly && spiritManager.PrimarySpirit == this;
+
+        public int GetEffectiveAbilityLevel(int abilityIndex)
+        {
+            int purchasedLevel = progression.GetAbilityLevel(abilityIndex);
+            if (purchasedLevel <= 0 || !HasLeadAbilityBonus || definition == null) return purchasedLevel;
+            int maximumLevel;
+            if (definition.RuntimeAbilities.Count > 0)
+            {
+                if (abilityIndex < 0 || abilityIndex >= definition.RuntimeAbilities.Count ||
+                    definition.RuntimeAbilities[abilityIndex] == null) return purchasedLevel;
+                maximumLevel = definition.RuntimeAbilities[abilityIndex].MaxLevel;
+            }
+            else
+            {
+                if (abilityIndex < 0 || abilityIndex >= definition.Abilities.Count) return purchasedLevel;
+                maximumLevel = definition.Abilities[abilityIndex].MaxLevel;
+            }
+            return Mathf.Min(purchasedLevel + 1, maximumLevel);
+        }
         public event Action<SpiritMember, int> WeaponLeveled;
         public event Action<SpiritMember, int, int> AbilityLeveled;
 
@@ -60,9 +83,11 @@ namespace WorldOfSpirits.Spirits
             bool isPrimary,
             bool playerIsMoving,
             bool primaryWeaponAndAbilitiesEnabled,
-            bool combatLocked = false)
+            bool combatLocked = false,
+            bool companionsOnly = false,
+            bool weaponsOnly = false)
         {
-            if (runtimeWeapon == null && weaponPrefab != null && player != null)
+            if (!companionsOnly && runtimeWeapon == null && weaponPrefab != null && player != null)
             {
                 runtimeWeapon = Instantiate(weaponPrefab, player);
                 runtimeWeapon.name = weaponPrefab.name;
@@ -76,7 +101,7 @@ namespace WorldOfSpirits.Spirits
             }
 
             // The primary spirit is channelled into its weapon while stationary.
-            bool spiritVisible = combatLocked || !isPrimary || playerIsMoving;
+            bool spiritVisible = !weaponsOnly && (companionsOnly || combatLocked || !isPrimary || playerIsMoving);
             foreach (Renderer spiritRenderer in renderers)
             {
                 // Weapon scripts control their own sprite visibility.
@@ -84,12 +109,11 @@ namespace WorldOfSpirits.Spirits
                 spiritRenderer.enabled = spiritVisible;
             }
 
-            // A spirit's weapon is active only while that spirit occupies the
-            // main slot and the player is standing still.
+            // Warrior keeps every owned weapon active, including during movement.
             foreach (SpiritWeaponAttack weapon in weapons)
             {
-                bool spiritOwnsWeapon = !combatLocked && isPrimary;
-                bool weaponCanAttack = spiritOwnsWeapon && !playerIsMoving;
+                bool spiritOwnsWeapon = !companionsOnly && !combatLocked && (weaponsOnly || isPrimary);
+                bool weaponCanAttack = spiritOwnsWeapon && (weaponsOnly || !playerIsMoving);
                 bool isThrustMelee = weapon is ThrustMeleeWeaponBase;
                 weapon.enabled = isThrustMelee
                     ? spiritOwnsWeapon
@@ -128,7 +152,8 @@ namespace WorldOfSpirits.Spirits
                 player,
                 playerIsMoving,
                 isPrimary,
-                primaryWeaponAndAbilitiesEnabled);
+                primaryWeaponAndAbilitiesEnabled,
+                companionsOnly);
             foreach (SpiritAbility ability in abilities)
             {
                 ability.TickAbility(context);

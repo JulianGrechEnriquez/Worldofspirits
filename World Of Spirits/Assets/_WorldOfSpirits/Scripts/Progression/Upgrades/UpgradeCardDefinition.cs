@@ -26,6 +26,10 @@ namespace WorldOfSpirits.Progression.Upgrades
         [Min(0f), SerializeField] private float baseWeight = 100f;
         [SerializeField] private bool repeatableAfterMaximum;
 
+        [Header("Prerequisites")]
+        [SerializeField, Min(0)] private int minimumOwnedSpirits;
+        [SerializeField] private List<UpgradeRequirement> requirements = new List<UpgradeRequirement>();
+
         [Header("Target (optional)")]
         [SerializeField] private SpiritDefinition targetSpirit;
         [Min(-1), SerializeField] private int abilityIndex = -1;
@@ -48,11 +52,25 @@ namespace WorldOfSpirits.Progression.Upgrades
         public UpgradeGroup Group => targetSpirit != null ? UpgradeGroup.Spirit :
             requiredCharacter != UpgradeCharacter.Any || category == UpgradeCategory.CharacterAbility
                 ? UpgradeGroup.Character : UpgradeGroup.General;
-        public bool IsAvailableFor(UpgradeCharacter character) =>
-            requiredCharacter == UpgradeCharacter.Any || requiredCharacter == character;
+        public bool IsAvailableFor(UpgradeCharacter character)
+        {
+            if (requiredCharacter != UpgradeCharacter.Any && requiredCharacter != character) return false;
+            if (character == UpgradeCharacter.SpiritBeastmaster && category == UpgradeCategory.Weapon) return false;
+            if (character == UpgradeCharacter.SpiritShepherd && category == UpgradeCategory.Weapon) return false;
+            if (character != UpgradeCharacter.SpiritWarrior) return true;
+            if (category == UpgradeCategory.SpiritAbility) return false;
+            // Shared cards that only increase companion power have no Warrior effect.
+            if (modifiers.Count == 0) return true;
+            foreach (var modifier in modifiers)
+                if (modifier.stat != UpgradeStat.SpiritDamage && modifier.stat != UpgradeStat.PrimarySpiritAbility)
+                    return true;
+            return false;
+        }
         public int MaximumLevel => Mathf.Max(1, maximumLevel);
         public float BaseWeight => Mathf.Max(0f, baseWeight);
         public bool RepeatableAfterMaximum => repeatableAfterMaximum;
+        public int MinimumOwnedSpirits => Mathf.Max(0, minimumOwnedSpirits);
+        public IReadOnlyList<UpgradeRequirement> Requirements => requirements;
         public SpiritDefinition TargetSpirit => targetSpirit;
         public int AbilityIndex => abilityIndex;
         public GameObject SpiritPrefab => spiritPrefab;

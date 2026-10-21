@@ -25,13 +25,20 @@ distinguish from game content.
 - `Scripts/Player` - player identity and movement.
 - `Scripts/Progression` - experience, upgrades, unlocks, and pickups.
 - `Scripts/Spawning` - enemy spawning, separation, and pooling.
+- `Scripts/Spawning/Definitions` - biome and enemy spawn configuration types.
 - `Scripts/Spirits` - spirit definitions, abilities, weapons, and progression.
+- `Scripts/Spirits/Definitions` - spirit, ability, and weapon definition types and the built-in catalog.
 - `Scripts/UI/Core` - shared UI actions and screen coordination.
 - `Scripts/UI/Screens` - pause, loss, and other screen controllers.
 - `Scripts/UI/Upgrades` - upgrade card and upgrade-screen presentation.
-- `Scripts/UI/Progression` - progression HUD components.
+- `Scripts/UI/HUD` - health, progression, run timer, companion and boss HUDs, and floating damage numbers.
+- `Scripts/UI/CharacterSelection` - playable-character selection.
 - `Scripts/UI/SpiritSelection` - starter-spirit selection views.
 - `Scripts/UI/Debug` - development-only controls and diagnostics.
+- `Scripts/Editor/Upgrades` - upgrade catalog inspection and organization tools.
+- `Scripts/Editor/Generators` - gameplay content generation tools.
+- `Scripts/Editor/Setup` - project folders and prefab setup tools.
+- `Scripts/Editor/Validation` - content validation tools.
 
 ## Data and Prefabs
 
@@ -53,4 +60,5 @@ distinguish from game content.
 - Keep generated gameplay data inside `Data`, not beside scripts.
 - Use `Variants` for alternatives; do not mix them with the primary prefab.
 - Move assets inside Unity so their `.meta` files and references are preserved.
+- Folder organization does not require changing class names or namespaces.
 - Create a new folder only when at least two related assets need it.

@@ -1,0 +1,698 @@
+[
+  {
+    "Name": "CameraFollow2D.cs",
+    "Hash": "DAA34815B879501C588F9674284A676149E2D073957F10F04759737ED0B21EF1",
+    "Guid": "guid: 4c8107ef7f595184d8dd6dcbe56e0822",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\Camera\\CameraFollow2D.cs"
+  },
+  {
+    "Name": "CombatSimulationManager.cs",
+    "Hash": "4B018C5E8CD34A774C1744CC0FA686CCB000B5D3FB98C7E2BB122D3F0DF5F3D3",
+    "Guid": "guid: 3ef837b6bb8c45740b30f5eb73b76f91",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\Combat\\CombatSimulationManager.cs"
+  },
+  {
+    "Name": "CombatSpatialIndex2D.cs",
+    "Hash": "1A88BB9B5BA91700B8CA2C3A52771E3B27588DF47014327A27A1054BD35587CF",
+    "Guid": "guid: 15b5c852f8465ea42b9775bd72347643",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\Combat\\CombatSpatialIndex2D.cs"
+  },
+  {
+    "Name": "CombatTargeting.cs",
+    "Hash": "6F179AB19D828710363DD02A2B929CE20C8345FCD62EC70720418B06DA6E4D33",
+    "Guid": "guid: 6eb5b5ebba1d9504eb2005177522a0b2",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\Combat\\CombatTargeting.cs"
+  },
+  {
+    "Name": "Faction.cs",
+    "Hash": "D8E43A9B12C4BF4A31DB9093809668B50C3F81016CF23C9D066D76ADB42175F0",
+    "Guid": "guid: 36b499666afe2b04faf4e9bde648ff77",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\Combat\\Faction.cs"
+  },
+  {
+    "Name": "SpiritWeaponAttack.cs",
+    "Hash": "12B7E75BE635D1CB2E2C1143E800139DDCA632C32AB4BAB950BB2EBAB993C6EA",
+    "Guid": "guid: 342678cf2b14ac14dbe6faf707d74460",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\Combat\\SpiritWeaponAttack.cs"
+  },
+  {
+    "Name": "ContactDamage.cs",
+    "Hash": "ECC594CAC28A8A5A952755B050858D5E43E7C84DF533EDA415FF3BD5459D5955",
+    "Guid": "guid: 0188639af7504dd4f8921172c1496528",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\Combat\\Damage\\ContactDamage.cs"
+  },
+  {
+    "Name": "DamageContext.cs",
+    "Hash": "D3453701A83A8C66D29886652A543F49086432815EB50ED83F501E66F40170C0",
+    "Guid": "guid: ed212bb39f24fd44fb546f56180b0753",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\Combat\\Damage\\DamageContext.cs"
+  },
+  {
+    "Name": "GameplayInterfaces.cs",
+    "Hash": "10E19C1BED20130464ABF22D9A4642DD5FD0FFF4CB2947477DA6BDC0229CBA42",
+    "Guid": "guid: 739198d6a8b626c4ba3afad717d3e5a6",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\Combat\\Damage\\GameplayInterfaces.cs"
+  },
+  {
+    "Name": "IDamageable.cs",
+    "Hash": "9DD3715215C6F0C5EB393A91FD9B8FF6BC0280BFA2ABA965FF87298E551037A7",
+    "Guid": "guid: 30aae1e899a73e24e9e4f7649f39083c",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\Combat\\Damage\\IDamageable.cs"
+  },
+  {
+    "Name": "IStatusEffectReceiver.cs",
+    "Hash": "677E1F783D39EFBE4503EA2E30F19BF952FD97F4E848B3F1298CEE0B9616989B",
+    "Guid": "guid: 403920285744d164ba7200ed6f78dc07",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\Combat\\Damage\\IStatusEffectReceiver.cs"
+  },
+  {
+    "Name": "LivingEntity.cs",
+    "Hash": "53137F41DC48AEEAA8D5113F596C7B0F48D4AE00E776D2672FF8CFCB70B530D6",
+    "Guid": "guid: 44e5b8c8930644545af911610e407e54",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\Combat\\Damage\\LivingEntity.cs"
+  },
+  {
+    "Name": "AvalancheCapturedEnemy.cs",
+    "Hash": "C6CE3E9853BBA96DDD4F78BEFB6402BBA02AA463D1A6302E9D8DC0D89C2BBE98",
+    "Guid": "guid: ff4ae5bec14b4b949809f989953bc3fb",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\Combat\\Projectiles\\AvalancheCapturedEnemy.cs"
+  },
+  {
+    "Name": "AvalancheProjectile.cs",
+    "Hash": "974E90CEB6413B4D1DE468896A77A1A972C68B2F4FDFAB8A396403924CBF7DFB",
+    "Guid": "guid: b8bfa6951ce11cb41b4f5b755779a851",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\Combat\\Projectiles\\AvalancheProjectile.cs"
+  },
+  {
+    "Name": "BoomerangProjectile.cs",
+    "Hash": "AF6ADB27B3A8A303E4F7555DDD2D15B3EDE4455608E891D48082980F0C17A400",
+    "Guid": "guid: 85fe5f29aee54c84af8942fb0e0a8a09",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\Combat\\Projectiles\\BoomerangProjectile.cs"
+  },
+  {
+    "Name": "ConfigurableProjectile.cs",
+    "Hash": "2BE00FE9DF062EA59324E3A8C24E5EFE09324174EF59F0EFD42727EC6A01606F",
+    "Guid": "guid: 4f1e1c2f0aee4804ea1c6bed20b16ede",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\Combat\\Projectiles\\ConfigurableProjectile.cs"
+  },
+  {
+    "Name": "DamageProjectile.cs",
+    "Hash": "2F6C6385C908700DFDE9B35ED9A847C0EA0CD33BC5EE14EAC187BF58ADE78EAD",
+    "Guid": "guid: f2b668673ab7efc4cabc97905112875a",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\Combat\\Projectiles\\DamageProjectile.cs"
+  },
+  {
+    "Name": "ProjectileBase.cs",
+    "Hash": "52C12B34D86332F851D1358B40D541B8F913FC6B5575B099B82EEF1CE46BF463",
+    "Guid": "guid: a409c18af67d560458101f44923d08da",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\Combat\\Projectiles\\ProjectileBase.cs"
+  },
+  {
+    "Name": "ProjectilePool.cs",
+    "Hash": "88944F180A2438C5D1F2761E6E6B39C7C1B5B2514B0D87BA6BE7C634B26A1E4B",
+    "Guid": "guid: 4d9f0ea01ce44b7b8cb7e894d0d3be19",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\Combat\\Projectiles\\ProjectilePool.cs"
+  },
+  {
+    "Name": "ProjectileTrigger.cs",
+    "Hash": "8DA597222421493F7A82E56C12F866383F9B011F7716B4AB1FB2B4960A4C512F",
+    "Guid": "guid: 643f9723b8af7c44eb731bda01927362",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\Combat\\Projectiles\\ProjectileTrigger.cs"
+  },
+  {
+    "Name": "TsunamiProjectile.cs",
+    "Hash": "B3BAC26AB162BB80551053D13F182EFF2DE76B004CBC5A525BA0A182D71B954E",
+    "Guid": "guid: 07e91f4c4a98430ca21a3f7645ed8c2f",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\Combat\\Projectiles\\TsunamiProjectile.cs"
+  },
+  {
+    "Name": "AutoProjectileWeapon.cs",
+    "Hash": "A05E32C3AEC806F61115CFD99D0A0A2AE1CC4A6485751A53C2D01E7F87C477B7",
+    "Guid": "guid: 10a29fcb6e09eb84aa7bbe9bd9112b92",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\Combat\\Weapons\\AutoProjectileWeapon.cs"
+  },
+  {
+    "Name": "GameManager.cs",
+    "Hash": "24340CBAA470CCF3FB7D54FF81A3DEDDA67E3AA34659FA0C8FEA22115A6F16A5",
+    "Guid": "guid: aeb69f5fe0419744998898aeb85f2341",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\Core\\GameManager.cs"
+  },
+  {
+    "Name": "GameState.cs",
+    "Hash": "669340776FB0FC4F90C3328336A9E3C61FDFB4B2CE14CA2B1534BE951961E6CC",
+    "Guid": "guid: 92097aaf808bf7a49956960576b4224e",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\Core\\GameState.cs"
+  },
+  {
+    "Name": "SceneObjectPool.cs",
+    "Hash": "E94F641307A29E58A9AC9D0A6D198E8CE66A8FE7132386569DA7B0F5CBBB43DA",
+    "Guid": "guid: 75eae234c41f4983b68bd99ad5268f5d",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\Core\\SceneObjectPool.cs"
+  },
+  {
+    "Name": "CrowdSimulationManager.cs",
+    "Hash": "318CAC991C062CB24BCD745DDA4B9C76A43247FABC539CEC107EFE2199738A58",
+    "Guid": "guid: c14d7b9a23e841a49f0a001c950ad101",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\Crowd\\CrowdSimulationManager.cs"
+  },
+  {
+    "Name": "EnemyCrowdAgent.cs",
+    "Hash": "C6AD99EF535ED740C41A497FC53AE0166BB5AC0AD109CCA422A9C1B55932A97B",
+    "Guid": "guid: c14d7b9a23e841a49f0a001c950ad102",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\Crowd\\EnemyCrowdAgent.cs"
+  },
+  {
+    "Name": "EnemyMovementProfile.cs",
+    "Hash": "F37865A3D851711733D1DE88E3C10F2CF87B673C52988617E460EC48CE2FC744",
+    "Guid": "guid: c14d7b9a23e841a49f0a001c950ad103",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\Crowd\\EnemyMovementProfile.cs"
+  },
+  {
+    "Name": "SpatialHashGrid2D.cs",
+    "Hash": "6AA4CE922B7562392539715D4111C1CB6BB25163B8BB1F496048C9641624B714",
+    "Guid": "guid: 259874662c51c524d8c1a8fc312f7c9a",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\Crowd\\SpatialHashGrid2D.cs"
+  },
+  {
+    "Name": "ContentCreatorWindow.cs",
+    "Hash": "50D54121F239B400C5EA06B7B383E0753AAC678AF7FB55C125B056CA8932729D",
+    "Guid": "guid: eecc45b2d68758a49b24d15d3024c5ab",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\Editor\\ContentCreatorWindow.cs"
+  },
+  {
+    "Name": "UpgradeCatalogEditor.cs",
+    "Hash": "0F88158525DECD90C9046CE86C00A88EE52047F2435EFFCD15B065CA614D29C1",
+    "Guid": "guid: ef31b612ec4c57e4fbfe102c1c686eb9",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\Editor\\UpgradeCatalogEditor.cs"
+  },
+  {
+    "Name": "UpgradeCatalogOrganizer.cs",
+    "Hash": "52CFCE430AB11BE41103EB5CC2B7CF6E42C7C2B893CF649C6FA8AD394E680960",
+    "Guid": "guid: 21f6e4e6db60f9c4e9c8110134d4ebc5",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\Editor\\UpgradeCatalogOrganizer.cs"
+  },
+  {
+    "Name": "AbilityAssetGenerator.cs",
+    "Hash": "017A7160A9F81AA1AF9DCA1D5C2749B34BBC30C2BC74C33EEE5B94C0DC3D68FE",
+    "Guid": "guid: 0ae32de4368c4199879208c055bbf010",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\Editor\\Generators\\AbilityAssetGenerator.cs"
+  },
+  {
+    "Name": "UpgradeContentGenerator.cs",
+    "Hash": "8469E4B95CACA4C1E98CF5BA130154D1BB1625ECE7AA151A3460F65E8AD71732",
+    "Guid": "guid: 053976be1d34d0b47a0abb50e8a051db",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\Editor\\Generators\\UpgradeContentGenerator.cs"
+  },
+  {
+    "Name": "ProjectOrganizer.cs",
+    "Hash": "5D12F2B5CD9582B381D77EFCEE773F6412E229F8287889A79B3758816C589E2B",
+    "Guid": "guid: 8dd1b5d511101804b92e46214b9191af",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\Editor\\Setup\\ProjectOrganizer.cs"
+  },
+  {
+    "Name": "SpiritPrefabConnector.cs",
+    "Hash": "B9E0CF89ACA267D05772D7F305D9BB337C0FFEDBAA24394D42EBFE16767E6B3E",
+    "Guid": "guid: cc9141ee6cdf469abcf6215c0397c1d5",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\Editor\\Setup\\SpiritPrefabConnector.cs"
+  },
+  {
+    "Name": "SpiritSystemValidator.cs",
+    "Hash": "70BAC1F168C11ACF928FD5549EDA9E0041AA92533AAF07286FCD3E47DB302DC6",
+    "Guid": "guid: a12e77b6fdb74615b935d868086bcaa5",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\Editor\\Validation\\SpiritSystemValidator.cs"
+  },
+  {
+    "Name": "EnemyPool.cs",
+    "Hash": "F0516E52943A2F35041D48588B4EFF4C75EFF5455A931EBD306E36935980DC3C",
+    "Guid": "guid: ce09446204904622b9191ec6bd5a3121",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\Enemies\\EnemyPool.cs"
+  },
+  {
+    "Name": "AttackTelegraph.cs",
+    "Hash": "7C8FDA43AB33F34BFA4416A6FB41C189DF7451EA7B1ADA86EA7EA718ABEE72CB",
+    "Guid": "guid: c8b36e293aeead4418ce15acfaee40ac",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\Enemies\\Bosses\\AttackTelegraph.cs"
+  },
+  {
+    "Name": "BossAttackBase.cs",
+    "Hash": "A376DDCABDFBCA0579880116623ED6DA2B59301E2559FA4AA0EE8BD1F02A74AE",
+    "Guid": "guid: 3d969d1590f88bd4fa081e9b1ca710fe",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\Enemies\\Bosses\\BossAttackBase.cs"
+  },
+  {
+    "Name": "BossAttackController.cs",
+    "Hash": "D1D027F927A5DB83EF66238706B54657D8D2F5386FA5D6DC714BA8C031EF75B9",
+    "Guid": "guid: 1059f7702fc1d3243b6377c23ca10202",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\Enemies\\Bosses\\BossAttackController.cs"
+  },
+  {
+    "Name": "BossContext.cs",
+    "Hash": "121EDEEF97FEFB8E9D75CBE43748AC198F879D605F935CE3C599EFD823C8990B",
+    "Guid": "guid: 261ce4a5f0abd8041b92ef8412dedb95",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\Enemies\\Bosses\\BossContext.cs"
+  },
+  {
+    "Name": "BossDamageZone.cs",
+    "Hash": "2B3CB6CBDA96BA2EEF9EFEE7FFA384887BF27C4601A0FD9EC243D9C23B5D6179",
+    "Guid": "guid: 543e3367c91d77d418acab6bdc7c3bc0",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\Enemies\\Bosses\\BossDamageZone.cs"
+  },
+  {
+    "Name": "BossData.cs",
+    "Hash": "7DAB160C2EAF5268962F2D6464EE82B68483F6C4310DFF37D202C979519D2DAE",
+    "Guid": "guid: c7455fffababe1d498587a0944efa072",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\Enemies\\Bosses\\BossData.cs"
+  },
+  {
+    "Name": "BossEnemyBase.cs",
+    "Hash": "020C4F589A8B23925F923A14EC0EFE4FCC5242219D09B1C7980E5B4E787ABF85",
+    "Guid": "guid: f496a6ff5c8021d4b9e29251de93307e",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\Enemies\\Bosses\\BossEnemyBase.cs"
+  },
+  {
+    "Name": "BossMovement.cs",
+    "Hash": "FF36F660F76D63BB23F262A784E572CF49F17CE8991D90A7830B86B0689241EC",
+    "Guid": "guid: 6a01a985e12b466469ef4184d4f55ba3",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\Enemies\\Bosses\\BossMovement.cs"
+  },
+  {
+    "Name": "FeatherBarrageAttack.cs",
+    "Hash": "8AB44AA3E7EB62C326FF3C5FA4B98599458E80DEAD58363865293C880A5C26E6",
+    "Guid": "guid: 3bf158c336a63bf429b67272a50ba03b",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\Enemies\\Bosses\\FeatherBarrageAttack.cs"
+  },
+  {
+    "Name": "FireDashAttack.cs",
+    "Hash": "22BC23E97184044964833593251668D8628ED489684F83DADF43CF7731A325F1",
+    "Guid": "guid: 46caba9182d586849a8eca83b8b79cf9",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\Enemies\\Bosses\\FireDashAttack.cs"
+  },
+  {
+    "Name": "FirePhoenixBoss.cs",
+    "Hash": "F6717B143A3D5744EC181E591C2360B02ECDD10A10576CDAE10C12533716D844",
+    "Guid": "guid: 8e6e217e7f1c87b42a64d2aff6ab894c",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\Enemies\\Bosses\\FirePhoenixBoss.cs"
+  },
+  {
+    "Name": "FlameTornadoAttack.cs",
+    "Hash": "6D702DDFFB9F18D2BECE1AA2AF5B6E35CA981D5AE5FC4750DF117B70F70DCCE2",
+    "Guid": "guid: 81e4fd78d82ba4f42bd787462c14625d",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\Enemies\\Bosses\\FlameTornadoAttack.cs"
+  },
+  {
+    "Name": "IBoss.cs",
+    "Hash": "3D51BD5F2E8379DC077C8A68E86A5C166F681935A29440C6C9D9804C4E2AD426",
+    "Guid": "guid: 50134193a66d8394db28cfc620d603ef",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\Enemies\\Bosses\\IBoss.cs"
+  },
+  {
+    "Name": "MeteorRainAttack.cs",
+    "Hash": "7554004D0F4FC9BBD66626A994C3004CE578613F056B2363A108DF6D79D8F56B",
+    "Guid": "guid: 178b89da78a22c04093097389633a1ae",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\Enemies\\Bosses\\MeteorRainAttack.cs"
+  },
+  {
+    "Name": "StationaryBoss.cs",
+    "Hash": "598B35E8429D16F2A7320545D0532F472B6237CC5A44CFCD0D917A54C0AA34C2",
+    "Guid": "guid: 9658550b11ea3f942a85bc13c93f0a71",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\Enemies\\Bosses\\StationaryBoss.cs"
+  },
+  {
+    "Name": "ChasingEnemy.cs",
+    "Hash": "79DDE826335999AD0D92CD3AB12EC48212399481D5FFA09B3087E4EEFAD35914",
+    "Guid": "guid: e0baa8530bf58284e8e27501d274dfd7",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\Enemies\\Movement\\ChasingEnemy.cs"
+  },
+  {
+    "Name": "EnemyBase.cs",
+    "Hash": "FB41196E1E4FF33EEB51DB437C8CDCD59696EE44C9DA3BC3A7F1590098A64C94",
+    "Guid": "guid: 05a7ae7792ac8514d91f474e400932b6",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\Enemies\\Movement\\EnemyBase.cs"
+  },
+  {
+    "Name": "PlayerCharacter.cs",
+    "Hash": "D06817AC702A0756BE5C23FE28B2D2D57DBEB67FCF94F65A10F421FD57D6BF5E",
+    "Guid": "guid: d257dbcb84421024a8079a8e378815f7",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\Player\\PlayerCharacter.cs"
+  },
+  {
+    "Name": "PlayerMovement.cs",
+    "Hash": "53EA569CC8C2FFBEEFE8E0C022798876D2C911F5A848B73C857A87A2E24E2F39",
+    "Guid": "guid: a858063731f0b464f9cb4fe0d27440c6",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\Player\\PlayerMovement.cs"
+  },
+  {
+    "Name": "SpiritDustWallet.cs",
+    "Hash": "DB8DAFBAA94F7E3E3E72123E43A53FFEEEED03E2C4BE611997A8996E5612CB72",
+    "Guid": "guid: 3f9c98421a003ea409548252af246267",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\Progression\\SpiritDustWallet.cs"
+  },
+  {
+    "Name": "ExperienceOrb.cs",
+    "Hash": "A5D289909CD142CCC826CCA9D04DE35C3EBB63E56BD3C4DB94038D490EA155BA",
+    "Guid": "guid: 72c8daea4d014fd8bdc45759fa18d27a",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\Progression\\Pickups\\ExperienceOrb.cs"
+  },
+  {
+    "Name": "ExperienceOrbService.cs",
+    "Hash": "8D7327B872DDBDDE7D06D38DBEC93D302D7FD416FF387AC849F5657BBB41A0AA",
+    "Guid": "guid: f5732a4097ec492e80c23da04eb291ce",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\Progression\\Pickups\\ExperienceOrbService.cs"
+  },
+  {
+    "Name": "SpiritUnlockProgress.cs",
+    "Hash": "14C95593C4EE5084AC92044BD7EE0CFDDDC5ABABA34E0B900967D96C84A890C3",
+    "Guid": "guid: 0f6fb838ec0f4abc9e3ef8bbf13f56a3",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\Progression\\Unlocks\\SpiritUnlockProgress.cs"
+  },
+  {
+    "Name": "PlayerLevelSystem.cs",
+    "Hash": "31775F820342D9877049E2A5ED353BD1F9B283CAB82C31BF5AE35DAF7E8833C8",
+    "Guid": "guid: ea759a67ebe731e429704742fc65722e",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\Progression\\Upgrades\\PlayerLevelSystem.cs"
+  },
+  {
+    "Name": "UpgradeCardDefinition.cs",
+    "Hash": "5F5884B0D2F1670F8755F1BB6E5FE42AA8A092D89B45B6EB4BCE4000326A2D06",
+    "Guid": "guid: ef4b4a2100beabc4d9dbab206fe54156",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\Progression\\Upgrades\\UpgradeCardDefinition.cs"
+  },
+  {
+    "Name": "UpgradeCatalog.cs",
+    "Hash": "ABAEEC1EF2CE35D8359D9999C51A0E77DD59670C31FDA47D899A93BE4EA1BEC1",
+    "Guid": "guid: ea4837f8c075c22458acf35886ecbeef",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\Progression\\Upgrades\\UpgradeCatalog.cs"
+  },
+  {
+    "Name": "UpgradeRuntimeStats.cs",
+    "Hash": "EE01FBC7ACAAED15CF4609EB6365675A0A2E2660A3CF056CAFF091AFA9A768D6",
+    "Guid": "guid: 06fa00a4a096ea849ad51cec19f7dae7",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\Progression\\Upgrades\\UpgradeRuntimeStats.cs"
+  },
+  {
+    "Name": "UpgradeSelectionManager.cs",
+    "Hash": "CB6B7F4C17F30B8DA4BD58C64A5F085BE8F9FE78CB546294B7F9D55F2B22E2DE",
+    "Guid": "guid: b05c1d4b63be78c49ac693b6e0f8f770",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\Progression\\Upgrades\\UpgradeSelectionManager.cs"
+  },
+  {
+    "Name": "UpgradeTypes.cs",
+    "Hash": "B6AA4CEBDB61D4285EF5EE987F824F9010FD08FEF10BF3CC8B77E4CEB48B6B7D",
+    "Guid": "guid: 28a05576ed142334aa108bfd7f8f571b",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\Progression\\Upgrades\\UpgradeTypes.cs"
+  },
+  {
+    "Name": "BiomeSpawnData.cs",
+    "Hash": "0DDB592283606AB98B599A628F7A249405EC93663C7E35060611539E27B6A741",
+    "Guid": "guid: 94fd1a2f1edd68841909888039eaf2a3",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\Spawning\\BiomeSpawnData.cs"
+  },
+  {
+    "Name": "BossEncounterController.cs",
+    "Hash": "835A1E3722931E0A703262C26CDC8D05094A64327510A7BB7B0D54142BC2E6F8",
+    "Guid": "guid: 63eb51618940f9242b4fa86d341bca46",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\Spawning\\BossEncounterController.cs"
+  },
+  {
+    "Name": "EnemyPool.cs",
+    "Hash": "CEA5D7C7F6B334FFC5141060E118C57118FD39DA8A1EB09A0AAFDB05D0A2F970",
+    "Guid": "guid: f164fd76417be8244aeacb26c665b639",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\Spawning\\EnemyPool.cs"
+  },
+  {
+    "Name": "EnemyRewardListener.cs",
+    "Hash": "A3E4C885BFCB1A85C65AD664C17CD85406C6E6B2EEBF3FD98C7CCF004D2D063B",
+    "Guid": "guid: 4b7da1291ab5fde40b14ed3ef6adf5d0",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\Spawning\\EnemyRewardListener.cs"
+  },
+  {
+    "Name": "EnemySpawnData.cs",
+    "Hash": "8C2A29ACF19F075168049F7B84262A8E7B16E89C01CC59862E59A6BBEB35B36A",
+    "Guid": "guid: 67382e1ee0013f84dbb1897c0ba32bf1",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\Spawning\\EnemySpawnData.cs"
+  },
+  {
+    "Name": "SpawnDirector.cs",
+    "Hash": "5DB4DC4B114CB2323208DCFBEA6FEB8079D352670C9CCDFA6346A7BBE9B77824",
+    "Guid": "guid: 517cfbdc60e229a4fa1d7ea9484e9541",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\Spawning\\SpawnDirector.cs"
+  },
+  {
+    "Name": "AbilityDefinition.cs",
+    "Hash": "64342B70C436FAF4B35F179788424C0B3654081D1A53FC040EB22E656C592BEE",
+    "Guid": "guid: b3cbab6077d644e3ab79aa41b86d3405",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\Spirits\\AbilityDefinition.cs"
+  },
+  {
+    "Name": "BuiltInSpiritCatalog.cs",
+    "Hash": "73E2FD497E04A49B5A65221FA1CB59C975931364026952FFFC58239FCCF8BABA",
+    "Guid": "guid: 74b81a3aa33c4dc795815ea094018fd2",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\Spirits\\BuiltInSpiritCatalog.cs"
+  },
+  {
+    "Name": "SpiritDefinition.cs",
+    "Hash": "C8D13CB334ACDB957DC1026B08967722E9BBE72E9CE7323DF15D5794FC41D25D",
+    "Guid": "guid: 2b3673d079a44352bca51249540fde9d",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\Spirits\\SpiritDefinition.cs"
+  },
+  {
+    "Name": "SpiritManager.cs",
+    "Hash": "7E299C02B206539CEF53D39BECD186FCBD5BD887728F2C5587404875331D8F70",
+    "Guid": "guid: e48f8726ad7c47f08368da643f143b75",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\Spirits\\SpiritManager.cs"
+  },
+  {
+    "Name": "SpiritMember.cs",
+    "Hash": "829AD5FA0F1173AF20412943F605D6329551DF988ED5E36A99A30F265A046C6C",
+    "Guid": "guid: aa69272fd7c64617b86f87fde7b72f15",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\Spirits\\SpiritMember.cs"
+  },
+  {
+    "Name": "SpiritProgression.cs",
+    "Hash": "F2A3CA447EAA909535F7A3928B8499A672686AB7BCDA2CEC534E4EDA697D225A",
+    "Guid": "guid: 8ce4ad29064d4a36aa42a79fe72b4246",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\Spirits\\SpiritProgression.cs"
+  },
+  {
+    "Name": "WeaponDefinition.cs",
+    "Hash": "964D55981FAD94CB3A30629DD3D66D2784DE5AE73578238C9E6B57F22978F5AC",
+    "Guid": "guid: 31342a0c190e58d49bf04376fd127bb4",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\Spirits\\WeaponDefinition.cs"
+  },
+  {
+    "Name": "AreaPulseVisual.cs",
+    "Hash": "F634F912401CB8EFCD74824AD96E984D5CCDB6DFDC3920D025022AA1C1560FF8",
+    "Guid": "guid: d19538fc42d74a0e8a1bd26c708ed324",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\Spirits\\Abilities\\AreaPulseVisual.cs"
+  },
+  {
+    "Name": "DataDrivenAbility.cs",
+    "Hash": "546EF70F907EF22D8169FA5AD90514A1DE9704AAA795FE5DD4FEB9D72B4697D2",
+    "Guid": "guid: 59463a8d5a7449f3a1ef4c6f88e1a242",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\Spirits\\Abilities\\DataDrivenAbility.cs"
+  },
+  {
+    "Name": "IceCrystalEffect.cs",
+    "Hash": "1A309B98DE29790A420A936E48F30BB102662241431CFE078DA8FB7D5FE0AA32",
+    "Guid": "guid: 4ba34a1aad3ffd74c903e419d791a84c",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\Spirits\\Abilities\\IceCrystalEffect.cs"
+  },
+  {
+    "Name": "PersistentDamageZone.cs",
+    "Hash": "C8FFC11F7D807879BEBFF2B01A4B3F382110F1F8BA67EB4645A788C6A2E45E39",
+    "Guid": "guid: 854ec0ef4b630764b84640faffd3c146",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\Spirits\\Abilities\\PersistentDamageZone.cs"
+  },
+  {
+    "Name": "PooledParticleEffect.cs",
+    "Hash": "23A71281CF0AA3BE518C706D1D8D1D05C25AC363E5CBB35CBDFBB48773562493",
+    "Guid": "guid: c650279701382624b8c47226fb77e61f",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\Spirits\\Abilities\\PooledParticleEffect.cs"
+  },
+  {
+    "Name": "SpiritAbility.cs",
+    "Hash": "9C80C8B5AA07479C61D66B021D22F65D35BB2690EEA120AE1FB11360A961A2D5",
+    "Guid": "guid: 15088418dddb460d850556187ad6d7e8",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\Spirits\\Abilities\\SpiritAbility.cs"
+  },
+  {
+    "Name": "StoneSpikeEffect.cs",
+    "Hash": "8B2EB00882F0B0328CBBF331C72375473F935CD5B8F5049D14C06E0EF5C153A1",
+    "Guid": "guid: e3007e56f1bc6234c8c5231a4db413c8",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\Spirits\\Abilities\\StoneSpikeEffect.cs"
+  },
+  {
+    "Name": "WaterAreaEffect.cs",
+    "Hash": "7DB7ED793E678BD31B1033E9FD08A5C514E293E1773F5350EC9C07E4DEBED9A4",
+    "Guid": "guid: a60eb23a9124d6049a42ad998afd24ae",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\Spirits\\Abilities\\WaterAreaEffect.cs"
+  },
+  {
+    "Name": "DataDrivenWeapon.cs",
+    "Hash": "BCDA58912B1208843AC4BC70613F54737D4CEBD3DAC0ECEDF1A6A4FDD22D2998",
+    "Guid": "guid: 1c49a0b4f73b5fc47be8ecc15b440909",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\Spirits\\Weapons\\DataDrivenWeapon.cs"
+  },
+  {
+    "Name": "IceGauntletsWeapon.cs",
+    "Hash": "1D369CD801B0C6D6EBF4CD9D3FE414FB3DEB92D87CC6B9D283FC11D8107736D3",
+    "Guid": "guid: b67c7ff31cb64cd39e327370586f11a8",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\Spirits\\Weapons\\IceGauntletsWeapon.cs"
+  },
+  {
+    "Name": "OrbitingMeleeWeapon.cs",
+    "Hash": "11A55BCC09A801043CA1C153962B2212ABCED5BAC7F917091B3F73E6AF7D00C7",
+    "Guid": "guid: a17a4c8d2bb84732a344e5863223fd92",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\Spirits\\Weapons\\OrbitingMeleeWeapon.cs"
+  },
+  {
+    "Name": "ThrustMeleeWeaponBase.cs",
+    "Hash": "859918FC14DF3BF71775D935CB9FD733CF7A4A7C8060D761CA8BF89760DFC88C",
+    "Guid": "guid: 2ad6917be502469c86ccaf7c79917a18",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\Spirits\\Weapons\\ThrustMeleeWeaponBase.cs"
+  },
+  {
+    "Name": "BossUI.cs",
+    "Hash": "1073DBB3DCEF2679E078CF61671DE0D6BAD7946754CE8D241AC14FBD654F2F92",
+    "Guid": "guid: 4b991406185769c48ab0f084e268da74",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\UI\\BossUI.cs"
+  },
+  {
+    "Name": "CharacterSelectionController.cs",
+    "Hash": "1E53ECB697B85CF46D2671A03547324A943897F73FE2D00838B6F0ED837CF261",
+    "Guid": "guid: c274659e561298e47954dc1901b5917f",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\UI\\CharacterSelection\\CharacterSelectionController.cs"
+  },
+  {
+    "Name": "GameUIManager.cs",
+    "Hash": "6AB41B8B9652DFD8EA64284471926A806F7831EE43D89395D93342328E392063",
+    "Guid": "guid: b8e1b6e74e982454d9ddcb51ad09abb8",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\UI\\Core\\GameUIManager.cs"
+  },
+  {
+    "Name": "UIActionButton.cs",
+    "Hash": "A7AE5CA61AAADADA00C34A1C2842625FFB3EC9E8429B2B7825BC64C3918CF817",
+    "Guid": "guid: 9d17c504e6a44b4195eca9f056270e96",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\UI\\Core\\UIActionButton.cs"
+  },
+  {
+    "Name": "BossEncounterTestButton.cs",
+    "Hash": "C93B39C7D736D317ECB40C7999839415200CD0D7C10041E51D5AFC1A339E3F1D",
+    "Guid": "guid: efad359aeed12124286eae589dfc07eb",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\UI\\Debug\\BossEncounterTestButton.cs"
+  },
+  {
+    "Name": "CombatDebugHUD.cs",
+    "Hash": "711601EFE86D8A8C2266315FFE7C7EEF6826B4DA27D5ECF58F0DB671E8E314F0",
+    "Guid": "guid: 1b83a674a11cc7c4ab97385871e5637a",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\UI\\Debug\\CombatDebugHUD.cs"
+  },
+  {
+    "Name": "DamageNumber.cs",
+    "Hash": "56C87CA74C7C91EF3477B5F5AEA345893432579D382510761EE5B27DD0CCB2A3",
+    "Guid": "guid: b28323e2860d49d0b8de8fae5ead02f2",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\UI\\Debug\\DamageNumber.cs"
+  },
+  {
+    "Name": "DamageNumberEmitter.cs",
+    "Hash": "9E8137D824AECDB92A16089F541B81B3DA5CC3792AF70AE097A31DB00D09DFB2",
+    "Guid": "guid: 79046c00d48f41fab1328695b7f4ee32",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\UI\\Debug\\DamageNumberEmitter.cs"
+  },
+  {
+    "Name": "SpiritGrantButton.cs",
+    "Hash": "2042423CAB662B963E9C0A78909E1ACFD9214925DAFCD16F71D4D46EB65AFF71",
+    "Guid": "guid: e5c5fcdb7d874713b1c37c78f442c834",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\UI\\Debug\\SpiritGrantButton.cs"
+  },
+  {
+    "Name": "StarterSpiritUnlockTestButton.cs",
+    "Hash": "DAAA1D76067CA9E68A9DA42ED3296B4A6E0A749BB4462A8E2FAF8919F0ABEC20",
+    "Guid": "guid: 404d8b88f5d82904783c62c275164f13",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\UI\\Debug\\StarterSpiritUnlockTestButton.cs"
+  },
+  {
+    "Name": "UpgradeTestPanel.cs",
+    "Hash": "B9EEA7DC332DE84908172327492F4013CE57E82C09C8E2A9B627F84761175D2F",
+    "Guid": "guid: 47e4f4bcb50c9294aa6bfe49170862f2",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\UI\\Debug\\UpgradeTestPanel.cs"
+  },
+  {
+    "Name": "PlayerHealthHud.cs",
+    "Hash": "3568B3788B4D8BCEA9485E8725D6C3C5AFDB46727EBC91A113E56780C0D0E4DD",
+    "Guid": "guid: af3ac2d2b23898c40bddb35f4a7a2105",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\UI\\Progression\\PlayerHealthHud.cs"
+  },
+  {
+    "Name": "PlayerProgressionHud.cs",
+    "Hash": "DA7E3858F27C4CA8677B78D07AAC14CBDC711CABF87580A9C07D211C744B1B58",
+    "Guid": "guid: 6b388e6ebecf47e6930dd3e67c4f19c2",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\UI\\Progression\\PlayerProgressionHud.cs"
+  },
+  {
+    "Name": "ProgressionInterface.cs",
+    "Hash": "7C782BB25280642CF277E1F921B674B8F613570E4F46072EAD38B8ECED972C0A",
+    "Guid": "guid: 19ec5beb277f4f67ba72f2460c817f71",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\UI\\Progression\\ProgressionInterface.cs"
+  },
+  {
+    "Name": "RunTimerHud.cs",
+    "Hash": "2C5E9DD507CECC6638BCC90176F0D982B1D914231CFF30F1D4BB38EFF45AB196",
+    "Guid": "guid: 9fcc95ab11f473646b73669995504c03",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\UI\\Progression\\RunTimerHud.cs"
+  },
+  {
+    "Name": "ShepherdLeadCompanionHud.cs",
+    "Hash": "72EE102B3700A2AB3E6DE051F6EA611F43B670D55B27A210E8E2E06B62E1B693",
+    "Guid": "guid: d2e3f4815af092541acaa31f48ee3a8a",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\UI\\Progression\\ShepherdLeadCompanionHud.cs"
+  },
+  {
+    "Name": "ShepherdStationaryBoostHud.cs",
+    "Hash": "6D6E137AB0AD09438D520BBE8149D536FE1385500BB34CCDC174E273EA7FA536",
+    "Guid": "guid: 35c5a51beef372b40bf87e89b37ce74b",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\UI\\Progression\\ShepherdStationaryBoostHud.cs"
+  },
+  {
+    "Name": "LossScreenController.cs",
+    "Hash": "5C10D68455C6BBAF84660A39C48CB720A85951B53A3B4D9AB63A7EB05C18C726",
+    "Guid": "guid: afdbae210eaf9ce4da66ef53139f7eee",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\UI\\Screens\\LossScreenController.cs"
+  },
+  {
+    "Name": "MainMenuController.cs",
+    "Hash": "1C72FBD1E9BAF85E1A2F28E194788EB2E78D348D5047C187378DA2B7833D46B1",
+    "Guid": "guid: dc82fac3c7bfe694bb0b188799ea6a89",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\UI\\Screens\\MainMenuController.cs"
+  },
+  {
+    "Name": "PauseMenuController.cs",
+    "Hash": "E1A4D8D7150DD86FE63E01EBA3F0E38AD76AD6377C0B8A706E25CEE0BDA746DA",
+    "Guid": "guid: 1fd6365d24e8c0f4f819c5b0e24ac52f",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\UI\\Screens\\PauseMenuController.cs"
+  },
+  {
+    "Name": "StarterSpiritCardView.cs",
+    "Hash": "03C657E2858CD4B68FB348B1B65BAD61C567A006319860BC478723593821B804",
+    "Guid": "guid: c6cad540094f49aca7153168987b57fc",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\UI\\SpiritSelection\\StarterSpiritCardView.cs"
+  },
+  {
+    "Name": "StarterSpiritSelectionController.cs",
+    "Hash": "3051389A7B4EE53AAFCA079A7D1EED7B0062AA68824C9735D05F6CD464C8162B",
+    "Guid": "guid: 9469363cd7314c6ca47bcd7fa0d9666a",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\UI\\SpiritSelection\\StarterSpiritSelectionController.cs"
+  },
+  {
+    "Name": "UpgradeCardView.cs",
+    "Hash": "9F983D84A94F4DED414C8B3E85EA78A73A103540190E17F7268E6E7AA56F0335",
+    "Guid": "guid: 239df6359dc77bf45bc242580e61b417",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\UI\\Upgrades\\UpgradeCardView.cs"
+  },
+  {
+    "Name": "UpgradeScreen.cs",
+    "Hash": "D69522005F884C6623A53F47FB38327612B8C16703A32316ABF359289916BA0C",
+    "Guid": "guid: 0edd426b070d13f488a64b5d9a313a85",
+    "Path": "C:\\Users\\julia\\OneDrive\\Documents\\GitHub\\Worldofspirits\\World Of Spirits\\Assets\\_WorldOfSpirits\\Scripts\\UI\\Upgrades\\UpgradeScreen.cs"
+  }
+]

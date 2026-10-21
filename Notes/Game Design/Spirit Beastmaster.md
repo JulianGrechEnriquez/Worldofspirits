@@ -2,7 +2,7 @@
 type: design-concept
 status: discussion
 created: 2026-10-05
-updated: 2026-10-05
+updated: 2026-10-19
 tags: [game-design, characters, companions, beastmaster]
 ---
 
@@ -14,9 +14,31 @@ The character is named **Spirit Beastmaster**. Owned spirits become independent 
 
 When a creature's health reaches zero, it disappears and enters recovery, then returns automatically. Manual revival is not the chosen direction.
 
-This is a character concept, not an implemented system. The number of active creatures, detailed controls and weapon/form restrictions are not decided.
+## Playable prototype — 18 October 2026
 
-The 5 October demo roster is Tamer, Warrior and Shepherd. Beastmaster is deferred to later development; see [[Notes/Planning/Demo Scope and Completion Plan|demo scope]].
+The Beastmaster is now available as a fourth option in the saved character selection screen. It starts with one spirit and uses the Tamer's three contract slots. Spirits become independent damageable creatures, with basic automatic close-range elemental attacks and their unlocked spirit abilities. The first ability starts at level one; other abilities can be unlocked and upgraded through spirit cards. Abilities cast from the creature and pause during recovery. Weapon forms remain disabled.
+
+| Input | Order |
+|---|---|
+| Left-click an enemy | Focus that enemy, then resume the previous order when it dies or despawns. |
+| Left-click the ground | Move to that location and fight nearby enemies. |
+| Right-click the ground | Guard that location, fighting within four world units and returning when threats leave. |
+| Q | Cancel focus, return to the player and defend while following. |
+| Hold Space | Fire spirit bolts toward the cursor, including while all creatures recover. |
+
+Commands apply to all owned creatures. World markers show the destination or focused enemy. Each creature has a health bar; the command panel displays health and recovery countdowns. Orders ignore UI clicks and paused gameplay.
+
+The player has a separate spirit bolt: 6 base physical damage, a 0.35-second fire interval, speed 14, lifetime 1.2 seconds and a small knockback. It uses the projectile pool and shared player damage modifiers, respects pause and player health, and does not require a living spirit.
+
+Initial tuning: 100 creature health, 12 base attack damage, 0.8-second attack interval, 18-second recovery and 1.5 seconds of protection after returning at full health. Shared damage modifiers apply to creature attacks. These values are prototype defaults, not final balance.
+
+Enemies can pursue nearby creatures and crowd enemies can deal contact damage to them. Defeated creatures disappear, lose their hitbox, stop attacking and cannot be targeted; they return near the player automatically. Creature defeats grant no enemy rewards. Spirit-ability cards are available; weapon cards remain excluded.
+
+Unity Play Mode checks passed for selection and card layout, starter creation, independent position, actual Input System mouse/Q bindings, guard/attack-move/recall orders, focus preservation and cleanup, enemy contact damage, creature attacks, defeat and recovery, and owner disable/reactivation. Spirit-specific creature techniques, terrain navigation, dedicated art, exclusive upgrades and full-run balancing remain future work.
+
+19 October Play Mode verification also passed for the Space input binding, bolt cooldown and pause checks, firing during creature recovery, actual projectile collision and damage, knockback, basic ability casting from the creature, and ability disable/restore on defeat/recovery.
+
+The 5 October demo plan deferred Beastmaster; work on this playable prototype began on 18 October. The earlier production scope remains historical context; see [[Notes/Planning/Demo Scope and Completion Plan|demo scope]].
 
 ## Difference from the Shepherd
 

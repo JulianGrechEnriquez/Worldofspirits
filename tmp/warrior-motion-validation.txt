@@ -1,0 +1,2 @@
+PASS: live dash moved 3.00 units; pause froze movement/cooldown; cooldown remains active. Incoming pair: Golem Shield
+PASS: live rotation completed; main pair/armour switched.

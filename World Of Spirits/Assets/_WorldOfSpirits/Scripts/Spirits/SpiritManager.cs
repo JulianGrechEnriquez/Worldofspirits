@@ -30,6 +30,7 @@ namespace WorldOfSpirits.Spirits
         private readonly List<SpiritMember> spirits = new List<SpiritMember>();
         private PlayerMovement playerMovement;
         private UpgradeRuntimeStats upgradeStats;
+        private SpiritWarriorController warrior;
         private float rotationProgress = 1f;
         private Vector3[] rotationStartPositions;
         private bool isChangingFormation;
@@ -38,6 +39,11 @@ namespace WorldOfSpirits.Spirits
         public int SpiritCount => spirits.Count;
         public int SpiritCapacity => slots.Count;
         public bool PlayerIsMoving => playerMovement != null && playerMovement.IsMoving;
+        public bool WeaponsOnly => upgradeStats != null &&
+            upgradeStats.Character == UpgradeCharacter.SpiritWarrior;
+        public bool CompanionsOnly => upgradeStats != null &&
+            upgradeStats.Character == UpgradeCharacter.SpiritShepherd;
+        public bool CreaturesOnly => upgradeStats != null && upgradeStats.Character == UpgradeCharacter.SpiritBeastmaster;
         public bool IsChangingFormation => isChangingFormation;
         public event Action<SpiritMember> SpiritContracted;
         public event Action<SpiritMember> SpiritRotated;
@@ -128,6 +134,12 @@ namespace WorldOfSpirits.Spirits
                 member = spiritObject.AddComponent<SpiritMember>();
             }
 
+            if (CreaturesOnly)
+            {
+                var controller = GetComponent<SpiritBeastmasterController>();
+                if (controller == null) controller = gameObject.AddComponent<SpiritBeastmasterController>();
+                member.gameObject.AddComponent<SpiritCreature>().Initialize(controller, spirits.Count);
+            }
             spirits.Add(member);
             SpiritContracted?.Invoke(member);
             Debug.Log($"Added {requestedName} to spirit slot {spirits.Count}.", this);
@@ -137,6 +149,26 @@ namespace WorldOfSpirits.Spirits
         private static string CleanSpiritName(string spiritName)
         {
             return spiritName.Replace("(Clone)", string.Empty).Trim().ToLowerInvariant();
+        }
+
+        private void OnDestroy()
+        {
+            foreach (var spirit in spirits)
+                if (spirit != null && spirit.GetComponent<SpiritCreature>() != null) Destroy(spirit.gameObject);
+        }
+
+        private void OnDisable()
+        {
+            if (!CreaturesOnly) return;
+            foreach (var spirit in spirits)
+                if (spirit != null) spirit.gameObject.SetActive(false);
+        }
+
+        private void OnEnable()
+        {
+            if (!CreaturesOnly) return;
+            foreach (var spirit in spirits)
+                if (spirit != null) spirit.gameObject.SetActive(true);
         }
 
         public bool IsPrimarySpirit(string spiritName)
@@ -149,6 +181,7 @@ namespace WorldOfSpirits.Spirits
         {
             playerMovement = GetComponent<PlayerMovement>();
             upgradeStats = GetComponent<UpgradeRuntimeStats>();
+            warrior = GetComponent<SpiritWarriorController>();
             if (playerProjectileSpawner == null)
             {
                 Transform existingSpawner = transform.Find("PlayerProjectileSpawner");
@@ -162,6 +195,7 @@ namespace WorldOfSpirits.Spirits
 
         private void Update()
         {
+            if (CreaturesOnly) return;
             if (Keyboard.current != null && Keyboard.current.tabKey.wasPressedThisFrame)
             {
                 RotateSpirits();
@@ -177,17 +211,21 @@ namespace WorldOfSpirits.Spirits
                 spirits[i].ApplyState(
                     transform,
                     playerProjectileSpawner,
-                    meleeWeaponSlots,
+                    WeaponsOnly && warrior != null
+                        ? warrior.GetWeaponAnchors(spirits[i], i, spirits.Count)
+                        : meleeWeaponSlots,
                     i == 0,
                     isMoving,
                     primaryWeaponAndAbilitiesEnabled,
-                    isChangingFormation);
+                    isChangingFormation,
+                    CompanionsOnly,
+                    WeaponsOnly);
             }
         }
 
         public void RotateSpirits()
         {
-            if (spirits.Count < 2 || isChangingFormation)
+            if (CreaturesOnly || spirits.Count < 2 || isChangingFormation)
             {
                 return;
             }
@@ -199,7 +237,7 @@ namespace WorldOfSpirits.Spirits
         {
             isChangingFormation = true;
 
-            float changeDuration = PlayFormationAnimation(false);
+            float changeDuration = (CompanionsOnly || WeaponsOnly) ? 0f : PlayFormationAnimation(false);
             if (changeDuration > 0f)
             {
                 yield return new WaitForSeconds(changeDuration);
@@ -227,7 +265,7 @@ namespace WorldOfSpirits.Spirits
                 yield return null;
             }
 
-            float remergeDuration = PlayFormationAnimation(true);
+            float remergeDuration = (CompanionsOnly || WeaponsOnly) ? 0f : PlayFormationAnimation(true);
             if (remergeDuration > 0f)
             {
                 yield return new WaitForSeconds(remergeDuration);
@@ -354,7 +392,13 @@ namespace WorldOfSpirits.Spirits
                 // deliberately ignored instead of being mistaken for spirits.
                 if (member != null)
                 {
-                    spirits.Add(member);
+                    if (CreaturesOnly)
+            {
+                var controller = GetComponent<SpiritBeastmasterController>();
+                if (controller == null) controller = gameObject.AddComponent<SpiritBeastmasterController>();
+                member.gameObject.AddComponent<SpiritCreature>().Initialize(controller, spirits.Count);
+            }
+            spirits.Add(member);
                 }
             }
 

@@ -18,6 +18,7 @@ namespace WorldOfSpirits.Spirits
         private readonly List<(GameObject Object, PooledSceneObject Pool, int Version)> activeEffects =
             new List<(GameObject, PooledSceneObject, int)>();
         private float followingAreaDisableTime;
+        private float orbitAngle;
         private AbilityLevelData ActiveLevel => definition != null ? definition.GetLevel(CurrentLevel) : null;
 
         public AbilityDefinition Definition => definition;
@@ -102,7 +103,10 @@ namespace WorldOfSpirits.Spirits
             SetOrbitingVisible(true);
             float radius = ActiveLevel.orbitRadius *
                 (UpgradeStats != null ? UpgradeStats.GetMultiplier(UpgradeStat.AreaSize) : 1f);
-            float angleOffset = Time.time * ActiveLevel.orbitSpeed;
+            // Integrate the angle so changing speed does not teleport orbiting effects.
+            orbitAngle = Mathf.Repeat(orbitAngle + Time.deltaTime * ActiveLevel.orbitSpeed *
+                (UpgradeStats != null ? UpgradeStats.CompanionOrbitSpeedMultiplier : 1f), 360f);
+            float angleOffset = orbitAngle;
             Vector3 orbitCenter = LatestContext.Player.position;
             for (int i = 0; i < orbitingObjects.Count; i++)
             {

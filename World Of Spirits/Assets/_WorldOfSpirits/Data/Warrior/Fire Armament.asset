@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b05c02a367ed2f419f5460619a8182a, type: 3}
+  m_Name: Fire Armament
+  m_EditorClassIdentifier: Assembly-CSharp::WorldOfSpirits.Player.WarriorArmamentDefinition
+  element: 1
+  pairedWeaponName: Talon Blades
+  armourName: Ember Armour
+  description: Bow + alternating physical talon lunges that burn enemies. Armour
+    reduces damage by 10%; dash burns nearby enemies.
+  colour: {r: 1, g: 0.4, b: 0.15, a: 1}
+  equipmentSprite: {fileID: 21300000, guid: 3625e892198499f418d8f800bc1de0b9, type: 3}
+  equipmentHeight: 1.15
+  thrustWeaponPrefab: {fileID: 4272928984192379646, guid: caae641818cbc6f4694c510bdf8baf43, type: 3}
+  damage: 12
+  cooldown: 0.5
+  range: 3.2
+  damageReduction: 0.1

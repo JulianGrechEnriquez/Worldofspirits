@@ -16,6 +16,13 @@ namespace WorldOfSpirits.Progression.Upgrades
         [SerializeField] private TMP_Text spiritDustLabel;
         private UpgradeRuntimeStats runtimeStats;
 
+        public void SetSelectionManager(UpgradeSelectionManager manager)
+        {
+            // Character selection calls this while the upgrade canvas is inactive.
+            selectionManager = manager;
+            runtimeStats = manager != null ? manager.GetComponent<UpgradeRuntimeStats>() : null;
+        }
+
         private void Awake()
         {
             if (canvasGroup == null) canvasGroup = GetComponent<CanvasGroup>();

@@ -16,6 +16,14 @@ namespace WorldOfSpirits.UI
 
         private bool subscribed;
 
+        public void SetPlayer(PlayerCharacter selectedPlayer)
+        {
+            if (player != null && subscribed) player.HealthChanged -= Refresh;
+            subscribed = false;
+            player = selectedPlayer;
+            if (isActiveAndEnabled) BindAndRefresh();
+        }
+
         private void Awake()
         {
             if (player == null) player = FindFirstObjectByType<PlayerCharacter>();

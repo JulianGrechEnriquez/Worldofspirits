@@ -1,0 +1,546 @@
+fileFormatVersion: 2
+guid: d8d10dab26299a74f8b70217930a6299
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -5588137071080822131
+    second: Tide Whip_0
+  - first:
+      213: 3218036637915931769
+    second: Tide Whip_1
+  - first:
+      213: -5613924816576090926
+    second: Tide Whip_2
+  - first:
+      213: -2842292740934330606
+    second: Tide Whip_3
+  - first:
+      213: -1116446704041031080
+    second: Tide Whip_4
+  - first:
+      213: 3342038277558373790
+    second: Tide Whip_5
+  - first:
+      213: -7224345525753369284
+    second: Tide Whip_6
+  - first:
+      213: 3563003186382260783
+    second: Tide Whip_7
+  - first:
+      213: 8074230208177922678
+    second: Tide Whip_8
+  - first:
+      213: -7635811420900303998
+    second: Tide Whip_9
+  - first:
+      213: -222371756203086446
+    second: Tide Whip_10
+  - first:
+      213: -4937747418883432069
+    second: Tide Whip_11
+  - first:
+      213: 1500028850229147778
+    second: Tide Whip_12
+  - first:
+      213: 6568769633669418374
+    second: Tide Whip_13
+  - first:
+      213: 6338116665555117413
+    second: Tide Whip_14
+  - first:
+      213: 1162999947151717588
+    second: Tide Whip_15
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 512
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Tide Whip_0
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 47
+        width: 307
+        height: 1164
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d8a290ae0f2f272b0800000000000000
+      internalID: -5588137071080822131
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tide Whip_1
+      rect:
+        serializedVersion: 2
+        x: 177
+        y: 425
+        width: 7
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 974eb25b543c8ac20800000000000000
+      internalID: 3218036637915931769
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tide Whip_2
+      rect:
+        serializedVersion: 2
+        x: 289
+        y: 805
+        width: 18
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2dc6b388f155712b0800000000000000
+      internalID: -5613924816576090926
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tide Whip_3
+      rect:
+        serializedVersion: 2
+        x: 305
+        y: 0
+        width: 930
+        height: 1224
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 21710fcafc52e88d0800000000000000
+      internalID: -2842292740934330606
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tide Whip_4
+      rect:
+        serializedVersion: 2
+        x: 311
+        y: 466
+        width: 8
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 85a8afa43a59180f0800000000000000
+      internalID: -1116446704041031080
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tide Whip_5
+      rect:
+        serializedVersion: 2
+        x: 338
+        y: 495
+        width: 23
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e9d00a74b1e416e20800000000000000
+      internalID: 3342038277558373790
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tide Whip_6
+      rect:
+        serializedVersion: 2
+        x: 362
+        y: 499
+        width: 7
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c3da9c24508fdbb90800000000000000
+      internalID: -7224345525753369284
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tide Whip_7
+      rect:
+        serializedVersion: 2
+        x: 372
+        y: 487
+        width: 9
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f2a46e93584527130800000000000000
+      internalID: 3563003186382260783
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tide Whip_8
+      rect:
+        serializedVersion: 2
+        x: 394
+        y: 389
+        width: 11
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6726c21689d6d0070800000000000000
+      internalID: 8074230208177922678
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tide Whip_9
+      rect:
+        serializedVersion: 2
+        x: 414
+        y: 931
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 28bdd5d08f5280690800000000000000
+      internalID: -7635811420900303998
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tide Whip_10
+      rect:
+        serializedVersion: 2
+        x: 997
+        y: 630
+        width: 9
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 29d6f6fd01af9ecf0800000000000000
+      internalID: -222371756203086446
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tide Whip_11
+      rect:
+        serializedVersion: 2
+        x: 1005
+        y: 626
+        width: 13
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b71e9d242e8997bb0800000000000000
+      internalID: -4937747418883432069
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tide Whip_12
+      rect:
+        serializedVersion: 2
+        x: 1011
+        y: 1065
+        width: 19
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 288feb2ba4c21d410800000000000000
+      internalID: 1500028850229147778
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tide Whip_13
+      rect:
+        serializedVersion: 2
+        x: 1017
+        y: 1084
+        width: 19
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 68d0d32dd25f82b50800000000000000
+      internalID: 6568769633669418374
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tide Whip_14
+      rect:
+        serializedVersion: 2
+        x: 1045
+        y: 1046
+        width: 11
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 565656bc68385f750800000000000000
+      internalID: 6338116665555117413
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tide Whip_15
+      rect:
+        serializedVersion: 2
+        x: 1145
+        y: 943
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4d4b6c34a4ec32010800000000000000
+      internalID: 1162999947151717588
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Tide Whip_0: -5588137071080822131
+      Tide Whip_1: 3218036637915931769
+      Tide Whip_10: -222371756203086446
+      Tide Whip_11: -4937747418883432069
+      Tide Whip_12: 1500028850229147778
+      Tide Whip_13: 6568769633669418374
+      Tide Whip_14: 6338116665555117413
+      Tide Whip_15: 1162999947151717588
+      Tide Whip_2: -5613924816576090926
+      Tide Whip_3: -2842292740934330606
+      Tide Whip_4: -1116446704041031080
+      Tide Whip_5: 3342038277558373790
+      Tide Whip_6: -7224345525753369284
+      Tide Whip_7: 3563003186382260783
+      Tide Whip_8: 8074230208177922678
+      Tide Whip_9: -7635811420900303998
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

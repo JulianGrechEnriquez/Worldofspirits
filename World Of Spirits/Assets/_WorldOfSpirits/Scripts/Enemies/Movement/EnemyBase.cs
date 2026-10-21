@@ -22,6 +22,7 @@ namespace WorldOfSpirits.Enemies
 
         protected Rigidbody2D Body { get; private set; }
         protected Transform Target => target;
+        public void SetTarget(Transform selectedPlayer) => target = selectedPlayer;
         public override Faction Faction => global::WorldOfSpirits.Combat.Faction.Enemy;
         public bool IsElite { get; private set; }
         public bool IsBoss { get; private set; }
@@ -67,6 +68,12 @@ namespace WorldOfSpirits.Enemies
                 return;
             }
 
+            var player = GetPlayerTransform();
+            if (player != null)
+            {
+                var creature = WorldOfSpirits.Spirits.SpiritCreature.FindThreat(transform.position, player.position);
+                target = creature != null ? creature.transform : player;
+            }
             if (IsAlive && target != null)
             {
                 if (Time.fixedTime >= nextMovementRefresh)

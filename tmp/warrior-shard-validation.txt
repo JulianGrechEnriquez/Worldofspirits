@@ -1,0 +1,1 @@
+PASS: travelling Ice shards hit a target four units away; damage 6

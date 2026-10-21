@@ -1,0 +1,39 @@
+Organize upgrades and document demo characters and Shepherd combined moves
+
+Upgrade catalog:
+- Organize all 100 existing cards into General, Character and Spirit folders,
+  preserving asset GUIDs, stable IDs, rarities, maximum levels and offer weights.
+- Add grouped catalog browsing, search, tester filters and character restrictions.
+- Make Spirit Master a Tamer-only character upgrade.
+- Keep card creation and starter generation compatible with organized folders
+  and preserve custom entries in the catalog.
+
+Weapons and authoring:
+- Separate runtime weapon prefabs from spirit hierarchies and bind their owners.
+- Update five runtime weapon prefabs, definitions and spirit connections.
+- Add projectile triggers for hits, expiry and despawn with weapon-level/card
+  requirements, secondary effects and bounded projectile generations.
+- Add focused ability and projectile-trigger editor inspectors.
+- Propagate triggered damage to persistent zones and release Avalanche state.
+- Remove duplicate combat simulation manager objects from Game.
+
+Obsidian design and planning:
+- Plan Tamer, Warrior and Shepherd as the three demo characters.
+- Record Warrior weapon pairs for all nine design spirits, armour and movement ideas.
+- Draft 14 exclusive upgrades each for Warrior and Shepherd.
+- Define Shepherd-only combined ability moves, beginning with Whirlpool + Tornado;
+  spirits never merge and exact unlock/casting rules remain open.
+- Record Beastmaster independent creatures, health and automatic recovery as
+  later character work.
+- Update Home, demo scope, roadmap, decision log and linked design notes.
+
+Validation:
+- Unity loads the 100-card catalog without missing or duplicate card entries.
+- Both enabled scenes and 17 spirit/runtime weapon prefabs have no missing scripts.
+- Catalog migration and Tamer-only eligibility/application checks passed.
+- Source/document whitespace checks passed, allowing Unity-generated trailing spaces.
+- No new standalone build or complete character playthrough was performed.
+
+Warrior, Shepherd, Beastmaster and their new exclusive/combined effects remain
+design work rather than playable implementations. Exported builds, temporary
+backups and generated local tool instructions are excluded.

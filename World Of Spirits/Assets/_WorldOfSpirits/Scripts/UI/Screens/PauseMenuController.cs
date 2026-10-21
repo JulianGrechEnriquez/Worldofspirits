@@ -124,7 +124,12 @@ namespace WorldOfSpirits.UI
                 {
                     string abilityName = spirit.Definition.RuntimeAbilities.Count > 0
                         ? spirit.Definition.RuntimeAbilities[ability].name : spirit.Definition.Abilities[ability].AbilityName;
-                    text.AppendLine($"{abilityName}  Lv.{spirit.Progression.GetAbilityLevel(ability)}");
+                    int purchasedLevel = spirit.Progression.GetAbilityLevel(ability);
+                    int effectiveLevel = spirit.GetEffectiveAbilityLevel(ability);
+                    text.AppendLine(purchasedLevel <= 0 ? $"{abilityName}  Locked" :
+                        effectiveLevel > purchasedLevel
+                            ? $"{abilityName}  Lv.{purchasedLevel} (+1 lead: Lv.{effectiveLevel})"
+                            : $"{abilityName}  Lv.{purchasedLevel}");
                 }
                 text.AppendLine();
             }

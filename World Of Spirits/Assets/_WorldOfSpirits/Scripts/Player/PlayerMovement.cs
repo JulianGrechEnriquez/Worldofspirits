@@ -22,6 +22,7 @@ namespace WorldOfSpirits.Player
         private Rigidbody2D rb;
         private PlayerCharacter playerCharacter;
         private UpgradeRuntimeStats upgradeStats;
+        private SpiritWarriorController warrior;
         private Vector2 moveInput;
         private Vector2 lastMoveDirection = Vector2.down;
         private bool hasMoveX;
@@ -31,7 +32,7 @@ namespace WorldOfSpirits.Player
         private bool hasLastMoveY;
         private string currentAnimationState;
 
-        public bool IsMoving => moveInput.sqrMagnitude > 0.01f;
+        public bool IsMoving => moveInput.sqrMagnitude > 0.01f || (warrior != null && warrior.IsDashing);
         public Vector2 MoveDirection => moveInput;
         public Vector2 LastMoveDirection => lastMoveDirection;
 
@@ -40,6 +41,7 @@ namespace WorldOfSpirits.Player
             rb = GetComponent<Rigidbody2D>();
             playerCharacter = GetComponent<PlayerCharacter>();
             upgradeStats = GetComponent<UpgradeRuntimeStats>();
+            warrior = GetComponent<SpiritWarriorController>();
             rb.gravityScale = 0f;
             rb.freezeRotation = true;
 
@@ -61,6 +63,20 @@ namespace WorldOfSpirits.Player
         {
             float speed = playerCharacter != null ? playerCharacter.MoveSpeed : fallbackMoveSpeed;
             if (upgradeStats != null) speed *= upgradeStats.GetMultiplier(UpgradeStat.MovementSpeed);
+            if (playerCharacter != null && (!playerCharacter.IsAlive || playerCharacter.IsMovementDisabled))
+            {
+                rb.linearVelocity = Vector2.zero;
+                return;
+            }
+            if (warrior != null && warrior.Active)
+            {
+                speed *= warrior.MovementMultiplier;
+                if (warrior.IsDashing)
+                {
+                    rb.linearVelocity = warrior.DashVelocity;
+                    return;
+                }
+            }
             rb.linearVelocity = moveInput * speed;
         }
 

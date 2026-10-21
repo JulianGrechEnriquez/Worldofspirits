@@ -3,6 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using WorldOfSpirits.Spirits;
+using WorldOfSpirits.Progression.Upgrades;
 
 namespace WorldOfSpirits.UI
 {
@@ -20,6 +21,9 @@ namespace WorldOfSpirits.UI
 
         private GameObject spiritPrefab;
         private Action<GameObject> selected;
+        private string displayedSpiritName;
+        public GameObject SpiritPrefab => spiritPrefab;
+        public Button SelectionButton => button;
 
         private void Awake()
         {
@@ -47,10 +51,16 @@ namespace WorldOfSpirits.UI
             }
 
             gameObject.name = $"Starter Card - {definition.SpiritName}";
+            displayedSpiritName = definition.SpiritName;
             if (spiritNameText != null) spiritNameText.text = definition.SpiritName;
             if (weaponNameText != null)
-                weaponNameText.text = definition.RuntimeWeapon != null
-                    ? definition.RuntimeWeapon.WeaponName : definition.Weapon.WeaponName;
+            {
+                var character = FindFirstObjectByType<UpgradeRuntimeStats>();
+                weaponNameText.text = character != null && character.Character == UpgradeCharacter.SpiritShepherd
+                    ? "Companion only"
+                    : definition.RuntimeWeapon != null
+                        ? definition.RuntimeWeapon.WeaponName : definition.Weapon.WeaponName;
+            }
 
             AbilityDefinition firstAbility = definition.RuntimeAbilities.Count > 0
                 ? definition.RuntimeAbilities[0] : null;
@@ -60,6 +70,15 @@ namespace WorldOfSpirits.UI
             if (descriptionText != null)
                 descriptionText.text = firstAbility != null
                     ? firstAbility.Description : $"A {definition.Shape} spirit.";
+
+            var warrior = FindFirstObjectByType<WorldOfSpirits.Player.SpiritWarriorController>();
+            var armament = warrior != null && warrior.Active ? warrior.FindArmament(member) : null;
+            if (armament != null)
+            {
+                if (weaponNameText != null) weaponNameText.text += " + " + armament.pairedWeaponName;
+                if (firstAbilityText != null) firstAbilityText.text = armament.armourName;
+                if (descriptionText != null) descriptionText.text = armament.description;
+            }
 
             SpriteRenderer preview = prefab.GetComponentInChildren<SpriteRenderer>(true);
             if (portrait != null)
@@ -72,6 +91,13 @@ namespace WorldOfSpirits.UI
             }
             if (border != null) border.color = GetSpiritColor(definition.SpiritName);
             gameObject.SetActive(true);
+        }
+
+        public void SetSelected(bool isSelected)
+        {
+            button.interactable = !isSelected;
+            if (spiritNameText != null)
+                spiritNameText.text = isSelected ? $"{displayedSpiritName} — Selected" : displayedSpiritName;
         }
 
         private void Select()

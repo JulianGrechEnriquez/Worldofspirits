@@ -90,9 +90,12 @@ namespace WorldOfSpirits.UI
                 return "Main Spirit: manager not found\nSupport 1: Empty\nSupport 2: Empty";
             }
 
-            return $"Main Spirit: {spiritManager.GetSpiritNameAt(0)}\n" +
-                   $"Support 1: {spiritManager.GetSpiritNameAt(1)}\n" +
-                   $"Support 2: {spiritManager.GetSpiritNameAt(2)}";
+            var text = new System.Text.StringBuilder();
+            text.Append($"Spirits: {spiritManager.SpiritCount}/{spiritManager.SpiritCapacity}\n");
+            text.Append($"{(spiritManager.CompanionsOnly ? "Lead Companion" : "Main Spirit")}: {spiritManager.GetSpiritNameAt(0)}");
+            for (int i = 1; i < spiritManager.SpiritCapacity; i++)
+                text.Append($"\nSupport {i}: {spiritManager.GetSpiritNameAt(i)}");
+            return text.ToString();
         }
 
         private void EnsureStyles()

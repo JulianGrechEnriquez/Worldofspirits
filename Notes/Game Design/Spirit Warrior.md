@@ -1,8 +1,8 @@
 ---
 type: design-concept
-status: discussion
+status: playable-prototype
 created: 2026-10-05
-updated: 2026-10-05
+updated: 2026-10-18
 tags: [game-design, characters, warrior, movement, upgrades]
 ---
 
@@ -14,11 +14,46 @@ tags: [game-design, characters, warrior, movement, upgrades]
 - The class should encourage frequent movement.
 - Its upgrades should support its weapons and character abilities.
 
-The user proposed two weapon functions for the main-slot spirit and spirit armour that grants abilities. These are the current design direction to explore; exact mechanics are not finalized. Nothing in this note is implemented yet.
+The weapon-only character, main-slot paired weapons, spirit armour, elemental dash and momentum now have a playable first implementation for the five existing spirit prefabs. Values are initial tuning choices; the future-spirit kits and additional upgrade branches below remain design proposals.
+
+## Basic character implementation — 18 October 2026
+
+- Select Spirit Warrior from the character selection screen. It has a separate prefab using the current player artwork.
+- Choose one starter spirit, with three base spirit slots.
+- All owned spirits stay in weapon form and attack while moving or stationary, including support slots.
+- Companion visuals and companion ability casting are disabled. Companion ability upgrade cards are excluded.
+- Rotation keeps the weapon-only form and skips companion transformation animations.
+- The main spirit grants its paired weapon and armour automatically, without drawing an upgrade. Non-main spirits retain their normal weapons and their own weapon levels.
+- Space or Left Shift dashes in the movement direction, or the last facing direction when stationary. Dash lasts 0.2 seconds at 3× movement speed and has a 3-second cooldown, scaled by cooldown reduction. Terrain collision and incoming damage remain active.
+- Moving within 8 units of an enemy builds momentum over 4 seconds. It grants up to +20% weapon damage; stopping or leaving combat drains it at 35% per second.
+- Tab rotates the main spirit. The incoming spirit supplies the pair and armour; paired-weapon cooldowns remain attached to each spirit so rotation cannot reset them. An ongoing dash retains its starting element, and its temporary Water shield can last its remaining 2 seconds after rotation.
+- Pausing freezes dash movement, cooldowns and attacks. Stun/freeze prevents dash movement and damage. Disabling the character clears dash, momentum, pair cooldowns and technique visuals.
+- HUD shows the main pair, armour, dash readiness and momentum. Starter cards explain the Warrior kit instead of companion abilities.
+- The five armament assets under `Data/Warrior` expose names, descriptions, colours, paired damage, cooldown, range and armour reduction for tuning. The Warrior prefab holds dash settings and material references.
+
+### Implemented pair and armour effects
+
+| Spirit | Main-slot paired weapon | Armour and dash |
+|---|---|---|
+| Fire | Talon Blades: two physical claws alternate extend/hit/return lunges, like Ice Gauntlets. Level one: 12 damage, 0.5-second attack cooldown, 2.8-unit thrust, 3.2-unit targeting range; burns for 1.5 seconds. | Ember Armour: 10% damage reduction. Dash hits and burns nearby enemies. |
+| Earth | Golem Shield: a physical shield automatically lunges and bashes nearby enemies; 18 damage every 0.9 seconds, 2.8-unit thrust, 3.2-unit targeting range. Hits briefly stun and apply 4.5 base knockback through crowd steering. No incoming hit is required. | Juggernaut Armour: 15% baseline reduction; frontal reduction rises to 60% during dash. Dash stuns struck enemies for 0.4 seconds. |
+| Water | Tide Whip: 14-damage sweep every 1.2 seconds, 3.5-unit range; pulls and slows enemies. | Tide Armour: 10% reduction. Dash grants a 12-point shield for 2 seconds and pushes/slows enemies. |
+| Wind | Gale Fans: 14-damage sweep every 1.2 seconds; pushes and slows enemies. | Gale Armour: 10% reduction and 12% movement speed. Dash pushes/slows nearby enemies. Projectile deflection remains a future option. |
+| Ice | Shard Launcher: three travelling shards every 1.8 seconds, 6 damage each, 9-unit range; slows for 1 second. | Frost Armour: 10% reduction. Dash slows nearby enemies by 35% for 2 seconds. |
+
+Each paired weapon scales damage by +20% per purchased weapon level after level one. General attack damage, attack speed, area, duration and elemental upgrades apply where relevant. Ice supports extra projectiles (capped at five per volley), projectile speed and size; its eight reusable shot slots cap simultaneous shards. A dash deals 12 base damage scaled by momentum before normal weapon damage modifiers and hits each enemy once. Wind paired melee range starts at 2.7 units. Fire and Earth use separate five-level WeaponDefinition assets with physical hitboxes and the same ThrustMeleeWeaponBase attack loop as Ice Gauntlets; the main spirit weapon level controls their level. Attack speed and melee echo damage upgrades apply. Each physical swing deduplicates its own targets. Their cooldowns persist across main-slot changes. Water/Wind forces use the existing kinematic crowd steering system.
+
+Shared companion-only modifier cards are also excluded: 36 existing cards were rejected, including ability cards and cards that only improve companion damage. The proposed 14 Warrior-exclusive upgrades remain a separate design draft and are not implemented in this pass.
+
+Validation in Unity play mode: all five paired kits dealt damage or spawned travelling shards; shield frontal reduction, Water shielding, pair cooldowns, dash cooldowns and hit deduplication passed. All five normal weapons stayed active while moving/stationary with companion renderers hidden and 20 distinct melee anchors. Tamer/Shepherd form-state regression checks passed. A live Ice shard hit a stationary target four units away. Sixty passive-ability movement/slot checks passed and no companion orbital snowballs spawned. A live dash moved three units; pausing froze movement and cooldown, and live rotation switched the main pair/armour. Final live motion/rotation results are recorded in `tmp/warrior-motion-validation.txt`.
+
+Presentation uses five generated transparent paired-weapon sprites under `Art/Sprites/Warrior/PairedWeapons`: Fire Talon, Earth Shield, Tide Whip, Gale Fan and Shard Launcher. Art and full generation prompts are saved together in that folder; the built-in image_gen tool was used. The current player sprite, magical armour outlines and attack effects remain. Dedicated Warrior character artwork, balance playtesting, the four future spirits and additional armour/upgrade branches are still outstanding.
+
+Physical weapon validation: live Fire attacks alternated both claws through Idle/Extending/Returning and dealt damage; Earth automatically bashed, dealt damage, and produced crowd knockback. Main-slot change hid/disabled the outgoing shield. A paused physical weapon did not advance its phase. See `tmp/warrior-physical-weapons-validation.txt`.
 
 ## Main-slot weapon pairs
 
-The main spirit could provide two complementary weapons or weapon functions. The following nine pairings were selected as the current concept direction on 5 October 2026. Their interaction examples remain proposals; attack rules, unlocks and balance are not finalized. The list includes all spirits in the design notes, including the future Necrotic concept, rather than only the currently implemented roster.
+The main spirit could provide two complementary weapons or weapon functions. The following nine pairings were selected as the current concept direction on 5 October 2026. The first five pairs have the playable behaviour listed above; the remaining four and additional interaction examples remain proposals. Balance is not finalized. The list includes all spirits in the design notes, including the future Necrotic concept, rather than only the currently implemented roster.
 
 | Spirit | Existing weapon | Paired weapon | Proposed interaction while moving |
 |---|---|---|---|
@@ -32,13 +67,13 @@ The main spirit could provide two complementary weapons or weapon functions. The
 | Necrotic — Bat | Necrotic Katana | Soul Chains | Chains catch or curse a target; katana finishes weakened enemies. |
 | Holy — Angel | Holy Sword | Halo Shield | Sword attacks nearby enemies; shield protects a direction and releases a counterattack. |
 
-These may be two linked functions of one spirit weapon rather than separate unrelated weapons. Other owned spirits remain weapons; their attack frequency, position and number of simultaneous attacks still need decisions.
+The current implementation gives every owned spirit its normal weapon and the main spirit one additional technique. All normal weapons can attack simultaneously and use separate resting anchors.
 
-A possible structure is one normal weapon per spirit, with the main slot activating that spirit's paired weapon and armour power. Another proposal is unlocking the second weapon through a Warrior upgrade. Neither activation/unlock rule is decided yet. Rotation would change the player's fighting style while preserving the weapon-only identity.
+The current baseline grants the main-slot pair and armour automatically. Unlocking extra functions through upgrades remains a possible later extension.
 
 Earth and Holy should have different defensive identities: the Golem Shield pushes through danger, while the Halo Shield blocks and counters. Water's earlier returning-spear pairing remains an alternative, but Tide Whip is the current recorded pairing.
 
-## Spirit armour upgrades
+## Additional spirit armour upgrade proposals
 
 Armour could be spirit-created equipment that grants active or automatic player abilities, rather than only defence statistics. It does not turn a spirit into a companion.
 
@@ -79,13 +114,13 @@ Example: an Earth Warrior shield-charges through enemies and swings the hammer, 
 
 ## Open decisions
 
-- [ ] How many weapons attack simultaneously, and how do non-main weapons behave?
-- [ ] Are the main-slot functions simultaneous, alternating automatically or selected by input?
+- [x] All owned normal weapons can attack simultaneously; only the main slot activates a pair and armour.
+- [x] The base weapon and automatic paired technique work simultaneously; Earth performs automatic physical shield bashes while its armour reduces frontal damage.
 - [x] Record the initial weapon pairings for all nine design spirits.
 - [ ] Define and playtest the interaction of each pair, including defensive and control weapons.
-- [ ] How is armour acquired, upgraded and changed during rotation?
-- [ ] Does the class gain a dash, and what limits its use?
-- [ ] Choose momentum, frenzy or another shared resource; define gain, decay and spending.
+- [x] Baseline armour follows the main slot automatically. Upgrade branches remain future work.
+- [x] Add a 0.2-second dash with a 3-second base cooldown and one hit per target.
+- [x] Add combat movement momentum with gain/decay and a passive weapon damage bonus. Spending/finishers remain future work.
 - [ ] Keep, replace or remove the Tamer's stationary charge bonuses for this class?
 - [ ] Decide whether combinations depend on the owned party or the order of rotation.
 - [ ] Balance damage, defence, targeting and visual clarity across the arsenal.

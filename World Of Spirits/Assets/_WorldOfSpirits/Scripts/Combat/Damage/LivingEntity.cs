@@ -215,6 +215,7 @@ namespace WorldOfSpirits.Combat
         public void AddShield(float amount, float duration)
         {
             if (!IsAlive || amount <= 0f) return;
+            if (Time.time >= shieldEndTime) currentShield = 0f;
             currentShield += amount;
             shieldEndTime = Mathf.Max(shieldEndTime, Time.time + Mathf.Max(0.1f, duration));
         }

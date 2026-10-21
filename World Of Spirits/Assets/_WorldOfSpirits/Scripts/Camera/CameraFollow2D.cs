@@ -13,6 +13,13 @@ namespace WorldOfSpirits.CameraSystem
 
         private Vector3 velocity;
 
+        public void SetPlayer(PlayerCharacter player)
+        {
+            target = player != null ? player.transform : null;
+            velocity = Vector3.zero;
+            SnapToTarget();
+        }
+
         private void Awake()
         {
             FindPlayerIfNeeded();

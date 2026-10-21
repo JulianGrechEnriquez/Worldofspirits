@@ -370,6 +370,17 @@ namespace WorldOfSpirits.Crowd
                 return;
             }
 
+            var creature = WorldOfSpirits.Spirits.SpiritCreature.FindThreat(body.position, playerPosition);
+            if (creature != null)
+            {
+                float reach = profile.CollisionRadius + 0.4f + profile.AttackRange;
+                if (((Vector2)creature.transform.position - body.position).sqrMagnitude <= reach * reach)
+                {
+                    creature.TakeDamage(new WorldOfSpirits.Combat.DamageContext(profile.ContactDamage, transform));
+                    nextAttackTime = Time.time + profile.AttackCooldown;
+                }
+                return;
+            }
             float contactDistance =
                 profile.CollisionRadius + playerCollisionRadius + profile.AttackRange;
             Vector2 direction = playerPosition - body.position;
@@ -381,7 +392,8 @@ namespace WorldOfSpirits.Crowd
             playerCharacter.TryTakeContactDamage(
                 profile.ContactDamage,
                 direction.sqrMagnitude > 0.001f ? direction.normalized : Vector2.zero,
-                profile.Knockback);
+                profile.Knockback,
+                transform);
             nextAttackTime = Time.time + profile.AttackCooldown;
         }
 

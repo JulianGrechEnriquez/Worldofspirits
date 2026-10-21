@@ -17,7 +17,7 @@ Add playable characters with different relationships to their contracted spirits
 - **Spirit Tamer:** the existing movement-based character is the comparison point: companion abilities while moving, main-spirit weapon while stationary.
 - **Spirit Beastmaster:** spirits fight as independently moving creatures with their own health bars. At zero health they disappear, recover and return automatically. The name and recovery direction were chosen on 5 October 2026; see [[Notes/Game Design/Spirit Beastmaster|Spirit Beastmaster]].
 
-The planned demo roster is **Spirit Tamer, Spirit Warrior and Spirit Shepherd**, recorded on 5 October 2026. **Spirit Beastmaster is planned for later development.** See [[Notes/Planning/Demo Scope and Completion Plan|demo scope]]. The new characters are not implemented; exact limits, balance values and unlock rules remain open.
+The planned demo roster is **Spirit Tamer, Spirit Warrior and Spirit Shepherd**, recorded on 5 October 2026. **Spirit Beastmaster is planned for later development.** See [[Notes/Planning/Demo Scope and Completion Plan|demo scope]]. Spirit Warrior now has a playable weapon-only prototype with main-slot pairs, armour, dash and momentum for the five existing spirit prefabs; see [[Notes/Game Design/Spirit Warrior|current Warrior behaviour and validation]]. Character balance and unlock rules remain open.
 
 ## Proposed character identities
 

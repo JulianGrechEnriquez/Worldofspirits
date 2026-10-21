@@ -13,6 +13,7 @@ namespace WorldOfSpirits.Player
         private Rigidbody2D body;
         private float nextContactDamageTime;
         private UpgradeRuntimeStats upgradeStats;
+        private SpiritWarriorController warrior;
 
         public override Faction Faction => global::WorldOfSpirits.Combat.Faction.Player;
         public event Action<float, float> PlayerHealthChanged;
@@ -23,6 +24,7 @@ namespace WorldOfSpirits.Player
             base.Awake();
             body = GetComponent<Rigidbody2D>();
             upgradeStats = GetComponent<UpgradeRuntimeStats>();
+            warrior = GetComponent<SpiritWarriorController>();
         }
 
         protected override void OnEnable()
@@ -50,6 +52,7 @@ namespace WorldOfSpirits.Player
             float armor = upgradeStats != null ? upgradeStats.GetFlat(UpgradeStat.Armor) : 0f;
             float amount = DamageResolver.Calculate(context, this) *
                 (100f / (100f + Mathf.Max(0f, armor)));
+            if (warrior != null) amount = warrior.ReduceIncomingDamage(amount, context);
             ApplyResolvedDamage(amount, context);
         }
 
@@ -61,14 +64,15 @@ namespace WorldOfSpirits.Player
         public bool TryTakeContactDamage(
             float damage,
             Vector2 incomingDirection,
-            float knockback)
+            float knockback,
+            Transform source = null)
         {
             if (!IsAlive || Time.time < nextContactDamageTime)
             {
                 return false;
             }
 
-            TakeDamage(damage);
+            TakeDamage(new DamageContext(damage, source));
             nextContactDamageTime = Time.time + globalContactInvulnerability;
 
             if (body != null && knockback > 0f)

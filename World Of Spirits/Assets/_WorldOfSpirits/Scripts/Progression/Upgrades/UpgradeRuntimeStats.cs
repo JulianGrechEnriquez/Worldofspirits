@@ -11,9 +11,26 @@ namespace WorldOfSpirits.Progression.Upgrades
     [DisallowMultipleComponent]
     public sealed class UpgradeRuntimeStats : MonoBehaviour, IUpgradeable
     {
-        [Tooltip("Upgrade eligibility only. Warrior and Shepherd combat rules are not implemented yet.")]
+        [Tooltip("Character upgrade eligibility and spirit form rules. Warrior uses weapons only; Shepherd uses companions only.")]
         [SerializeField] private UpgradeCharacter character = UpgradeCharacter.SpiritTamer;
         public UpgradeCharacter Character => character;
+        public void SetCharacter(UpgradeCharacter value) => character = value;
+
+        [Header("Shepherd Stationary Boost")]
+        [SerializeField, Min(0f)] private float shepherdStationaryDamageBonus = 0.25f;
+        [SerializeField, Min(0f)] private float shepherdStationaryCastSpeedBonus = 0.20f;
+        [SerializeField, Min(0f)] private float shepherdStationaryOrbitSpeedBonus = 0.25f;
+
+        private PlayerMovement playerMovement;
+        private SpiritWarriorController warrior;
+        public bool ShepherdStationaryBoostActive => character == UpgradeCharacter.SpiritShepherd &&
+            player != null && player.IsAlive && playerMovement != null && !playerMovement.IsMoving;
+        public float CompanionDamageMultiplier => ShepherdStationaryBoostActive
+            ? 1f + Mathf.Max(0f, shepherdStationaryDamageBonus) : 1f;
+        public float CompanionCastSpeedMultiplier => ShepherdStationaryBoostActive
+            ? 1f + Mathf.Max(0f, shepherdStationaryCastSpeedBonus) : 1f;
+        public float CompanionOrbitSpeedMultiplier => ShepherdStationaryBoostActive
+            ? 1f + Mathf.Max(0f, shepherdStationaryOrbitSpeedBonus) : 1f;
         private readonly Dictionary<string, int> cardLevels = new Dictionary<string, int>(64);
         private readonly float[] additive = new float[(int)UpgradeStat.Count];
         private readonly float[] multiplicative = new float[(int)UpgradeStat.Count];
@@ -27,6 +44,8 @@ namespace WorldOfSpirits.Progression.Upgrades
         private void Awake()
         {
             player = GetComponent<PlayerCharacter>();
+            playerMovement = GetComponent<PlayerMovement>();
+            warrior = GetComponent<SpiritWarriorController>();
             spiritManager = GetComponent<SpiritManager>();
         }
 
@@ -47,7 +66,7 @@ namespace WorldOfSpirits.Progression.Upgrades
 
         public bool TryApply(UpgradeCardDefinition card)
         {
-            if (card == null || !card.IsAvailableFor(character)) return false;
+            if (!CanApply(card)) return false;
             int oldLevel = GetCardLevel(card.Id);
             if (oldLevel >= card.MaximumLevel && !card.RepeatableAfterMaximum) return false;
 
@@ -74,6 +93,16 @@ namespace WorldOfSpirits.Progression.Upgrades
             int newLevel = oldLevel + 1;
             cardLevels[card.Id] = newLevel;
             UpgradeApplied?.Invoke(card, newLevel);
+            return true;
+        }
+
+        public bool CanApply(UpgradeCardDefinition card)
+        {
+            if (card == null || !card.IsAvailableFor(character)) return false;
+            if (GetCardLevel(card.Id) >= card.MaximumLevel && !card.RepeatableAfterMaximum) return false;
+            if (card.MinimumOwnedSpirits > (spiritManager != null ? spiritManager.SpiritCount : 0)) return false;
+            foreach (UpgradeRequirement requirement in card.Requirements)
+                if (GetCardLevel(requirement.cardId) < Mathf.Max(1, requirement.requiredLevel)) return false;
             return true;
         }
 
@@ -137,7 +166,7 @@ namespace WorldOfSpirits.Progression.Upgrades
 
         public float ScaleWeaponDamage(float baseDamage, IDamageable target = null)
         {
-            float result = baseDamage * GetMultiplier(UpgradeStat.AttackDamage) *
+            float result = baseDamage * (warrior != null ? warrior.WeaponDamageMultiplier : 1f) * GetMultiplier(UpgradeStat.AttackDamage) *
                 GetMultiplier(UpgradeStat.ElementalDamage);
             return ScaleDamageAgainstTarget(RollCritical(result), target);
         }
@@ -147,8 +176,9 @@ namespace WorldOfSpirits.Progression.Upgrades
             float result = context.BaseDamage;
             if (context.IsWeaponDamage || context.IsSpiritDamage)
                 result *= GetMultiplier(UpgradeStat.AttackDamage);
+            if (context.IsWeaponDamage && warrior != null) result *= warrior.WeaponDamageMultiplier;
             if (context.IsSpiritDamage)
-                result *= GetMultiplier(UpgradeStat.SpiritDamage);
+                result *= GetMultiplier(UpgradeStat.SpiritDamage) * CompanionDamageMultiplier;
             if (context.Element != DamageElement.Physical)
                 result *= GetMultiplier(UpgradeStat.ElementalDamage);
             if (context.CanCritical)
@@ -158,8 +188,8 @@ namespace WorldOfSpirits.Progression.Upgrades
 
         public float ScaleSpiritDamage(float baseDamage, IDamageable target = null)
         {
-            float result = baseDamage * GetMultiplier(UpgradeStat.AttackDamage) *
-                GetMultiplier(UpgradeStat.SpiritDamage) *
+            float result = baseDamage * (warrior != null ? warrior.WeaponDamageMultiplier : 1f) * GetMultiplier(UpgradeStat.AttackDamage) *
+                GetMultiplier(UpgradeStat.SpiritDamage) * CompanionDamageMultiplier *
                 GetMultiplier(UpgradeStat.ElementalDamage);
             return ScaleDamageAgainstTarget(RollCritical(result), target);
         }

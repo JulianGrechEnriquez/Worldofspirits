@@ -1,0 +1,34 @@
+Add Earth and Water ability effects and improve combat, menus and HUD
+
+Earth spirit:
+- Fix Quicksand ground layering and apply enemy movement slow, including crowds.
+- Fix Boulder damage collision settings and add Boulder and Stone Spikes art.
+- Add pooled Stone Spikes, damage/bleed behavior and five-level prefab wiring.
+
+Water and Fire effects:
+- Add Rain Clouds with cloud art, rain particles, enemy tracking and damage ticks.
+- Add Whirlpool particle rings, inward pull, swirl and upgrade configuration.
+- Replace the Fiery Talons trail sprite with resettable pooled flame particles.
+
+Combat and ability fixes:
+- Stop movement-dependent effects as soon as activation conditions fail.
+- Guard pooled spawn versions and remove stale damage-zone occupants.
+- Avoid starting hit-flash coroutines on inactive enemies.
+- Add growing Avalanche projectiles that carry and release eligible enemies.
+- Fix ThrustMeleeWeaponBase size adjustment compilation in player builds.
+- Preserve authored data-driven ability tuning and remove legacy implementations.
+- Remove the stale deleted lava-builder component from Game.
+
+UI and project setup:
+- Add the main menu flow with saved audio/fullscreen settings, help and Quit.
+- Update health HUD, boss warning, starter selection and spirit card layout.
+- Organize the Game scene and configure MainMenu as the first build scene.
+- Restore default time scale, preload input and update Unity MCP dependencies.
+
+Document the update, validation and remaining upgrade work in Notes/Development.
+Latest available Windows build succeeded with zero errors; both enabled scenes
+contain zero missing scripts after the final scene reference fix. Player-side
+weapon compilation was checked with editor-only blocks excluded. Not every
+upgrade combination has been playtested.
+
+Exclude exported builds, local generated tool files and temporary backups.
