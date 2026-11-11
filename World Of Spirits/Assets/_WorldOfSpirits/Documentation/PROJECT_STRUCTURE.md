@@ -35,6 +35,7 @@ distinguish from game content.
 - `Scripts/UI/CharacterSelection` - playable-character selection.
 - `Scripts/UI/SpiritSelection` - starter-spirit selection views.
 - `Scripts/UI/Debug` - development-only controls and diagnostics.
+- `Scripts/Editor/Inspectors` - custom ability inspectors and property drawers.
 - `Scripts/Editor/Upgrades` - upgrade catalog inspection and organization tools.
 - `Scripts/Editor/Generators` - gameplay content generation tools.
 - `Scripts/Editor/Setup` - project folders and prefab setup tools.
@@ -62,3 +63,7 @@ distinguish from game content.
 - Move assets inside Unity so their `.meta` files and references are preserved.
 - Folder organization does not require changing class names or namespaces.
 - Create a new folder only when at least two related assets need it.
+
+## Repository navigation
+
+The repository README is the entry point. Design, planning and review notes live in `Notes` outside Assets. Keep Unity-specific setup guides here. All first-party editor scripts belong under `Scripts/Editor`; the former top-level `Editor` location has been consolidated.

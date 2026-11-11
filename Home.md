@@ -13,17 +13,21 @@ status: active
 - [[Showcase/World of Spirits|Public showcase]]
 - [[Notes/Game Design/Game Overview|Game overview]]
 - [[Notes/Game Design/Spirits|Spirits and abilities]]
-- [[Notes/Game Design/Playable Characters|Playable characters — three demo classes and Beastmaster concept]]
-- [[Notes/Game Design/Spirit Warrior|Spirit Warrior — weapon pairs, armour and movement ideas]]
-- [[Notes/Game Design/Spirit Shepherd|Spirit Shepherd — companions and exclusive combined ability moves]]
-- [[Notes/Game Design/Character Exclusive Upgrades|Warrior and Shepherd — exclusive upgrade draft]]
-- [[Notes/Game Design/Spirit Beastmaster|Spirit Beastmaster — independent creatures and recovery]]
+- [[Notes/Game Design/Playable Characters|Playable characters â€” three demo classes and Beastmaster concept]]
+- [[Notes/Game Design/Spirit Warrior|Spirit Warrior â€” weapon pairs, armour and movement ideas]]
+- [[Notes/Game Design/Spirit Shepherd|Spirit Shepherd â€” companions and exclusive combined ability moves]]
+- [[Notes/Game Design/Character Exclusive Upgrades|Warrior and Shepherd â€” exclusive upgrade draft]]
+- [[Notes/Game Design/Spirit Beastmaster|Spirit Beastmaster â€” independent creatures and recovery]]
 - [[Notes/Game Design/Areas and Bosses|Areas and bosses]]
 - [[Notes/Development/Technical Overview|Technical overview]]
 - [[Notes/Planning/Roadmap|Roadmap]]
 - [[Notes/Planning/Demo Scope and Completion Plan|Demo scope and completion plan]]
 - [[Notes/Planning/Project Audit and Backlog|Project audit and backlog]]
 - [[Notes/Planning/Decision Log|Decision log]]
+
+## Latest project review
+
+- [[Notes/Development/2026-11-11 Project Review|11 November 2026 — organization, fixes and prioritized follow-up]]
 
 ## Current focus
 
@@ -55,5 +59,5 @@ See [[Notes/Planning/Demo Scope and Completion Plan|Demo scope and completion pl
 
 ## Source material
 
-- `World of Spirits - Updated v3.docx` — current long-form design source.
-- `World Of Spirits/Assets/_WorldOfSpirits/Documentation` — current Unity organization and implementation guidance.
+- `World of Spirits - Updated v3.docx` â€” current long-form design source.
+- `World Of Spirits/Assets/_WorldOfSpirits/Documentation` â€” current Unity organization and implementation guidance.

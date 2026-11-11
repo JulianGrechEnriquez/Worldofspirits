@@ -55,6 +55,16 @@ namespace WorldOfSpirits.Core
             else if (CurrentState == GameState.Paused) SetState(GameState.Playing);
         }
 
+        public void Pause()
+        {
+            if (CurrentState == GameState.Playing) SetState(GameState.Paused);
+        }
+
+        public void Resume()
+        {
+            if (CurrentState == GameState.Paused) SetState(GameState.Playing);
+        }
+
         public void ReturnToPreviousState()
         {
             SetState(previousState == CurrentState ? GameState.Playing : previousState);
@@ -64,7 +74,8 @@ namespace WorldOfSpirits.Core
         {
             Time.timeScale = state == GameState.Paused ||
                 state == GameState.LevelUp ||
-                state == GameState.GameOver ? 0f : 1f;
+                state == GameState.GameOver ||
+                state == GameState.StarterSelection ? 0f : 1f;
         }
     }
 }

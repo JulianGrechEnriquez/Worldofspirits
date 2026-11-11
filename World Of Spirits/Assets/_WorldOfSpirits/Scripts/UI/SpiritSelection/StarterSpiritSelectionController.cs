@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using TMPro;
+using WorldOfSpirits.Core;
 using WorldOfSpirits.Progression;
 using WorldOfSpirits.Progression.Upgrades;
 using WorldOfSpirits.Spirits;
@@ -22,6 +23,7 @@ namespace WorldOfSpirits.UI
 
         private SpiritManager spiritManager;
         private float previousTimeScale = 1f;
+        private GameState previousState;
         private bool selectionOpen;
         public int RequiredStarterCount { get; private set; } = 1;
 
@@ -40,7 +42,12 @@ namespace WorldOfSpirits.UI
 
             BuildUnlockedCards();
             previousTimeScale = Time.timeScale;
-            Time.timeScale = 0f;
+            if (GameManager.Instance != null)
+            {
+                previousState = GameManager.Instance.CurrentState;
+                GameManager.Instance.SetState(GameState.StarterSelection);
+            }
+            else Time.timeScale = 0f;
             selectionOpen = true;
             SetGameplayHudHidden(true);
             RefreshSelection();
@@ -50,8 +57,18 @@ namespace WorldOfSpirits.UI
         {
             SetGameplayHudHidden(false);
             if (!selectionOpen) return;
-            Time.timeScale = previousTimeScale;
+            RestoreGameplayState();
             selectionOpen = false;
+        }
+
+        private void RestoreGameplayState()
+        {
+            if (GameManager.Instance != null)
+            {
+                if (GameManager.Instance.CurrentState == GameState.StarterSelection)
+                    GameManager.Instance.SetState(previousState);
+            }
+            else Time.timeScale = previousTimeScale;
         }
 
         private void SetGameplayHudHidden(bool hidden)
@@ -138,7 +155,7 @@ namespace WorldOfSpirits.UI
             RefreshSelection();
             if (spiritManager.SpiritCount < RequiredStarterCount) return;
             selectionOpen = false;
-            Time.timeScale = previousTimeScale;
+            RestoreGameplayState();
             gameObject.SetActive(false);
         }
 

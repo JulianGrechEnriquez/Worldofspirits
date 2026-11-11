@@ -1,0 +1,370 @@
+Assets/_Recovery/0.unity
+Assets/_WorldOfSpirits/Animations/Projectiles/earth/EarthSpike.anim
+Assets/_WorldOfSpirits/Animations/Projectiles/earth/Spike.controller
+Assets/_WorldOfSpirits/Animations/Spirits/Ice/Ice Ball.controller
+Assets/_WorldOfSpirits/Animations/Spirits/Ice/LevelUp.anim
+Assets/_WorldOfSpirits/Art/Sprites/Enemies/Bosses/Earth/Golem/Death.png
+Assets/_WorldOfSpirits/Art/Sprites/Enemies/Bosses/Earth/Golem/page_gif.gif
+Assets/_WorldOfSpirits/Art/Sprites/Enemies/Bosses/Earth/Golem/rock.png
+Assets/_WorldOfSpirits/Art/Sprites/Enemies/Bosses/Earth/Golem/vfx.png
+Assets/_WorldOfSpirits/Art/Sprites/Player/Character/ATTACK 1/attack1_down.png
+Assets/_WorldOfSpirits/Art/Sprites/Player/Character/ATTACK 1/attack1_left.png
+Assets/_WorldOfSpirits/Art/Sprites/Player/Character/ATTACK 1/attack1_right.png
+Assets/_WorldOfSpirits/Art/Sprites/Player/Character/ATTACK 1/attack1_up.png
+Assets/_WorldOfSpirits/Art/Sprites/Player/Character/ATTACK 2/attack2_down.png
+Assets/_WorldOfSpirits/Art/Sprites/Player/Character/ATTACK 2/attack2_left.png
+Assets/_WorldOfSpirits/Art/Sprites/Player/Character/ATTACK 2/attack2_right.png
+Assets/_WorldOfSpirits/Art/Sprites/Player/Character/ATTACK 2/attack2_up.png
+Assets/_WorldOfSpirits/Art/Sprites/Spirits/Earth/Earth Wall.png
+Assets/_WorldOfSpirits/Art/Sprites/Spirits/Earth/EarthSpirt.png
+Assets/_WorldOfSpirits/Art/Sprites/Spirits/Earth/Gemini_Generated_Image_grd71ygrd71ygrd7 (1).png
+Assets/_WorldOfSpirits/Art/Sprites/Spirits/Fire/Phoenixling Sprite Sheet-export.png
+Assets/_WorldOfSpirits/Art/Sprites/Spirits/Ice/Abilities/IceCrystal/Ice VFX 2 192x192.png
+Assets/_WorldOfSpirits/Art/Sprites/Spirits/Ice/Abilities/IceCrystal/Ice VFX 2 Start.png
+Assets/_WorldOfSpirits/Art/Sprites/Spirits/Ice/Abilities/IceCrystal/Ice VFX 2.aseprite
+Assets/_WorldOfSpirits/Art/Sprites/Spirits/Ice/Abilities/IceCrystal/Separated Frames/Ice VFX 2 Active1.png
+Assets/_WorldOfSpirits/Art/Sprites/Spirits/Ice/Abilities/IceCrystal/Separated Frames/Ice VFX 2 Active2.png
+Assets/_WorldOfSpirits/Art/Sprites/Spirits/Ice/Abilities/IceCrystal/Separated Frames/Ice VFX 2 Active3.png
+Assets/_WorldOfSpirits/Art/Sprites/Spirits/Ice/Abilities/IceCrystal/Separated Frames/Ice VFX 2 Active4.png
+Assets/_WorldOfSpirits/Art/Sprites/Spirits/Ice/Abilities/IceCrystal/Separated Frames/Ice VFX 2 Active5.png
+Assets/_WorldOfSpirits/Art/Sprites/Spirits/Ice/Abilities/IceCrystal/Separated Frames/Ice VFX 2 Active6.png
+Assets/_WorldOfSpirits/Art/Sprites/Spirits/Ice/Abilities/IceCrystal/Separated Frames/Ice VFX 2 Active7.png
+Assets/_WorldOfSpirits/Art/Sprites/Spirits/Ice/Abilities/IceCrystal/Separated Frames/Ice VFX 2 Active8.png
+Assets/_WorldOfSpirits/Art/Sprites/Spirits/Ice/Abilities/IceCrystal/Separated Frames/Ice VFX 2 Active9.png
+Assets/_WorldOfSpirits/Art/Sprites/Spirits/Ice/Abilities/IceCrystal/Separated Frames/Ice VFX 2 Ending1.png
+Assets/_WorldOfSpirits/Art/Sprites/Spirits/Ice/Abilities/IceCrystal/Separated Frames/Ice VFX 2 Ending10.png
+Assets/_WorldOfSpirits/Art/Sprites/Spirits/Ice/Abilities/IceCrystal/Separated Frames/Ice VFX 2 Ending11.png
+Assets/_WorldOfSpirits/Art/Sprites/Spirits/Ice/Abilities/IceCrystal/Separated Frames/Ice VFX 2 Ending12.png
+Assets/_WorldOfSpirits/Art/Sprites/Spirits/Ice/Abilities/IceCrystal/Separated Frames/Ice VFX 2 Ending13.png
+Assets/_WorldOfSpirits/Art/Sprites/Spirits/Ice/Abilities/IceCrystal/Separated Frames/Ice VFX 2 Ending14.png
+Assets/_WorldOfSpirits/Art/Sprites/Spirits/Ice/Abilities/IceCrystal/Separated Frames/Ice VFX 2 Ending15.png
+Assets/_WorldOfSpirits/Art/Sprites/Spirits/Ice/Abilities/IceCrystal/Separated Frames/Ice VFX 2 Ending16.png
+Assets/_WorldOfSpirits/Art/Sprites/Spirits/Ice/Abilities/IceCrystal/Separated Frames/Ice VFX 2 Ending17.png
+Assets/_WorldOfSpirits/Art/Sprites/Spirits/Ice/Abilities/IceCrystal/Separated Frames/Ice VFX 2 Ending18.png
+Assets/_WorldOfSpirits/Art/Sprites/Spirits/Ice/Abilities/IceCrystal/Separated Frames/Ice VFX 2 Ending2.png
+Assets/_WorldOfSpirits/Art/Sprites/Spirits/Ice/Abilities/IceCrystal/Separated Frames/Ice VFX 2 Ending3.png
+Assets/_WorldOfSpirits/Art/Sprites/Spirits/Ice/Abilities/IceCrystal/Separated Frames/Ice VFX 2 Ending4.png
+Assets/_WorldOfSpirits/Art/Sprites/Spirits/Ice/Abilities/IceCrystal/Separated Frames/Ice VFX 2 Ending5.png
+Assets/_WorldOfSpirits/Art/Sprites/Spirits/Ice/Abilities/IceCrystal/Separated Frames/Ice VFX 2 Ending6.png
+Assets/_WorldOfSpirits/Art/Sprites/Spirits/Ice/Abilities/IceCrystal/Separated Frames/Ice VFX 2 Ending7.png
+Assets/_WorldOfSpirits/Art/Sprites/Spirits/Ice/Abilities/IceCrystal/Separated Frames/Ice VFX 2 Ending8.png
+Assets/_WorldOfSpirits/Art/Sprites/Spirits/Ice/Abilities/IceCrystal/Separated Frames/Ice VFX 2 Ending9.png
+Assets/_WorldOfSpirits/Art/Sprites/Spirits/Ice/Abilities/IceCrystal/Separated Frames/Ice VFX 2 Start1.png
+Assets/_WorldOfSpirits/Art/Sprites/Spirits/Ice/Abilities/IceCrystal/Separated Frames/Ice VFX 2 Start2.png
+Assets/_WorldOfSpirits/Art/Sprites/Spirits/Ice/Abilities/IceCrystal/Separated Frames/Ice VFX 2 Start3.png
+Assets/_WorldOfSpirits/Art/Sprites/Spirits/Ice/Abilities/IceCrystal/Separated Frames/Ice VFX 2 Start4.png
+Assets/_WorldOfSpirits/Art/Sprites/Spirits/Ice/Abilities/IceCrystal/Separated Frames/Ice VFX 2 Start5.png
+Assets/_WorldOfSpirits/Art/Sprites/Spirits/Ice/Abilities/IceCrystal/Separated Frames/Ice VFX 2 Start6.png
+Assets/_WorldOfSpirits/Art/Sprites/Spirits/Ice/Abilities/IceCrystal/Separated Frames/Ice VFX 2 Start7.png
+Assets/_WorldOfSpirits/Art/Sprites/Spirits/Ice/Abilities/IceCrystal/Separated Frames/Ice VFX 2 Start8.png
+Assets/_WorldOfSpirits/Art/Sprites/Spirits/Ice/Abilities/IceCrystal/Separated Frames/Ice VFX 2 Start9.png
+Assets/_WorldOfSpirits/Art/Sprites/Spirits/Ice/Abilities/IceShard/Ice VFX 1 192x192.png
+Assets/_WorldOfSpirits/Art/Sprites/Spirits/Ice/Abilities/IceShard/Ice VFX 1 Hit.png
+Assets/_WorldOfSpirits/Art/Sprites/Spirits/Ice/Abilities/IceShard/Ice VFX 1 Start.png
+Assets/_WorldOfSpirits/Art/Sprites/Spirits/Ice/Abilities/IceShard/Ice VFX 1.aseprite
+Assets/_WorldOfSpirits/Art/Sprites/Spirits/Ice/Abilities/IceShard/IceVFX 1 Repeatable.png
+Assets/_WorldOfSpirits/Art/Sprites/Spirits/Ice/Abilities/IceShard/Separated Frames/VFX 1 Hit1.png
+Assets/_WorldOfSpirits/Art/Sprites/Spirits/Ice/Abilities/IceShard/Separated Frames/VFX 1 Hit2.png
+Assets/_WorldOfSpirits/Art/Sprites/Spirits/Ice/Abilities/IceShard/Separated Frames/VFX 1 Hit3.png
+Assets/_WorldOfSpirits/Art/Sprites/Spirits/Ice/Abilities/IceShard/Separated Frames/VFX 1 Hit4.png
+Assets/_WorldOfSpirits/Art/Sprites/Spirits/Ice/Abilities/IceShard/Separated Frames/VFX 1 Hit5.png
+Assets/_WorldOfSpirits/Art/Sprites/Spirits/Ice/Abilities/IceShard/Separated Frames/VFX 1 Hit6.png
+Assets/_WorldOfSpirits/Art/Sprites/Spirits/Ice/Abilities/IceShard/Separated Frames/VFX 1 Hit7.png
+Assets/_WorldOfSpirits/Art/Sprites/Spirits/Ice/Abilities/IceShard/Separated Frames/VFX 1 Hit8.png
+Assets/_WorldOfSpirits/Art/Sprites/Spirits/Ice/Abilities/IceShard/Separated Frames/VFX 1 Repeatable1.png
+Assets/_WorldOfSpirits/Art/Sprites/Spirits/Ice/Abilities/IceShard/Separated Frames/VFX 1 Repeatable10.png
+Assets/_WorldOfSpirits/Art/Sprites/Spirits/Ice/Abilities/IceShard/Separated Frames/VFX 1 Repeatable2.png
+Assets/_WorldOfSpirits/Art/Sprites/Spirits/Ice/Abilities/IceShard/Separated Frames/VFX 1 Repeatable3.png
+Assets/_WorldOfSpirits/Art/Sprites/Spirits/Ice/Abilities/IceShard/Separated Frames/VFX 1 Repeatable4.png
+Assets/_WorldOfSpirits/Art/Sprites/Spirits/Ice/Abilities/IceShard/Separated Frames/VFX 1 Repeatable5.png
+Assets/_WorldOfSpirits/Art/Sprites/Spirits/Ice/Abilities/IceShard/Separated Frames/VFX 1 Repeatable6.png
+Assets/_WorldOfSpirits/Art/Sprites/Spirits/Ice/Abilities/IceShard/Separated Frames/VFX 1 Repeatable7.png
+Assets/_WorldOfSpirits/Art/Sprites/Spirits/Ice/Abilities/IceShard/Separated Frames/VFX 1 Repeatable8.png
+Assets/_WorldOfSpirits/Art/Sprites/Spirits/Ice/Abilities/IceShard/Separated Frames/VFX 1 Repeatable9.png
+Assets/_WorldOfSpirits/Art/Sprites/Spirits/Ice/Abilities/IceShard/Separated Frames/VFX 1 Start1.png
+Assets/_WorldOfSpirits/Art/Sprites/Spirits/Ice/Abilities/IceShard/Separated Frames/VFX 1 Start2.png
+Assets/_WorldOfSpirits/Art/Sprites/Spirits/Ice/Abilities/IceShard/Separated Frames/VFX 1 Start3.png
+Assets/_WorldOfSpirits/Art/Sprites/Spirits/Ice/Gemini_Generated_Image_ml60qsml60qsml60-Picsart-BackgroundRemover.png
+Assets/_WorldOfSpirits/Art/Sprites/Spirits/Lightning/Abilities/LightningBOlt/Thunder projectile1 w blur.png
+Assets/_WorldOfSpirits/Art/Sprites/Spirits/Lightning/Abilities/Thunder/Thunderstrike wo blur.png
+Assets/_WorldOfSpirits/Art/Sprites/Spirits/Water/Abilities/Water Blast - Startup and Infinite.png
+Assets/_WorldOfSpirits/Art/Sprites/Warrior/PairedWeapons/Generation Prompts.json
+Assets/_WorldOfSpirits/Art/Tiles/Areas/Fire/Lava.prefab
+Assets/_WorldOfSpirits/Art/Tiles/Areas/Fire/lavaAreaStone.prefab
+Assets/_WorldOfSpirits/Art/Tiles/Areas/Fire/lava-dark-stone_large.png
+Assets/_WorldOfSpirits/Art/Tiles/Areas/Fire/lava-dark-stone_large_0.asset
+Assets/_WorldOfSpirits/Art/Tiles/Areas/Fire/lava-dark-stone_large_1.asset
+Assets/_WorldOfSpirits/Art/Tiles/Areas/Fire/lava-dark-stone_large_10.asset
+Assets/_WorldOfSpirits/Art/Tiles/Areas/Fire/lava-dark-stone_large_11.asset
+Assets/_WorldOfSpirits/Art/Tiles/Areas/Fire/lava-dark-stone_large_12.asset
+Assets/_WorldOfSpirits/Art/Tiles/Areas/Fire/lava-dark-stone_large_13.asset
+Assets/_WorldOfSpirits/Art/Tiles/Areas/Fire/lava-dark-stone_large_14.asset
+Assets/_WorldOfSpirits/Art/Tiles/Areas/Fire/lava-dark-stone_large_15.asset
+Assets/_WorldOfSpirits/Art/Tiles/Areas/Fire/lava-dark-stone_large_16.asset
+Assets/_WorldOfSpirits/Art/Tiles/Areas/Fire/lava-dark-stone_large_17.asset
+Assets/_WorldOfSpirits/Art/Tiles/Areas/Fire/lava-dark-stone_large_18.asset
+Assets/_WorldOfSpirits/Art/Tiles/Areas/Fire/lava-dark-stone_large_19.asset
+Assets/_WorldOfSpirits/Art/Tiles/Areas/Fire/lava-dark-stone_large_2.asset
+Assets/_WorldOfSpirits/Art/Tiles/Areas/Fire/lava-dark-stone_large_20.asset
+Assets/_WorldOfSpirits/Art/Tiles/Areas/Fire/lava-dark-stone_large_21.asset
+Assets/_WorldOfSpirits/Art/Tiles/Areas/Fire/lava-dark-stone_large_22.asset
+Assets/_WorldOfSpirits/Art/Tiles/Areas/Fire/lava-dark-stone_large_23.asset
+Assets/_WorldOfSpirits/Art/Tiles/Areas/Fire/lava-dark-stone_large_24.asset
+Assets/_WorldOfSpirits/Art/Tiles/Areas/Fire/lava-dark-stone_large_25.asset
+Assets/_WorldOfSpirits/Art/Tiles/Areas/Fire/lava-dark-stone_large_26.asset
+Assets/_WorldOfSpirits/Art/Tiles/Areas/Fire/lava-dark-stone_large_27.asset
+Assets/_WorldOfSpirits/Art/Tiles/Areas/Fire/lava-dark-stone_large_28.asset
+Assets/_WorldOfSpirits/Art/Tiles/Areas/Fire/lava-dark-stone_large_29.asset
+Assets/_WorldOfSpirits/Art/Tiles/Areas/Fire/lava-dark-stone_large_3.asset
+Assets/_WorldOfSpirits/Art/Tiles/Areas/Fire/lava-dark-stone_large_30.asset
+Assets/_WorldOfSpirits/Art/Tiles/Areas/Fire/lava-dark-stone_large_31.asset
+Assets/_WorldOfSpirits/Art/Tiles/Areas/Fire/lava-dark-stone_large_32.asset
+Assets/_WorldOfSpirits/Art/Tiles/Areas/Fire/lava-dark-stone_large_33.asset
+Assets/_WorldOfSpirits/Art/Tiles/Areas/Fire/lava-dark-stone_large_34.asset
+Assets/_WorldOfSpirits/Art/Tiles/Areas/Fire/lava-dark-stone_large_35.asset
+Assets/_WorldOfSpirits/Art/Tiles/Areas/Fire/lava-dark-stone_large_36.asset
+Assets/_WorldOfSpirits/Art/Tiles/Areas/Fire/lava-dark-stone_large_37.asset
+Assets/_WorldOfSpirits/Art/Tiles/Areas/Fire/lava-dark-stone_large_38.asset
+Assets/_WorldOfSpirits/Art/Tiles/Areas/Fire/lava-dark-stone_large_39.asset
+Assets/_WorldOfSpirits/Art/Tiles/Areas/Fire/lava-dark-stone_large_4.asset
+Assets/_WorldOfSpirits/Art/Tiles/Areas/Fire/lava-dark-stone_large_40.asset
+Assets/_WorldOfSpirits/Art/Tiles/Areas/Fire/lava-dark-stone_large_41.asset
+Assets/_WorldOfSpirits/Art/Tiles/Areas/Fire/lava-dark-stone_large_42.asset
+Assets/_WorldOfSpirits/Art/Tiles/Areas/Fire/lava-dark-stone_large_43.asset
+Assets/_WorldOfSpirits/Art/Tiles/Areas/Fire/lava-dark-stone_large_44.asset
+Assets/_WorldOfSpirits/Art/Tiles/Areas/Fire/lava-dark-stone_large_45.asset
+Assets/_WorldOfSpirits/Art/Tiles/Areas/Fire/lava-dark-stone_large_46.asset
+Assets/_WorldOfSpirits/Art/Tiles/Areas/Fire/lava-dark-stone_large_5.asset
+Assets/_WorldOfSpirits/Art/Tiles/Areas/Fire/lava-dark-stone_large_6.asset
+Assets/_WorldOfSpirits/Art/Tiles/Areas/Fire/lava-dark-stone_large_7.asset
+Assets/_WorldOfSpirits/Art/Tiles/Areas/Fire/lava-dark-stone_large_8.asset
+Assets/_WorldOfSpirits/Art/Tiles/Areas/Fire/lava-dark-stone_large_9.asset
+Assets/_WorldOfSpirits/Art/Tiles/Areas/Fire/stone_terrain_addon_10.asset
+Assets/_WorldOfSpirits/Art/Tiles/Areas/Fire/stone_terrain_addon_11.asset
+Assets/_WorldOfSpirits/Art/Tiles/Areas/Fire/stone_terrain_addon_15.asset
+Assets/_WorldOfSpirits/Art/Tiles/Areas/Fire/stone_terrain_addon_16.asset
+Assets/_WorldOfSpirits/Art/Tiles/Areas/Fire/stone_terrain_addon_17.asset
+Assets/_WorldOfSpirits/Art/Tiles/Areas/Fire/stone_terrain_addon_18.asset
+Assets/_WorldOfSpirits/Art/Tiles/Areas/Fire/stone_terrain_addon_22.asset
+Assets/_WorldOfSpirits/Art/Tiles/Areas/Fire/stone_terrain_addon_23.asset
+Assets/_WorldOfSpirits/Art/Tiles/Areas/Fire/stone_terrain_addon_24.asset
+Assets/_WorldOfSpirits/Art/Tiles/Areas/Fire/stone_terrain_addon_25.asset
+Assets/_WorldOfSpirits/Art/Tiles/Areas/Fire/stone_terrain_addon_26.asset
+Assets/_WorldOfSpirits/Art/Tiles/Areas/Fire/stone_terrain_addon_27.asset
+Assets/_WorldOfSpirits/Art/Tiles/Areas/Fire/stone_terrain_addon_28.asset
+Assets/_WorldOfSpirits/Art/Tiles/Areas/Fire/stone_terrain_addon_3.asset
+Assets/_WorldOfSpirits/Art/Tiles/Areas/Fire/stone_terrain_addon_4.asset
+Assets/_WorldOfSpirits/Art/Tiles/Areas/Fire/stone_terrain_addon_8.asset
+Assets/_WorldOfSpirits/Art/Tiles/Areas/Fire/stone_terrain_addon_9.asset
+Assets/_WorldOfSpirits/Art/Tiles/Areas/Ice/Ice Dungeon Free Sample_nnekart/Free Licence.txt
+Assets/_WorldOfSpirits/Art/Tiles/Areas/Ice/Ice Dungeon Free Sample_nnekart/Ice Free Sample_nnekart.png
+Assets/_WorldOfSpirits/Art/Tiles/Areas/Ocean/cozy_island/ISLAND TOP DOWN/ANIM_WATER-Sheet.png
+Assets/_WorldOfSpirits/Art/Tiles/Areas/Ocean/cozy_island/ISLAND TOP DOWN/PROPS.png
+Assets/_WorldOfSpirits/Art/Tiles/Areas/Ocean/cozy_island/ISLAND TOP DOWN/TILESET.png
+Assets/_WorldOfSpirits/Data/Legacy/Spirits/Earth Spirt.asset
+Assets/_WorldOfSpirits/Data/Legacy/Upgrades/Earth spike.asset
+Assets/_WorldOfSpirits/Documentation/PROJECT_STRUCTURE.md
+Assets/_WorldOfSpirits/Documentation/SPIRIT_ABILITY_SETUP.md
+Assets/_WorldOfSpirits/Documentation/UPGRADE_SYSTEM_SETUP.md
+Assets/_WorldOfSpirits/Documentation/World of Spirits - Spirit Setup Guide.docx
+Assets/_WorldOfSpirits/Editor/AbilityDefinitionEditor.cs
+Assets/_WorldOfSpirits/Editor/ProjectileTriggerDrawer.cs
+Assets/_WorldOfSpirits/Prefabs/Projectiles/Earth/spike.prefab
+Assets/_WorldOfSpirits/Prefabs/Spirits/Variants/Fire/fire 1.prefab
+Assets/_WorldOfSpirits/Prefabs/Spirits/Variants/Fire/fire.prefab
+Assets/_WorldOfSpirits/Scenes/GameTestGround.unity
+Assets/_WorldOfSpirits/Scenes/Lobby.unity
+Assets/_WorldOfSpirits/Scripts/Combat/CombatSpatialIndex2D.cs
+Assets/_WorldOfSpirits/Scripts/Combat/CombatTargeting.cs
+Assets/_WorldOfSpirits/Scripts/Combat/Damage/DamageContext.cs
+Assets/_WorldOfSpirits/Scripts/Combat/Damage/GameplayInterfaces.cs
+Assets/_WorldOfSpirits/Scripts/Combat/Damage/IDamageable.cs
+Assets/_WorldOfSpirits/Scripts/Combat/Damage/IStatusEffectReceiver.cs
+Assets/_WorldOfSpirits/Scripts/Combat/Damage/LivingEntity.cs
+Assets/_WorldOfSpirits/Scripts/Combat/Faction.cs
+Assets/_WorldOfSpirits/Scripts/Combat/Projectiles/AvalancheCapturedEnemy.cs
+Assets/_WorldOfSpirits/Scripts/Combat/Projectiles/DamageProjectile.cs
+Assets/_WorldOfSpirits/Scripts/Combat/Projectiles/ProjectileBase.cs
+Assets/_WorldOfSpirits/Scripts/Combat/Projectiles/ProjectilePool.cs
+Assets/_WorldOfSpirits/Scripts/Combat/Projectiles/ProjectileTrigger.cs
+Assets/_WorldOfSpirits/Scripts/Combat/Weapons/AutoProjectileWeapon.cs
+Assets/_WorldOfSpirits/Scripts/Combat/Weapons/SpiritWeaponAttack.cs
+Assets/_WorldOfSpirits/Scripts/Core/GameState.cs
+Assets/_WorldOfSpirits/Scripts/Crowd/SpatialHashGrid2D.cs
+Assets/_WorldOfSpirits/Scripts/Editor/ContentCreatorWindow.cs
+Assets/_WorldOfSpirits/Scripts/Editor/Generators/AbilityAssetGenerator.cs
+Assets/_WorldOfSpirits/Scripts/Editor/Generators/UpgradeContentGenerator.cs
+Assets/_WorldOfSpirits/Scripts/Editor/Setup/ProjectOrganizer.cs
+Assets/_WorldOfSpirits/Scripts/Editor/Setup/SpiritPrefabConnector.cs
+Assets/_WorldOfSpirits/Scripts/Editor/Upgrades/UpgradeCatalogEditor.cs
+Assets/_WorldOfSpirits/Scripts/Editor/Upgrades/UpgradeCatalogOrganizer.cs
+Assets/_WorldOfSpirits/Scripts/Editor/Validation/SpiritSystemValidator.cs
+Assets/_WorldOfSpirits/Scripts/Enemies/Bosses/BossAttackBase.cs
+Assets/_WorldOfSpirits/Scripts/Enemies/Bosses/BossContext.cs
+Assets/_WorldOfSpirits/Scripts/Enemies/Bosses/BossEnemyBase.cs
+Assets/_WorldOfSpirits/Scripts/Enemies/Bosses/IBoss.cs
+Assets/_WorldOfSpirits/Scripts/Enemies/EnemyPool.cs
+Assets/_WorldOfSpirits/Scripts/Enemies/Movement/EnemyBase.cs
+Assets/_WorldOfSpirits/Scripts/Progression/SpiritDustWallet.cs
+Assets/_WorldOfSpirits/Scripts/Progression/Unlocks/SpiritUnlockProgress.cs
+Assets/_WorldOfSpirits/Scripts/Progression/Upgrades/UpgradeTypes.cs
+Assets/_WorldOfSpirits/Scripts/Spirits/Abilities/SpiritAbility.cs
+Assets/_WorldOfSpirits/Scripts/Spirits/Definitions/BuiltInSpiritCatalog.cs
+Assets/_WorldOfSpirits/Scripts/Spirits/SpiritCreature.cs
+Assets/_WorldOfSpirits/Scripts/Spirits/SpiritProgression.cs
+Assets/_WorldOfSpirits/Scripts/Spirits/Weapons/OrbitingMeleeWeapon.cs
+Assets/_WorldOfSpirits/Scripts/Spirits/Weapons/ThrustMeleeWeaponBase.cs
+Assets/_WorldOfSpirits/Scripts/UI/Debug/SpiritGrantButton.cs
+Assets/_WorldOfSpirits/Scripts/UI/HUD/DamageNumber.cs
+Assets/_WorldOfSpirits/Scripts/UI/HUD/DamageNumberEmitter.cs
+Assets/_WorldOfSpirits/Scripts/UI/HUD/ProgressionInterface.cs
+Assets/_WorldOfSpirits/Settings/Lit2DSceneTemplate.scenetemplate
+Assets/_WorldOfSpirits/Settings/Scenes/URP2DSceneTemplate.unity
+Assets/Plugins/NuGet/McpPlugin.Common.dll
+Assets/Plugins/NuGet/McpPlugin.dll
+Assets/Plugins/NuGet/Microsoft.AspNetCore.Connections.Abstractions.dll
+Assets/Plugins/NuGet/Microsoft.AspNetCore.Http.Connections.Client.dll
+Assets/Plugins/NuGet/Microsoft.AspNetCore.Http.Connections.Common.dll
+Assets/Plugins/NuGet/Microsoft.AspNetCore.SignalR.Client.Core.dll
+Assets/Plugins/NuGet/Microsoft.AspNetCore.SignalR.Client.dll
+Assets/Plugins/NuGet/Microsoft.AspNetCore.SignalR.Common.dll
+Assets/Plugins/NuGet/Microsoft.AspNetCore.SignalR.Protocols.Json.dll
+Assets/Plugins/NuGet/Microsoft.Bcl.AsyncInterfaces.dll
+Assets/Plugins/NuGet/Microsoft.Bcl.Memory.dll
+Assets/Plugins/NuGet/Microsoft.Bcl.TimeProvider.dll
+Assets/Plugins/NuGet/Microsoft.CodeAnalysis.CSharp.dll
+Assets/Plugins/NuGet/Microsoft.CodeAnalysis.dll
+Assets/Plugins/NuGet/Microsoft.Extensions.Caching.Abstractions.dll
+Assets/Plugins/NuGet/Microsoft.Extensions.Configuration.Abstractions.dll
+Assets/Plugins/NuGet/Microsoft.Extensions.DependencyInjection.Abstractions.dll
+Assets/Plugins/NuGet/Microsoft.Extensions.DependencyInjection.dll
+Assets/Plugins/NuGet/Microsoft.Extensions.Diagnostics.Abstractions.dll
+Assets/Plugins/NuGet/Microsoft.Extensions.Features.dll
+Assets/Plugins/NuGet/Microsoft.Extensions.FileProviders.Abstractions.dll
+Assets/Plugins/NuGet/Microsoft.Extensions.Hosting.Abstractions.dll
+Assets/Plugins/NuGet/Microsoft.Extensions.Logging.Abstractions.dll
+Assets/Plugins/NuGet/Microsoft.Extensions.Logging.dll
+Assets/Plugins/NuGet/Microsoft.Extensions.Options.dll
+Assets/Plugins/NuGet/Microsoft.Extensions.Primitives.dll
+Assets/Plugins/NuGet/R3.dll
+Assets/Plugins/NuGet/ReflectorNet.dll
+Assets/Plugins/NuGet/Rql.Contracts.dll
+Assets/Plugins/NuGet/Rql.Execution.dll
+Assets/Plugins/NuGet/Rql.Parser.dll
+Assets/Plugins/NuGet/System.Buffers.dll
+Assets/Plugins/NuGet/System.Collections.Immutable.dll
+Assets/Plugins/NuGet/System.ComponentModel.Annotations.dll
+Assets/Plugins/NuGet/System.Diagnostics.DiagnosticSource.dll
+Assets/Plugins/NuGet/System.IO.Pipelines.dll
+Assets/Plugins/NuGet/System.Memory.dll
+Assets/Plugins/NuGet/System.Numerics.Vectors.dll
+Assets/Plugins/NuGet/System.Reflection.Metadata.dll
+Assets/Plugins/NuGet/System.Runtime.CompilerServices.Unsafe.dll
+Assets/Plugins/NuGet/System.Text.Encoding.CodePages.dll
+Assets/Plugins/NuGet/System.Text.Encodings.Web.dll
+Assets/Plugins/NuGet/System.Text.Json.dll
+Assets/Plugins/NuGet/System.Threading.Channels.dll
+Assets/Plugins/NuGet/System.Threading.Tasks.Extensions.dll
+Assets/TextMesh Pro/Examples & Extras/Fonts/Anton OFL.txt
+Assets/TextMesh Pro/Examples & Extras/Fonts/Bangers - OFL.txt
+Assets/TextMesh Pro/Examples & Extras/Fonts/Oswald-Bold - OFL.txt
+Assets/TextMesh Pro/Examples & Extras/Fonts/Roboto-Bold - AFL.txt
+Assets/TextMesh Pro/Examples & Extras/Fonts/Roboto-Bold - License.txt
+Assets/TextMesh Pro/Examples & Extras/Fonts/Unity - OFL.txt
+Assets/TextMesh Pro/Examples & Extras/Fonts/Unity.ttf
+Assets/TextMesh Pro/Examples & Extras/Materials/Crate - Surface Shader Scene.mat
+Assets/TextMesh Pro/Examples & Extras/Materials/Crate - URP.mat
+Assets/TextMesh Pro/Examples & Extras/Materials/Ground - Logo Scene.mat
+Assets/TextMesh Pro/Examples & Extras/Materials/Ground - Surface Shader Scene.mat
+Assets/TextMesh Pro/Examples & Extras/Materials/Ground - URP.mat
+Assets/TextMesh Pro/Examples & Extras/Materials/Small Crate_diffuse.mat
+Assets/TextMesh Pro/Examples & Extras/Scenes/01-  Single Line TextMesh Pro.unity
+Assets/TextMesh Pro/Examples & Extras/Scenes/02 - Multi-line TextMesh Pro.unity
+Assets/TextMesh Pro/Examples & Extras/Scenes/03 - Line Justification.unity
+Assets/TextMesh Pro/Examples & Extras/Scenes/04 - Word Wrapping.unity
+Assets/TextMesh Pro/Examples & Extras/Scenes/05 - Style Tags.unity
+Assets/TextMesh Pro/Examples & Extras/Scenes/06 - Extra Rich Text Examples.unity
+Assets/TextMesh Pro/Examples & Extras/Scenes/07 - Superscript & Subscript Example.unity
+Assets/TextMesh Pro/Examples & Extras/Scenes/08 - Improved Text Alignment.unity
+Assets/TextMesh Pro/Examples & Extras/Scenes/09 - Margin Tag Example.unity
+Assets/TextMesh Pro/Examples & Extras/Scenes/10 - Bullets & Numbered List Example.unity
+Assets/TextMesh Pro/Examples & Extras/Scenes/11 - The Style Tag.unity
+Assets/TextMesh Pro/Examples & Extras/Scenes/12 - Link Example.unity
+Assets/TextMesh Pro/Examples & Extras/Scenes/12a - Text Interactions.unity
+Assets/TextMesh Pro/Examples & Extras/Scenes/13 - Soft Hyphenation.unity
+Assets/TextMesh Pro/Examples & Extras/Scenes/14 - Multi Font & Sprites.unity
+Assets/TextMesh Pro/Examples & Extras/Scenes/15 - Inline Graphics & Sprites.unity
+Assets/TextMesh Pro/Examples & Extras/Scenes/16 - Linked text overflow mode example.unity
+Assets/TextMesh Pro/Examples & Extras/Scenes/17 - Old Computer Terminal.unity
+Assets/TextMesh Pro/Examples & Extras/Scenes/18 - ScrollRect & Masking & Layout.unity
+Assets/TextMesh Pro/Examples & Extras/Scenes/19 - Masking Texture & Soft Mask.unity
+Assets/TextMesh Pro/Examples & Extras/Scenes/20 - Input Field with Scrollbar.unity
+Assets/TextMesh Pro/Examples & Extras/Scenes/21 - Script Example.unity
+Assets/TextMesh Pro/Examples & Extras/Scenes/22 - Basic Scripting Example.unity
+Assets/TextMesh Pro/Examples & Extras/Scenes/23 - Animating Vertex Attributes.unity
+Assets/TextMesh Pro/Examples & Extras/Scenes/24 - Surface Shader Example URP.unity
+Assets/TextMesh Pro/Examples & Extras/Scenes/24 - Surface Shader Example.unity
+Assets/TextMesh Pro/Examples & Extras/Scenes/25 - Sunny Days Example.unity
+Assets/TextMesh Pro/Examples & Extras/Scenes/26 - Dropdown Placeholder Example.unity
+Assets/TextMesh Pro/Examples & Extras/Scenes/27 - Double Pass Shader Example.unity
+Assets/TextMesh Pro/Examples & Extras/Scenes/28 - HDRP Shader Example.unity
+Assets/TextMesh Pro/Examples & Extras/Scenes/28 - HDRP Shader Example/Sky and Fog Volume Profile.asset
+Assets/TextMesh Pro/Examples & Extras/Scenes/Benchmark (Floating Text).unity
+Assets/TextMesh Pro/Examples & Extras/Scripts/Benchmark01.cs
+Assets/TextMesh Pro/Examples & Extras/Scripts/Benchmark01_UGUI.cs
+Assets/TextMesh Pro/Examples & Extras/Scripts/Benchmark02.cs
+Assets/TextMesh Pro/Examples & Extras/Scripts/Benchmark03.cs
+Assets/TextMesh Pro/Examples & Extras/Scripts/Benchmark04.cs
+Assets/TextMesh Pro/Examples & Extras/Scripts/CameraController.cs
+Assets/TextMesh Pro/Examples & Extras/Scripts/ChatController.cs
+Assets/TextMesh Pro/Examples & Extras/Scripts/DropdownSample.cs
+Assets/TextMesh Pro/Examples & Extras/Scripts/EnvMapAnimator.cs
+Assets/TextMesh Pro/Examples & Extras/Scripts/ObjectSpin.cs
+Assets/TextMesh Pro/Examples & Extras/Scripts/ShaderPropAnimator.cs
+Assets/TextMesh Pro/Examples & Extras/Scripts/SimpleScript.cs
+Assets/TextMesh Pro/Examples & Extras/Scripts/SkewTextExample.cs
+Assets/TextMesh Pro/Examples & Extras/Scripts/TeleType.cs
+Assets/TextMesh Pro/Examples & Extras/Scripts/TextConsoleSimulator.cs
+Assets/TextMesh Pro/Examples & Extras/Scripts/TextMeshProFloatingText.cs
+Assets/TextMesh Pro/Examples & Extras/Scripts/TextMeshSpawner.cs
+Assets/TextMesh Pro/Examples & Extras/Scripts/TMP_DigitValidator.cs
+Assets/TextMesh Pro/Examples & Extras/Scripts/TMP_ExampleScript_01.cs
+Assets/TextMesh Pro/Examples & Extras/Scripts/TMP_FrameRateCounter.cs
+Assets/TextMesh Pro/Examples & Extras/Scripts/TMP_PhoneNumberValidator.cs
+Assets/TextMesh Pro/Examples & Extras/Scripts/TMP_TextEventCheck.cs
+Assets/TextMesh Pro/Examples & Extras/Scripts/TMP_TextEventHandler.cs
+Assets/TextMesh Pro/Examples & Extras/Scripts/TMP_TextInfoDebugTool.cs
+Assets/TextMesh Pro/Examples & Extras/Scripts/TMP_TextSelector_A.cs
+Assets/TextMesh Pro/Examples & Extras/Scripts/TMP_TextSelector_B.cs
+Assets/TextMesh Pro/Examples & Extras/Scripts/TMP_UiFrameRateCounter.cs
+Assets/TextMesh Pro/Examples & Extras/Scripts/TMPro_InstructionOverlay.cs
+Assets/TextMesh Pro/Examples & Extras/Scripts/VertexColorCycler.cs
+Assets/TextMesh Pro/Examples & Extras/Scripts/VertexJitter.cs
+Assets/TextMesh Pro/Examples & Extras/Scripts/VertexShakeA.cs
+Assets/TextMesh Pro/Examples & Extras/Scripts/VertexShakeB.cs
+Assets/TextMesh Pro/Examples & Extras/Scripts/VertexZoom.cs
+Assets/TextMesh Pro/Examples & Extras/Scripts/WarpTextExample.cs
+Assets/TextMesh Pro/Examples & Extras/Textures/Floor Tiles 1 - diffuse.jpg
+Assets/TextMesh Pro/Examples & Extras/Textures/Gradient Vertical (Color).jpg
+Assets/TextMesh Pro/Examples & Extras/Textures/Mask Zig-n-Zag.psd
+Assets/TextMesh Pro/Examples & Extras/Textures/Small Crate_diffuse.jpg
+Assets/TextMesh Pro/Examples & Extras/Textures/Small Crate_normal.jpg
+Assets/TextMesh Pro/Examples & Extras/Textures/Text Overflow - Linked Text Image 1.png
+Assets/TextMesh Pro/Examples & Extras/Textures/Text Overflow - Linked Text UI Screenshot.png
+Assets/TextMesh Pro/Examples & Extras/Textures/Wipe Pattern - Diagonal.psd
+Assets/TextMesh Pro/Examples & Extras/Textures/Wipe Pattern - Radial Double.psd
+Assets/TextMesh Pro/Examples & Extras/Textures/Wipe Pattern - Radial Quad.psd
+Assets/TextMesh Pro/Fonts/LiberationSans - OFL.txt
+Assets/TextMesh Pro/Shaders/TMP_Bitmap.shader
+Assets/TextMesh Pro/Shaders/TMP_Bitmap-Custom-Atlas.shader
+Assets/TextMesh Pro/Shaders/TMP_Bitmap-Mobile.shader
+Assets/TextMesh Pro/Shaders/TMP_SDF Overlay.shader
+Assets/TextMesh Pro/Shaders/TMP_SDF SSD.shader
+Assets/TextMesh Pro/Shaders/TMP_SDF-Mobile SSD.shader
+Assets/TextMesh Pro/Shaders/TMP_SDF-URP Unlit.shadergraph
+Assets/TextMesh Pro/Shaders/TMPro.cginc
+Assets/TextMesh Pro/Shaders/TMPro_Mobile.cginc
+Assets/TextMesh Pro/Shaders/TMPro_Properties.cginc
+Assets/TextMesh Pro/Shaders/TMPro_Surface.cginc
+Assets/TextMesh Pro/Sprites/EmojiOne Attribution.txt
+Assets/TextMesh Pro/Sprites/EmojiOne.json

@@ -7,6 +7,7 @@ namespace WorldOfSpirits.UI
     [RequireComponent(typeof(Button))]
     public sealed class StarterSpiritUnlockTestButton : MonoBehaviour
     {
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
         public enum TestAction
         {
             UnlockAllSpirits,
@@ -47,5 +48,11 @@ namespace WorldOfSpirits.UI
             else
                 selectionController.ResetSpiritUnlocksForTesting();
         }
+#else
+        private void Awake()
+        {
+            gameObject.SetActive(false);
+        }
+#endif
     }
 }

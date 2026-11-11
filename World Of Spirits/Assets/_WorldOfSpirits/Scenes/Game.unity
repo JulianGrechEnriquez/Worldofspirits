@@ -6645,7 +6645,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 206999568}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 1393705027}
+  m_Script: {fileID: 11500000, guid: 5bb61a4803c64760bc3fd36ab2c43309, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WorldOfSpirits.Core.PooledSceneObject
 --- !u!114 &206999571
@@ -35645,7 +35645,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 850523638}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 1678986454}
+  m_Script: {fileID: 11500000, guid: 5bb61a4803c64760bc3fd36ab2c43309, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WorldOfSpirits.Core.PooledSceneObject
 --- !u!114 &850523641
@@ -42485,21 +42485,6 @@ MonoBehaviour:
   m_FlexibleWidth: 0
   m_FlexibleHeight: 0
   m_LayoutPriority: 1
---- !u!115 &1393705027
-MonoScript:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  serializedVersion: 7
-  m_DefaultReferences: {}
-  m_Icon: {fileID: 0}
-  m_Type: 0
-  m_ExecutionOrder: 0
-  m_ClassName: PooledSceneObject
-  m_Namespace: WorldOfSpirits.Core
-  m_AssemblyName: Assembly-CSharp
 --- !u!1 &1395551415
 GameObject:
   m_ObjectHideFlags: 0
@@ -44940,21 +44925,6 @@ Transform:
   - {fileID: 740466705}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!115 &1678986454
-MonoScript:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  serializedVersion: 7
-  m_DefaultReferences: {}
-  m_Icon: {fileID: 0}
-  m_Type: 0
-  m_ExecutionOrder: 0
-  m_ClassName: PooledSceneObject
-  m_Namespace: WorldOfSpirits.Core
-  m_AssemblyName: Assembly-CSharp
 --- !u!1 &1681912914
 GameObject:
   m_ObjectHideFlags: 0

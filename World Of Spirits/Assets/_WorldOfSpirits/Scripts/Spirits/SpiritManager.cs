@@ -255,7 +255,7 @@ namespace WorldOfSpirits.Spirits
             }
 
             rotationProgress = rotationMoveDuration <= 0f ? 1f : 0f;
-            if (logRotation)
+            if (logRotation && (Application.isEditor || Debug.isDebugBuild))
             {
                 Debug.Log($"Primary spirit changed to {PrimarySpirit.name}.", this);
             }

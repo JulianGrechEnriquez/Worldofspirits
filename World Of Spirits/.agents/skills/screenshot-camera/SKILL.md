@@ -2,7 +2,8 @@
 name: screenshot-camera
 description: Capture a screenshot from a Unity `Camera` and return it as a PNG image for direct LLM inspection. Falls back to `Camera.main` (then any active camera) when `cameraRef` is null. Width and height are capped to keep response size manageable.
 metadata:
-  generated-by: mcp-plugin-dotnet
+  generated-by: unity-mcp
+  ai-game-dev: exclude
 ---
 
 # Screenshot / Camera
@@ -18,33 +19,26 @@ Captures a screenshot from a camera and returns it as an image. If no camera is 
 
 Allocates a temporary `RenderTexture`, swaps it onto the chosen camera, calls `Camera.Render`, reads back via `Texture2D.ReadPixels`, encodes as PNG, and restores the camera's prior `targetTexture`. Returns a `ResponseCallTool.Image` with `image/png` MIME and a descriptive caption.
 
+## Saving a file
+
+`savePath`: Optional file to also write the PNG to, for when the user wants the picture as a file: the image result itself exists only in this conversation. Relative to the project root (or absolute under it): 'Screenshots/shot.png' stays a plain file; a path under 'Assets/' becomes a Unity asset, imported at once with a .meta file. Missing folders are created and .png is added when there is no extension. Refused: anything outside the project, Unity's own folders (Library, Temp, Logs, obj, Packages, ProjectSettings, UserSettings), a name other than .png, an existing file (it never overwrites). Without it nothing is written. The image is still returned and the text says `Saved to <absolute path>`.
+
 ## How to Call
 
-```bash
-unity-mcp-cli run-tool screenshot-camera --input '{
+```powershell
+[System.IO.File]::WriteAllText((Join-Path $PWD 'args.json'), @'
+{
   "cameraRef": "string_value",
   "width": 0,
-  "height": 0
-}'
+  "height": 0,
+  "savePath": "string_value"
+}
+'@)
+unity-mcp-cli.cmd run-tool screenshot-camera --input-file args.json
 ```
 
-> For complex input (multi-line strings, code), save the JSON to a file and use:
-> ```bash
-> unity-mcp-cli run-tool screenshot-camera --input-file args.json
-> ```
->
-> Or pipe via stdin (recommended):
-> ```bash
-> unity-mcp-cli run-tool screenshot-camera --input-file - <<'EOF'
-> {"param": "value"}
-> EOF
-> ```
-
-
-### Troubleshooting
-
-If `unity-mcp-cli` is not found, either install it globally (`npm install -g unity-mcp-cli`) or use `npx unity-mcp-cli` instead.
-Read the /unity-initial-setup skill for detailed installation instructions.
+> CLI installation and usage: see the `unity-cli` skill.
+> If this task needs unavailable asset-generation or Blender tools, consult `ai-game-dev-app` for an optional integrated workflow.
 
 ## Input
 
@@ -53,6 +47,7 @@ Read the /unity-initial-setup skill for detailed installation instructions.
 | `cameraRef` | `string` | No | Reference to the camera GameObject. If not specified, uses the Main Camera. RQL: GameObjectRef |
 | `width` | `integer` | No | Width of the screenshot in pixels. |
 | `height` | `integer` | No | Height of the screenshot in pixels. |
+| `savePath` | `string` | No | Optional file to also write the PNG to, for when the user wants the picture as a file: the image result itself exists only in this conversation. Relative to the project root (or absolute under it): 'Screenshots/shot.png' stays a plain file; a path under 'Assets/' becomes a Unity asset, imported at once with a .meta file. Missing folders are created and .png is added when there is no extension. Refused: anything outside the project, Unity's own folders (Library, Temp, Logs, obj, Packages, ProjectSettings, UserSettings), a name other than .png, an existing file (it never overwrites). Without it nothing is written. |
 
 ### Input JSON Schema
 
@@ -68,6 +63,9 @@ Read the /unity-initial-setup skill for detailed installation instructions.
     },
     "height": {
       "type": "integer"
+    },
+    "savePath": {
+      "type": "string"
     }
   }
 }

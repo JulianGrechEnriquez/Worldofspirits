@@ -20,46 +20,6 @@ namespace WorldOfSpirits.Core
         void OnReturnedToPool();
     }
 
-    public sealed class PooledSceneObject : MonoBehaviour
-    {
-        internal GameObject Prefab;
-        internal PoolCategory Category;
-        internal Transform StorageParent;
-        internal int SpawnVersion;
-        internal string OriginalName;
-        private IScenePoolable[] callbacks;
-
-        internal IScenePoolable[] GetCallbacks()
-        {
-            if (callbacks != null)
-            {
-                return callbacks;
-            }
-
-            MonoBehaviour[] behaviours = GetComponentsInChildren<MonoBehaviour>(true);
-            int count = 0;
-            for (int i = 0; i < behaviours.Length; i++)
-            {
-                if (behaviours[i] is IScenePoolable)
-                {
-                    count++;
-                }
-            }
-
-            callbacks = new IScenePoolable[count];
-            int callbackIndex = 0;
-            for (int i = 0; i < behaviours.Length; i++)
-            {
-                if (behaviours[i] is IScenePoolable callback)
-                {
-                    callbacks[callbackIndex++] = callback;
-                }
-            }
-
-            return callbacks;
-        }
-    }
-
     public sealed class SceneObjectPool : MonoBehaviour
     {
         private sealed class Bucket
@@ -156,15 +116,18 @@ namespace WorldOfSpirits.Core
 
         public static void AdoptExisting(GameObject spawned, PoolCategory category)
         {
-            if (spawned == null || spawned.TryGetComponent(out PooledSceneObject _))
+            if (spawned == null)
             {
                 return;
             }
 
+            PooledSceneObject pooled = spawned.GetComponent<PooledSceneObject>();
+            if (pooled != null && pooled.Prefab != null) return;
+
             SceneObjectPool manager = GetOrCreate();
             Bucket bucket = manager.GetBucket(spawned, category);
             bucket.CreatedCount++;
-            PooledSceneObject pooled = spawned.AddComponent<PooledSceneObject>();
+            if (pooled == null) pooled = spawned.AddComponent<PooledSceneObject>();
             pooled.Prefab = spawned;
             pooled.Category = category;
             pooled.StorageParent = bucket.Parent;

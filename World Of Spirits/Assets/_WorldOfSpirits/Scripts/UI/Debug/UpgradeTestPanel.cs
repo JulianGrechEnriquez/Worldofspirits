@@ -13,6 +13,7 @@ namespace WorldOfSpirits.UI
     [DisallowMultipleComponent]
     public sealed class UpgradeTestPanel : MonoBehaviour
     {
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
         [SerializeField] private UpgradeCatalog catalog;
         [SerializeField] private bool visible;
         [SerializeField] private Key toggleKey = Key.F4;
@@ -263,5 +264,11 @@ namespace WorldOfSpirits.UI
                 normal = { textColor = new Color(1f, 0.85f, 0.35f) }
             };
         }
+#else
+        private void Awake()
+        {
+            enabled = false;
+        }
+#endif
     }
 }

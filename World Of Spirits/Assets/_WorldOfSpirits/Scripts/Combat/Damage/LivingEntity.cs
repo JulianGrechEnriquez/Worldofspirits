@@ -168,7 +168,7 @@ namespace WorldOfSpirits.Combat
             HealthChanged?.Invoke(currentHealth, maxHealth);
             PlayHitFlash();
 
-            if (logHealthChanges)
+            if (logHealthChanges && (Application.isEditor || Debug.isDebugBuild))
             {
                 Debug.Log($"[{name}] Took {amount:0.##} damage. HP: {currentHealth:0.##}/{maxHealth:0.##}", this);
             }
@@ -189,7 +189,7 @@ namespace WorldOfSpirits.Combat
             currentHealth = Mathf.Min(maxHealth, currentHealth + amount);
             HealthChanged?.Invoke(currentHealth, maxHealth);
 
-            if (logHealthChanges)
+            if (logHealthChanges && (Application.isEditor || Debug.isDebugBuild))
             {
                 Debug.Log($"[{name}] Healed {amount:0.##}. HP: {currentHealth:0.##}/{maxHealth:0.##}", this);
             }
@@ -248,7 +248,7 @@ namespace WorldOfSpirits.Combat
                 return;
             }
 
-            if (logHealthChanges)
+            if (logHealthChanges && (Application.isEditor || Debug.isDebugBuild))
             {
                 Debug.Log($"[{name}] Died.", this);
             }

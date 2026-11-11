@@ -66,10 +66,10 @@ namespace WorldOfSpirits.UI
                     if (gameManager != null) gameManager.TogglePause();
                     break;
                 case UIAction.Pause:
-                    if (gameManager != null) gameManager.SetState(GameState.Paused);
+                    if (gameManager != null) gameManager.Pause();
                     break;
                 case UIAction.Resume:
-                    if (gameManager != null) gameManager.SetState(GameState.Playing);
+                    if (gameManager != null) gameManager.Resume();
                     break;
                 case UIAction.RetryCurrentScene:
                     Time.timeScale = 1f;

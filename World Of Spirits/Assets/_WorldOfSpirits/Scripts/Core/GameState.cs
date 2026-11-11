@@ -9,6 +9,7 @@ namespace WorldOfSpirits.Core
         Playing,
         Paused,
         LevelUp,
-        GameOver
+        GameOver,
+        StarterSelection
     }
 }

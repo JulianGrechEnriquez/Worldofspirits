@@ -53,12 +53,12 @@ namespace WorldOfSpirits.UI
 
         public void Pause()
         {
-            if (GameManager.Instance != null) GameManager.Instance.SetState(GameState.Paused);
+            if (GameManager.Instance != null) GameManager.Instance.Pause();
         }
 
         public void Resume()
         {
-            if (GameManager.Instance != null) GameManager.Instance.SetState(GameState.Playing);
+            if (GameManager.Instance != null) GameManager.Instance.Resume();
         }
 
         private void OnGameStateChanged(GameState oldState, GameState newState)
@@ -116,7 +116,7 @@ namespace WorldOfSpirits.UI
                 if (spirit == null) continue;
                 string spiritName = spirit.Definition != null && !string.IsNullOrWhiteSpace(spirit.Definition.SpiritName)
                     ? spirit.Definition.SpiritName : spirit.name.Replace("(Clone)", string.Empty);
-                text.AppendLine($"<b>{(i == 0 ? "★ " : string.Empty)}{spiritName}</b>");
+                text.AppendLine($"<b>{spiritName}{(i == 0 ? " (Lead)" : string.Empty)}</b>");
                 text.AppendLine($"Weapon Level  {spirit.Progression.WeaponLevel}");
                 int count = spirit.Definition != null && spirit.Definition.RuntimeAbilities.Count > 0
                     ? spirit.Definition.RuntimeAbilities.Count : spirit.Definition != null ? spirit.Definition.Abilities.Count : 0;

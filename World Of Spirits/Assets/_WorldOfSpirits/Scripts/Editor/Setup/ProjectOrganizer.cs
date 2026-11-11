@@ -38,6 +38,7 @@ namespace WorldOfSpirits.EditorTools
                 Root + "/Scripts/Progression/Unlocks",
                 Root + "/Scripts/Spirits/Definitions",
                 Root + "/Scripts/Spawning/Definitions",
+                Root + "/Scripts/Editor/Inspectors",
                 Root + "/Scripts/Editor/Upgrades",
                 Root + "/Scripts/UI/Core",
                 Root + "/Scripts/UI/HUD",

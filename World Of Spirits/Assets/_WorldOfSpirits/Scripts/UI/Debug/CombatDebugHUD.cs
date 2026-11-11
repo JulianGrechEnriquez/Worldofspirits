@@ -9,6 +9,7 @@ namespace WorldOfSpirits.UI
 {
     public class CombatDebugHUD : MonoBehaviour
     {
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
         [SerializeField] private bool showHud = true;
         [SerializeField] private Vector2 screenPosition = new Vector2(12f, 12f);
         [SerializeField, Min(0.1f)] private float enemyCountRefreshRate = 0.5f;
@@ -112,5 +113,11 @@ namespace WorldOfSpirits.UI
                 normal = { textColor = Color.white }
             };
         }
+#else
+        private void Awake()
+        {
+            enabled = false;
+        }
+#endif
     }
 }
